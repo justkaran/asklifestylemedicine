@@ -1,0 +1,80 @@
+{
+  "title": "Warum wir Palonur bauen",
+  "hero": {
+    "eyebrow": "Warum wir Palonur bauen",
+    "headline": "KI im Grossmassstab braucht {{em}} Menschen im Grossmassstab {{/em}}",
+    "body1": "In einem Jahr werden mehr Gesundheitsfragen von einer KI beantwortet als von einem Arzt. Die Frage ist nicht mehr, ob Menschen eine KI fragen werden, was sie nachts wach haelt - das tun sie bereits. Die Frage ist, ob die Antwort den Namen von jemandem traegt.",
+    "body2": "Palonur ist die Vertrauensschicht fuer diesen Moment. Jede Schlafffrage wird durch Stanford-Fakultaet geleitet. Jede Antwort kommt mit einer Person, einer Studie und einem Befund dahinter zurueck. Wenn es keinen gibt, sagen wir es.",
+    "aside": "Zuversicht wird zum Fehler, nicht zum Merkmal."
+  },
+  "problem": {
+    "eyebrow": "Das Problem",
+    "headline": "Zuversicht wird {{em}} zum Fehler {{/em}}, nicht zum Merkmal",
+    "body1": "Die heutigen Modelle beantworten jede Gesundheitsfrage mit derselben ruhigen Gewissheit - ob sie Recht haben, falsch liegen oder es erfinden. Sie koennen nicht sagen, was Sie bekommen haben. Die App, die es Ihnen angezeigt hat, auch nicht. Der Arzt am anderen Ende auch nicht.",
+    "body2": "Die Loesung ist kein kluegeres Modell. Es ist ein namentlich genannter Mensch, der hinter der Antwort steht und bereit ist abzulehnen, wenn die Belege fehlen. Das ist der Vertrag, den wir aufbauen.",
+    "aside": "Das Problem ist nicht, dass KI falsch liegt - es ist, dass man den Unterschied nicht erkennen kann."
+  },
+  "founder": {
+    "eyebrow": "Gründer",
+    "name": "Karan Dehghani",
+    "role": "Gründer, Palonur · Mitglied des Beirats, Stanford Lifestyle Medicine · Botschafter, Stanford GSB",
+    "origin1": "Karan Dehghani ist Mitglied des Beirats des Stanford Lifestyle Medicine Programms. Palonur entstand aus seinen laufenden Gesprächen dort mit Prof. Jamie Zeitzer, Prof. Michael Fredericson und Prof. Anne Friedlander. Was als Frage beim Kaffee begann, wie erreicht gute Wissenschaft die Menschen, die sie brauchen, wurde zu einem gemeinsamen Projekt. Heute bauen sie Palonur zusammen auf.",
+    "origin2": "An der Stanford Graduate School of Business, wo Karan Botschafter ist, bringt Allison Kluger ihre Erfahrung in Reputationsmanagement und Personal Branding in dieselbe Mission ein: Wenn eine Antwort den Namen eines Professors trägt, muss sie diesem Namen gerecht werden.",
+    "body1": "Für Karan ist das persönlich. Er hat eine kleine Tochter, und er möchte für jedes Kapitel ihres Lebens stark, klar und präsent sein. Gut altern ist bei ihm zu Hause kein abstraktes Thema. Es ist der Grund, warum er dieselben Fragen stellt wie die Besucher von Palonur: über Schlaf, über Bewegung, über Verbundenheit. Er möchte, dass die Antworten von Menschen kommen, die es wirklich wissen.",
+    "body2": "Palonur existiert, um diese Verantwortlichkeit wiederherzustellen: jede Antwort betreut von einem namentlich genannten Forscher, der sie gelesen, verifiziert und unterschrieben hat. Die schnellste Antwort und die vertrauenswürdigste Antwort sollten dasselbe sein.",
+    "cta": "Karan eine Nachricht senden",
+    "formDesc": "Hinterlassen Sie Ihren Namen und Ihre E-Mail, und Karan meldet sich bei Ihnen.",
+    "namePlaceholder": "Ihr Name",
+    "emailPlaceholder": "Ihre E-Mail",
+    "msgPlaceholder": "Ihre Nachricht (optional)",
+    "send": "Senden",
+    "sending": "Wird gesendet…",
+    "cancel": "Abbrechen",
+    "success": "✓ Nachricht gesendet. Karan wird sich bei Ihnen melden."
+  },
+  "why": {
+    "eyebrow": "Warum der Gründer das gebaut hat",
+    "headline": "Palonur gibt es aus {{em}} zwei Gründen {{/em}}",
+    "body1": "Der erste ist persönlich. Als die Tochter des Gründers krank wurde, führte die Suche nach Antworten überallhin und nirgendwohin: selbstsichere Ratschläge aus anonymen Quellen, ohne zu wissen, was stimmt. Was die Familie brauchte, waren Antworten, die verlässlich sind und einem echten Experten zugeschrieben werden, der seinen Namen daruntersetzt.",
+    "body2": "Der zweite ist etwas, das dem Gründer immer wieder begegnete: Nach 45 werden die Fragen zu Körper, Schlaf und Geist schwieriger, und die Unterstützung wird dünner. Menschen in der zweiten Lebenshälfte brauchen weit mehr Unterstützung, als sie tatsächlich bekommen.",
+    "body3": "Palonur ist die Antwort auf beides. Jede Antwort stammt aus der veröffentlichten Forschung eines namentlich genannten Stanford-Fakultätsmitglieds, zitiert und unterschrieben. Unterstützung, die Sie überprüfen können, zu jeder Stunde, in den Jahren, in denen Sie sie am meisten brauchen.",
+    "pullQuote": "Wir setzen einen {{em}} Namen {{/em}} zurück auf die Antwort.",
+    "pullSub": "Eine Frage. Ein Stanford-Fakultätsmitglied. Eine von ihm unterzeichnete Antwort.",
+    "closing": "Diese Familie, und jeder Mensch, der heute Nacht eine schwere Frage stellt, verdient eine Antwort, der man vertrauen kann, von jemandem, dessen Name darauf steht.",
+    "tenets": {
+      "name": {
+        "title": "Ein Name, kein Modell",
+        "text": "Antworten werden von dem Stanford-Fakultätsmitglied unterzeichnet, dessen Labor die Forschung durchgeführt hat. Eine echte Person mit einem Ruf zu schützen."
+      },
+      "citation": {
+        "title": "Eine überprüfbare Quellenangabe",
+        "text": "Jede Antwort enthält die Studie, aus der sie stammt, und die Quellenangabe wird vor Ihrer Ansicht gegen diese Studie verifiziert."
+      },
+      "limits": {
+        "title": "Ehrlich über seine Grenzen",
+        "text": "Wenn die Forschung Ihre Frage nicht abdeckt, sagt Palonur genau das. Es füllt die Lücke nie mit einer zuversichtlichen Vermutung."
+      }
+    }
+  },
+  "team": {
+    "eyebrow": "Das Team, das dies glaubwuerdig macht",
+    "headline": "Echte Namen. Echte Labore. {{em}} Echte Ablehnungen {{/em}}",
+    "body": "Stanford Lifestyle Medicine ist ein Anwendungsfall für Palonur. Der Schlafbereich wird von Prof. Jamie Zeitzer an der Stanford School of Medicine geleitet. Das breitere Team bringt die naechsten Saeulen mit -",
+    "pillarsLink": "alle Saeulen ansehen"
+  },
+  "comparison": {
+    "eyebrow": "Dieselbe Frage - zwei Antworten",
+    "headline": "Was einfache KI sagt vs. {{em}} was Stanford sagt {{/em}}",
+    "question": "Sie: Ruiniert das Scrollen auf dem Handy im Bett wirklich meinen Schlaf?",
+    "plainLabel": "Einfache KI - ohne Palonur",
+    "stanfordLabel": "Dieselbe KI - durch Palonur",
+    "plainAnswer": "Ja, fuer viele Menschen schon - aber nicht weil Bildschirme boese sind. Geistige Stimulation haelt das Gehirn wach. Blaues Licht kann Melatonin verzoegern, obwohl der Effekt wahrscheinlich kleiner ist als Schlagzeilen suggerieren. Ein 10-minuetiges Scrollen wird leicht zu 45 Minuten. Versuchen Sie, das Handy weiter weg und dunkler zu halten, stimulierende Apps in den letzten 30-60 Minuten zu meiden und Night Shift einzuschalten.",
+    "stanfordAnswer": "Der groesste Teil des Effekts ist Helligkeit, nicht Farbe. Etwa 100 Lux - dunkler als ein typisch beleuchtetes Wohnzimmer - halbiert bereits das Abendmelatonin und verschiebt den Schlaf nach hinten. Ein Handy nah am Gesicht ueberschreitet das leicht. Das Dimmen des gesamten Raums in der Stunde vor dem Schlafengehen bringt mehr als der Nachtmodus auf einem einzelnen Bildschirm.",
+    "plainMeta": "Keine Quelle - Kein Zitat - Generisch",
+    "stanfordMeta": "Zeitzer et al. - J Physiol, 2000 - Stanford"
+  },
+  "footer": {
+    "copyright": "© Palonur",
+    "backHome": "Zurueck zu palonur.com"
+  }
+}

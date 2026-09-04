@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Palonur · Technical overview — prepared for Reach Capital</title>
+<meta name="robots" content="noindex,nofollow" />
+<style>
+  :root{
+    --paper:#FAF8F4; --ink:#0A0A0F; --red:#E8352A; --muted:#5b5b66;
+    --rule:rgba(10,10,15,.12); --card:#ffffff;
+    --serif:Georgia,'Times New Roman',serif;
+    --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;background:#e9e6df;color:var(--ink);font-family:var(--sans);}
+  .page{
+    width:8.5in; min-height:11in; margin:24px auto; padding:0.5in 0.55in;
+    background:var(--paper); position:relative; overflow:hidden;
+    box-shadow:0 8px 40px rgba(0,0,0,.18);
+  }
+  header{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--rule);padding-bottom:9px;margin-bottom:12px;}
+  .lockup{display:flex;align-items:center;gap:10px;}
+  .flower{width:22px;height:22px;}
+  .brand{font-family:var(--serif);font-weight:400;font-size:19px;letter-spacing:.01em;}
+  .partner{font-family:var(--serif);font-style:italic;color:var(--muted);font-size:11px;}
+  .partner b{color:var(--red);font-style:normal;font-weight:600;}
+  .doctag{font-family:var(--sans);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);}
+  h1{font-family:var(--serif);font-weight:500;font-size:25px;line-height:1.14;margin:6px 0 4px;letter-spacing:-.005em;}
+  .lede{font-family:var(--serif);font-size:12.5px;line-height:1.45;color:#222;margin:4px 0 10px;max-width:7.1in;}
+  h2{font-family:var(--sans);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin:10px 0 6px;font-weight:700;}
+  .row{display:grid;grid-template-columns:120px 1fr;gap:10px;font-size:11.5px;line-height:1.4;border-bottom:1px dotted var(--rule);padding:4px 0;}
+  .row b{font-family:var(--serif);font-weight:600;font-size:12px;}
+  .row span{color:#1f1f1f;}
+  .stage{display:grid;grid-template-columns:22px 1fr;gap:8px;margin:5px 0;font-size:11.5px;line-height:1.4;}
+  .stage .n{font-family:var(--serif);font-size:12px;color:var(--red);font-weight:600;}
+  .stage b{font-family:var(--serif);font-size:12px;}
+  .stack-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px 18px;}
+  .stack-grid .row{padding:3px 0;font-size:11px;grid-template-columns:104px 1fr;}
+  .why{display:grid;grid-template-columns:18px 1fr;gap:8px;margin:4px 0;font-size:11.5px;line-height:1.42;}
+  .why .dot{width:14px;height:14px;border-radius:50%;border:1.4px solid var(--red);margin-top:2px;}
+  .why b{font-family:var(--serif);font-size:12px;}
+  footer{position:absolute;left:.55in;right:.55in;bottom:.35in;display:flex;justify-content:space-between;border-top:1px solid var(--rule);padding-top:6px;font-size:9.5px;color:var(--muted);}
+  footer b{color:var(--ink);font-weight:600;}
+  /* edit toolbar */
+  .toolbar{position:fixed;top:12px;right:12px;z-index:9999;display:flex;gap:6px;background:rgba(10,10,15,.92);padding:8px 10px;border-radius:10px;box-shadow:0 6px 24px rgba(0,0,0,.3);font-family:var(--sans);font-size:11.5px;}
+  .toolbar button{background:#fff;color:#0A0A0F;border:0;border-radius:6px;padding:6px 10px;font-size:11.5px;font-weight:600;cursor:pointer;}
+  .toolbar button.primary{background:#E8352A;color:#fff;}
+  .toolbar button:disabled{opacity:.55;cursor:wait;}
+  #save-indicator{position:fixed;bottom:12px;right:12px;z-index:9999;background:rgba(10,10,15,.92);color:#fff;padding:7px 12px;border-radius:8px;font-family:var(--sans);font-size:11.5px;opacity:0;transition:opacity .25s;}
+  #save-indicator.show{opacity:1;}
+  [contenteditable="true"]:focus{outline:2px solid rgba(232,53,42,.6);outline-offset:1px;border-radius:2px;}
+  @media print{
+    html,body{background:#fff;}
+    .page{box-shadow:none;margin:0;width:auto;min-height:auto;padding:.4in .5in;}
+    .toolbar,#save-indicator{display:none !important;}
+    @page{size:Letter;margin:0;}
+  }
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <button id="edit-mode-btn" onclick="toggleEditMode()">Enable editing</button>
+  <button class="primary" id="pdf-btn" onclick="generatePDF()">Download PDF</button>
+</div>
+<div id="save-indicator"></div>
+<div id="doc-root">
+<div class="page">
+  <header>
+    <div class="lockup">
+      <svg class="flower" viewBox="0 0 48 48" fill="none" stroke="#0A0A0F" stroke-width="1.6">
+        <circle cx="24" cy="24" r="9"/><circle cx="24" cy="15" r="9"/>
+        <circle cx="31.8" cy="19.5" r="9"/><circle cx="31.8" cy="28.5" r="9"/>
+        <circle cx="24" cy="33" r="9"/><circle cx="16.2" cy="28.5" r="9"/>
+        <circle cx="16.2" cy="19.5" r="9"/>
+      </svg>
+      <div>
+        <div class="brand">Palonur</div>
+        <div class="partner"><i>prepared for</i> <b>Reach Capital</b></div>
+      </div>
+    </div>
+    <div class="doctag">Prepared for Reach Capital · Technical overview</div>
+  </header>
+
+  <h1>A faculty-signed answer pipeline for AI in lifestyle medicine.</h1>
+  <p class="lede">
+    Palonur is a verification pipeline that routes a user's lifestyle-medicine
+    question through a Stanford-curated corpus, forces the model into a
+    structured output, runs a citation guard against what was actually
+    retrieved, and routes anything new to the named faculty steward for
+    approval before it ships. Sleep is live, with Prof. Jamie Zeitzer's name
+    on every answer; six more pillars are queued behind the same pipeline.
+  </p>
+
+  <h2>How it works — request lifecycle, end to end</h2>
+  <div class="stage"><span class="n">1</span><span><b>Question in.</b> Consumer and partner traffic both hit <code>POST /api/sleep-agent</code> over SSE; the route is wrapped in <code>partnerKeyMiddleware("sleep-agent")</code>, which validates the partner API key and enforces per-key rate and concurrency limits. A lighter <code>/api/agent/query</code> endpoint (per-IP limiter, 10/min) exists for unkeyed agent browsing.</span></div>
+  <div class="stage"><span class="n">2</span><span><b>Retrieval.</b> The question is embedded and matched against the pillar-scoped corpus in Postgres (pgvector / <code>halfvec</code>). Faculty-approved interpretations are weighted above raw paper chunks so steward edits actually move what the model sees.</span></div>
+  <div class="stage"><span class="n">3</span><span><b>Structured generation.</b> Anthropic Claude is constrained to emit a fixed labeled schema — <code>ANSWER · CITATION · PAPER · FINDING · INTERPRETATION · ACTION · INSIGHT</code> (plus an optional <code>CLARIFY</code> and, on the governed path, an optional <code>ADVISOR_NOTE</code>) — alongside two refusal tokens (<code>REFUSE:</code> off-topic, <code>UNCOVERED:</code> in-scope but not in corpus). Refusal is an output token, not a soft instruction in prose.</span></div>
+  <div class="stage"><span class="n">4</span><span><b>Citation guard.</b> After streaming, <code>verifyCitation()</code> in the api-server's <code>lib/rag.ts</code> parses the <code>CITATION:</code> line, extracts first-author surname + year, and checks at least one retrieved provenance entry matches. Result (<code>verified</code> / <code>unmatched</code> / <code>missing</code>) ships to the client in the SSE <code>done</code> event so the UI can suppress sources on a hallucinated cite.</span></div>
+  <div class="stage"><span class="n">5</span><span><b>Steward queue.</b> Uncovered questions and new interpretation drafts land in the named pillar steward's console (<code>/api/faculty/*</code>, <code>/api/faculty/interpretations/*</code>). The steward edits, the row transitions <code>proposed → approved</code>, the body is re-embedded into <code>interpretation_chunks</code>, and the next matching question starts pulling the faculty voice.</span></div>
+  <div class="stage"><span class="n">6</span><span><b>Signed response out.</b> The answer is returned with a queryable receipt: question → retrieved chunks → source → approving faculty member → timestamp + version, all in SQL (<code>agent_queries</code> joined to <code>interpretations</code> and <code>sources</code>).</span></div>
+
+  <h2>The stack</h2>
+  <div class="stack-grid">
+    <div class="row"><b>Monorepo</b><span>pnpm workspaces · TypeScript 5.9 · Node 24</span></div>
+    <div class="row"><b>API</b><span>Express 5, esbuild CJS bundle</span></div>
+    <div class="row"><b>Frontend</b><span>React + Vite (consumer app · faculty console)</span></div>
+    <div class="row"><b>Database</b><span>PostgreSQL + Drizzle ORM, pgvector (<code>halfvec(3072)</code>) for corpus &amp; interpretation chunks</span></div>
+    <div class="row"><b>Contract</b><span>OpenAPI 3.1 spec + Orval codegen → Zod schemas + React Query hooks</span></div>
+    <div class="row"><b>Model</b><span>Anthropic Claude (Sonnet) via managed integrations proxy</span></div>
+    <div class="row"><b>Streaming</b><span>SSE; structured-output parsing client-side</span></div>
+    <div class="row"><b>Partner API</b><span>Keyed access with per-key rate + concurrency caps; OpenAPI spec at <code>/api/agent/spec</code></span></div>
+    <div class="row"><b>Audio / email</b><span>ElevenLabs TTS · Resend for steward email</span></div>
+    <div class="row"><b>Auth</b><span>Clerk (faculty console), anonymous session cookie (consumer)</span></div>
+  </div>
+
+  <h2>Why it's good</h2>
+  <div class="why"><div class="dot"></div><div><b>The output is auditable, not just fluent.</b> Seven labeled sections are the model's contract, so every conforming answer is deterministically parseable by partners and reviewable by stewards. The citation guard catches drift from the contract post-hoc and the UI degrades safely when a section is missing or unmatched.</div></div>
+  <div class="why"><div class="dot"></div><div><b>Refusal is in code, not prompted prose.</b> <code>REFUSE:</code> (off-topic) and <code>UNCOVERED:</code> (in-scope but ungrounded) are output tokens with their own client-side handling and steward-inbox plumbing — not a "please refuse" line in a system prompt.</div></div>
+  <div class="why"><div class="dot"></div><div><b>Citations are verified, not promised.</b> The citation guard parses the model's claim and matches it against the chunks that were actually retrieved. Hallucinated surnames or years are logged with the queryId, and the verification result is shipped to the client so the UI can suppress the source strip on an unmatched cite.</div></div>
+  <div class="why"><div class="dot"></div><div><b>Faculty-in-the-loop is a real workflow.</b> Steward queue, draft → proposed → approved transitions, versioned snapshots in <code>interpretation_versions</code>, edit history, and a steward insights endpoint that closes the loop from <code>agent_queries</code> back to the people writing interpretations — not a prompt trick.</div></div>
+
+  <footer>
+    <span>Palonur · Prepared for Reach Capital · Confidential</span>
+    <span><b>palonur.com</b> · partners@palonur.com</span>
+  </footer>
+</div>
+
+<div class="page">
+  <header>
+    <div class="lockup">
+      <svg class="flower" viewBox="0 0 48 48" fill="none" stroke="#0A0A0F" stroke-width="1.6">
+        <circle cx="24" cy="24" r="9"/><circle cx="24" cy="15" r="9"/>
+        <circle cx="31.8" cy="19.5" r="9"/><circle cx="31.8" cy="28.5" r="9"/>
+        <circle cx="24" cy="33" r="9"/><circle cx="16.2" cy="28.5" r="9"/>
+        <circle cx="16.2" cy="19.5" r="9"/>
+      </svg>
+      <div>
+        <div class="brand">Palonur</div>
+        <div class="partner"><i>prepared for</i> <b>Reach Capital</b></div>
+      </div>
+    </div>
+    <div class="doctag">Prepared for Reach Capital · Technical overview · p.2</div>
+  </header>
+
+  <h1>How it scales · where it fails safely.</h1>
+  <p class="lede">
+    The retrieval layer, replay model, failure modes, security posture, and
+    partner contract — described in terms of the actual tables, indexes,
+    and code paths in production today.
+  </p>
+
+  <h2>Retrieval — what we actually do</h2>
+  <p class="lede" style="margin-top:2px;">
+    Embeddings: <code>text-embedding-3-large</code>, stored as
+    <code>halfvec(3072)</code> in Postgres with an HNSW cosine index
+    (<code>agent_queries_embedding_hnsw_idx</code>) — no second vector DB to
+    operate. Two pillar-scoped pools query in parallel — approved
+    <code>interpretation_chunks</code> and raw <code>source_chunks</code> —
+    with top-K=8 per side. The merge in <code>lib/rag.ts</code> ranks
+    interpretation chunks above raw paper chunks tied at distance, so a
+    steward edit immediately moves what the model sees with no re-train and
+    no re-deploy. The corpus is curated, not crawled.
+  </p>
+
+  <h2>Reproducibility — every answer is replayable</h2>
+  <p class="lede" style="margin-top:2px;">
+    Every row in <code>agent_queries</code> stores the question,
+    <code>question_embedding</code> (<code>halfvec(3072)</code>),
+    <code>embedding_model</code>, the <code>pillar_ids</code>,
+    <code>retrieved_source_ids[]</code>,
+    <code>retrieved_interpretation_ids[]</code>, <code>top_score</code>,
+    <code>was_uncovered</code>, <code>latency_ms</code>,
+    <code>answer_text</code>, and <code>created_at</code>. Combined with the
+    immutable <code>interpretation_versions</code> table (every approved edit
+    snapshotted) and the answering model pin (<code>claude-sonnet-4-6</code>),
+    any past answer can be re-run, audited, and diffed against the current
+    state of the corpus.
+  </p>
+
+  <h2>Failure modes &amp; fallbacks (in code today)</h2>
+  <div class="stack-grid">
+    <div class="row"><b>Model down</b><span>SSE closes with an error event · client renders a "try again" state · no fabricated answer streams</span></div>
+    <div class="row"><b>No retrieval match</b><span>Row marked <code>was_uncovered=true</code> · model emits <code>UNCOVERED:</code> · question lands in the named pillar steward's inbox</span></div>
+    <div class="row"><b>Citation unmatched</b><span><code>verifyCitation()</code> in the api-server's <code>lib/rag.ts</code> returns <code>unmatched</code> · UI suppresses the source strip · row logged at <code>warn</code> with <code>queryId</code></span></div>
+    <div class="row"><b>Off-topic</b><span>Model emits <code>REFUSE:</code> · client renders the refusal, no source strip, no steward inbox hit</span></div>
+  </div>
+
+  <h2>Security &amp; data posture</h2>
+  <p class="lede" style="margin-top:2px;">
+    Consumer query rows are PII-free — only an opaque <code>session_id</code>
+    (random UUID in an httpOnly cookie, never linked to an account) is stored
+    on <code>agent_queries</code>; no email, no IP, no user-agent on the
+    answer log. Pageview analytics on the same surface capture IP and
+    user-agent in a separate table for traffic measurement only, deletable
+    on partner / data-residency request. Faculty console is gated by Clerk
+    with role-scoped sessions and a platform-admin flag in
+    <code>faculty_users</code>. Partner API keys are stored as hashes only
+    (<code>partner_keys.key_hash</code>, unique) with the prefix kept for
+    human matching, and are revocable per-key via <code>revoked_at</code>.
+    All traffic is TLS; Postgres is encrypted at rest by the managed
+    provider.
+  </p>
+
+  <h2>B2B contract surface</h2>
+  <div class="stack-grid">
+    <div class="row"><b>OpenAPI</b><span>Live spec at <code>/api/agent/spec</code> · Orval generates Zod schemas + React Query hooks from the same source of truth</span></div>
+    <div class="row"><b>Per-key limits</b><span>Default <b>60</b> req/min · <b>50,000</b> req/day · <b>10</b> concurrent streams per key (tunable per partner in <code>partner_keys</code>)</span></div>
+    <div class="row"><b>Response shape</b><span>Seven structured labels (<code>ANSWER · CITATION · PAPER · FINDING · INTERPRETATION · ACTION · INSIGHT</code>) — additive and stable for partners to parse</span></div>
+    <div class="row"><b>Receipts on request</b><span>Every answer carries the <code>queryId</code> (UUID) that resolves to its full provenance row — question · retrieved chunks · approving faculty · timestamp</span></div>
+  </div>
+
+  <footer>
+    <span>Palonur · Prepared for Reach Capital · Confidential</span>
+    <span><b>palonur.com</b> · partners@palonur.com</span>
+  </footer>
+</div>
+</div>
+
+<script>
+  // Server-backed persistence. Anyone can view; only editors with the
+  // password (default: palonureditor) can save.
+  const API_URL = '/api/reach-tech';
+  const PASSWORD_KEY = 'palonur-reach-tech-edit-password';
+
+  function setIndicator(text, ok){
+    const ind = document.getElementById('save-indicator');
+    if (!ind) return;
+    ind.textContent = text;
+    ind.style.color = ok === false ? '#e26a6a' : '#7fbf7f';
+    ind.classList.add('show');
+    clearTimeout(setIndicator._t);
+    setIndicator._t = setTimeout(() => ind.classList.remove('show'), 2200);
+  }
+
+  function isEditMode(){ return !!sessionStorage.getItem(PASSWORD_KEY); }
+
+  function refreshEditAffordances(){
+    const editing = isEditMode();
+    const btn = document.getElementById('edit-mode-btn');
+    if (btn) btn.textContent = editing ? 'Editing on · click to exit' : 'Enable editing';
+    const root = document.getElementById('doc-root');
+    if (!root) return;
+    // Make every text-bearing element editable; never the toolbar / svg.
+    root.querySelectorAll('h1, h2, p, span, b, i, div, code, li').forEach(el => {
+      if (el.closest('.toolbar')) return;
+      if (el.closest('svg')) return;
+      if (editing) el.setAttribute('contenteditable', 'true');
+      else el.removeAttribute('contenteditable');
+    });
+  }
+
+  function toggleEditMode(){
+    if (isEditMode()){
+      sessionStorage.removeItem(PASSWORD_KEY);
+      refreshEditAffordances();
+      setIndicator('View only', true);
+      return;
+    }
+    const pw = prompt('Enter edit password:');
+    if (!pw) return;
+    sessionStorage.setItem(PASSWORD_KEY, pw);
+    refreshEditAffordances();
+    saveToServer(true).then(ok => {
+      if (!ok){
+        sessionStorage.removeItem(PASSWORD_KEY);
+        refreshEditAffordances();
+        setIndicator('Wrong password', false);
+      } else {
+        setIndicator('Editing enabled', true);
+      }
+    });
+  }
+
+  async function saveToServer(validateOnly){
+    if (!isEditMode()) return false;
+    const root = document.getElementById('doc-root');
+    if (!root) return false;
+    // Snapshot a clean copy without contenteditable attrs.
+    const snap = root.cloneNode(true);
+    snap.querySelectorAll('[contenteditable]').forEach(n => n.removeAttribute('contenteditable'));
+    const content = snap.innerHTML;
+    try {
+      const resp = await fetch(API_URL, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-edit-password': sessionStorage.getItem(PASSWORD_KEY) || '',
+        },
+        body: JSON.stringify({ content }),
+      });
+      if (resp.status === 401){ setIndicator('Wrong password — edits not saved', false); return false; }
+      if (!resp.ok){ setIndicator('Save failed (server)', false); return false; }
+      if (!validateOnly) setIndicator('Saved to cloud ' + new Date().toLocaleTimeString(), true);
+      return true;
+    } catch(e){
+      setIndicator('Save failed (offline)', false);
+      return false;
+    }
+  }
+
+  let saveTimer;
+  function autoSave(){
+    if (!isEditMode()) return;
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(() => { saveToServer(false); }, 600);
+  }
+
+  async function loadFromServer(){
+    try {
+      const resp = await fetch(API_URL + '?t=' + Date.now(), { cache: 'no-store' });
+      if (!resp.ok) return false;
+      const data = await resp.json();
+      const content = typeof data?.content === 'string' ? data.content : null;
+      if (!content) return false;
+      const root = document.getElementById('doc-root');
+      if (!root) return false;
+      // Backwards-compat: older saves stored only the inner HTML of a
+      // single .page (no <div class="page"> wrapper). Detect that and wrap.
+      const hasPageWrapper = /<div[^>]*class="[^"]*\bpage\b/.test(content);
+      root.innerHTML = hasPageWrapper ? content : '<div class="page">' + content + '</div>';
+      if (data.updatedAt){
+        setIndicator('Loaded · last edit ' + new Date(data.updatedAt).toLocaleString(), true);
+      }
+      return true;
+    } catch(e){ return false; }
+  }
+
+  function loadPdfLib(){
+    return new Promise((resolve, reject) => {
+      if (window.html2pdf) return resolve(window.html2pdf);
+      const s = document.createElement('script');
+      s.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
+      s.onload = () => resolve(window.html2pdf);
+      s.onerror = () => reject(new Error('Failed to load PDF library'));
+      document.head.appendChild(s);
+    });
+  }
+
+  async function generatePDF(){
+    const btn = document.getElementById('pdf-btn');
+    const originalLabel = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = 'Building PDF…';
+    try {
+      const html2pdf = await loadPdfLib();
+      const pages = document.querySelectorAll('#doc-root .page');
+      if (!pages.length) throw new Error('No pages found');
+      const clone = document.createElement('div');
+      clone.style.cssText = 'background:#FAF8F4;width:8.5in;margin:0;padding:0;';
+      pages.forEach(p => {
+        const cp = p.cloneNode(true);
+        cp.querySelectorAll('[contenteditable]').forEach(n => n.removeAttribute('contenteditable'));
+        cp.style.width = '8.5in';
+        cp.style.height = '11in';
+        cp.style.minHeight = '11in';
+        cp.style.maxHeight = '11in';
+        cp.style.margin = '0';
+        cp.style.boxShadow = 'none';
+        cp.style.overflow = 'hidden';
+        cp.style.pageBreakAfter = 'always';
+        cp.style.breakAfter = 'page';
+        clone.appendChild(cp);
+      });
+
+      const stage = document.createElement('div');
+      stage.style.cssText = 'position:fixed;top:0;left:0;width:8.5in;background:#FAF8F4;pointer-events:none;z-index:-1;';
+      stage.appendChild(clone);
+      document.body.appendChild(stage);
+
+      await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+      if (document.fonts && document.fonts.ready){ try { await document.fonts.ready; } catch(_){} }
+
+      await html2pdf()
+        .set({
+          margin: 0,
+          filename: 'palonur-reach-tech.pdf',
+          image: { type: 'jpeg', quality: 0.98 },
+          html2canvas: { scale: 2, useCORS: true, allowTaint: true, backgroundColor: '#FAF8F4', windowWidth: 816, scrollX: 0, scrollY: 0 },
+          jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
+          pagebreak: { mode: ['css', 'legacy'], before: '.page' },
+        })
+        .from(clone)
+        .save();
+
+      document.body.removeChild(stage);
+      btn.textContent = 'Saved ✓';
+      setTimeout(() => { btn.textContent = originalLabel; btn.disabled = false; }, 1500);
+    } catch(e){
+      console.error(e);
+      btn.textContent = 'PDF failed';
+      setTimeout(() => { btn.textContent = originalLabel; btn.disabled = false; }, 2000);
+      alert('Could not build PDF: ' + (e?.message || e) + '\n\nFalling back to browser print. Uncheck "Headers and footers" and set Margins to "None".');
+      window.print();
+    }
+  }
+
+  window.addEventListener('DOMContentLoaded', async () => {
+    await loadFromServer();
+    refreshEditAffordances();
+    document.addEventListener('input', autoSave, true);
+    if (location.search.includes('print')){
+      document.querySelectorAll('.toolbar, #save-indicator').forEach(el => el.style.display = 'none');
+    }
+  });
+</script>
+</body>
+</html>

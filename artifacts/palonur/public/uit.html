@@ -1,0 +1,850 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Palonur · Stanford Review Package · Data Risk, Vendor Security &amp; Web Governance · Editable</title>
+<style>
+  :root{
+    --ink:#0b0b10; --paper:#faf8f4; --sub:#5a5a66; --rule:#e6e2d8;
+    --cardinal:#8C1515; --cardinal-soft:rgba(140,21,21,.06);
+    --red:#e8352a; --gold:#b88a2d; --card:#ffffff;
+    --good:#2f7d4f; --tech:#2f5d8a;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:#2a2a30;color:var(--ink);font-family:Georgia,'Times New Roman',serif}
+  body{padding:80px 0 120px}
+
+  /* Toolbar */
+  .toolbar{
+    position:fixed;top:0;left:0;right:0;height:56px;background:#0b0b10;color:#fff;
+    display:flex;align-items:center;justify-content:space-between;padding:0 24px;
+    z-index:9999;font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;font-size:13px;
+    border-bottom:1px solid #222;
+  }
+  .toolbar .left{display:flex;align-items:center;gap:14px}
+  .toolbar .brand{font-weight:600;letter-spacing:.04em}
+  .toolbar .hint{color:#9a9aa6}
+  .toolbar button{
+    background:transparent;border:1px solid #444;color:#fff;padding:8px 14px;border-radius:6px;
+    cursor:pointer;font:inherit;margin-left:8px
+  }
+  .toolbar button:hover{background:#1c1c22;border-color:#666}
+  .toolbar button.primary{background:var(--cardinal);border-color:var(--cardinal)}
+  .toolbar button.primary:hover{background:#a01a1a}
+  .toolbar a.pdf-link{
+    display:inline-block;background:var(--cardinal);border:1px solid var(--cardinal);color:#fff;
+    text-decoration:none;border-radius:6px;padding:7px 12px;font:inherit;font-size:12.5px;
+    cursor:pointer;
+  }
+  .toolbar a.pdf-link:hover{background:#a01a1a;border-color:#a01a1a}
+
+  /* Page ("slide") */
+  .page{
+    width:8.5in;min-height:11in;background:var(--paper);margin:24px auto;
+    padding:64px 72px;box-shadow:0 4px 24px rgba(0,0,0,.4);position:relative;
+  }
+  .page.dark{background:#0b0b10;color:#fff}
+  .page.dark .sub,.page.dark .rule-label{color:#bdb9af}
+
+  .page-header{
+    display:flex;justify-content:space-between;align-items:baseline;
+    font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;font-size:10.5px;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--sub);
+    border-bottom:1px solid var(--rule);padding-bottom:10px;margin-bottom:32px;
+  }
+  .page.dark .page-header{border-bottom-color:#2a2a30;color:#9a9aa6}
+
+  h1{font-size:40px;line-height:1.12;font-weight:500;margin:0 0 18px}
+  h2{font-size:27px;line-height:1.15;font-weight:500;margin:0 0 14px}
+  h3{font-size:17px;font-weight:600;margin:0 0 10px;font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;letter-spacing:.03em}
+  p{font-size:14px;line-height:1.55;margin:0 0 11px;color:#2a2a32}
+  .page.dark p{color:#d4d2cc}
+  .lead{font-size:16.5px;line-height:1.5;color:#3a3a44}
+  .page.dark .lead{color:#e2e0d8}
+  ul{margin:6px 0 12px;padding-left:18px}
+  li{font-size:13.5px;line-height:1.5;margin:0 0 6px;color:#2a2a32}
+  .page.dark li{color:#d4d2cc}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;background:var(--cardinal-soft);padding:1px 5px;border-radius:4px;color:#5a2020}
+  .page.dark code{background:rgba(255,255,255,.08);color:#f0d9d9}
+
+  .rule-label{
+    font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;font-size:10.5px;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--sub);margin-bottom:8px
+  }
+  .cardinal{color:var(--cardinal)}
+  .italic{font-style:italic}
+  .muted{color:var(--sub)}
+
+  /* Cards */
+  .card{
+    position:relative;background:var(--card);border:1px solid var(--rule);
+    border-radius:10px;padding:20px 22px;margin:0 0 14px;
+  }
+  .page.dark .card{background:#15151c;border-color:#2a2a30}
+  .card .label{
+    font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;font-size:10.5px;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--sub);margin-bottom:8px
+  }
+  .card h4{font-size:15px;margin:0 0 8px;font-weight:600}
+  .card p{font-size:13px;margin:0 0 8px}
+  .card p:last-child{margin-bottom:0}
+
+  .delete-btn{
+    position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:50%;
+    background:#0b0b10;color:#fff;border:none;cursor:pointer;font-size:14px;line-height:1;
+    display:none;align-items:center;justify-content:center;font-family:Helvetica,Arial,sans-serif;z-index:5;
+  }
+  [data-card]{position:relative}
+  [data-card]:hover > .delete-btn{display:flex}
+  .delete-btn:hover{background:var(--cardinal)}
+  #save-indicator{color:#7fbf7f;font-size:12px;margin-left:14px;opacity:0;transition:opacity .3s}
+  #save-indicator.show{opacity:1}
+
+  /* Grids */
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+
+  /* Cover stats */
+  .stat-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;margin-top:28px;border-top:1px solid #2a2a30;padding-top:22px}
+  .stat-label{font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:#9a9aa6}
+
+  /* Q&A dual panes */
+  .qhead{display:flex;align-items:baseline;gap:12px;margin:0 0 4px}
+  .qnum{font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--cardinal);font-weight:700;white-space:nowrap}
+  .dual{display:grid;grid-template-columns:1fr;gap:13px;margin-top:14px}
+  .pane{position:relative;border-radius:10px;padding:16px 20px;border:1px solid var(--rule)}
+  .pane.lay{background:#f4f8f4;border-left:4px solid var(--good)}
+  .pane.tech{background:#f3f6f9;border-left:4px solid var(--tech)}
+  .pane .tag{display:inline-flex;align-items:center;gap:7px;font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;font-size:10px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;margin-bottom:8px}
+  .pane.lay .tag{color:var(--good)}
+  .pane.tech .tag{color:var(--tech)}
+  .pane .tag .dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+  .pane.lay .tag .dot{background:var(--good)}
+  .pane.tech .tag .dot{background:var(--tech)}
+  .pane p{font-size:13px;margin:0 0 8px}
+  .pane p:last-child{margin-bottom:0}
+  .pane li{font-size:12.5px}
+
+  /* Numbered rail (vertical flow graph) */
+  .rail{position:relative;margin:16px 0 6px;padding-left:2px}
+  .rail::before{content:"";position:absolute;left:16px;top:10px;bottom:24px;width:2px;background:var(--rule)}
+  .rail .step{position:relative;display:flex;gap:16px;align-items:flex-start;padding:0 0 14px}
+  .rail .step:last-child{padding-bottom:0}
+  .rail .badge{flex:0 0 auto;width:32px;height:32px;border-radius:50%;background:var(--cardinal);color:#fff;display:flex;align-items:center;justify-content:center;font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;font-weight:700;font-size:13px;position:relative;z-index:1}
+  .rail .badge.gate{background:var(--good)}
+  .rail .badge.stop{background:#0b0b10}
+  .rail .stepbody{padding-top:3px}
+  .rail .stepbody .st{font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;font-size:11px;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:var(--ink);margin-bottom:2px}
+  .rail .stepbody p{font-size:12.5px;margin:0;color:#3a3a44}
+
+  /* Horizontal flow graph */
+  .flow{display:flex;align-items:stretch;flex-wrap:wrap;gap:8px;margin:16px 0}
+  .flow .node{flex:1 1 0;min-width:120px;background:#fff;border:1px solid var(--rule);border-radius:10px;padding:11px 13px}
+  .flow .node .nt{font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--cardinal);font-weight:700;margin-bottom:4px}
+  .flow .node p{font-size:11.5px;margin:0;color:#3a3a44}
+  .flow .arrow{flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:var(--cardinal);font-size:20px;font-family:Arial,sans-serif}
+
+  /* Trust-boundary diagram */
+  .zones{display:flex;align-items:stretch;margin:18px 0 8px;border:1px solid var(--rule);border-radius:12px;overflow:hidden}
+  .zone{flex:1;padding:18px 20px;position:relative}
+  .zone.gov{background:#f2f7f2}
+  .zone.prov{background:#0b0b10;color:#fff}
+  .zone .ztitle{font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;margin-bottom:10px}
+  .zone.gov .ztitle{color:var(--good)}
+  .zone.prov .ztitle{color:#e9b8b8}
+  .zone .chip{display:block;background:#fff;border:1px solid var(--rule);border-radius:8px;padding:8px 11px;font-size:12px;margin:0 0 7px;color:#2a2a32}
+  .zone.prov .chip{background:#15151c;border-color:#2a2a30;color:#e2e0d8}
+  .zone .chip:last-child{margin-bottom:0}
+  .stamp{display:inline-block;margin-top:10px;border:2px solid #e9b8b8;color:#e9b8b8;border-radius:6px;padding:5px 9px;font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;font-size:10px;letter-spacing:.12em;font-weight:800;text-transform:uppercase;transform:rotate(-3deg)}
+  .divider{flex:0 0 78px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-left:2px dashed var(--cardinal);border-right:2px dashed var(--cardinal);background:repeating-linear-gradient(45deg,#faf8f4,#faf8f4 6px,#f1ede4 6px,#f1ede4 12px);padding:8px 4px}
+  .divider .dl{font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--cardinal);text-align:center;line-height:1.3}
+  .divider .ar{color:var(--cardinal);font-size:16px;font-family:Arial,sans-serif;margin:4px 0}
+  .caption{font-size:11.5px;color:var(--sub);font-style:italic;margin:6px 2px 0}
+
+  /* Promise / highlight */
+  .promise{position:relative;background:#0b0b10;color:#fff;border-radius:12px;padding:20px 24px;border-left:5px solid var(--good);margin:14px 0}
+  .promise .ptitle{font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:#86d29c;margin-bottom:8px}
+  .promise p{color:#ececf2;font-size:14.5px;line-height:1.5;margin:0}
+
+  /* Never / Always checklists */
+  .checklist{list-style:none;margin:8px 0 0;padding:0}
+  .checklist li{position:relative;padding-left:24px;font-size:13px;margin-bottom:9px;color:#2a2a32}
+  .checklist li::before{position:absolute;left:0;top:0;font-family:Arial,sans-serif;font-weight:700}
+  .checklist.never li::before{content:"\2715";color:var(--cardinal)}
+  .checklist.always li::before{content:"\2713";color:var(--good)}
+
+  /* Questions index */
+  .qindex{list-style:none;margin:10px 0 0;padding:0}
+  .qindex li{display:flex;gap:12px;align-items:baseline;padding:10px 0;border-bottom:1px dotted var(--rule);font-size:13.5px}
+  .qindex li:last-child{border-bottom:none}
+  .qindex .qi-q{flex:1;color:#2a2a32}
+  .qindex .qi-where{font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--cardinal);white-space:nowrap;font-weight:600}
+
+  /* Glossary */
+  .gloss{display:grid;grid-template-columns:1fr 1fr;gap:10px 22px}
+  .gloss dt{font-weight:700;font-size:13px;margin-bottom:2px}
+  .gloss dd{margin:0 0 10px;font-size:12.5px;color:#3a3a44;line-height:1.45}
+
+  /* Footer */
+  .page-footer{
+    position:absolute;bottom:24px;left:72px;right:72px;
+    display:flex;justify-content:space-between;font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;
+    font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--sub)
+  }
+  .page.dark .page-footer{color:#9a9aa6}
+
+  /* Editable hover */
+  [contenteditable=true]{outline:none;transition:background .15s}
+  [contenteditable=true]:hover{background:rgba(140,21,21,.04)}
+  [contenteditable=true]:focus{background:rgba(140,21,21,.08);box-shadow:inset 0 0 0 1px rgba(140,21,21,.25);border-radius:3px}
+  .page.dark [contenteditable=true]:hover{background:rgba(255,255,255,.04)}
+  .page.dark [contenteditable=true]:focus{background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)}
+
+  /* Page numbers (auto-injected by JS) */
+  .page-num{
+    position:absolute;bottom:24px;left:0;right:0;text-align:center;
+    font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;
+    font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--sub);
+    pointer-events:none;user-select:none;
+  }
+  .page.dark .page-num{color:#9a9aa6}
+
+  /* Print */
+  @page{ size: 8.5in 11in; margin: 0; }
+  @media print{
+    *{ -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; }
+    html, body{ background:#fff !important; margin:0 !important; padding:0 !important; }
+    .toolbar, #save-indicator, .delete-btn{ display:none !important; }
+    .page{
+      width: 8.5in !important; height: 11in !important; min-height:0 !important; max-height:11in !important;
+      margin:0 !important; padding:0.55in 0.65in 0.75in 0.65in !important;
+      box-shadow:none !important; border-radius:0 !important;
+      page-break-after: always; break-after: page; page-break-inside: avoid; break-inside: avoid;
+      overflow:hidden; position:relative;
+    }
+    .page:last-child{ page-break-after:auto; break-after:auto; }
+    .page.dark{ background:#0b0b10 !important; color:#fff !important; }
+    .card,.pane,.promise,.zones,.flow,.rail .step,.grid-2,.grid-3{ page-break-inside:avoid; break-inside:avoid; }
+    [contenteditable=true]:hover,[contenteditable=true]:focus{ background:none !important; box-shadow:none !important; outline:none !important; }
+    h1{font-size:34px !important;line-height:1.08 !important}
+    h2{font-size:23px !important}
+    .lead{font-size:14.5px !important;line-height:1.45 !important}
+    p{font-size:12.5px !important;line-height:1.48 !important}
+    .page-header{margin-bottom:22px !important;padding-bottom:8px !important}
+    *{position:static !important}
+    .page,.delete-btn,.page-footer,.zone,.divider,.rail,.rail::before,.rail .badge{position:relative !important}
+    .page-footer{position:absolute !important;bottom:0.3in;left:0.65in;right:0.65in}
+    .page-num{position:absolute !important;bottom:0.3in !important;left:0 !important;right:0 !important;text-align:center !important;color:#6a6a72 !important}
+    .page.dark .page-num{color:#bdb9af !important}
+  }
+
+  /* The ?print=1 PDF view applies this same layout on SCREEN, so the cream/dark
+     pages render edge-to-edge with no editor backdrop. "Export as PDF" or
+     "Save as PDF" then never picks up the gray border/shadow around each page. */
+  html.printing{ background:#fff !important; }
+  html.printing body{ background:#fff !important; margin:0 !important; padding:0 !important; }
+  html.printing .toolbar, html.printing #save-indicator, html.printing .delete-btn{ display:none !important; }
+  html.printing .page{
+    width:8.5in !important; height:11in !important; min-height:0 !important; max-height:11in !important;
+    margin:0 auto !important; padding:0.55in 0.65in 0.75in 0.65in !important;
+    box-shadow:none !important; border-radius:0 !important; overflow:hidden; position:relative;
+    page-break-after:always; break-after:page; page-break-inside:avoid; break-inside:avoid;
+  }
+  html.printing .page:last-child{ page-break-after:auto; break-after:auto; }
+  html.printing .page.dark{ background:#0b0b10 !important; color:#fff !important; }
+  html.printing h1{ font-size:34px !important; line-height:1.08 !important; }
+  html.printing h2{ font-size:23px !important; }
+  html.printing .lead{ font-size:14.5px !important; line-height:1.45 !important; }
+  html.printing p{ font-size:12.5px !important; line-height:1.48 !important; }
+  html.printing .page-header{ margin-bottom:22px !important; padding-bottom:8px !important; }
+  html.printing .page-footer{ position:absolute !important; bottom:0.3in; left:0.65in; right:0.65in; }
+  html.printing .page-num{ position:absolute !important; bottom:0.3in !important; left:0 !important; right:0 !important; text-align:center !important; color:#6a6a72 !important; }
+  html.printing .page.dark .page-num{ color:#bdb9af !important; }
+</style>
+</head>
+<body>
+
+
+<div class="toolbar">
+  <div class="left">
+    <span class="brand">Palonur · Stanford Review Package · Editable</span>
+    <span class="hint">Click any text to edit · hover a block to delete it</span>
+  </div>
+  <div class="right">
+    <span id="save-indicator">Saved</span>
+    <button id="edit-mode-btn" onclick="toggleEditMode()">Enable editing</button>
+    <button onclick="resetAll()">Reset</button>
+    <button onclick="saveHTML()">Download HTML</button>
+    <a class="pdf-link" id="pdf-btn" href="/uit.html?print=1" target="_blank" rel="noopener">Download PDF</a>
+  </div>
+</div>
+
+<!-- COVER -->
+<section class="page dark" data-card>
+  <button class="delete-btn" onclick="deletePage(this)">×</button>
+  <div class="page-header">
+    <span>Palonur</span>
+    <span>Confidential — prepared for Stanford review</span>
+  </div>
+  <div class="rule-label">Stanford Review Package</div>
+  <h1>What Stanford's reviewers need to know: data risk classification, vendor security, procurement terms, and web governance.</h1>
+  <p class="lead">This package is organized around the three Stanford review tracks: University IT (data risk classification and vendor security review), Procurement (vendor agreement and data terms), and UIT web governance (sign-off for anything on a Stanford site). Each stated concern is answered directly, with the technical facts as they are today — not as we wish they were.</p>
+  <div class="stat-row">
+    <div><div class="stat-label">Prepared</div><div style="margin-top:6px">August 2026</div></div>
+    <div><div class="stat-label">Status</div><div style="margin-top:6px">Live in closed beta for review</div></div>
+    <div><div class="stat-label">Contact</div><div style="margin-top:6px">karan@palonur.com</div></div>
+  </div>
+  <div class="page-footer"><span></span><span>palonur.com</span></div>
+</section>
+
+<!-- ORIENTATION -->
+<section class="page" data-card>
+  <button class="delete-btn" onclick="deletePage(this)">×</button>
+  <div class="page-header"><span>Orientation</span><span>Three review tracks, four concerns</span></div>
+  <h2>How this package is organized</h2>
+
+  <div class="dual">
+    <div class="pane lay" data-card>
+      <button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="tag"><span class="dot"></span>The three review tracks</div>
+      <ul>
+        <li><strong>University IT (UIT)</strong> — data risk classification and vendor security review. Pages 3–4: what personal data exists, where it lives, who can see it, and how access is controlled and audited.</li>
+        <li><strong>Procurement</strong> — vendor agreement and data terms. Page 5: every third-party service in the system, what data reaches it, and the contractual terms that matter.</li>
+        <li><strong>UIT web governance</strong> — sign-off for anything on a Stanford site. Page 6: the Stanford Lifestyle Medicine page would link to our own site only — nothing runs on Stanford infrastructure — plus the accessibility posture and which decisions are institutional, not faculty decisions.</li>
+      </ul>
+    </div>
+    <div class="pane tech" data-card>
+      <button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="tag"><span class="dot"></span>The four concerns raised</div>
+      <ul>
+        <li>"Whatever documents the tool indexes get sent to a third party."</li>
+        <li>"Faculty generally can't sign the vendor's terms of service or put software on a Stanford website. Those are institutional decisions."</li>
+        <li>"The vendor may log and train on our content unless the contract says otherwise — IP and privacy issues."</li>
+        <li>"There are accessibility and web-governance requirements for anything on an official Stanford site."</li>
+      </ul>
+      <p style="margin-top:10px">Each is answered directly on page 7, with the honest current state and what a Stanford agreement would add.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:18px">The one-sentence summary</h3>
+  <div class="card" data-card>
+    <button class="delete-btn" onclick="deleteCard(this)">×</button>
+    <p>Palonur does <strong>not</strong> bulk-upload an indexed corpus to any AI vendor: indexing (embedding) runs in-house on our own servers, and only the short excerpts needed to answer one specific question cross to the answer model, under API terms that exclude training. We do not ask faculty to sign anything, and we treat hosting, contracting, and website placement as institutional decisions for Stanford to make.</p>
+  </div>
+  <div class="page-footer"><span>Confidential — prepared for Stanford review</span><span>palonur.com</span></div>
+</section>
+
+<!-- TRACK 1A: DATA INVENTORY -->
+<section class="page" data-card>
+  <button class="delete-btn" onclick="deletePage(this)">×</button>
+  <div class="page-header"><span>Track 1 · UIT</span><span>Data inventory &amp; risk classification</span></div>
+  <div class="qhead"><span class="qnum">Track 1 · UIT</span></div>
+  <h2>What data exists, where it lives, and who can see it</h2>
+
+  <div class="dual">
+    <div class="pane lay" data-card>
+      <button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="tag"><span class="dot"></span>Summary</div>
+      <p>The system holds two kinds of material: the research corpus (published papers and faculty-approved interpretations — not personal data) and a modest amount of personal data about the people who use it. No Social Security numbers, no medical records, no student records, and no payment card numbers are stored — payments are handled entirely by Stripe. The most sensitive category is reader questions, because a person may volunteer health context when asking. We propose classifying each element using Stanford's Low / Moderate / High risk scale, and we list our proposed classification below for UIT to confirm or correct.</p>
+    </div>
+    <div class="pane tech" data-card>
+      <button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="tag"><span class="dot"></span>Proposed risk classification (for UIT to confirm)</div>
+      <ul>
+        <li><strong>Research corpus</strong> (published studies, approved interpretations) — <em>Low</em>. Published material; no personal data.</li>
+        <li><strong>Reader questions &amp; answers</strong> — <em>Moderate</em>. Free text may include volunteered health context; stored with a session identifier, not a verified identity.</li>
+        <li><strong>Subscriber contact data</strong> (email, optional phone for text check-ins) — <em>Moderate</em>.</li>
+        <li><strong>Faculty account data</strong> (name, Stanford email, title, photo, bio) — <em>Moderate</em>; directory-type information, but access-controlled.</li>
+        <li><strong>Access-audit records</strong> (IP address, browser user-agent, coarse city) — <em>Moderate</em>.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 style="margin-top:18px">Who can see what</h3>
+  <div class="dual">
+    <div class="pane lay" data-card>
+      <button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="tag"><span class="dot"></span>Summary</div>
+      <p>Every surface has its own lock. Faculty sign in through a managed identity provider. Subscribers sign in through a link emailed to them. Admin and governance dashboards need separate passwords. Outside platforms need an issued key. Nobody sees more than their own role requires, and reader questions are never shown publicly with any identifying information.</p>
+    </div>
+    <div class="pane tech" data-card>
+      <button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="tag"><span class="dot"></span>Authentication model, per surface</div>
+      <ul>
+        <li><strong>Faculty portal</strong> — Clerk (managed identity provider); role-based pillar memberships; deactivation and archiving enforced in middleware, not just the UI.</li>
+        <li><strong>Consumer / subscriber area</strong> — emailed magic-link sessions (signed, HTTP-only cookies); no passwords exist to leak.</li>
+        <li><strong>Admin &amp; governance dashboards</strong> — separate password gates that fail closed: if a password is not configured, the surface denies access rather than opening up.</li>
+        <li><strong>Partner / API access</strong> — individually issued, metered keys with rate tiers; revocable per partner.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="page-footer"><span>Confidential — prepared for Stanford review</span><span>palonur.com</span></div>
+</section>
+
+<!-- TRACK 1B: DATA FLOW, RETENTION, AUDIT -->
+<section class="page" data-card>
+  <button class="delete-btn" onclick="deletePage(this)">×</button>
+  <div class="page-header"><span>Track 1 · UIT</span><span>Data flow, retention &amp; auditing</span></div>
+  <div class="qhead"><span class="qnum">Track 1 · UIT</span></div>
+  <h2>How data moves, how long it stays, and how access is audited</h2>
+
+  <h3>The data flow for one answered question</h3>
+  <div class="flow" data-card>
+    <button class="delete-btn" onclick="deleteCard(this)">×</button>
+    <div class="node"><div class="nt">1 · Reader asks</div><p>The question arrives at Palonur's server.</p></div>
+    <div class="arrow">→</div>
+    <div class="node"><div class="nt">2 · In-house search</div><p>Palonur's own embedding model (self-hosted) finds the matching approved excerpts. Nothing leaves.</p></div>
+    <div class="arrow">→</div>
+    <div class="node"><div class="nt">3 · One API call</div><p>The question plus only those excerpts go to the answer model (Anthropic Claude) for that single answer.</p></div>
+    <div class="arrow">→</div>
+    <div class="node"><div class="nt">4 · Cited answer</div><p>The answer returns with citations; a guard blocks any claim that lacks a matching approved source.</p></div>
+  </div>
+
+  <div class="dual" style="margin-top:18px">
+    <div class="pane lay" data-card>
+      <button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="tag"><span class="dot"></span>Retention &amp; deletion — summary</div>
+      <p>Questions and answers are kept so faculty can see what readers actually ask (that is how coverage gaps are found) — with a session identifier, not a name. Subscribers can unsubscribe from every email, and a single STOP text opts a phone number out account-wide. When a faculty member is archived, their portal access ends immediately. Data deletion requests are honored on request; under a Stanford agreement, retention schedules would be set to Stanford's requirements.</p>
+    </div>
+    <div class="pane tech" data-card>
+      <button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="tag"><span class="dot"></span>Access auditing — current state</div>
+      <ul>
+        <li><strong>Governance dashboards</strong> — every open of the OTL/review dashboards is logged (time, IP, coarse city), including returning sessions, so the audit trail has no silent gaps.</li>
+        <li><strong>Faculty actions</strong> — approvals, edits, and role changes are attributable to the signed-in faculty account.</li>
+        <li><strong>Admin "view as"</strong> — when an admin previews a faculty member's portal it is read-only by construction; writes never execute as the target user.</li>
+        <li><strong>Rate limits &amp; abuse budgets</strong> — anonymous costed endpoints are rate-limited per client IP as reported through the hosting proxy; audit records capture the reported IP and browser signature.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="page-footer"><span>Confidential — prepared for Stanford review</span><span>palonur.com</span></div>
+</section>
+
+<!-- TRACK 2: PROCUREMENT / THIRD PARTIES -->
+<section class="page" data-card>
+  <button class="delete-btn" onclick="deletePage(this)">×</button>
+  <div class="page-header"><span>Track 2 · Procurement</span><span>Third-party services &amp; data terms</span></div>
+  <div class="qhead"><span class="qnum">Track 2 · Procurement</span></div>
+  <h2>Every third party in the system, and what reaches each one</h2>
+
+  <div class="card" data-card>
+    <button class="delete-btn" onclick="deleteCard(this)">×</button>
+    <p><strong>The complete list.</strong> Nothing is omitted here; if a service is not on this list, it does not receive data from Palonur.</p>
+    <ul>
+      <li><strong>Anthropic (Claude)</strong> — the answer model. Receives, per question: the reader's question and the short text we provide as the basis for that answer. It does not browse or hold the corpus itself — it only sees what we send per question. API terms: used for inference only, not for model training.</li>
+      <li><strong>Clerk</strong> — faculty identity. Receives faculty name, Stanford email, and credentials. SOC 2 Type II.</li>
+      <li><strong>Resend</strong> — transactional email (magic links, newsletters). Receives recipient email addresses and message content.</li>
+      <li><strong>Sendblue</strong> — optional text check-ins (SMS/iMessage). Receives phone numbers and message content for subscribers who explicitly opt in.</li>
+      <li><strong>ElevenLabs</strong> — text-to-speech for the voice surface. Receives the already-generated answer text to read aloud.</li>
+      <li><strong>Hosting (AWS, US West)</strong> — runs the application, the PostgreSQL database, and object storage. The corpus and all records live here.</li>
+      <li><strong>External AI engines (e.g. OpenAI)</strong> — used only by the optional "how AI sees you" visibility reports, which ask public questions about the brand. No corpus text or personal data is sent.</li>
+      <li><strong>Geo-IP lookup</strong> — converts an IP address to a coarse city/country for the access-audit log only.</li>
+    </ul>
+  </div>
+
+  <div class="dual" style="margin-top:18px">
+    <div class="pane lay" data-card>
+      <button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="tag"><span class="dot"></span>What is contractually true today</div>
+      <p>Today these are standard commercial API agreements: the answer model's terms exclude training on API traffic, and each provider processes data only to deliver its service. What today's terms do <strong>not</strong> include: a Stanford-negotiated data processing agreement, Stanford-specific retention schedules, or a HIPAA business associate agreement (none is claimed, and none is currently needed — no medical records are processed).</p>
+    </div>
+    <div class="pane tech" data-card>
+      <button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="tag"><span class="dot"></span>What a Stanford agreement would add</div>
+      <ul>
+        <li>A vendor agreement between Stanford and Palonur (not faculty) covering IP, data terms, and liability.</li>
+        <li>Flow-down data terms for the answer-model provider: contractual no-training, defined retention, and breach notification on Stanford's timelines.</li>
+        <li>Stanford-approved hosting for Stanford material — deployable into a Stanford-controlled environment, since the stack is standard Node.js + PostgreSQL with no proprietary lock-in.</li>
+        <li>A named data inventory appendix that UIT can re-verify at any time.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="page-footer"><span>Confidential — prepared for Stanford review</span><span>palonur.com</span></div>
+</section>
+
+<!-- TRACK 3: WEB GOVERNANCE -->
+<section class="page" data-card>
+  <button class="delete-btn" onclick="deletePage(this)">×</button>
+  <div class="page-header"><span>Track 3 · Web governance</span><span>Site placement &amp; accessibility</span></div>
+  <div class="qhead"><span class="qnum">Track 3 · Web governance</span></div>
+  <h2>What would live on a Stanford site — and what would not</h2>
+
+  <div class="dual">
+    <div class="pane lay" data-card>
+      <button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="tag"><span class="dot"></span>Summary</div>
+      <p>Nothing goes on a Stanford website without UIT web governance's sign-off — that is the correct order of operations and we are not asking anyone to shortcut it. What is proposed here is deliberately the lightest possible arrangement: the Stanford Lifestyle Medicine page would link to our own site only. No software runs on Stanford infrastructure at all. Faculty are never asked to accept terms of service, install anything, or place anything on a Stanford page.</p>
+    </div>
+    <div class="pane tech" data-card>
+      <button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="tag"><span class="dot"></span>The integration model</div>
+      <ul>
+        <li><strong>Link out only (no governance footprint)</strong> — the Stanford Lifestyle Medicine page links to the independently hosted site (asklifestylemedicine.com). No code, no data, no embed on Stanford infrastructure. Everything the reader interacts with runs on our own hosting.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 style="margin-top:18px">Accessibility posture — honest current state</h3>
+  <div class="card" data-card>
+    <button class="delete-btn" onclick="deleteCard(this)">×</button>
+    <p>This section covers the one surface a Stanford page would link to: asklifestylemedicine.com. It is built with semantic HTML, keyboard-operable controls, readable contrast, and text alternatives, and is deliberately written in plain language for older readers; browser zoom is never disabled, and keyboard users get a visible focus indicator on every control. An automated WCAG 2.1 A/AA scan (axe-core) of the public ask page was run on August 14, 2026: it surfaced one contrast issue, which was fixed the same day, and the page now passes the automated ruleset with zero violations. Automated scanning covers only what machines can check — a formal third-party WCAG 2.1 AA conformance audit has <strong>not</strong> yet been performed, and we state that plainly rather than claim conformance. Before a Stanford page links out, we would complete whatever accessibility review web governance requires and remediate to Stanford's standard (WCAG 2.1 AA), producing a VPAT if procurement needs one.</p>
+  </div>
+  <div class="page-footer"><span>Confidential — prepared for Stanford review</span><span>palonur.com</span></div>
+</section>
+
+<!-- THE FOUR CONCERNS -->
+<section class="page" data-card>
+  <button class="delete-btn" onclick="deletePage(this)">×</button>
+  <div class="page-header"><span>Direct answers</span><span>The four concerns, one by one</span></div>
+  <h2>Your concerns, answered directly</h2>
+
+  <div class="card" data-card>
+    <button class="delete-btn" onclick="deleteCard(this)">×</button>
+    <p><strong>1 · "Whatever documents the tool indexes get sent to a third party."</strong></p>
+    <p>Partly true, and the distinction matters. <em>Indexing does not send documents anywhere</em>: the embedding model that indexes the corpus runs in-house on Palonur's own servers, so building the searchable index involves no third party. What does cross to a third party is smaller and per-question: when a reader asks something, the short approved excerpts selected for that one answer are sent to the answer model (Anthropic Claude) in a single API call. So there is no bulk transfer of the corpus — but we will not claim "the corpus never leaves," because excerpt text does cross at answer time. Under a Stanford-hosted deployment, the stored corpus stays entirely inside Stanford's boundary and only those per-answer excerpts cross, under negotiated terms.</p>
+  </div>
+
+  <div class="card" data-card>
+    <button class="delete-btn" onclick="deleteCard(this)">×</button>
+    <p><strong>2 · "Faculty can't sign the vendor's terms of service or put software on a Stanford website."</strong></p>
+    <p>Agreed, and the system is built on that assumption. Faculty participation requires no signature on any vendor terms: a faculty steward reviews and approves content through a portal — an editorial role, not a contracting one. The institutional decisions — the vendor agreement (Procurement), data terms and risk classification (UIT), and any placement on a Stanford site (web governance) — sit with Stanford, and this package exists to give each of those offices what they need to decide.</p>
+  </div>
+
+  <div class="card" data-card>
+    <button class="delete-btn" onclick="deleteCard(this)">×</button>
+    <p><strong>3 · "The vendor may log and train on our content unless the contract says otherwise."</strong></p>
+    <p>This is the right default suspicion, so here is the current state precisely. The answer model is called under API terms that exclude training on submitted content — API traffic is inference only. Palonur itself never trains any model on Stanford material; the system is retrieval-based, so faculty-approved text is quoted and cited, not absorbed into model weights. What is <em>not</em> yet in place is a Stanford-negotiated contract making those commitments to Stanford directly, with defined retention and audit rights — that is exactly what the Procurement track would add, and we support flowing those terms down to the model provider.</p>
+  </div>
+
+  <div class="card" data-card>
+    <button class="delete-btn" onclick="deleteCard(this)">×</button>
+    <p><strong>4 · "There are accessibility and web-governance requirements for anything on an official Stanford site."</strong></p>
+    <p>Understood, and nothing is proposed for a Stanford site without that review. The link-out model requires no Stanford-site footprint at all and can proceed while deeper options are evaluated. An internal remediation pass (August 2026) already addressed contrast, zoom, and keyboard-focus issues on the main public pages (no auditable automated result is retained yet, so we claim only the remediations themselves). For any embedded or hosted option, we would still complete web governance's accessibility review first (target: WCAG 2.1 AA) and remediate before placement — see the honest current-state note on the web governance page.</p>
+  </div>
+  <div class="page-footer"><span>Confidential — prepared for Stanford review</span><span>palonur.com</span></div>
+</section>
+
+<!-- DECISION POINTS -->
+<section class="page" data-card>
+  <button class="delete-btn" onclick="deletePage(this)">×</button>
+  <div class="page-header"><span>Next steps</span><span>Institutional decision points</span></div>
+  <h2>The decisions this package supports</h2>
+
+  <div class="flow" data-card>
+    <button class="delete-btn" onclick="deleteCard(this)">×</button>
+    <div class="node"><div class="nt">UIT</div><p>Confirm or correct the proposed data risk classifications; run the vendor security review against pages 3–4.</p></div>
+    <div class="arrow">→</div>
+    <div class="node"><div class="nt">Procurement</div><p>Negotiate the vendor agreement and data terms using the third-party inventory on page 5.</p></div>
+    <div class="arrow">→</div>
+    <div class="node"><div class="nt">Web governance</div><p>Choose an integration model and set the accessibility bar for any Stanford-site placement.</p></div>
+  </div>
+
+  <div class="card" data-card style="margin-top:18px">
+    <button class="delete-btn" onclick="deleteCard(this)">×</button>
+    <p><strong>What we commit to during review.</strong> Any question in this package can be re-verified live: UIT can be walked through the data flow against the running system, and every claim here is written to remain true under inspection. Where the current state falls short of a Stanford requirement (for example, the formal accessibility audit), this package says so explicitly rather than papering over it.</p>
+  </div>
+
+  <p class="caption">This package is the companion to the Palonur technical &amp; governance brief prepared for OTL; both are maintained together and accessible from the same governed dashboard, with access logged.</p>
+  <div class="page-footer"><span>Confidential — prepared for Stanford review</span><span>palonur.com</span></div>
+</section>
+<script>
+  // Edits are persisted to the database (source of truth on load) via
+  // /api/uit-doc, with localStorage kept as a local backup. Use Download
+  // HTML / PDF to share a snapshot. Edit mode is a sessionStorage flag
+  // (clears on tab close); saving to the DB requires an edit password.
+  const LOCAL_KEY = 'palonur-uit-brief';
+  const EDIT_FLAG = 'palonur-uit-edit';
+  const PW_KEY = 'palonur-uit-edit-password';
+  const SERVER_URL = '/api/uit-doc';
+
+  function getPassword(){ return sessionStorage.getItem(PW_KEY) || ''; }
+
+  function setIndicator(text, ok){
+    const ind = document.getElementById('save-indicator');
+    if (!ind) return;
+    ind.textContent = text;
+    ind.style.color = ok === false ? '#e26a6a' : '#7fbf7f';
+    ind.classList.add('show');
+    clearTimeout(setIndicator._t);
+    setIndicator._t = setTimeout(() => ind.classList.remove('show'), 2200);
+  }
+
+  function isEditMode(){ return !!sessionStorage.getItem(EDIT_FLAG); }
+
+  function refreshEditAffordances(){
+    const editing = isEditMode();
+    const btn = document.getElementById('edit-mode-btn');
+    if (btn) btn.textContent = editing ? 'Editing on · click to exit' : 'Enable editing';
+    document.querySelectorAll('.delete-btn').forEach(b => { b.style.display = editing ? '' : 'none'; });
+    document.querySelectorAll('.card, td, .page-header span, .page-footer span, .stat-label, .rule-label, h1, h2, h3, h4, p, li, th, dt, dd, .stepbody .st, .node p, .node .nt, .chip, .ztitle, .qi-q, .caption, .ptitle').forEach(el => {
+      if (editing){
+        if (!el.closest('.toolbar') && !el.classList.contains('delete-btn')) el.setAttribute('contenteditable', 'true');
+      } else {
+        el.removeAttribute('contenteditable');
+      }
+    });
+    // The footer stat VALUES (e.g. "June 2026", the Status, the contact email)
+    // sit in plain sibling divs next to each .stat-label, so make those editable
+    // too. Targeted structurally so it also covers the saved DB snapshot, whose
+    // markup predates any class we could add to the static template.
+    document.querySelectorAll('.stat-label').forEach(lbl => {
+      const val = lbl.nextElementSibling;
+      if (!val) return;
+      if (editing) val.setAttribute('contenteditable', 'true');
+      else val.removeAttribute('contenteditable');
+    });
+    document.querySelectorAll('.delete-btn').forEach(b => b.setAttribute('contenteditable', 'false'));
+  }
+
+  function toggleEditMode(){
+    if (isEditMode()){
+      sessionStorage.removeItem(EDIT_FLAG);
+      refreshEditAffordances();
+      setIndicator('View only', true);
+      return;
+    }
+    if (!getPassword()){
+      const pw = prompt('Enter the edit password to save changes to the database:');
+      if (!pw) { setIndicator('Editing cancelled', false); return; }
+      sessionStorage.setItem(PW_KEY, pw.trim());
+    }
+    sessionStorage.setItem(EDIT_FLAG, '1');
+    refreshEditAffordances();
+    setIndicator('Editing enabled · changes save to the database', true);
+  }
+
+  function currentPages(){
+    return Array.from(document.querySelectorAll('.page')).map(p => p.outerHTML);
+  }
+
+  function saveLocal(){
+    try { localStorage.setItem(LOCAL_KEY, JSON.stringify(currentPages())); }
+    catch(e){ /* localStorage is a best-effort backup only */ }
+  }
+
+  // Migrate any legacy "In plain language" pane label saved before the rename
+  // to "Summary". Non-destructive: only rewrites the label, leaving the dot
+  // and all other edited content untouched.
+  function normalizeLegacyLabels(){
+    let changed = false;
+    document.querySelectorAll('.page .tag').forEach(tag => {
+      if (/in plain language/i.test(tag.textContent || '')){
+        const dot = tag.querySelector('.dot');
+        tag.textContent = '';
+        if (dot) tag.appendChild(dot);
+        else { const s = document.createElement('span'); s.className = 'dot'; tag.appendChild(s); }
+        tag.appendChild(document.createTextNode('Summary'));
+        changed = true;
+      }
+    });
+    return changed;
+  }
+
+  async function saveToServer(){
+    if (!isEditMode()) return false;
+    saveLocal();
+    try {
+      const res = await fetch(SERVER_URL, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', 'x-edit-password': getPassword() },
+        body: JSON.stringify({ content: currentPages() }),
+      });
+      if (res.status === 401){
+        sessionStorage.removeItem(PW_KEY);
+        setIndicator('Wrong edit password — not saved', false);
+        return false;
+      }
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      setIndicator('Saved to database ' + new Date().toLocaleTimeString(), true);
+      return true;
+    } catch(e){
+      setIndicator('Saved locally · database save failed', false);
+      return false;
+    }
+  }
+
+  let saveTimer;
+  function autoSave(){
+    if (!isEditMode()) return;
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(() => { saveToServer(); }, 800);
+  }
+
+  function deleteCard(btn){
+    if (!isEditMode()) return;
+    const card = btn.closest('[data-card]');
+    if (card && confirm('Delete this block?')){ card.remove(); autoSave(); }
+  }
+  function deletePage(btn){
+    if (!isEditMode()) return;
+    const page = btn.closest('.page');
+    if (page && confirm('Delete this entire page?')){ page.remove(); renumberPages(); autoSave(); }
+  }
+  function renumberPages(){
+    const pages = document.querySelectorAll('.page');
+    const total = pages.length;
+    pages.forEach((p, i) => {
+      const existing = p.querySelector(':scope > .page-num');
+      if (i === 0){ if (existing) existing.remove(); return; }
+      let badge = existing;
+      if (!badge){ badge = document.createElement('div'); badge.className = 'page-num'; p.appendChild(badge); }
+      badge.textContent = 'P.' + (i + 1) + ' · of ' + total;
+    });
+  }
+
+  function buildPrintStyleBlock(id){
+    return `
+      <style id="${id}">
+        html,body{background:#fff !important;margin:0 !important;padding:0 !important}
+        *{ -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; }
+        @page{ size: 8.5in 11in; margin: 0; }
+        .page{
+          width: 8.5in !important; height: 11in !important; min-height:0 !important; max-height:11in !important;
+          margin:0 !important; padding:0.55in 0.65in 0.75in 0.65in !important;
+          box-shadow:none !important; border-radius:0 !important; position:relative !important; overflow:hidden !important;
+          page-break-after: always; break-after: page; page-break-inside: avoid; break-inside: avoid;
+        }
+        .page:last-child{ page-break-after:auto; break-after:auto; }
+        .page.dark{ background:#0b0b10 !important; color:#fff !important; }
+        .page-num{ position:absolute !important; bottom:0.3in !important; left:0 !important; right:0 !important; text-align:center !important; font-size:10px !important; letter-spacing:.18em; text-transform:uppercase; color:#6a6a72 !important; }
+        .page.dark .page-num{ color:#bdb9af !important; }
+        .card,.pane,.promise,.zones,.flow,.grid-2,.grid-3,.rail .step{ page-break-inside:avoid; break-inside:avoid; }
+      </style>`;
+  }
+
+  function buildPrintDocument(){
+    const clone = document.documentElement.cloneNode(true);
+    clone.querySelectorAll('.delete-btn, .toolbar, #save-indicator').forEach(n => n.remove());
+    clone.querySelectorAll('[contenteditable]').forEach(n => n.removeAttribute('contenteditable'));
+    const head = clone.querySelector('head');
+    if (head) head.insertAdjacentHTML('beforeend', buildPrintStyleBlock('palonur-uit-print-window'));
+    return '<!doctype html>\n' + clone.outerHTML;
+  }
+
+  function saveHTML(){
+    const clone = document.documentElement.cloneNode(true);
+    clone.classList.add('printing');
+    clone.querySelectorAll('.delete-btn, .toolbar, #save-indicator').forEach(n => n.remove());
+    clone.querySelectorAll('[contenteditable]').forEach(n => n.removeAttribute('contenteditable'));
+    const head = clone.querySelector('head');
+    if (head) head.insertAdjacentHTML('beforeend', buildPrintStyleBlock('palonur-uit-print-export'));
+    const html = '<!doctype html>\n' + clone.outerHTML;
+    const blob = new Blob([html], {type:'text/html'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'palonur_uit_review.html';
+    document.body.appendChild(a); a.click(); a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  async function resetAll(){
+    if (!confirm('Reset this brief back to the original? This clears the saved edits in the database and in this browser.')) return;
+    let pw = getPassword();
+    if (!pw){
+      const entered = prompt('Enter the edit password to reset the saved version:');
+      if (!entered) { setIndicator('Reset cancelled', false); return; }
+      pw = entered.trim();
+      sessionStorage.setItem(PW_KEY, pw);
+    }
+    try {
+      const res = await fetch(SERVER_URL, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', 'x-edit-password': pw },
+        body: JSON.stringify({ content: [] }),
+      });
+      if (res.status === 401){
+        sessionStorage.removeItem(PW_KEY);
+        alert('Wrong edit password — nothing was reset.');
+        return;
+      }
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+    } catch(e){
+      alert('Could not reset the saved version (database error). Please try again.');
+      return;
+    }
+    localStorage.removeItem(LOCAL_KEY);
+    location.reload();
+  }
+
+  function injectPages(pages){
+    if (!Array.isArray(pages) || pages.length === 0 || !pages.every(x => typeof x === 'string')) return false;
+    const existing = document.querySelectorAll('.page');
+    const parent = existing[0] ? existing[0].parentNode : document.body;
+    const anchor = existing[existing.length - 1] ? existing[existing.length - 1].nextSibling : null;
+    existing.forEach(p => p.remove());
+    pages.forEach(html => {
+      const wrap = document.createElement('div');
+      wrap.innerHTML = html;
+      const node = wrap.firstElementChild;
+      if (node) parent.insertBefore(node, anchor);
+    });
+    return true;
+  }
+
+  async function loadFromServer(){
+    try {
+      const res = await fetch(SERVER_URL, { headers: { 'Accept': 'application/json' } });
+      if (!res.ok) return false;
+      const data = await res.json();
+      const content = data && data.content;
+      // A row exists (array) — the server is authoritative, even when empty
+      // (an empty array means it was reset back to the static original).
+      if (Array.isArray(content)){
+        if (content.length === 0){
+          localStorage.removeItem(LOCAL_KEY); // drop any stale local backup
+          return true;
+        }
+        if (injectPages(content)){
+          setIndicator('Loaded the latest saved edits', true);
+          return true;
+        }
+      }
+      // content === null → nothing saved yet → fall back to localStorage / static
+    } catch(e){ /* fall back to localStorage / static below */ }
+    return false;
+  }
+
+  function loadLocal(){
+    try {
+      const raw = localStorage.getItem(LOCAL_KEY);
+      if (!raw) return false;
+      const pages = JSON.parse(raw);
+      if (injectPages(pages)){
+        setIndicator('Loaded your saved edits', true);
+        return true;
+      }
+      return false;
+    } catch(e){ return false; }
+  }
+
+  // Delegated delete handling. Pages loaded from the database snapshot are
+  // sanitized on save (event-handler attributes stripped), so their delete
+  // buttons have no inline onclick — handle them here. Static buttons that
+  // still carry an inline onclick are skipped to avoid double-firing.
+  document.addEventListener('click', (e) => {
+    const btn = e.target && e.target.closest ? e.target.closest('.delete-btn') : null;
+    if (!btn || btn.getAttribute('onclick')) return;
+    if (btn.parentElement && btn.parentElement.classList.contains('page')) deletePage(btn);
+    else deleteCard(btn);
+  });
+
+  window.addEventListener('DOMContentLoaded', async () => {
+    const fromServer = await loadFromServer();
+    if (!fromServer) loadLocal();
+    if (normalizeLegacyLabels()) saveLocal();
+    renumberPages();
+    refreshEditAffordances();
+    document.addEventListener('input', autoSave, true);
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('print') === '1') {
+      document.documentElement.classList.add('printing');
+      document.querySelectorAll('.toolbar, #save-indicator, .delete-btn').forEach(n => n.remove());
+      document.querySelectorAll('[contenteditable]').forEach(n => n.removeAttribute('contenteditable'));
+      try { if (document.fonts && document.fonts.ready) await document.fonts.ready; } catch(_){}
+      setTimeout(() => { try { window.focus(); window.print(); } catch(_){} }, 400);
+    }
+  });
+</script>
+</body>
+</html>

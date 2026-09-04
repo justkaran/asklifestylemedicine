@@ -1,0 +1,485 @@
+{
+  "hero": {
+    "eyebrow": "Verlässliche Antworten für Ihr Leben",
+    "headline": "Palonur ist der Autoritätsrouter für das KI-Zeitalter.",
+    "subhead": "Palonur leitet jede Frage an die richtige menschliche Fakultätsautorität weiter. Wir nennen sie Palonur Stewards, mit Zuständigkeit, Quellen und Governance.",
+    "headlinePrefix": "Fragen Sie einen",
+    "headlineSuffix": "Professor über",
+    "topics": [
+      "Schlaf",
+      "Ernährung",
+      "Bewegung",
+      "Stress",
+      "Gedächtnis",
+      "Sinn"
+    ],
+    "trust": "Von Experten getragen. Mit Quellen. Klar, wenn Wissen fehlt.",
+    "placeholderNight": "Geben Sie hier Ihre Frage ein",
+    "placeholderDay": "Geben Sie hier Ihre Frage ein",
+    "sampleQ0": "Warum wache ich nachts um 3 Uhr auf?",
+    "sampleQ1": "Wie viel Protein brauche ich wirklich nach 60?",
+    "sampleQ2": "Was macht chronischer Stress mit meinem Körper?",
+    "sampleQ3": "Sollte ich mir über meine Gedächtnislücken Sorgen machen?",
+    "sampleLabel": "Probieren Sie eine echte Frage",
+    "inputLabel": "Palonur eine Frage stellen",
+    "askLabel": "Palonur eine Frage stellen",
+    "scrollCue": "Warum wir das bauen ↓",
+    "lateNight": "Es ist {{time}}. Schlaf verändert sich nach 50. Fragen Sie {{faculty}}, was Ihrer Ihnen sagt.",
+    "morning": "Gut zu altern heißt, echte Entscheidungen zu treffen. Treffen Sie sie mit {{faculty}}, nicht mit einem Dutzend widersprüchlicher Meinungen.",
+    "evening": "Ihr Körper ist nach 50 anders. Fragen Sie {{faculty}}, was die Wissenschaft sagt.",
+    "night": "Es ist {{time}}. Schlaf nach 50 ist anders. Wirklich anders. Fragen Sie {{faculty}} warum.",
+    "faculty": "Professoren der Stanford",
+    "askButton": "Palonur fragen",
+    "tagline": "Treffen Sie die wichtigen Entscheidungen Ihres Lebens, mit der besten Fakultät der Welt an Ihrer Seite.",
+    "chips": {
+      "sleep": "Schlaf nach 50",
+      "muscle": "Muskelverlust",
+      "brain": "Gehirngesundheit",
+      "stress": "Chronischer Stress",
+      "connect": "Verbunden bleiben",
+      "purpose": "Sinn im Leben"
+    },
+    "headlineA": "Fragen Sie",
+    "headlineB": "Professoren",
+    "headlineC": "Echte Wissenschaft für die großen Entscheidungen des Lebens",
+    "freeLine": "Kostenlos fragen. Kein Konto nötig.",
+    "ctaApply": "Steward werden",
+    "ctaHow": "So funktioniert es"
+  },
+  "pillars": {
+    "eyebrow": "Showcase: Stanford Lifestyle Medicine Programm",
+    "headline": "Ein direkter Draht zu den besten Fakultätsmitgliedern für die {{em}} Wissenschaft des gesunden Alterns {{/em}}",
+    "body1": "Für Erwachsene in der zweiten Lebenshälfte prägt die Art, wie sie schlafen, sich bewegen, essen, Beziehungen pflegen und Sinn finden, die langfristige Gesundheit stärker als fast alles, was ein Arzt verschreiben kann. Stanford Lifestyle Medicine hat diese Evidenz in sieben Säulen gegliedert, die jeweils von einem Fakultätsexperten geleitet werden, der mit seinem Namen für jede Antwort einsteht.",
+    "body2": "Palonur ist die Tür. Erwachsene ab 50 bringen eine echte Entscheidung aus ihrem echten Leben mit: wie sie schlafen, essen, sich bewegen, verbunden bleiben. Die Säule antwortet mit der veröffentlichten Forschung eines namentlich genannten Experten, damit Sie mit der Wissenschaft im Rücken entscheiden, nicht mit einem Feed, nicht mit einem Influencer, nicht mit einer Vermutung.",
+    "exploreAll": "Alle Säulen erkunden →",
+    "askQuestion": "Eine Frage stellen →",
+    "exploreTopic": "Thema erkunden →",
+    "cards": {
+      "sleep": {
+        "name": "Schlaf",
+        "description": "Schlechter Schlaf beschleunigt den kognitiven Abbau, erhöht den Blutdruck und lässt das Gehirn schneller altern. Die meisten Ratschläge liegen nach 50 falsch.",
+        "linkLabel": "Schlafffrage stellen →"
+      },
+      "stress-management": {
+        "name": "Stressbewältigung",
+        "description": "Chronischer Stress verkürzt Telomere und fördert Entzündungen. Wie er sich mit der Zeit aufschaukelt, wird selten klar erklärt.",
+        "linkLabel": "Frage stellen →"
+      },
+      "nutrition": {
+        "name": "Ernährung",
+        "description": "Der Nährstoffbedarf verändert sich nach 50 erheblich. Was mit 35 funktioniert hat, kann jetzt gegen Sie arbeiten.",
+        "linkLabel": "Frage stellen →"
+      },
+      "movement": {
+        "name": "Bewegung",
+        "description": "Muskelverlust beginnt mit 40 und beschleunigt sich rasch. Die richtige Bewegung verlangsamt ihn. Die falsche nicht.",
+        "linkLabel": "Frage stellen →"
+      },
+      "social-connection": {
+        "name": "Soziale Verbindung",
+        "description": "Soziale Isolation erhöht das Demenzrisiko stärker als Rauchen. Verbunden zu bleiben ist eine medizinische Entscheidung, keine Lifestyle-Frage.",
+        "linkLabel": "Frage stellen →"
+      },
+      "cognitive-enhancement": {
+        "name": "Kognitive Förderung",
+        "description": "Gedächtnislücken fühlen sich nach 50 beunruhigend an. Die meisten sind normal. Manche signalisieren etwas, das Sie jetzt angehen können.",
+        "linkLabel": "Frage stellen →"
+      },
+      "gratitude-purpose": {
+        "name": "Dankbarkeit & Sinn",
+        "description": "Menschen mit einem klaren Sinn im Leben leben länger und erholen sich schneller von Krankheiten. Die Forschung ist konkreter als die meisten erwarten.",
+        "linkLabel": "Frage stellen →"
+      }
+    }
+  },
+  "sleep": {
+    "eyebrow": "Schaufenster: Die Schlaf-Säule",
+    "headline": "{{em}} Schlaf {{/em}}",
+    "body1": "Wir begannen mit dem Schlaf, weil dort die schwierigsten Fragen ankommen, um 3 Uhr morgens, ohne jemanden zum Fragen. Jede Schlafantwort auf Palonur kommt aus einem Labor der Stanford School of Medicine und trägt den Namen des Stewards.",
+    "body2": "Jede Säule funktioniert auf dieselbe Weise: ein Fachgebiet, ein Fakultätssteward, eine Unterschrift auf jeder Antwort. Stellen Sie oben eine Frage, Palonur leitet sie an die richtige Säule weiter.",
+    "visitSleep": "Die Schlaf-Säule besuchen →",
+    "orAsk": "oder die heutige Frage stellen",
+    "stewardCaption": "Betreut von Prof. Jamie Zeitzer",
+    "meetBelow": "lernen Sie ihn unten kennen"
+  },
+  "access": {
+    "eyebrow": "Der Zugang",
+    "headline": "Stanford-Fakultät, {{em}} in Reichweite {{/em}}",
+    "body1": "Die Menschen hinter Palonurs Säulen sind die Fakultät, die Stanford Lifestyle Medicine leitet: Forscher, die Labore leiten, Arbeiten veröffentlichen und ihre Fachgebiete anführen. Normalerweise bedeutet es, sie zu erreichen: eine monatelange Warteliste, ein Konferenzausweis oder eine Paywall.",
+    "body2": "Stanford Lifestyle Medicine ist ein Anwendungsfall für Palonur: Säule für Säule stellen Fakultätsstewards ihre eigene veröffentlichte Forschung und ihren Namen hinter Ihre Fragen. Diesen Zugang gibt es sonst nirgendwo.",
+    "cards": {
+      "hard": {
+        "title": "Die am schwersten erreichbaren Menschen",
+        "text": "Säulenleiter bei Stanford Lifestyle Medicine verbringen ihre Tage im Labor, in der Klinik und im Hörsaal. Ihr Fachwissen erreicht Sie normalerweise aus zweiter Hand, wenn überhaupt."
+      },
+      "door": {
+        "title": "Eine Partnerschaft öffnet die Tür",
+        "text": "Palonur ist mit der Fakultät gebaut, nicht über sie. Jeder Steward kuratiert, woraus seine Säule antwortet: seine eigene veröffentlichte, begutachtete Forschung."
+      },
+      "yours": {
+        "title": "Jederzeit für Sie verfügbar",
+        "text": "Sie buchen keinen Termin und warten nicht auf eine Vorlesung. Fragen Sie heute Nacht, und die Säule antwortet mit der Forschung des Stewards: zitiert, verifiziert und unterschrieben."
+      }
+    },
+    "meetStewards": "Die Stewards kennenlernen →"
+  },
+  "authorityRouter": {
+    "eyebrow": "Der Autoritäts-Router",
+    "headline": "Bevor ein Agent antwortet, sollte er wissen, {{em}} wer für das Fachgebiet spricht {{/em}}",
+    "intro": "Wenn ein Agent ein Fachgebiet betritt, braucht er mehr als eine sprachlich überzeugende Antwort. Er muss wissen, wer dieses Fachgebiet maßgeblich definiert, welcher Wissensstand dahintersteht und welche Version aktuell ist.",
+    "graphLabel": "Ein Agent fragt, wer in einem Fachgebiet maßgeblich ist. Palonur ermittelt Fachgebiet und Steward und liefert ein prüfbares Autoritätsergebnis.",
+    "loopLabel": "Wenn Autorität unklar ist:",
+    "loopText": "gibt Palonur die Lücke zur Prüfung zurück, statt einen Experten zu erfinden oder eine Vermutung als Konsens darzustellen.",
+    "request": {
+      "label": "Agenten-Anfrage",
+      "question": "Wer ist in diesem Fachgebiet maßgeblich?",
+      "fieldLabel": "Fachgebiet",
+      "fieldValue": "Ein definierter Wissensbereich",
+      "intentLabel": "Absicht",
+      "intentValue": "Autorität bewerten"
+    },
+    "resolveLabel": "Palonur ermittelt",
+    "resolveText": "Fachgebiet → Steward → Wissensstand",
+    "result": {
+      "label": "Autoritätsergebnis",
+      "badge": "Strukturierte Ausgabe",
+      "level": "Benannt · aktuell · zuordenbar",
+      "fieldLabel": "Fachgebiet",
+      "fieldText": "Der Wissensbereich, für den diese Autorität steht.",
+      "stewardLabel": "Steward",
+      "stewardText": "Ein benannter Experte oder eine Institution mit Rang im Fachgebiet.",
+      "recordLabel": "Wissensstand",
+      "recordText": "Freigegebene Arbeit mit sichtbarer Version.",
+      "traceLabel": "Nachweis",
+      "traceText": "Quellenangaben und Versionsverlauf."
+    }
+  },
+  "technical": {
+    "eyebrow": "Die technische Seite",
+    "headline": "Das ist die technische Seite von Palonur.",
+    "intro": "Hier sehen Sie, wie Palonur eine Frage mit der richtigen Autorität verbindet, den Wissensstand sichtbar hält und die Antwort in die KI-Werkzeuge bringt, die Menschen bereits nutzen."
+  },
+  "nightly": {
+    "eyebrow": "Palonur Pal",
+    "headline": "Ein {{em}} Bericht {{/em}} aus Ihren eigenen Daten, jeden Morgen",
+    "body": "Palonur Pal ist eine private Morgenzusammenfassung Ihrer vorherigen Nacht. In einfacher Sprache geschrieben, auf derselben Forschung basierend und auf das abgestimmt, was Sie uns über Ihre Situation mitgeteilt haben. Kein Fitness-Tracker erforderlich: Ihre Antworten genügen.",
+    "cta": "Demnächst. Auf die Liste setzen.",
+    "price": "$19.90 / Monat, Gründerpreis",
+    "priceReg": "regulär $89 für 90 Tage",
+    "productName": "Palonur Pal",
+    "tryFree": "zuerst eine Frage kostenlos stellen",
+    "features": [
+      "Unbegrenzte Antworten aus Dr. Zeiters eigener veröffentlichter Forschung, auch um 3 Uhr morgens",
+      "Jede Antwort mit Quellenangabe der Studie, unterzeichnet mit Namen",
+      "Nächtliches Tracking + ein persönlicher Bericht aus Ihren Fragen",
+      "Plus: Zugang zu jedem anderen Palonur-Experten, sobald seine Säule öffnet"
+    ]
+  },
+  "agents": {
+    "eyebrow": "Nutzen Sie bereits ChatGPT oder Claude?",
+    "headline": "Von der Fakultät signierte Antworten für jede KI, die Sie bereits nutzen",
+    "body": "Dieselben kontrollierten Antworten, Token für Token über einen einfachen HTTPS-Endpunkt gestreamt. Jede Antwort trägt eine Studie, ein Jahr und einen namentlich genannten Stanford-Wissenschaftler. Stanford Lifestyle Medicine ist ein Anwendungsfall; dasselbe Modell kann auch andere Institutionen, Fachgebiete und Expertengemeinschaften unterstützen. Funktioniert mit ChatGPT, Claude oder Ihrem eigenen Agenten.",
+    "cta": "API + MCP-Dokumentation →",
+    "forAgents": "Für KI-Agenten →",
+    "forPlatforms": "Für Plattformen →",
+    "agentAccess": "Agenten- und API-Zugang →",
+    "specLabel": "Agenten-Spezifikation",
+    "specDesc": "In ChatGPT oder Claude einfügen und eine Schlafffrage stellen, die Antwort kommt signiert zurück.",
+    "mcpLabel": "MCP-Server",
+    "mcpDesc": "Agenten-Entwickler verbinden sich über das Model Context Protocol mit einem Partnerschlüssel. Dasselbe kontrollierte Korpus, dieselben Zitierungen."
+  },
+  "stewards": {
+    "viewAll": "Alle Stewards kennenlernen →",
+    "spotlight": {
+      "fredericson": {
+        "title": "Direktor, Stanford Lifestyle Medicine · Sportmediziner",
+        "blurb": "Als Leitender Medizinischer Direktor von USA Track & Field und Professor für Physikalische Medizin & Rehabilitation hat er Olympioniken jahrzehntelang in Bewegung gehalten. Er leitet Stanford Lifestyle Medicine, und nun beantwortet seine Bewegungsforschung direkt Ihre Fragen.",
+        "linkLabel": "Bewegung & Sport erkunden"
+      },
+      "friedlander": {
+        "title": "Co-Direktorin, Stanford Lifestyle Medicine · Bewegungsphysiologin",
+        "blurb": "Eine NIH-geförderte Bewegungsphysiologin, die erforscht, wie Bewegung das Altern verlangsamt. Sie co-leitet das Lifestyle Medicine Fellowship, das die nächste Ärztegeneration ausbildet. Ihre Wissenschaft des Starkbleibens ist für Ihre Fragen offen.",
+        "linkLabel": "Bewegung & Sport erkunden"
+      },
+      "zeitzer": {
+        "title": "Schlaf- und Zirkadianwissenschaftler · Co-Direktor, Center for Sleep Research",
+        "blurb": "Er hat die NASA zum Schlaf von Astronauten beraten und leitet das Zeitzer Lab in Stanford, eines der weltweit führenden Labore für die innere Uhr. Jede Schlaf-Antwort auf Palonur stammt aus der veröffentlichten Forschung seines Labors und trägt seinen Namen. Fragen Sie sie noch heute Abend.",
+        "linkLabel": "Jetzt seine Forschung fragen"
+      },
+      "parker": {
+        "title": "Forscherin für Psychiatrie & Verhaltenswissenschaften",
+        "blurb": "Eine Stanford-Laborleiterin, Kavli Fellow und von der Simons Foundation und dem US-Verteidigungsministerium unterstützte Neurowissenschaftlerin, die das soziale Gehirn erforscht. Ihre Säule wird mit derselben Sorgfalt vorbereitet wie alle anderen.",
+        "comingSoon": "Ihre Säule öffnet bald"
+      }
+    },
+    "eyebrow": "Das Stanford Lifestyle Medicine Programm",
+    "headline": "Schließen Sie sich {{em}} diesen Kolleginnen und Kollegen {{/em}} an",
+    "body": "Diese Expertinnen und Experten kommen aus dem Stanford Lifestyle Medicine Programm. Stanford Lifestyle Medicine (SLM) ist ein Anwendungsfall für Palonur: ein fakultätsgeführtes Programm, in dem Expertinnen und Experten ein Wissensgebiet betreuen und mit ihrem Namen für die Antworten einstehen. Jede und jeder hat kuratiert, woraus die eigene Säule schöpft, genehmigt jede Interpretation und unterschreibt jede Antwort mit dem eigenen Namen.",
+    "ask": "{{name}} eine Frage stellen →",
+    "body2": "Sie haben Palonur gewählt, weil es ihre Expertise skaliert, ohne sie zu verwässern. Dieselben Standards, dieselbe Evidenz, ihr Name auf dem Ergebnis.",
+    "joinCta": "Werden Sie Teil dieses großartigen Kollegiums"
+  },
+  "whyNow": {
+    "eyebrow": "Warum das heute zählt",
+    "headline": "Die nächsten 20 Jahre werden {{em}} jetzt {{/em}} entschieden",
+    "quote": "Hilf mir, die nächsten 20 Jahre stark, geistig fit und unabhängig zu bleiben.",
+    "quoteCaption": "Die Frage hinter jeder Frage, die uns erreicht.",
+    "body1": "Kraft, Gedächtnis, Schlaf, Verbundenheit, nichts davon versagt über Nacht. Es schwindet leise, Jahr für Jahr, und der Verlust verstärkt sich. Die Forschung ist eindeutig: Was Sie in Ihren 50ern und 60ern tun, entscheidet weitgehend, ob Sie Ihre 70er und 80er selbstbestimmt leben.",
+    "body2": "Deshalb ist Warten die eine Strategie, die die Evidenz ausschließt. Jede Säule auf Palonur ist ein Hebel, den Sie heute noch umlegen können, mit einem Stanford-Fakultätsmitglied, das Ihnen aus der eigenen veröffentlichten Forschung genau sagt, wie.",
+    "closing": "Der beste Tag anzufangen war vor zehn Jahren. Der zweitbeste ist heute."
+  },
+  "karen": {
+    "eyebrow": "Was demnächst startet",
+    "launchEyebrow": "Was demnächst startet",
+    "launchAttribution": "Karen Parker · Psychiatrie & Verhaltenswissenschaften · Stanford",
+    "department": "Psychiatrie & Verhaltenswissenschaften · Stanford",
+    "headline": "Die Neurowissenschaft, {{em}} warum wir uns verbinden {{/em}}",
+    "body1": "Karen Parker leitet eines der wenigen Labore der Welt, das die Biologie des sozialen Gehirns von innen heraus erforscht. Wie Oxytocin Bindung formt. Was Neurowissenschaft über menschliche Verbindung verrät. Warum dieselben Schaltkreise, die uns anfällig für Isolation machen, auch diejenigen sind, die uns gesund erhalten.",
+    "body2": "Ihre Forschung reicht von Tiermodellen bis zu klinischen Humanstudien, finanziert vom Kavli Fellowship, der Simons Foundation und dem US-Verteidigungsministerium. Wenn ihre Säule öffnet, wird sie Fragen beantworten, die kein Lifestyle-Ratgeber jemals auf dieser Wissenschaft gegründet hat.",
+    "badge0": "Kavli Fellowship",
+    "badge1": "Simons Foundation",
+    "badge2": "US-Verteidigungsministerium",
+    "badge3": "Stanford Lab-Direktorin",
+    "value1Label": "Die Forschung, die zählt",
+    "value1Text": "Parkers Labor untersucht Verbindung nicht abstrakt. Sie kartiert ihre molekulare Maschinerie: die Neuropeptide, die Schaltkreise, die klinischen Interventionen, die wirken.",
+    "value2Label": "Antworten, auf die Sie handeln können",
+    "value2Text": "Wenn ihre Säule öffnet, wird jede Antwort aus ihrer veröffentlichten, begutachteten Forschung stammen: zitiert, verifiziert und mit ihrem Namen unterzeichnet.",
+    "value3Label": "Wissenschaft aus erster Hand",
+    "value3Text": "Normalerweise ist ihr Fachwissen hinter langen Wartelisten oder einer Paywall verborgen. Palonur macht es eine Frage entfernt.",
+    "askHeadline": "Stellen Sie Karens Forschung eine Frage",
+    "askSub": "Diese Fragen sind live, wenn ihre Säule öffnet. Werden Sie als Erste benachrichtigt.",
+    "sampleQ0": "Warum hilft mir Zeit mit Menschen, die ich liebe, schneller vom Stress zu erholen?",
+    "sampleQ1": "Was verrät die Neurowissenschaft darüber, wie wir alle uns verbinden?",
+    "sampleQ2": "Wie wirkt sich soziale Isolation tatsächlich auf die körperliche Gesundheit aus?",
+    "emailPlaceholder": "ihre@email.de",
+    "notifyMe": "Benachrichtige mich",
+    "onList": "Sie stehen auf der Liste. Wir informieren Sie sofort, wenn Karens Säule öffnet.",
+    "podcastLabel": "Podcast",
+    "podcastTitle": "Das soziale Gehirn mit Karen Parker",
+    "podcastBody": "Gespräche über Oxytocin, soziale Bindung und die Neurowissenschaft menschlicher Verbindung. Jede Episode in Karens eigenen Worten, basierend auf ihrer Forschung.",
+    "comingSoon": "Demnächst"
+  },
+  "demo": {
+    "eyebrow": "Wie eine Antwort aussieht",
+    "headline": "Eine Frage. {{em}} Eine Stanford-Fakultätsantwort. {{/em}}",
+    "question": "Ich hatte um 16 Uhr Kaffee. Kann ich trotzdem um 23 Uhr einschlafen?",
+    "stanfordSigned": "STANFORD-SIGNIERT",
+    "professor": "Prof. Jamie Zeitzer · Stanford School of Medicine",
+    "answer": "Wahrscheinlich ja, aber erwarten Sie, etwa",
+    "answerDelay": "40 Minuten später",
+    "answerTail": "einzuschlafen als sonst und weniger Zeit im Tiefschlaf zu verbringen.",
+    "body": "Koffein hat eine Halbwertszeit von ungefähr fünf Stunden, sodass eine Tasse um 16 Uhr zur Schlafenszeit noch ein Viertel der Dosis im Blut hat. Das reicht, um das Einschlafen zu verzögern und den Langsamwellenschlaf zu reduzieren, auch wenn Sie sich nicht \"aufgedreht\" fühlen.",
+    "paper": "Studie",
+    "tryTonight": "Heute Nacht ausprobieren",
+    "paperTitle": "\"Koffeineffekte auf den Schlaf, 0, 3 oder 6 Stunden vor dem Zubettgehen.\"",
+    "paperCitation": "Drake et al., J Clin Sleep Med, 2013",
+    "tryText": "Begrenzen Sie Koffein auf 14 Uhr für die nächsten drei Nächte. Sehen Sie, ob das Einschlafen schneller geht.",
+    "nowAsk": "Jetzt Ihre eigene Frage stellen →",
+    "orPaste": "Oder fügen Sie",
+    "intoChatGPT": "in ChatGPT oder Claude ein."
+  },
+  "sampleAnswer": {
+    "eyebrow": "So sieht eine Antwort aus",
+    "headline": "Keine Chatbot-Antwort. Eine _signierte Antwort._",
+    "question": "Warum wache ich um 3 Uhr auf und kann nicht wieder einschlafen?",
+    "answer1": "Nächtliches Aufwachen gehört zur normalen Schlafarchitektur. Jeder taucht zwischen den Schlafzyklen kurz auf. Ab 50 nimmt der Tiefschlaf ab, deshalb werden aus diesem Auftauchen häufiger richtige Wachphasen, an die man sich erinnert.",
+    "answer2": "Das Problem ist meist nicht das Aufwachen, sondern was danach kommt: auf die Uhr schauen, rechnen, angestrengt einschlafen wollen. Anstrengung ist der Feind des Schlafs. Wenn Sie gefühlt zwanzig Minuten wach liegen: aufstehen, Licht gedämpft lassen, etwas Ruhiges tun und erst wieder ins Bett, wenn Sie schläfrig sind.",
+    "citationLabel": "Zitierte Quelle",
+    "citationTitle": "Psychological and behavioral treatment of insomnia: update of the recent evidence",
+    "citationMeta": "Morin et al. · Sleep, 2006 · peer-reviewed",
+    "signedBy": "Dr. Jamie Zeitzer",
+    "signedRole": "Professor, Stanford",
+    "note": "Jede Antwort funktioniert so: eine namentlich genannte Stanford-Lehrkraft steht dahinter, und die Forschung, auf der sie beruht, ist darunter zitiert. Deckt die freigegebene Forschung Ihre Frage nicht ab, sagt Palonur das, statt zu raten.",
+    "cta": "Stellen Sie Ihre eigene Frage"
+  },
+  "how": {
+    "eyebrow": "So funktioniert es",
+    "headline": "Ihre Expertise, {{em}} zu Ihren Bedingungen {{/em}}",
+    "intro": "Sie behalten bei jedem Schritt die Kontrolle. Palonur ist kein Chatbot, der auf Ihren Daten trainiert wurde. Er antwortet nur aus Arbeiten, die Sie veröffentlicht und freigegeben haben.",
+    "steps": {
+      "boundaries": {
+        "title": "Sie setzen die Grenzen",
+        "text": "Sie entscheiden, aus welchen Ihrer veröffentlichten Arbeiten Ihre Säule schöpfen darf. Nichts wird ohne Ihre Freigabe verwendet."
+      },
+      "retrieval": {
+        "title": "Palonur antwortet nur aus Ihren Arbeiten",
+        "text": "Jede Antwort entsteht ausschließlich aus Ihren freigegebenen Arbeiten. Deckt die Forschung eine Frage nicht ab, sagt Palonur das, statt zu raten."
+      },
+      "named": {
+        "title": "Jede Antwort ist benannt und zitiert",
+        "text": "Antworten tragen Ihren Namen und zitieren die Studie, aus der sie stammen. Leserinnen und Leser können die Quelle selbst prüfen."
+      },
+      "gaps": {
+        "title": "Lücken kommen zu Ihnen zurück",
+        "text": "Fragen außerhalb Ihrer freigegebenen Quellen kommen als Entwürfe zur Prüfung zu Ihnen zurück. Sie entscheiden, was Ihre Säule als Nächstes abdeckt."
+      },
+      "noTraining": {
+        "title": "Ihre Arbeit trainiert nie eine KI",
+        "text": "Palonur verwendet Ihre Inhalte nie, um KI-Modelle zu trainieren. Stellen Sie es sich wie einen Wasserhahn vor: Ihre Arbeit fließt zitiert und unverändert zu Ihren Leserinnen und Lesern. Sie wird nie in ein Modell aufgenommen."
+      },
+      "reach": {
+        "title": "Ihre Antworten gehen dorthin, wo die Menschen sind",
+        "text": "Dieselben Antworten können auf Ihrer Website, in Newslettern und im Chat erscheinen. So begegnen Menschen Ihrer Expertise dort, wo sie ohnehin Fragen stellen. So erreichen Sie Millionen."
+      }
+    },
+    "diagram": {
+      "source": "Ihre Arbeit",
+      "sourceSub": "Nur was Sie freigeben",
+      "vault": "Geschützt in Palonur",
+      "vaultSub": "Trainiert nie eine KI",
+      "out": "Nur Antworten gehen hinaus",
+      "outSub": "Mit Namen und Quellen",
+      "channels": ["Website", "Newsletter", "Chat"]
+    }
+  },
+  "benefits": {
+    "eyebrow": "Warum Stewards mitmachen",
+    "headline": "Skalieren Sie Ihre Expertise, {{em}} ohne sie zu verlieren {{/em}}",
+    "cards": {
+      "scale": {
+        "title": "Skalierung ohne Verwässerung",
+        "text": "Beantworten Sie tausende Fragen pro Nacht, jede einzelne nur aus Arbeiten, die Sie freigegeben haben."
+      },
+      "governance": {
+        "title": "Kontrolle ohne Reibung",
+        "text": "Sie prüfen Quellen und Interpretationen in Ihrem eigenen Rhythmus. Die Plattform übernimmt den Rest."
+      },
+      "identity": {
+        "title": "Eine Identität, die Ihre bleibt",
+        "text": "Ihr Name, Ihr Foto, Ihre Institution stehen auf jeder Antwort Ihrer Säule."
+      },
+      "trust": {
+        "title": "Vertrauen, das wächst",
+        "text": "Jede zitierte, unterschriebene Antwort baut Ihre öffentliche Bilanz auf. Kann Ihre Säule nicht antworten, sagt sie das."
+      }
+    }
+  },
+  "provenance": {
+    "eyebrow": "Wissen, das sich verteidigen lässt",
+    "headline": "Vom Fakultätszugang zu {{em}} nachverfolgbarem Wissen {{/em}}",
+    "intro1": "Der Zugang oben schafft Wissen, das schwer aufzubauen und leicht zu kopieren ist. Deshalb ist Palonur als Herkunftskette gebaut: Jede Antwort lässt sich vom Fakultätsmitglied, das sie freigegeben hat, bis dorthin verfolgen, wohin der Text weiterwandert.",
+    "intro2": "Um klar zu sein, was das ist: ein Herkunftsmerkmal, kein Sicherheitsmerkmal. Es verhindert Kopieren nicht. Sein Wert liegt darin, dass unbefugte Weiterverwendung erkennbar und zuordenbar wird.",
+    "stages": {
+      "faculty": {
+        "title": "Fakultätszugang",
+        "text": "Es beginnt mit Arbeitsbeziehungen zur Fakultät von Stanford Lifestyle Medicine, aufgebaut Experte für Experte. An den Menschen führt kein Abkürzungsweg vorbei."
+      },
+      "protocols": {
+        "title": "Eigene Experten-Protokolle",
+        "text": "Jeder Steward entscheidet, aus welchen der eigenen veröffentlichten Arbeiten die Säule schöpfen darf, und genehmigt jede Interpretation. Diese Kuratierung — was zählt, was nicht, wie es gesagt werden darf — existiert nur auf Palonur."
+      },
+      "knowledge": {
+        "title": "Die Palonur-Wissensschicht",
+        "text": "Freigegebene Quellen liegen in einem versionierten Korpus mit Momentaufnahmen in unseren Systemen. Jede Antwort entsteht allein aus diesem Korpus, zitiert ihre Studie und trägt die Unterschrift des Stewards."
+      },
+      "marks": {
+        "title": "Nachverfolgbare Wasserzeichen",
+        "text": "Schon heute trägt von Palonur kopierter Text eine unsichtbare Markierung, die Sie auf unserer Prüfseite testen können. Darauf bauen wir auf: mit kryptografischen Prüfsummen und Kanarien-Passagen, die die Herkunft einer Antwort später überprüfbar machen sollen."
+      },
+      "licensing": {
+        "title": "Kontrollierte Lizenzierung",
+        "text": "Programmatischer Zugang läuft über widerrufbare Partnerschlüssel unter einer schriftlichen Lizenz, die Training verbietet. Jede Antwort über einen Schlüssel trägt maschinenlesbare Lizenz- und Attributions-Header, die auf die Bedingungen verweisen."
+      },
+      "detection": {
+        "title": "Unbefugte Weiterverwendung wird erkennbar",
+        "text": "Das Ziel der Kette: Wir bauen an Fingerabdrücken pro Lizenznehmer und Black-Box-Tests, die anzeigen sollen, wenn ein Modell Palonur-Inhalte aufgenommen hat — statistische Belege, die eine Zuordnung stützen, kein gerichtsfester Beweis."
+      }
+    },
+    "limits": "Wir sagen das überall auf der Seite gleich: Wasserzeichen lassen sich entfernen, und Erkennungsbelege sind statistisch, kein Beweis. Die Kette stoppt das Kopieren nicht — sie macht Kopieren zuordenbar, und das verändert das Gespräch mit demjenigen, der es getan hat.",
+    "ctaAccess": "So funktioniert der Agenten-Zugang →",
+    "ctaLicense": "Die Nutzungslizenz lesen →"
+  },
+  "aiVisibility": {
+    "eyebrow": "Wie KI Sie sieht",
+    "headline": "Sehen Sie, was KI den Menschen heute über {{em}} Ihr Fachgebiet {{/em}} erzählt",
+    "body1": "Jeden Tag stellen Menschen ChatGPT und Claude die Fragen, deren Beantwortung Sie eine ganze Laufbahn gewidmet haben. Manchmal nennen diese Antworten Ihren Namen. Oft nicht, oder sie zitieren Sie ungenau, oder sie verweisen auf jemand ganz anderen.",
+    "body2": "Palonur zeigt Ihnen das Vorher-Bild: einen einseitigen Bericht darüber, was führende KI-Assistenten auf Ihre Themen gerade wirklich antworten, ob Sie erwähnt werden, wie Sie beschrieben werden und wer stattdessen empfohlen wird.",
+    "body3": "Dann kommt das Nachher-Bild. Ihre Palonur-Säule beantwortet dieselben Fragen aus Ihren eigenen freigegebenen Arbeiten, zitiert und mit Ihrem Namen unterschrieben. Sehen Sie, wie KI heute über Sie spricht, und nehmen Sie sich den Stift zurück.",
+    "cta": "Steward werden",
+    "example": {
+      "label": "Illustratives Beispiel — keine echten Steward-Daten",
+      "title": "Wie KI Dr. Beispiel sieht",
+      "question": "Wie bleibe ich nach der Pensionierung geistig fit?",
+      "rows": {
+        "a": {
+          "assistant": "ChatGPT",
+          "verdict": "Nicht erwähnt",
+          "finding": "Gibt allgemeine Ratschläge und empfiehlt zwei andere Autoren. Dr. Beispiels Forschung zu genau dieser Frage kommt nie vor."
+        },
+        "b": {
+          "assistant": "Claude",
+          "verdict": "Ungenau erwähnt",
+          "finding": "Nennt Dr. Beispiel einmal, gibt ein Ergebnis aber ohne Quelle frei wieder und vermischt es mit fachfremden Ratschlägen."
+        }
+      },
+      "afterLabel": "Mit einer Palonur-Säule:",
+      "afterText": "werden dieselben Fragen ausschließlich aus Dr. Beispiels freigegebenen Arbeiten beantwortet, zitiert und mit eigenem Namen unterschrieben."
+    }
+  },
+  "applyForm": {
+    "eyebrow": "Steward werden",
+    "headline": "Bringen Sie Ihr Fachgebiet zu {{em}} den Menschen, die fragen {{/em}}",
+    "body": "Bewerben Sie sich direkt über das Fakultätsportal. Es dauert nur wenige Minuten, und wir prüfen jede Bewerbung persönlich.",
+    "steps": {
+      "apply": "Erstellen Sie Ihr Konto und erzählen Sie uns von Ihrem Fachgebiet.",
+      "verify": "Bestätigen Sie Ihre institutionelle E-Mail-Adresse.",
+      "admit": "Wir prüfen Ihre Bewerbung und heißen Sie in Ihrer Säule willkommen."
+    },
+    "cta": "Jetzt als Steward bewerben",
+    "note": "Wir verwenden Ihre Angaben ausschließlich zur Prüfung Ihrer Bewerbung."
+  },
+  "facultyTribute": {
+    "eyebrow": "Eine Tradition des Fragens",
+    "line1": "Vergangene Jahrhunderte, vergangene Jahrzehnte.",
+    "line2": "Innovationen kamen und gingen, Könige kamen und gingen.",
+    "line3": "Aber die Universitäten und ihre Gelehrten blieben, weil sie immer wieder fragen: {{em}}Was ist wahr?{{/em}}",
+    "payoffHeadline": "Nun kann diese Art zu fragen {{em}}Millionen erreichen.{{/em}}",
+    "payoffBody": "Ihre strengen Standards müssen keine begrenzte Reichweite bedeuten. Ihre freigegebenen Quellen und Ihre genauen Worte können nun die Entscheidungen begleiten, die Menschen jeden Tag treffen. Und Ihr Name steht sichtbar dahinter."
+  },
+  "story": {
+    "slm": {
+      "eyebrow": "Showcase: Stanford Lifestyle Medicine Programm",
+      "placeholder": "Warum wache ich jede Nacht um 3 Uhr auf?",
+      "caption": "Das ist das echte Eingabefeld der Säule Stanford Lifestyle Medicine. Probieren Sie es aus. Jede Antwort kommt benannt, zitiert und ausschließlich aus fakultätsgeprüften Arbeiten zurück."
+    }
+  },
+  "introVideo": {
+    "eyebrow": "So funktioniert es live",
+    "headline": "Palonur in einer Minute",
+    "close": "Schließen"
+  },
+  "landingDemo": {
+    "ariaLabel": "Demonstration der Autoritätsvermittlung durch Palonur",
+    "you": "Sie",
+    "routing": "Ihre Frage wird weitergeleitet...",
+    "thinking": "Antwort wird formuliert...",
+    "startOver": "Neu beginnen",
+    "followUpLabel": "Eine Rückfrage stellen",
+    "followUpPlaceholder": "Frage zu {{topic}}",
+    "ask": "Fragen",
+    "genericError": "Die Demo konnte diese Anfrage nicht abschließen.",
+    "noMatch": "Für diese Frage wurde kein passender Steward gefunden.",
+    "eyebrow": "Illustrative Vorschau der Vermittlung",
+    "searching": "Verifizierte Steward-Routen werden geprüft",
+    "analyzing": "Aktuelle Expertise wird geprüft",
+    "searchingDetail": "Palonurs verifiziertes öffentliches Steward-Verzeichnis wird in der angezeigten Reihenfolge geprüft...",
+    "analyzingDetail": "Die dokumentierte Themenpassung wird ohne vermutete Unterstützung geprüft...",
+    "resultHeadline": "Ein Palonur Steward passt",
+    "noMatchHeadline": "Noch kein verifizierter Steward passend",
+    "askAnother": "Weitere Frage",
+    "questionLabel": "Ihre Frage",
+    "stewardLabel": "Palonur Steward",
+    "stewardFound": "Von Palonur gerankt",
+    "stewardVerified": "Verifizierter Steward im Verzeichnis",
+    "noVerifiedSteward": "Kein Steward zugeordnet",
+    "noAttribution": "Palonur nennt keine unpassende Fakultätsperson, wenn im verifizierten Verzeichnis keine aktuelle Themenpassung besteht.",
+    "currentExpertiseLabel": "Analyse der aktuellen Expertise",
+    "matchSignals": "Passende Signale",
+    "answerLabel": "Illustratives Vermittlungsergebnis",
+    "sourceLabel": "Verwaltetes Thema und zugehörige Quellen",
+    "publicSourceLabel": "Externes Universitätsprofil für die Expertise-Prüfung",
+    "noSourceUntilVerified": "Eine Fakultätsquelle wird erst nach Verifizierung eines passenden Stewards zugeordnet.",
+    "searchBasis": "Diese Stufen vergleichen öffentliche Universitätsprofile und Palonurs verifiziertes Verzeichnis. Palonur bezeichnet die gerankte menschliche Autorität nach eigenen Standards als Palonur Steward.",
+    "disclaimer": "Dies ist Palonurs eigene Steward-Bezeichnung. Ein öffentliches Profil belegt die aktuelle Themenpassung; während wir unsere Partnerschaften mit führenden Universitäten ausbauen, besagt es nicht, dass die Person oder Universität Palonur akzeptiert, unterstützt oder übernommen hat."
+  }
+}

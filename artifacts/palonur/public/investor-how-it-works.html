@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Palonur · How it works — defensible, robust, scalable</title>
+<meta name="robots" content="noindex,nofollow" />
+<style>
+  :root{
+    --paper:#FAF8F4; --ink:#0A0A0F; --red:#E8352A; --muted:#5b5b66;
+    --rule:rgba(10,10,15,.12); --card:#ffffff;
+    --serif:Georgia,'Times New Roman',serif;
+    --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;background:#e9e6df;color:var(--ink);font-family:var(--sans);}
+  .page{
+    width:8.5in; min-height:11in; margin:24px auto; padding:0.5in 0.55in 0.7in;
+    background:var(--paper); position:relative; overflow:hidden;
+    box-shadow:0 8px 40px rgba(0,0,0,.18);
+  }
+  header{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--rule);padding-bottom:10px;margin-bottom:14px;}
+  .lockup{display:flex;align-items:center;gap:10px;}
+  .flower{width:22px;height:22px;}
+  .brand{font-family:var(--serif);font-weight:400;font-size:20px;letter-spacing:.01em;}
+  .partner{font-family:var(--serif);font-style:italic;color:var(--muted);font-size:11.5px;}
+  .partner b{color:var(--red);font-style:normal;font-weight:600;}
+  .doctag{font-family:var(--sans);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);}
+  h1{font-family:var(--serif);font-weight:500;font-size:28px;line-height:1.12;margin:6px 0 4px;letter-spacing:-.005em;}
+  h1 em{font-style:italic;color:var(--red);font-weight:500;}
+  .lede{font-family:var(--serif);font-size:13px;line-height:1.45;color:#222;margin:6px 0 12px;max-width:7.1in;}
+  h2{font-family:var(--sans);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin:14px 0 8px;font-weight:700;}
+
+  /* Architecture flow */
+  .flow{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;align-items:stretch;margin:6px 0 4px;}
+  .node{background:#fff;border:1px solid var(--rule);border-radius:8px;padding:8px 7px;font-size:10.5px;line-height:1.25;text-align:center;display:flex;flex-direction:column;justify-content:center;min-height:64px;}
+  .node b{display:block;font-family:var(--serif);font-size:11px;font-weight:600;margin-bottom:2px;}
+  .node.faculty{border-color:var(--red);background:#fff7f6;}
+  .node.refuse{background:#0A0A0F;color:#fff;border-color:#0A0A0F;}
+  .node.refuse b{color:#fff;}
+  .arrow{display:flex;align-items:center;justify-content:center;color:var(--red);font-size:14px;font-weight:700;}
+  .flow-caption{font-family:var(--serif);font-style:italic;font-size:11px;color:var(--muted);text-align:center;margin:4px 0 6px;}
+
+  /* Two-col layout */
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .col h3{font-family:var(--serif);font-size:14px;font-weight:600;margin:0 0 6px;}
+  .row{display:grid;grid-template-columns:118px 1fr;gap:8px;font-size:11.5px;line-height:1.38;border-bottom:1px dotted var(--rule);padding:5px 0;}
+  .row b{font-family:var(--serif);font-weight:600;font-size:12px;}
+  .row .why{display:block;color:var(--muted);font-style:italic;font-size:10.5px;margin-top:2px;}
+  code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:10.5px;background:#fff;padding:1px 4px;border:1px solid var(--rule);border-radius:3px;}
+
+  /* Protection table */
+  .protect{margin-top:6px;border:1px solid var(--rule);border-radius:10px;overflow:hidden;background:#fff;}
+  .protect .head{display:grid;grid-template-columns:160px 1fr 1fr;background:#0A0A0F;color:#fff;font-size:10px;letter-spacing:.16em;text-transform:uppercase;padding:6px 10px;}
+  .protect .body{display:grid;grid-template-columns:160px 1fr 1fr;font-size:11px;line-height:1.36;}
+  .protect .body > div{padding:7px 10px;border-top:1px solid var(--rule);}
+  .protect .body > div:first-child,
+  .protect .body > div:nth-child(2),
+  .protect .body > div:nth-child(3){border-top:0;}
+  .protect .body b{font-family:var(--serif);font-size:11.5px;font-weight:600;}
+  .protect .threat{color:#5b5b66;font-style:italic;}
+
+  .pull{font-family:var(--serif);font-size:13px;line-height:1.45;border-left:3px solid var(--red);padding:6px 12px;margin:10px 0 4px;color:#1a1a22;background:#fff;}
+
+  footer{position:absolute;left:.55in;right:.55in;bottom:.35in;display:flex;justify-content:space-between;border-top:1px solid var(--rule);padding-top:8px;font-size:10px;color:var(--muted);}
+  footer b{color:var(--ink);font-weight:600;}
+  @media print{
+    html,body{background:#fff;}
+    .page{box-shadow:none;margin:0;width:auto;min-height:auto;padding:.4in .5in .55in;}
+    @page{size:Letter;margin:0;}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <div class="lockup">
+      <svg class="flower" viewBox="0 0 48 48" fill="none" stroke="#0A0A0F" stroke-width="1.6">
+        <circle cx="24" cy="24" r="9"/><circle cx="24" cy="15" r="9"/>
+        <circle cx="31.8" cy="19.5" r="9"/><circle cx="31.8" cy="28.5" r="9"/>
+        <circle cx="24" cy="33" r="9"/><circle cx="16.2" cy="28.5" r="9"/>
+        <circle cx="16.2" cy="19.5" r="9"/>
+      </svg>
+      <div>
+        <div class="brand">Palonur</div>
+        <div class="partner"><i>in partnership with</i> <b>Stanford</b> Lifestyle Medicine</div>
+      </div>
+    </div>
+    <div class="doctag">Investor · How it works · Defensible · Robust · Scalable</div>
+  </header>
+
+  <h1>How a question becomes a <em>signed Stanford answer</em>.</h1>
+  <p class="lede">
+    Palonur is a verification pipeline, not a chatbot. A question routes through a
+    Stanford-curated corpus, gets answered in a structured format, is queued for
+    faculty approval, and ships with a cryptographic receipt that names the human
+    behind it. The faculty corpus and the signed-answer ledger are the two assets
+    other AIs cannot train their way around.
+  </p>
+
+  <h2>The pipeline — seven stages, one source of truth</h2>
+  <div class="flow">
+    <div class="node"><b>1 · Question</b>Consumer app or partner API call</div>
+    <div class="arrow">→</div>
+    <div class="node"><b>2 · Retrieve</b>Pillar-keyed vector search over Stanford corpus</div>
+    <div class="arrow">→</div>
+    <div class="node"><b>3 · Structure</b>LLM emits 5 labeled sections + refusal mode</div>
+    <div class="arrow">→</div>
+    <div class="node faculty"><b>4 · Faculty queue</b>Named signer reviews, edits, approves</div>
+  </div>
+  <div class="flow" style="margin-top:6px;">
+    <div class="node faculty"><b>5 · Sign</b>Approval writes signer + timestamp to ledger</div>
+    <div class="arrow">→</div>
+    <div class="node"><b>6 · Serve</b>Cached, signed answer returned to user / partner</div>
+    <div class="arrow">→</div>
+    <div class="node"><b>7 · Receipt</b>Graph receipt: Q → chunk → paper → signer → ts</div>
+    <div class="arrow">→</div>
+    <div class="node refuse"><b>Refuse path</b>If no faculty-grounded answer: REFUSE / UNCOVERED</div>
+  </div>
+  <div class="flow-caption">No prompt-only fallback. Every shipping answer has a human name attached or it is refused on the record.</div>
+
+  <h2>How the faculty data is protected from training by other AI systems</h2>
+  <div class="protect">
+    <div class="head">
+      <div>Asset</div><div>Threat we block</div><div>How we block it</div>
+    </div>
+    <div class="body">
+      <div><b>The corpus</b><br/><span class="threat">Faculty papers, talks, clinical guidance, embeddings</span></div>
+      <div class="threat">Scraping bots, OpenAI/Anthropic crawlers, browser-tool agents copying raw chunks to seed a rival corpus.</div>
+      <div>Corpus never ships to the client. Embeddings live server-side; the API returns the synthesized answer, never the underlying chunks. <code>robots.txt</code> + <code>noindex</code> on every signed-answer URL. Rate-limited per partner key, no bulk export endpoint.</div>
+
+      <div><b>Signed answers</b><br/><span class="threat">Q&amp;A pairs with a faculty signature</span></div>
+      <div class="threat">Distillation — a competitor scrapes our outputs and fine-tunes a model to mimic "Stanford-style" answers.</div>
+      <div>Every signed answer carries an attribution string and a receipt id. License terms forbid use as training data. A distilled clone can copy the wording; it cannot copy <i>"Zeitzer signed this on 2026-04-12"</i> — that requires a relationship we own.</div>
+
+      <div><b>The refusal posture</b><br/><span class="threat">When we say <code>UNCOVERED</code></span></div>
+      <div class="threat">Competitors silently answer where we refuse, then claim broader coverage in demos.</div>
+      <div>Refusals are first-class outputs in the spec. Partners parse <code>REFUSE</code> / <code>UNCOVERED</code> as a feature, not a failure. Honest refusal at scale is what regulators, insurers, and legal teams require — copying it costs competitors their margin story.</div>
+
+      <div><b>The faculty queue</b><br/><span class="threat">Steward workflow + edit history</span></div>
+      <div class="threat">A model that pretends to be reviewed without an actual reviewer.</div>
+      <div>Approval is a workflow tied to authenticated human accounts (Clerk + steward console + edit history). No public API can write to it. The provenance log is the audit trail regulators ask for — a prompt cannot fake it.</div>
+
+      <div><b>The /agent/spec contract</b><br/><span class="threat">Machine-readable B2B endpoint</span></div>
+      <div class="threat">Partners using our spec to train a "Palonur-compatible" generic model.</div>
+      <div>Spec access is keyed, metered, and contractually scoped to inference-only use. Receipts let us prove which partner served which answer when. Misuse is detectable because the receipt graph is ours, not theirs.</div>
+    </div>
+  </div>
+
+  <div class="cols">
+    <div class="col">
+      <h2>Robust by construction</h2>
+      <div class="row"><b>Structured output</b><span>Five labeled sections + two refusal modes. Malformed responses are rejected before reaching the queue.<span class="why">No silent confabulation can escape the parser.</span></span></div>
+      <div class="row"><b>Human-in-the-loop</b><span>Faculty signer is the final gate. Edits write to history. Nothing ships unreviewed.<span class="why">Audit trail satisfies clinical and regulatory diligence.</span></span></div>
+      <div class="row"><b>Refusal as a feature</b><span>If the corpus doesn't cover it, we don't answer. Partners get a clean <code>UNCOVERED</code> they can route elsewhere.<span class="why">Failing loudly is what makes the trust claim credible.</span></span></div>
+      <div class="row"><b>Receipts as proof</b><span>Every answer carries a queryable graph receipt. Reproducible end-to-end.<span class="why">If it isn't in the receipt graph, it isn't ours.</span></span></div>
+    </div>
+    <div class="col">
+      <h2>Scalable by architecture</h2>
+      <div class="row"><b>Pillar-keyed corpus</b><span>Sleep, exercise, nutrition, stress, social, substances, environment — each pillar is an isolated index with its own faculty lead.<span class="why">New pillars ship without rewriting the platform.</span></span></div>
+      <div class="row"><b>Warm-intro recruiting</b><span>Each Stanford faculty member recruits the next pillar's lead. Then Stanford leads recruit global peers (Oxford, Karolinska, Mayo, Johns Hopkins, UCSF).<span class="why">Faculty acquisition cost falls per pillar, not rises.</span></span></div>
+      <div class="row"><b>One source of truth</b><span><code>/api/sleep-agent</code> (B2C) and <code>/api/agent/spec</code> (B2B) read the same signed-answer ledger.<span class="why">Same answer, same signer, same receipt — at any volume.</span></span></div>
+      <div class="row"><b>Cache the signature</b><span>Approved answers are cached by question-cluster + corpus version. New questions hit the queue; repeat questions are free.<span class="why">Faculty time scales as <i>log</i> of usage, not linear.</span></span></div>
+    </div>
+  </div>
+
+  <p class="pull">
+    Defensibility comes from the relationships. Robustness comes from the refusal
+    posture. Scalability comes from the cache. <em>The corpus, the queue, and the
+    receipt ledger are the three assets a competitor cannot scrape into existence.</em>
+  </p>
+
+  <footer>
+    <span>Palonur · Confidential · For investor discussion only — not medical advice</span>
+    <span><b>palonur.com</b> · partners@palonur.com</span>
+  </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,479 @@
+{
+  "nav": {
+    "back": "← Palonur",
+    "home": "Palonur",
+    "sleep": "Sleep",
+    "about": "About",
+    "pillars": "The pillars",
+    "stewards": "The stewards",
+    "newsletter": "Newsletter",
+    "readingRoom": "Reading room",
+    "forAgents": "For AI agents",
+    "forPlatforms": "For platforms",
+    "terms": "Terms",
+    "privacy": "Privacy",
+    "askPalonur": "Ask Palonur",
+    "whatIsPalonur": "What is Palonur?",
+    "aiWithoutTraining": "AI without training"
+  },
+  "footer": {
+    "tagline": "Scientific integrity in AI.",
+    "subTagline": "For end users, AI agents, and AI platforms.",
+    "cta": "Get in touch →",
+    "copyright": "© Palonur",
+    "disclaimer": "Palonur publishes educational content. It does not provide medical advice, diagnosis, or treatment. Consult your physician for clinical decisions.",
+    "slogan": "The world's finest faculty at your fingertips.",
+    "newsletter": {
+      "label": "The Palonur newsletter",
+      "description": "Lifestyle medicine science you can use, plus real anonymized stories from our community. A few times a month.",
+      "placeholder": "you@email.com",
+      "subscribe": "Subscribe",
+      "subscribing": "…",
+      "subscribed": "Subscribed ✓",
+      "errorFallback": "Please try again.",
+      "networkError": "Network error. Please try again."
+    }
+  },
+  "newsletterPitch": {
+    "label": "The Palonur newsletter",
+    "headline": "Stanford lifestyle medicine science,",
+    "headlineEm": "in your inbox.",
+    "body": "One thing to try, the research behind it, and real anonymized stories from our community. Signed by name. A few times a month.",
+    "placeholder": "you@email.com",
+    "subscribe": "Subscribe",
+    "subscribing": "…",
+    "subscribed": "Subscribed ✓",
+    "errorFallback": "Please try again.",
+    "networkError": "Network error. Please try again."
+  },
+  "lang": {
+    "switcherLabel": "Language",
+    "en": "EN",
+    "de": "DE"
+  },
+  "stanford": "Stanford",
+  "slm": "Lifestyle Medicine",
+  "tagline": "The World's Finest Faculty at your Fingertips",
+  "ask": "Ask",
+  "askArrow": "Ask →",
+  "scrollCue": "Why we built this ↓",
+  "whyWeBuiltThis": "Why we built this ↓",
+  "refuseCard": {
+    "heading": "I can only answer from reviewed sleep and lifestyle research",
+    "subline": "You can keep going. Ask about sleep, health, or daily life, and I'll look for research that can answer it."
+  },
+  "uncoveredCard": {
+    "heading": "I don't have reviewed research for that yet",
+    "subline": "You can keep going. Try a narrower question or ask about a related sleep topic.",
+    "teamNotified": "Team notified",
+    "autoNotice": "Our team has been notified and is searching Stanford material on this topic. Anything we find goes to our faculty stewards for review before it can be quoted.",
+    "followUpPrompt": "Want a personal follow-up? Leave your email:",
+    "placeholder": "your@email.com (optional)",
+    "button": "Keep me posted",
+    "sending": "Sending...",
+    "emailSent": "Got it. We will reach out when we have a grounded answer.",
+    "error": "Something went wrong. Please try again."
+  },
+  "boundaryEvidence": {
+    "label": "A real case, not a promise",
+    "triggerLabel": "What triggered it",
+    "trigger": "On {{date}}, a reader asked: “{{question}}” Nothing in our reviewed corpus cleared the bar, so nothing was quoted from it.",
+    "nextLabel": "What happened next",
+    "nextApproved": "Our system searched Stanford's own pages, found “{{title}}” and queued it for the {{pillar}} steward, who has since reviewed and approved it. That question now gets a grounded, citable answer.",
+    "nextPending": "Our system searched Stanford's own pages, found “{{title}}” and queued it for the {{pillar}} steward. Nothing gets quoted until a named steward approves it.",
+    "aggregate": "In the last 30 days, {{n}} questions reached the edge of our reviewed knowledge. Every one was logged. This boundary is how the map grows."
+  },
+  "popup": {
+    "title": "Secure your founding rate.",
+    "subTitle": "Your price, if you ever subscribe: $19.90/month.",
+    "body": "No charge today. If you ever subscribe, you'll pay $19.90/month instead of the regular $89/month, locked in for life.",
+    "socialProof": "{{count}} people have already reserved a founding spot.",
+    "emailPlaceholder": "Email",
+    "legal": "By submitting, you agree to receive updates from Palonur. No payment today — ever. Unsubscribe any time.",
+    "saving": "Saving...",
+    "claimSpot": "Reserve my spot",
+    "noThanks": "No, thanks",
+    "successTitle": "You're in.",
+    "successBody": "Your founding rate of $19.90/month is reserved. No payment until we open — we'll reach out first.",
+    "continue": "CONTINUE",
+    "errorGeneric": "Something went wrong.",
+    "errorServer": "Could not reach the server. Check your connection."
+  },
+  "sleepAgent": {
+    "greeting": {
+      "morning": "Good morning",
+      "afternoon": "Good afternoon",
+      "evening": "Good evening",
+      "night": "Good night"
+    },
+    "yourJourney": "Your journey →",
+    "searchPlaceholder": "Ask Stanford anything about your sleep…",
+    "askButton": "Ask",
+    "conversation": {
+      "tryThis": "Try this:",
+      "listen": "Listen",
+      "stopListening": "Stop",
+      "continueLabel": "Continue the conversation",
+      "placeholder": "Ask a follow-up question...",
+      "send": "Send",
+      "askAboutThis": "Ask about this",
+      "askAboutPrompt": "Can you explain this part in more detail?",
+      "selectedExcerpt": "From the answer",
+      "removeSelectedExcerpt": "Remove selected excerpt",
+      "answerSelectionHint": "Answer text. Select a passage, then press Alt+A to ask about it.",
+      "speakQuestion": "Speak your question",
+      "stopRecording": "Stop recording",
+      "recordingHint": "Listening... tap the square to finish",
+      "transcribing": "Transcribing your question...",
+      "transcribeError": "We couldn't understand that recording. Please try again or type your question.",
+      "micError": "We couldn't access your microphone. Please allow microphone access or type your question.",
+      "turnsLeft": "{{count}} free follow-up questions left in this conversation",
+      "paywall": {
+        "eyebrow": "Keep going",
+        "heading": "You've used your free follow-ups for this conversation",
+        "body": "Subscribers can continue any conversation as long as they like, with every answer grounded in steward-reviewed research.",
+        "cta": "See subscription options",
+        "newQuestionHint": "You can also start a fresh question tomorrow: your daily free question resets every day."
+      },
+      "rail": {
+        "title": "About this answer",
+        "open": "About this answer",
+        "close": "Close",
+        "detailsOpen": "All details",
+        "earlierTurn": "You're viewing an earlier answer in this conversation.",
+        "backToLatest": "Back to the latest answer",
+        "pillar": "Pillar",
+        "sources": "Sources",
+        "alsoAnswered": "Also answered by",
+        "coverage": {
+          "covered": "Steward-verified",
+          "fallback": "Wider Stanford research",
+          "boundary": "Research limit",
+          "refuse": "Outside scope",
+          "unverified": "Not verified"
+        },
+        "coverageNote": {
+          "covered": "Grounded in this pillar's approved corpus and citation-checked.",
+          "fallback": "Drawn from wider Stanford research, not yet steward-reviewed.",
+          "boundary": "No reviewed source answered this question yet. You can keep asking.",
+          "refuse": "This question falls outside what this service covers.",
+          "unverified": "This answer could not be verified against the approved corpus."
+        },
+        "share": {
+          "title": "Share this learning",
+          "body": "Pass this answer along to someone who could use it.",
+          "copy": "Copy share text",
+          "copied": "Copied"
+        },
+        "trust": {
+          "title": "Your read",
+          "question": "Do you feel you can trust this answer?",
+          "yes": "Yes",
+          "no": "No",
+          "thanks": "Thank you. Your feedback helps the experts behind this service improve it."
+        }
+      }
+    },
+    "contact": {
+      "button": "Get personal help",
+      "title": "Get personal help",
+      "intro": "Send a note to our team. We read every message and reply by email.",
+      "name": "Your name",
+      "namePlaceholder": "Your name",
+      "email": "Your email",
+      "emailPlaceholder": "you@example.com",
+      "message": "How can we help?",
+      "messagePlaceholder": "Tell us a little about what you need…",
+      "send": "Send message",
+      "sending": "Sending…",
+      "sentTitle": "Message sent",
+      "sentBody": "Thank you. Our team will reply to your email soon.",
+      "error": "Something went wrong. Please try again.",
+      "close": "Close"
+    },
+    "loading": {
+      "details": "Getting a couple of quick details…",
+      "consulting": "Consulting Stanford research…"
+    },
+    "error": {
+      "couldNotReach": "Sorry, I couldn't reach the service. ({{message}})"
+    },
+    "intake": {
+      "label": "A couple of quick questions",
+      "subheading": "So Stanford's research can answer you more precisely.",
+      "instruction": "Tap what fits or type your own. Answer what you like — or skip straight to the answer.",
+      "typeYourOwn": "Or type your own…",
+      "getAnswer": "Get my answer",
+      "skip": "Skip — just answer me"
+    },
+    "emptyState": {
+      "whatsOnMind": "What's on your mind?",
+      "nightlyLabel": "Palonur Pal",
+      "nightlyHeading": "Unlimited evidence-based answers, all pillars.",
+      "nightlyBody": "Your first question each day is free. No card required. Subscribe to Pal for unlimited answers across every pillar, grounded in Stanford research.",
+      "subscribeCta": "Subscribe →"
+    },
+    "situationCards": [
+      {
+        "label": "Staying Asleep",
+        "title": "I wake up at 3am and can't fall back asleep",
+        "q": "Why do I wake up at 3am and can't fall back asleep?"
+      },
+      {
+        "label": "Morning Fog",
+        "title": "I'm groggy for hours even after a full night",
+        "q": "Why am I so groggy in the morning even after sleeping enough?"
+      },
+      {
+        "label": "Evening Light",
+        "title": "Screens before bed are messing with my sleep",
+        "q": "How do screens and phone light before bed affect my sleep?"
+      },
+      {
+        "label": "Daytime Fatigue",
+        "title": "I feel tired all day no matter how much I sleep",
+        "q": "Why do I feel tired all day even when I've slept enough?"
+      },
+      {
+        "label": "Jet Lag & Travel",
+        "title": "Traveling throws my sleep completely off",
+        "q": "How do I recover from jet lag after traveling across time zones?"
+      },
+      {
+        "label": "Sleep & Aging",
+        "title": "I'm older and sleeping less than I used to",
+        "q": "Why do older adults sleep less and what can I do about it?"
+      },
+      {
+        "label": "Caffeine",
+        "title": "Coffee — when does it stop affecting my sleep?",
+        "q": "When should I stop drinking coffee so it doesn't affect my sleep?"
+      },
+      {
+        "label": "Exercise",
+        "title": "I exercise regularly but still sleep badly",
+        "q": "I exercise regularly but still sleep badly — what's going on?"
+      }
+    ],
+    "voteCard": {
+      "label": "Help us decide what to build next",
+      "body": "The same answer, three ways. Try each one, then vote for your favorite.",
+      "options": {
+        "text": {
+          "label": "Text",
+          "desc": "Read it, like the answer above"
+        },
+        "podcast": {
+          "label": "Podcast",
+          "desc": "A produced two-voice episode"
+        },
+        "avatar": {
+          "label": "Avatar",
+          "desc": "A presenter speaks it to you"
+        }
+      },
+      "podcastBlurb": "A host and the expert discuss your question.",
+      "yourPick": "Your pick ✓",
+      "voteFor": "Vote for {{label}}",
+      "thanks": "Thanks for voting — you can change your pick anytime."
+    },
+    "avatarDemo": {
+      "preparing": "Preparing…",
+      "stop": "Stop",
+      "preview": "Preview the avatar",
+      "blurb": "Early demo: {{name}} speaks the answer. Video comes next."
+    },
+    "answer": {
+      "answerSteward": "Answer steward",
+      "slmFallbackTitle": "From wider Stanford research",
+      "slmFallbackNote": "Not yet reviewed by our faculty stewards.",
+      "advisorTip": "Talking about this with someone? See how to communicate it →",
+      "tryThis": "Try this",
+      "source": "Source",
+      "copyCredentialTitle": "Copy the Stanford credential with the citation",
+      "credentialCopied": "Credential copied",
+      "copyCredential": "Copy credential",
+      "ttsLoading": "Loading…",
+      "ttsStop": "Stop",
+      "ttsListen": "Listen",
+      "seeFullSource": "See full source ↓",
+      "readCitation": "Read citation",
+      "doi": "View DOI ↗",
+      "sourceLink": "Open source ↗",
+      "interpretedBy": "Interpreted by {{author}}",
+      "reviewedBySteward": "Reviewed by steward",
+      "hidePassage": "Hide passage",
+      "showPassage": "Show passage",
+      "close": "Close",
+      "dismiss": "Dismiss",
+      "sourcesUsed": "Sources used",
+      "groundedInInterps_one": "This answer is grounded in {{count}} Stanford-approved interpretation.",
+      "groundedInInterps_other": "This answer is grounded in {{count}} Stanford-approved interpretations.",
+      "groundedInPapers_one": "This answer is grounded in {{count}} paper.",
+      "groundedInPapers_other": "This answer is grounded in {{count}} papers.",
+      "groundedInBoth": "This answer is grounded in {{interpCount}} Stanford-approved interpretation(s) and {{paperCount}} paper(s).",
+      "groundedDefault": "This answer is grounded in Stanford-approved sources.",
+      "stewardNote": "Steward's note",
+      "stewardNameNote": "{{name}}'s note",
+      "visitPillar": "Visit {{name}} →",
+      "readMoreSlm": "Read more from Stanford Lifestyle Medicine: ",
+      "shareNudge": {
+        "label": "Share this with someone",
+        "body": "Know someone who struggles with sleep? Give them 5 free questions.",
+        "copied": "Copied!",
+        "copyLink": "Copy link"
+      },
+      "shareStory": {
+        "label": "For the Stanford Lifestyle Medicine newsletter",
+        "cta": "Did this help? Share your sleep story →",
+        "body": "Did this help?",
+        "ctaLink": "Share your sleep story →"
+      },
+      "clarifyPlaceholder": "Your answer…",
+      "flag": {
+        "done": "Thanks — this answer has been flagged for Stanford faculty review.",
+        "whatWrong": "What's wrong with this answer? (optional)",
+        "placeholder": "e.g. doesn't actually answer my question, or contradicts what I read elsewhere…",
+        "sending": "Sending…",
+        "sendToFaculty": "Send to faculty",
+        "cancel": "Cancel",
+        "flagForReview": "Flag this answer for faculty review"
+      },
+      "journey": {
+        "premiumLabel": "Palonur Premium",
+        "premiumBody": "Keep asking until you find your answer. When you're there, press the button below.",
+        "foundAnswer": "I've found my answer ✓",
+        "completeHeading": "Journey complete",
+        "completeBody": "Auto-renewal is turned off — you keep access through the 90 days you've already paid for. We hope you found what you were looking for.",
+        "inviteHeading": "Come back tomorrow and let's see together if this changes over 7 nights.",
+        "inviteHeadingTopics": {
+          "caffeine": "Come back tomorrow and let's see together if your caffeine timing makes a difference over 7 nights.",
+          "alcohol": "Come back tomorrow and let's see together if your sleep changes without the evening drink over 7 nights.",
+          "screens": "Come back tomorrow and let's see together if a calmer evening routine pays off over 7 nights.",
+          "dreams": "Come back tomorrow and let's see together if your dreams change over 7 nights.",
+          "wake3am": "Come back tomorrow and let's see together if your night wakings change over 7 nights.",
+          "earlyWake": "Come back tomorrow and let's see together if your early waking changes over 7 nights.",
+          "fallAsleep": "Come back tomorrow and let's see together if falling asleep gets easier over 7 nights.",
+          "daytime": "Come back tomorrow and let's see together if you feel more awake during the day over 7 nights."
+        },
+        "inviteSubtitle": "Takes 15 seconds. Your progress stays private.",
+        "begin": "Begin my 7 nights →"
+      },
+      "saveAnswer": {
+        "heading": "Want to keep this answer?",
+        "body": "We'll email you this answer and your sources so you can come back to it anytime.",
+        "placeholder": "you@example.com",
+        "button": "Email me this answer",
+        "sending": "Sending…",
+        "dismiss": "Dismiss",
+        "newsletterLabel": "Also send me the Stanford Lifestyle Medicine newsletter. Optional — you'll get a confirmation email first, and nothing starts unless you confirm.",
+        "sentHeading": "Check your inbox — your answer and its sources are on the way.",
+        "sentBody": "The email includes a link that signs you in, so you can pick up right where you left off.",
+        "sentNewsletterPending": "We also sent a separate newsletter confirmation — nothing starts unless you confirm it.",
+        "errorStillSaving": "Your answer is still saving — please try again in a few seconds.",
+        "errorTooMany": "Too many requests — please try again in a little while.",
+        "errorGeneric": "Something went wrong — please try again.",
+        "errorConnection": "Connection problem — please try again."
+      }
+    },
+    "share": {
+      "tryThis": "Try this: {{text}}",
+      "jamiesTake": "— Jamie's take —",
+      "source": "— Source —",
+      "finding": "Finding: {{text}}",
+      "verifiedBy": "Verified by Prof. Jamie Zeitzer · Stanford School of Medicine",
+      "viaPalonur": "via Palonur — palonur.com",
+      "credential": "✓ Verified by Prof. Jamie Zeitzer · Stanford School of Medicine",
+      "stewardsTake": "— {{name}}'s take —",
+      "verifiedByName": "Verified by {{name}}",
+      "credentialName": "✓ Verified by {{name}}",
+      "expertsTake": "— The expert's take —",
+      "verifiedGeneric": "Verified against the reviewed Stanford corpus",
+      "credentialGeneric": "✓ Verified against the reviewed Stanford corpus",
+      "stewardsTakeApos": "— {{name}}' take —"
+    },
+    "privacyFooter": {
+      "body": "We log your questions (anonymously, no name or email attached) so Stanford faculty can spot gaps and improve the answers. No personal identifiers are stored.",
+      "resumeSharing": "Resume sharing my questions",
+      "dontLog": "Don't log my questions",
+      "paused": "✓ Logging paused on this device."
+    },
+    "sourceSheet": {
+      "header": "Stanford source",
+      "loading": "Loading…",
+      "loadError": "Couldn't load this source. ({{error}})",
+      "stanfordsTake": "Stanford's take",
+      "notProven": "Not proven:",
+      "tryThis": "Try this:",
+      "abstract": "Abstract",
+      "noAbstract": "No abstract on file for this source yet.",
+      "openPaper": "Open paper (DOI) ↗",
+      "openSource": "Open source ↗"
+    },
+    "onboarding": {
+      "welcomeName": "Welcome, {{name}}.",
+      "journeyBegins": "Your 7-night journey begins tonight.",
+      "comeBackTomorrow": "Come back tomorrow and keep the streak going.",
+      "firstStep": "You just took your first step.",
+      "tomorrowQuestion": "One question tomorrow morning: did it work? That's all — the rest builds night by night.",
+      "firstNamePlaceholder": "Your first name (optional)",
+      "emailPlaceholder": "Your email",
+      "loading": "One moment…",
+      "startTonight": "Start with tonight →",
+      "maybeLater": "Maybe later"
+    },
+    "premiumModal": {
+      "badge": "$49 / month · Early access",
+      "heading": "A doctor dedicated to your sleep.",
+      "body": "There is a waitlist for Palonur's personal sleep program — a dedicated sleep-medicine physician, grounded in Stanford research, working with you one-on-one.",
+      "subBody": "Leave your details and we'll reach out when a spot opens.",
+      "namePlaceholder": "Your name",
+      "emailPlaceholder": "Email address",
+      "savingBtn": "Saving…",
+      "reserveSpot": "Reserve my spot →",
+      "noCharge": "No charge now. We'll reach out when a spot opens.",
+      "waitlistHeading": "You are on the waitlist.",
+      "waitlistBody": "We'll reach out as soon as a spot opens. In the meantime, keep exploring your sleep with the AI agent.",
+      "backToQuestions": "Back to my questions"
+    },
+    "paywallModal": {
+      "badge": "Palonur Premium",
+      "heading": "Want to ask a follow-up? Save your answer and keep going.",
+      "waitlistDoneHeading": "You're on the list.",
+      "waitlistDoneBody": "We'll email you when we open up more spots, along with your member discount.",
+      "waitlistBody": "We are currently inviting users in batches. Enter your email and we will notify you when a spot opens up. Early members get a discount.",
+      "emailPlaceholder": "your@email.com",
+      "notifyMe": "Notify me",
+      "loading": "…",
+      "maybeLater": "Maybe later"
+    },
+    "phoneCapture": {
+      "heading": "Want support by text?",
+      "blurb": "Optional nudges for your sleep experiments. Text, email, or both. One note to confirm, nothing else until you reply YES."
+    },
+    "trajectory": {
+      "title": "How this answer was built",
+      "whereWeLooked": "Where we looked",
+      "searchedOne": "We searched the {pillar} pillar — a collection of research that faculty stewards approved in advance.",
+      "searchedMany": "We searched these pillars — collections of research that faculty stewards approved in advance: {pillars}.",
+      "whatWeFound": "What we found",
+      "foundSources": "{count} approved source(s) matched your question closely enough to build this answer:",
+      "foundNone": "No approved source matched your question closely enough. Rather than guess, we told you what we don't yet cover.",
+      "foundFallback": "No approved source matched closely enough, so this answer draws on wider Stanford Lifestyle Medicine research and is labeled that way.",
+      "checksWeRan": "Checks we ran",
+      "checkApproved": "Every source used was approved by a faculty steward before the answer could use it.",
+      "checkCoveragePassed": "Coverage check passed — the research matched your question closely enough to answer.",
+      "checkCoverageNotPassed": "Coverage check not passed — so we said so instead of answering without support.",
+      "checkCitationPassed": "Citation check passed — the study cited in the answer matches a source on this list.",
+      "checkCitationFailed": "Citation check couldn't automatically confirm the cited study against the approved list.",
+      "foundSuppressed": "Approved sources supported this answer, but our automatic citation check couldn't confirm the exact match, so the list isn't shown here."
+    }
+  },
+  "limitNotices": {
+    "fewSources_one": "This answer draws on {{count}} approved source.",
+    "fewSources_other": "This answer draws on {{count}} approved sources.",
+    "pendingReview_one": "{{count}} more relevant draft is awaiting faculty review.",
+    "pendingReview_other": "{{count}} more relevant drafts are awaiting faculty review.",
+    "nearThreshold": "This question sits near the edge of the reviewed material. The answer stays within what has been approved so far."
+  }
+}

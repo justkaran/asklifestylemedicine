@@ -1,0 +1,3471 @@
+openapi: 3.1.0
+info:
+  # Do not change the title, if the title changes, the import paths will be broken
+  title: Api
+  version: 0.1.0
+  description: API specification
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+    description: Health operations
+  - name: sources
+    description: Knowledge ingestion (papers + chunks + embeddings)
+  - name: interpretations
+    description: Faculty interpretations, review workflow, and discussion threads
+  - name: reputation
+    description: AI reputation tracking — see how external AI engines answer questions in a topic
+  - name: Storage
+    description: Object storage upload and serving endpoints.
+  - name: account
+    description: Signed-in consumer account hub (subscriptions, notifications).
+paths:
+  /storage/uploads/request-url:
+    post:
+      tags: [Storage]
+      operationId: requestUploadUrl
+      summary: Request a presigned URL for file upload
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UploadUrlRequest"
+      responses:
+        "200":
+          description: Presigned upload URL generated.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UploadUrlResponse"
+        "400":
+          description: Missing or invalid required fields.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/StorageErrorEnvelope" }
+        "500":
+          description: Failed to generate upload URL.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/StorageErrorEnvelope" }
+  /storage/public-objects/{filePath}:
+    get:
+      tags: [Storage]
+      operationId: getPublicObject
+      summary: Serve a public asset
+      parameters:
+        - name: filePath
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: Object content streamed.
+          content:
+            "*/*":
+              schema: { type: string, format: binary }
+        "404":
+          description: File not found.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/StorageErrorEnvelope" }
+  /storage/objects/{objectPath}:
+    get:
+      tags: [Storage]
+      operationId: getStorageObject
+      summary: Serve an object entity
+      parameters:
+        - name: objectPath
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: Object content streamed.
+          content:
+            "*/*":
+              schema: { type: string, format: binary }
+        "404":
+          description: Object not found.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/StorageErrorEnvelope" }
+  /pillars/{slug}/resources:
+    get:
+      operationId: getPillarResources
+      tags: [sources]
+      summary: Get curated external resource links for a pillar
+      description: >
+        Returns operator-seeded external resource links for the given pillar,
+        ordered by display_order. Public, read-only. Returns an empty array for
+        pillars with no resource rows. Used to surface "Learn more" panels on
+        the UNCOVERED agent path.
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [resources]
+                properties:
+                  resources:
+                    type: array
+                    items: { $ref: "#/components/schemas/PillarResource" }
+        "404":
+          description: Pillar not found
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [error]
+                properties:
+                  error: { type: string }
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      summary: Health check
+      description: Returns server health status
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+  /faculty/pillars/{slug}/sources:
+    get:
+      operationId: listSources
+      tags: [sources]
+      summary: List sources in a pillar
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema: { type: string }
+        - name: status
+          in: query
+          required: false
+          schema: { $ref: "#/components/schemas/SourceStatus" }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [sources]
+                properties:
+                  sources:
+                    type: array
+                    items: { $ref: "#/components/schemas/SourceListItem" }
+    post:
+      operationId: ingestSource
+      tags: [sources]
+      summary: Ingest a new source (PDF or text)
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              allOf:
+                - if:
+                    properties:
+                      kind: { const: paper }
+                    required: [kind]
+                  then:
+                    required: [rightsBasis]
+              properties:
+                file:
+                  type: string
+                  format: binary
+                kind: { $ref: "#/components/schemas/SourceKind" }
+                title: { type: string }
+                authors: { type: string }
+                year: { type: integer }
+                journal: { type: string }
+                doi: { type: string }
+                abstract: { type: string }
+                sourceUrl: { type: string }
+                studyDesign:
+                  type: string
+                  nullable: true
+                  description: >-
+                    Optional controlled-vocabulary study type (e.g. rct,
+                    meta_analysis, cohort). Empty string is treated as unset.
+                text: { type: string }
+                rightsBasis:
+                  $ref: "#/components/schemas/SourceRightsBasis"
+                  description: Required when kind is paper.
+      responses:
+        "201":
+          description: Ingested
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/IngestSourceResponse" }
+  /faculty/pillars/{slug}/sources/{id}:
+    get:
+      operationId: getSource
+      tags: [sources]
+      parameters:
+        - { name: slug, in: path, required: true, schema: { type: string } }
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/SourceDetail" }
+  /faculty/pillars/{slug}/sources/{id}/transition:
+    post:
+      operationId: transitionSource
+      tags: [sources]
+      parameters:
+        - { name: slug, in: path, required: true, schema: { type: string } }
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [status]
+              properties:
+                status: { $ref: "#/components/schemas/SourceStatus" }
+                note: { type: string }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id: { type: integer }
+                  status: { $ref: "#/components/schemas/SourceStatus" }
+                  retentionStatus:
+                    { $ref: "#/components/schemas/SourceRetentionStatus" }
+                  purged: { type: boolean }
+  /faculty/pillars/{slug}/sources/{id}/exclude:
+    post:
+      operationId: excludeDiscoveredSource
+      tags: [sources]
+      summary: Exclude and archive automatically discovered work (steward only)
+      parameters:
+        - { name: slug, in: path, required: true, schema: { type: string } }
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reason: { type: string, maxLength: 500 }
+      responses:
+        "200":
+          description: Excluded, or already excluded
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  [id, status, automaticallyDiscovered, excluded, unchanged, purged]
+                properties:
+                  id: { type: integer }
+                  status: { $ref: "#/components/schemas/SourceStatus" }
+                  automaticallyDiscovered: { type: boolean }
+                  excluded: { type: boolean }
+                  excludedAt:
+                    { type: string, format: date-time, nullable: true }
+                  exclusionReason: { type: string, nullable: true }
+                  unchanged: { type: boolean }
+                  purged: { type: boolean }
+        "409":
+          description: Source was not created by research discovery
+  /faculty/pillars/{slug}/sources/{id}/rights:
+    patch:
+      operationId: updateSourceRights
+      tags: [sources]
+      summary: Record a source's full-text rights basis (steward only)
+      parameters:
+        - { name: slug, in: path, required: true, schema: { type: string } }
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [rightsBasis]
+              properties:
+                rightsBasis: { $ref: "#/components/schemas/SourceRightsBasis" }
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id: { type: integer }
+                  rightsBasis:
+                    { $ref: "#/components/schemas/SourceRightsBasis" }
+                  retentionStatus:
+                    { $ref: "#/components/schemas/SourceRetentionStatus" }
+  /faculty/pillars/{slug}/sources/{id}/assessment:
+    get:
+      operationId: getSourceAssessment
+      tags: [sources]
+      summary: Current three-axis reliability assessment for a source
+      parameters:
+        - { name: slug, in: path, required: true, schema: { type: string } }
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/SourceAssessment" }
+    put:
+      operationId: saveSourceAssessment
+      tags: [sources]
+      summary: Save (draft) or approve a reliability assessment (steward only)
+      parameters:
+        - { name: slug, in: path, required: true, schema: { type: string } }
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/SourceAssessmentInput" }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/SourceAssessment" }
+  /faculty/pillars/{slug}/sources/{id}/assessment/draft:
+    post:
+      operationId: draftSourceAssessment
+      tags: [sources]
+      summary: Generate an AI first-pass reliability draft (steward only)
+      parameters:
+        - { name: slug, in: path, required: true, schema: { type: string } }
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/SourceAssessment" }
+  /faculty/sources/{id}/interpretations:
+    get:
+      operationId: listInterpretations
+      tags: [interpretations]
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [interpretations]
+                properties:
+                  interpretations:
+                    type: array
+                    items: { $ref: "#/components/schemas/Interpretation" }
+                  role: { type: string, nullable: true }
+                  pillar:
+                    type: object
+                    properties:
+                      id: { type: integer }
+                      slug: { type: string }
+                      name: { type: string }
+    post:
+      operationId: createInterpretation
+      tags: [interpretations]
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/InterpretationBody" }
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Interpretation" }
+  /faculty/interpretations/{id}:
+    patch:
+      operationId: updateInterpretation
+      tags: [interpretations]
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/InterpretationBodyPatch" }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Interpretation" }
+  /faculty/interpretations/{id}/transition:
+    post:
+      operationId: transitionInterpretation
+      tags: [interpretations]
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [status]
+              properties:
+                status: { $ref: "#/components/schemas/InterpretationStatus" }
+                note: { type: string }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [id, status]
+                properties:
+                  id: { type: integer }
+                  status: { $ref: "#/components/schemas/InterpretationStatus" }
+                  version: { type: integer }
+                  chunks:
+                    type: integer
+                    description: Number of retrieval chunks written (only on approval).
+                  sentBack:
+                    type: boolean
+                    description: True when a steward send-back event was recorded.
+                  unchanged:
+                    type: boolean
+                    description: True when the requested status equals the current status.
+  /faculty/interpretations/{id}/versions:
+    get:
+      operationId: listInterpretationVersions
+      tags: [interpretations]
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [versions]
+                properties:
+                  versions:
+                    type: array
+                    items:
+                      { $ref: "#/components/schemas/InterpretationVersion" }
+  /faculty/interpretations/{id}/comments:
+    get:
+      operationId: listInterpretationComments
+      tags: [interpretations]
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [comments]
+                properties:
+                  comments:
+                    type: array
+                    items:
+                      { $ref: "#/components/schemas/InterpretationComment" }
+    post:
+      operationId: createInterpretationComment
+      tags: [interpretations]
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [body]
+              properties:
+                body: { type: string }
+                quotedText: { type: string }
+                parentCommentId: { type: integer }
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/InterpretationComment" }
+  /faculty/pillars/{slug}/inbox:
+    get:
+      operationId: getStewardInbox
+      tags: [interpretations]
+      parameters:
+        - { name: slug, in: path, required: true, schema: { type: string } }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [pillar, pending]
+                properties:
+                  pillar:
+                    type: object
+                    properties:
+                      id: { type: integer }
+                      slug: { type: string }
+                      name: { type: string }
+                  pending:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id: { type: integer }
+                        sourceId: { type: integer }
+                        sourceTitle: { type: string }
+                        sourceAuthors: { type: string, nullable: true }
+                        sourceYear: { type: integer, nullable: true }
+                        answer: { type: string }
+                        version: { type: integer }
+                        authorId: { type: integer, nullable: true }
+                        authorName: { type: string, nullable: true }
+                        authorEmail: { type: string, nullable: true }
+                        createdAt: { type: string, format: date-time }
+                        updatedAt: { type: string, format: date-time }
+  /reputation/topics/{slug}:
+    get:
+      operationId: getReputationTopic
+      tags: [reputation]
+      summary: Get a reputation topic with its prompts and latest run summary
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ReputationTopicDetail" }
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/HealthStatus" }
+  /reputation/topics/{slug}/runs:
+    post:
+      operationId: triggerReputationRun
+      tags: [reputation]
+      summary: Manually trigger a new reputation run across all engines
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/ReputationRunInput" }
+      responses:
+        "202":
+          description: Run accepted and started in background
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ReputationRunSummary" }
+        "404":
+          description: Topic not found
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/HealthStatus" }
+  /reputation/runs/{id}:
+    get:
+      operationId: getReputationRun
+      tags: [reputation]
+      summary: Get a reputation run with all per-engine answers
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: integer }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ReputationRunDetail" }
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/HealthStatus" }
+  /faculty/cross-pillar/pillars:
+    get:
+      operationId: listCrossPillarPillars
+      tags: [cross-pillar]
+      summary: Every pillar with counts of its approved interpretations and sources
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [pillars]
+                properties:
+                  pillars:
+                    type: array
+                    items: { $ref: "#/components/schemas/CrossPillarSummary" }
+  /faculty/cross-pillar/interpretations:
+    get:
+      operationId: listCrossPillarInterpretations
+      tags: [cross-pillar]
+      summary: Every pillar's approved interpretations, optionally filtered by pillar slug
+      parameters:
+        - name: pillar
+          in: query
+          required: false
+          schema: { type: string }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [interpretations]
+                properties:
+                  interpretations:
+                    type: array
+                    items:
+                      { $ref: "#/components/schemas/CrossPillarInterpretation" }
+  /faculty/cross-pillar/merge-requests:
+    get:
+      operationId: listCrossPillarMergeRequests
+      tags: [cross-pillar]
+      summary: List merge requests in the steward's inbox (to review) or outbox (mine)
+      parameters:
+        - name: box
+          in: query
+          required: false
+          schema: { type: string, enum: [inbox, outbox] }
+        - name: status
+          in: query
+          required: false
+          schema: { type: string, enum: [proposed, approved, declined] }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [requests]
+                properties:
+                  requests:
+                    type: array
+                    items:
+                      { $ref: "#/components/schemas/CrossPillarMergeRequest" }
+    post:
+      operationId: proposeCrossPillarMergeRequest
+      tags: [cross-pillar]
+      summary: Propose adopting another pillar's approved interpretation into yours
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [sourceInterpretationId, targetPillarId]
+              properties:
+                sourceInterpretationId: { type: integer }
+                targetPillarId: { type: integer }
+                note: { type: string, nullable: true }
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/CrossPillarMergeRequest" }
+        "400":
+          description: Invalid request or interpretation not adoptable
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/HealthStatus" }
+        "403":
+          description: Not a steward of the receiving pillar
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/HealthStatus" }
+        "409":
+          description: An open request already exists
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/HealthStatus" }
+  /faculty/cross-pillar/merge-requests/{id}/approve:
+    post:
+      operationId: approveCrossPillarMergeRequest
+      tags: [cross-pillar]
+      summary: Owning steward approves; an attributed copy is merged into the target pillar
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      responses:
+        "200":
+          description: Approved and merged
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [ok]
+                properties:
+                  ok: { type: boolean }
+                  resultingSourceId: { type: integer }
+                  resultingInterpretationId: { type: integer }
+        "403":
+          description: Not a steward of the owning pillar
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/HealthStatus" }
+        "409":
+          description: Request already resolved
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/HealthStatus" }
+  /faculty/cross-pillar/merge-requests/{id}/decline:
+    post:
+      operationId: declineCrossPillarMergeRequest
+      tags: [cross-pillar]
+      summary: Owning steward declines a merge request
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reason: { type: string, nullable: true }
+      responses:
+        "200":
+          description: Declined
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [ok]
+                properties:
+                  ok: { type: boolean }
+        "403":
+          description: Not a steward of the owning pillar
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/HealthStatus" }
+        "409":
+          description: Request already resolved
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/HealthStatus" }
+  /faculty/frameworks:
+    get:
+      operationId: listFrameworks
+      tags: [frameworks]
+      summary: Frameworks in pillars the caller stewards (admins see all)
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [frameworks]
+                properties:
+                  frameworks:
+                    type: array
+                    items: { $ref: "#/components/schemas/FrameworkListItem" }
+    post:
+      operationId: createFramework
+      tags: [frameworks]
+      summary: Create a framework in a pillar the caller stewards
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/CreateFrameworkInput" }
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [framework]
+                properties:
+                  framework: { $ref: "#/components/schemas/Framework" }
+        "400":
+          description: Invalid
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/HealthStatus" }
+        "403":
+          description: Not a steward of the pillar
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/HealthStatus" }
+  /faculty/frameworks/published:
+    get:
+      operationId: listPublishedFrameworks
+      tags: [frameworks]
+      summary: Every published framework with owner + pillar attribution
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [frameworks]
+                properties:
+                  frameworks:
+                    type: array
+                    items: { $ref: "#/components/schemas/FrameworkListItem" }
+  /faculty/frameworks/{id}:
+    patch:
+      operationId: updateFramework
+      tags: [frameworks]
+      summary: Edit a framework's fields
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/UpdateFrameworkInput" }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [framework]
+                properties:
+                  framework: { $ref: "#/components/schemas/Framework" }
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/HealthStatus" }
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/HealthStatus" }
+  /faculty/frameworks/{id}/publish:
+    post:
+      operationId: publishFramework
+      tags: [frameworks]
+      summary: Publish a framework
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [framework]
+                properties:
+                  framework: { $ref: "#/components/schemas/Framework" }
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/HealthStatus" }
+  /faculty/frameworks/{id}/retire:
+    post:
+      operationId: retireFramework
+      tags: [frameworks]
+      summary: Retire a framework
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [framework]
+                properties:
+                  framework: { $ref: "#/components/schemas/Framework" }
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/HealthStatus" }
+  /faculty/frameworks/{id}/apply:
+    post:
+      operationId: applyFramework
+      tags: [frameworks]
+      summary: Rewrite a draft to follow a framework, grounded in the owner's content
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/FrameworkApplyInput" }
+      responses:
+        "200":
+          description: Result (may be a refusal / uncovered / ai_unavailable)
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/FrameworkApplyResult" }
+        "400":
+          description: Invalid or framework not published
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/HealthStatus" }
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/HealthStatus" }
+  /faculty/frameworks/bookings:
+    get:
+      operationId: listFrameworkBookings
+      tags: [frameworks]
+      summary: Bookings the caller made (mine) or owns (owner)
+      parameters:
+        - name: box
+          in: query
+          required: false
+          schema: { type: string, enum: [mine, owner] }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/FrameworkBookingsResponse" }
+    post:
+      operationId: bookFramework
+      tags: [frameworks]
+      summary: Book a framework against a piece of work (idempotent per target)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/BookFrameworkInput" }
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [booking]
+                properties:
+                  booking: { $ref: "#/components/schemas/FrameworkBooking" }
+        "200":
+          description: Existing booking (idempotent re-book)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  booking:
+                    {
+                      $ref: "#/components/schemas/FrameworkBooking",
+                      nullable: true,
+                    }
+                  idempotent: { type: boolean }
+        "400":
+          description: Invalid or framework not published
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/HealthStatus" }
+        "403":
+          description: Not a steward of the booker pillar
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/HealthStatus" }
+  /faculty/frameworks/bookings/ledger:
+    get:
+      operationId: frameworkBookingsLedger
+      tags: [frameworks]
+      summary: Admin-only full bookings ledger + summary
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/FrameworkBookingsResponse" }
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/HealthStatus" }
+  /faculty/frameworks/bookings/{id}/revenue:
+    post:
+      operationId: recordFrameworkBookingRevenue
+      tags: [frameworks]
+      summary: Record revenue for a booking (booker or admin); computes owner share
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/RecordRevenueInput" }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [booking]
+                properties:
+                  booking: { $ref: "#/components/schemas/FrameworkBooking" }
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/HealthStatus" }
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/HealthStatus" }
+  /faculty/frameworks/bookings/{id}:
+    patch:
+      operationId: updateFrameworkBooking
+      tags: [frameworks]
+      summary: Admin settle / adjust a booking
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/UpdateBookingInput" }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [booking]
+                properties:
+                  booking: { $ref: "#/components/schemas/FrameworkBooking" }
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/HealthStatus" }
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/HealthStatus" }
+  /phone/subscribe:
+    post:
+      operationId: subscribePhone
+      tags: [phone]
+      summary: Capture a phone number opt-in for a consumer product
+      description: >
+        Public, consent-gated phone capture for the Nightly sleep surface.
+        Normalizes the number to E.164, records
+        explicit consent, stores it as pending, and (idempotently) sends one
+        opt-in confirmation iMessage. Re-submitting the same number on the same
+        product never duplicates or re-spams.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/PhoneSubscribeInput" }
+      responses:
+        "200":
+          description: Captured (or already captured).
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/PhoneSubscribeResult" }
+        "400":
+          description: Missing/invalid phone, product, or consent.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/HealthStatus" }
+        "500":
+          description: Capture failed.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/HealthStatus" }
+  /account/notifications:
+    get:
+      operationId: getNotificationSettings
+      tags: [account]
+      summary: Get the signed-in consumer's notification channel preferences
+      description: >
+        Returns the caller's per-product notification channel preferences
+        (email / imessage / both), the products they are entitled to, and the
+        status of any phone number linked to their account. Scoped strictly to
+        the cookie-resolved consumer; never exposes another account.
+      responses:
+        "200":
+          description: The caller's notification settings.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/NotificationSettings" }
+        "401":
+          description: Not signed in.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/HealthStatus" }
+        "500":
+          description: Load failed.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/HealthStatus" }
+  /account/notifications/{product}:
+    put:
+      operationId: updateNotificationChannel
+      tags: [account]
+      summary: Set the channel preference for one product
+      description: >
+        Set how the caller is notified for a given product. Choosing "imessage"
+        or "both" requires a confirmed phone number linked to the account; the
+        server rejects the change otherwise.
+      parameters:
+        - name: product
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: [nightly]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              { $ref: "#/components/schemas/UpdateNotificationChannelInput" }
+      responses:
+        "200":
+          description: Updated settings.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/NotificationSettings" }
+        "400":
+          description: Invalid product or channel, or iMessage without a confirmed phone.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/HealthStatus" }
+        "401":
+          description: Not signed in.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/HealthStatus" }
+        "500":
+          description: Update failed.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/HealthStatus" }
+  /account/phone:
+    post:
+      operationId: addAccountPhone
+      tags: [account]
+      summary: Add and verify a phone number for the signed-in consumer
+      description: >
+        Links a phone number to the caller's account and (idempotently) sends a
+        single opt-in confirmation iMessage, reusing the existing double opt-in.
+        Confirming (reply YES or tap the link) makes the number usable for the
+        iMessage channel. Consent is mandatory.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/AddAccountPhoneInput" }
+      responses:
+        "200":
+          description: Linked (or already linked); confirmation awaited if pending.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/AddAccountPhoneResult" }
+        "400":
+          description: Missing/invalid phone or consent.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/HealthStatus" }
+        "401":
+          description: Not signed in.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/HealthStatus" }
+        "500":
+          description: Link failed.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/HealthStatus" }
+  /tts/minicast:
+    post:
+      operationId: minicastTts
+      summary: Produce a two-voice "Nightly" podcast episode from a parsed answer
+      description: >-
+        Builds a fixed 10-turn conversational episode (hook, welcome, answer,
+        reaction, action, bridge, finding, takeaway, closing, outro) and calls
+        ElevenLabs with the male host voice for host turns and the expert
+        avatar voice for expert turns. Returns an ordered array of
+        base64-encoded MP3 voice segments; theme music (5s entry, 30s outro)
+        is layered entirely client-side from a static track.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MinicastRequest"
+      responses:
+        "200":
+          description: Array of audio segments in episode order.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MinicastResponse"
+        "400":
+          description: Missing or invalid fields.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/HealthStatus" }
+        "502":
+          description: ElevenLabs TTS service error.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/HealthStatus" }
+  /referral/code:
+    get:
+      tags: [referral]
+      operationId: getReferralCode
+      summary: Get or create the caller's referral code
+      security: [{ consumerCookie: [] }]
+      responses:
+        "200":
+          description: The caller's referral code.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [code]
+                properties:
+                  code: { type: string }
+        "401": { description: Not signed in. }
+  /referral/owner:
+    get:
+      tags: [referral]
+      operationId: getReferralOwner
+      summary: Look up a referral code's owner first name (anonymous)
+      parameters:
+        - name: code
+          in: query
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: Owner display name.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [firstName]
+                properties:
+                  firstName: { type: string }
+        "400": { description: Missing code. }
+        "404": { description: Unknown code. }
+  /referral/ref:
+    get:
+      tags: [referral]
+      operationId: getReferralRef
+      summary: Return code and owner name from the persisted ref_code cookie
+      responses:
+        "200":
+          description: Active referral context or empty object.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code: { type: string }
+                  firstName: { type: string, nullable: true }
+  /referral/track:
+    post:
+      tags: [referral]
+      operationId: trackReferralClick
+      summary: Record a referral click and set the ref_code cookie
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [code]
+              properties:
+                code: { type: string }
+      responses:
+        "200":
+          description: Click recorded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [ok]
+                properties:
+                  ok: { type: boolean }
+        "400": { description: Missing code. }
+        "404": { description: Unknown code. }
+  /referral/status:
+    get:
+      tags: [referral]
+      operationId: getReferralStatus
+      summary: Caller's referral stats (signups, conversions, bonus remaining)
+      security: [{ consumerCookie: [] }]
+      responses:
+        "200":
+          description: Referral status.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  [
+                    code,
+                    link,
+                    signups,
+                    conversions,
+                    creditsEarnedCents,
+                    bonusQuestionsRemaining,
+                  ]
+                properties:
+                  code: { type: string, nullable: true }
+                  link: { type: string }
+                  signups: { type: integer }
+                  conversions: { type: integer }
+                  creditsEarnedCents: { type: integer }
+                  bonusQuestionsRemaining: { type: integer }
+        "401": { description: Not signed in. }
+  /admin/referral-stats:
+    get:
+      tags: [referral]
+      operationId: getAdminReferralStats
+      summary: Aggregate referral program stats (admin only)
+      responses:
+        "200":
+          description: Aggregate counts and credits.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  [
+                    totalCodes,
+                    totalClicks,
+                    totalSignups,
+                    totalConversions,
+                    totalCreditsCents,
+                  ]
+                properties:
+                  totalCodes: { type: integer }
+                  totalClicks: { type: integer }
+                  totalSignups: { type: integer }
+                  totalConversions: { type: integer }
+                  totalCreditsCents: { type: integer }
+        "403": { description: Forbidden. }
+  /decision-room/me:
+    get:
+      tags: [decision-room]
+      operationId: getDecisionRoomMe
+      summary: Current user identity and access level for the Decision Room
+      responses:
+        "200":
+          description: Identity.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/DecisionRoomMe" }
+        "401": { description: Not authenticated. }
+        "403": { description: No Decision Room access. }
+
+  /decision-room/pillars:
+    get:
+      tags: [decision-room]
+      operationId: listDecisionRoomPillars
+      summary: Pillars available for consultation in the Decision Room
+      responses:
+        "200":
+          description: Consultable pillars.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [pillars]
+                properties:
+                  pillars:
+                    type: array
+                    items: { $ref: "#/components/schemas/DecisionRoomPillar" }
+  /decision-room/summary:
+    get:
+      tags: [decision-room]
+      operationId: getDecisionRoomSummary
+      summary: Dashboard counts and recent decisions
+      responses:
+        "200":
+          description: Summary.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/DecisionRoomSummary" }
+
+  # ── CVO Release Governance (mode-scoped) ───────────────────────────────
+  /decision-room/{mode}/summary:
+    get:
+      tags: [decision-room]
+      operationId: getReleaseModeSummary
+      summary: Dashboard summary for a release mode (test|live)
+      parameters:
+        - {
+            name: mode,
+            in: path,
+            required: true,
+            schema: { $ref: "#/components/schemas/ReleaseMode" },
+          }
+      responses:
+        "200":
+          description: Mode summary.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ReleaseModeSummary" }
+        "400": { description: Invalid mode. }
+        "401": { description: Not authenticated. }
+        "403": { description: No Decision Room access. }
+
+  /decision-room/{mode}/releases:
+    get:
+      tags: [decision-room]
+      operationId: listReleases
+      summary: List CVO releases for a mode (newest first)
+      parameters:
+        - {
+            name: mode,
+            in: path,
+            required: true,
+            schema: { $ref: "#/components/schemas/ReleaseMode" },
+          }
+      responses:
+        "200":
+          description: Releases.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [releases]
+                properties:
+                  releases:
+                    type: array
+                    items: { $ref: "#/components/schemas/ReleaseSummary" }
+        "401": { description: Not authenticated. }
+        "403": { description: No Decision Room access. }
+    post:
+      tags: [decision-room]
+      operationId: createRelease
+      summary: Create a new CVO release record
+      parameters:
+        - {
+            name: mode,
+            in: path,
+            required: true,
+            schema: { $ref: "#/components/schemas/ReleaseMode" },
+          }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/ReleaseCreateBody" }
+      responses:
+        "201":
+          description: Created.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ReleaseDetail" }
+        "400": { description: Invalid input. }
+        "401": { description: Not authenticated. }
+        "403": { description: No Decision Room access. }
+
+  /decision-room/{mode}/releases/{id}:
+    get:
+      tags: [decision-room]
+      operationId: getRelease
+      summary: Get one CVO release record with consultations
+      parameters:
+        - {
+            name: mode,
+            in: path,
+            required: true,
+            schema: { $ref: "#/components/schemas/ReleaseMode" },
+          }
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      responses:
+        "200":
+          description: Release detail.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ReleaseDetail" }
+        "400": { description: Mode mismatch. }
+        "401": { description: Not authenticated. }
+        "403": { description: No Decision Room access. }
+        "404": { description: Not found. }
+    patch:
+      tags: [decision-room]
+      operationId: updateRelease
+      summary: Update a CVO release record (substantive edits invalidate signoffs)
+      parameters:
+        - {
+            name: mode,
+            in: path,
+            required: true,
+            schema: { $ref: "#/components/schemas/ReleaseMode" },
+          }
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/ReleaseUpdateBody" }
+      responses:
+        "200":
+          description: Updated.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ReleaseDetail" }
+        "400": { description: Invalid input or mode mismatch. }
+        "401": { description: Not authenticated. }
+        "403": { description: Forbidden. }
+        "404": { description: Not found. }
+    delete:
+      tags: [decision-room]
+      operationId: deleteRelease
+      summary: Delete a draft/in_review CVO release
+      parameters:
+        - {
+            name: mode,
+            in: path,
+            required: true,
+            schema: { $ref: "#/components/schemas/ReleaseMode" },
+          }
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      responses:
+        "200":
+          description: Deleted.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [ok]
+                properties:
+                  ok: { type: boolean }
+        "400": { description: Mode mismatch or status prevents delete. }
+        "401": { description: Not authenticated. }
+        "403": { description: Forbidden. }
+        "404": { description: Not found. }
+
+  /decision-room/{mode}/releases/{id}/consult:
+    post:
+      tags: [decision-room]
+      operationId: consultReleasepillars
+      summary: Run governed pillar consultation on a release
+      parameters:
+        - {
+            name: mode,
+            in: path,
+            required: true,
+            schema: { $ref: "#/components/schemas/ReleaseMode" },
+          }
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/ReleaseConsultBody" }
+      responses:
+        "200":
+          description: Consultations recorded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [consultations]
+                properties:
+                  consultations:
+                    type: array
+                    items: { $ref: "#/components/schemas/PillarConsultation" }
+        "400":
+          {
+            description: "Own-view missing, invalid pillars, or mode mismatch.",
+          }
+        "401": { description: Not authenticated. }
+        "403": { description: No Decision Room access. }
+        "404": { description: Not found. }
+
+  /decision-room/{mode}/releases/{id}/faculty-signoff:
+    post:
+      tags: [decision-room]
+      operationId: facultySignoff
+      summary: Record substantive faculty sign-off on a release (invalidates CVO verification)
+      parameters:
+        - {
+            name: mode,
+            in: path,
+            required: true,
+            schema: { $ref: "#/components/schemas/ReleaseMode" },
+          }
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/FacultySignoffBody" }
+      responses:
+        "200":
+          description: Signed off.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ReleaseDetail" }
+        "400": { description: Mode mismatch or release not eligible. }
+        "401": { description: Not authenticated. }
+        "403": { description: Forbidden. }
+        "404": { description: Not found. }
+
+  /decision-room/{mode}/releases/{id}/cvo-verification:
+    post:
+      tags: [decision-room]
+      operationId: cvoVerification
+      summary: CVO process verification of a release (requires prior faculty signoff)
+      parameters:
+        - {
+            name: mode,
+            in: path,
+            required: true,
+            schema: { $ref: "#/components/schemas/ReleaseMode" },
+          }
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/CvoVerificationBody" }
+      responses:
+        "200":
+          description: Verified.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ReleaseDetail" }
+        "400": { description: "Mode mismatch or faculty signoff missing." }
+        "401": { description: Not authenticated. }
+        "403": { description: Platform admin (CVO) only. }
+        "404": { description: Not found. }
+
+  /decision-room/{mode}/releases/{id}/publish:
+    post:
+      tags: [decision-room]
+      operationId: publishRelease
+      summary: Publish a ready release (platform-admin CVO only)
+      parameters:
+        - {
+            name: mode,
+            in: path,
+            required: true,
+            schema: { $ref: "#/components/schemas/ReleaseMode" },
+          }
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                note: { type: string, maxLength: 2000 }
+      responses:
+        "200":
+          description: Published.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ReleaseDetail" }
+        "400": { description: Not ready or live requirements unmet. }
+        "401": { description: Not authenticated. }
+        "403": { description: Platform admin (CVO) only. }
+        "404": { description: Not found. }
+
+  /decision-room/{mode}/releases/{id}/withdraw:
+    post:
+      tags: [decision-room]
+      operationId: withdrawRelease
+      summary: Withdraw a published release (platform-admin CVO only)
+      parameters:
+        - {
+            name: mode,
+            in: path,
+            required: true,
+            schema: { $ref: "#/components/schemas/ReleaseMode" },
+          }
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reason: { type: string, maxLength: 2000 }
+      responses:
+        "200":
+          description: Withdrawn.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ReleaseDetail" }
+        "400": { description: Not published. }
+        "401": { description: Not authenticated. }
+        "403": { description: Platform admin (CVO) only. }
+        "404": { description: Not found. }
+
+  /decision-room/{mode}/releases/{id}/comments:
+    post:
+      tags: [decision-room]
+      operationId: createReleaseComment
+      summary: Add a comment or challenge to a release
+      parameters:
+        - {
+            name: mode,
+            in: path,
+            required: true,
+            schema: { $ref: "#/components/schemas/ReleaseMode" },
+          }
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/ReleaseCommentCreateBody" }
+      responses:
+        "201":
+          description: Created.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ReleaseComment" }
+        "400": { description: Invalid input or mode mismatch. }
+        "401": { description: Not authenticated. }
+        "403": { description: No Decision Room access. }
+        "404": { description: Not found. }
+
+  /decision-room/{mode}/releases/{id}/comments/{commentId}:
+    patch:
+      tags: [decision-room]
+      operationId: updateReleaseComment
+      summary: Resolve or re-open a comment/challenge
+      parameters:
+        - {
+            name: mode,
+            in: path,
+            required: true,
+            schema: { $ref: "#/components/schemas/ReleaseMode" },
+          }
+        - { name: id, in: path, required: true, schema: { type: integer } }
+        - {
+            name: commentId,
+            in: path,
+            required: true,
+            schema: { type: integer },
+          }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/ReleaseCommentUpdateBody" }
+      responses:
+        "200":
+          description: Updated.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ReleaseComment" }
+        "400": { description: Invalid input or mode mismatch. }
+        "401": { description: Not authenticated. }
+        "403": { description: No Decision Room access. }
+        "404": { description: Not found. }
+
+  /decision-room/{mode}/releases/{id}/review-links:
+    post:
+      tags: [decision-room]
+      operationId: createReviewLink
+      summary: Create a one-time-reveal opaque review link for a release
+      parameters:
+        - {
+            name: mode,
+            in: path,
+            required: true,
+            schema: { $ref: "#/components/schemas/ReleaseMode" },
+          }
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/ReviewLinkCreateBody" }
+      responses:
+        "201":
+          description: Created. rawToken is returned ONCE only.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ReviewLinkCreated" }
+        "400": { description: Invalid input. }
+        "401": { description: Not authenticated. }
+        "403": { description: No Decision Room access. }
+        "404": { description: Not found. }
+
+  /decision-room/{mode}/releases/{id}/review-links/{linkId}/revoke:
+    post:
+      tags: [decision-room]
+      operationId: revokeReviewLink
+      summary: Revoke an issued read-only review link
+      parameters:
+        - {
+            name: mode,
+            in: path,
+            required: true,
+            schema: { $ref: "#/components/schemas/ReleaseMode" },
+          }
+        - { name: id, in: path, required: true, schema: { type: integer } }
+        - { name: linkId, in: path, required: true, schema: { type: integer } }
+      responses:
+        "200":
+          description: Revoked. Repeating the request is idempotent.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ReviewLinkRevoked" }
+        "400": { description: Invalid input or mode mismatch. }
+        "401": { description: Not authenticated. }
+        "403": { description: Only the link creator or CVO may revoke it. }
+        "404": { description: Not found. }
+
+  /decision-room/review/{token}:
+    get:
+      tags: [decision-room]
+      operationId: getPublicReview
+      summary: Public read-only review of a release via opaque token (no auth required)
+      parameters:
+        - { name: token, in: path, required: true, schema: { type: string } }
+      responses:
+        "200":
+          description: Public-safe release view.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/PublicReviewResponse" }
+        "404": { description: "Token invalid or expired." }
+
+  /decision-room/decisions:
+    get:
+      tags: [decision-room]
+      operationId: listDecisions
+      summary: List decisions (newest first)
+      responses:
+        "200":
+          description: Decisions.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [decisions]
+                properties:
+                  decisions:
+                    type: array
+                    items: { $ref: "#/components/schemas/DecisionSummary" }
+    post:
+      tags: [decision-room]
+      operationId: createDecision
+      summary: Frame a new decision
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/DecisionInput" }
+      responses:
+        "201":
+          description: Created.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/DecisionDetail" }
+        "400":
+          description: Invalid input.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/HealthStatus" }
+  /decision-room/decisions/{id}:
+    get:
+      tags: [decision-room]
+      operationId: getDecision
+      summary: One decision with its pillar consultations
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      responses:
+        "200":
+          description: Decision detail.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/DecisionDetail" }
+        "404":
+          description: Not found.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/HealthStatus" }
+    patch:
+      tags: [decision-room]
+      operationId: updateDecision
+      summary: Update a decision (own view, final call, status, checked steps)
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/DecisionUpdate" }
+      responses:
+        "200":
+          description: Updated.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/DecisionDetail" }
+        "404":
+          description: Not found.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/HealthStatus" }
+    delete:
+      tags: [decision-room]
+      operationId: deleteDecision
+      summary: Delete a decision and its consultations
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      responses:
+        "200":
+          description: Deleted.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [ok]
+                properties:
+                  ok: { type: boolean }
+        "404":
+          description: Not found.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/HealthStatus" }
+  /decision-room/decisions/{id}/consult:
+    post:
+      tags: [decision-room]
+      operationId: consultPillars
+      summary: Ask the governed pillars for perspectives on this decision
+      description: >
+        Runs the decision question through the governed retrieval pipeline for
+        each requested pillar and stores one consultation per pillar. Requires
+        the author's own view to be recorded first (automation-bias rule).
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/ConsultRequest" }
+      responses:
+        "200":
+          description: Consultations created.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [consultations]
+                properties:
+                  consultations:
+                    type: array
+                    items: { $ref: "#/components/schemas/PillarConsultation" }
+        "400":
+          description: Own view missing or invalid pillars.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/HealthStatus" }
+        "404":
+          description: Not found.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/HealthStatus" }
+  /decision-room/steps:
+    get:
+      tags: [decision-room]
+      operationId: listAiSteps
+      summary: The editable protocol of steps for considering AI in decisions
+      responses:
+        "200":
+          description: Steps in order.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [steps]
+                properties:
+                  steps:
+                    type: array
+                    items: { $ref: "#/components/schemas/AiStep" }
+    post:
+      tags: [decision-room]
+      operationId: createAiStep
+      summary: Add a protocol step
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/AiStepInput" }
+      responses:
+        "201":
+          description: Created.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/AiStep" }
+        "400":
+          description: Invalid input.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/HealthStatus" }
+  /decision-room/steps/{id}:
+    patch:
+      tags: [decision-room]
+      operationId: updateAiStep
+      summary: Edit or reorder a protocol step
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/AiStepUpdate" }
+      responses:
+        "200":
+          description: Updated.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/AiStep" }
+        "404":
+          description: Not found.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/HealthStatus" }
+    delete:
+      tags: [decision-room]
+      operationId: deleteAiStep
+      summary: Remove a protocol step
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      responses:
+        "200":
+          description: Deleted.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [ok]
+                properties:
+                  ok: { type: boolean }
+        "404":
+          description: Not found.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/HealthStatus" }
+components:
+  schemas:
+    # ── CVO Release Governance Schemas ─────────────────────────────────────
+    DecisionRoomMe:
+      type: object
+      required: [userId, fullName, isCvo, hasMembership, canFacultySignoff]
+      properties:
+        userId: { type: integer }
+        fullName: { type: string }
+        email: { type: string }
+        isCvo: { type: boolean }
+        hasMembership: { type: boolean }
+        canFacultySignoff:
+          type: boolean
+          description: True only for a non-CVO member with an active steward role.
+
+    ReleaseMode:
+      type: string
+      enum: [test, live]
+
+    ReleaseStatus:
+      type: string
+      enum: [draft, in_review, ready, published, withdrawn]
+
+    ReleaseSummary:
+      type: object
+      required:
+        [
+          id,
+          mode,
+          status,
+          institutionName,
+          namedExpert,
+          publicGuidance,
+          isSample,
+          createdAt,
+          updatedAt,
+        ]
+      properties:
+        id: { type: integer }
+        mode: { $ref: "#/components/schemas/ReleaseMode" }
+        status: { $ref: "#/components/schemas/ReleaseStatus" }
+        institutionName: { type: string }
+        namedExpert: { type: string }
+        publicGuidance: { type: string }
+        isSample: { type: boolean }
+        facultyApprovedAt: { type: string, format: date-time, nullable: true }
+        cvoVerifiedAt: { type: string, format: date-time, nullable: true }
+        publishedAt: { type: string, format: date-time, nullable: true }
+        createdAt: { type: string, format: date-time }
+        updatedAt: { type: string, format: date-time }
+
+    ReleaseAuditEvent:
+      type: object
+      required: [id, mode, releaseId, actorName, eventType, createdAt]
+      properties:
+        id: { type: integer }
+        mode: { $ref: "#/components/schemas/ReleaseMode" }
+        releaseId: { type: integer }
+        actorName: { type: string }
+        eventType: { type: string }
+        detail: { type: object, additionalProperties: true, nullable: true }
+        createdAt: { type: string, format: date-time }
+
+    ReleaseDetail:
+      type: object
+      required:
+        [
+          id,
+          mode,
+          status,
+          institutionName,
+          namedExpert,
+          publicGuidance,
+          intendedAudience,
+          sourceAndProvenanceNotes,
+          scopeLimits,
+          recoursePath,
+          externallyCleared,
+          revenueTermsAcknowledged,
+          isSample,
+          consultations,
+          comments,
+          auditEvents,
+          createdAt,
+          updatedAt,
+        ]
+      properties:
+        id: { type: integer }
+        mode: { $ref: "#/components/schemas/ReleaseMode" }
+        status: { $ref: "#/components/schemas/ReleaseStatus" }
+        institutionName: { type: string }
+        namedExpert: { type: string }
+        ownerFacultyUserId: { type: integer, nullable: true }
+        publicGuidance: { type: string }
+        intendedAudience: { type: ["string", "null"] }
+        sourceAndProvenanceNotes: { type: ["string", "null"] }
+        scopeLimits: { type: ["string", "null"] }
+        recoursePath: { type: ["string", "null"] }
+        externallyCleared: { type: boolean }
+        revenueTermsAcknowledged: { type: boolean }
+        revenueTermsNote: { type: string, nullable: true }
+        facultyApprovedAt: { type: string, format: date-time, nullable: true }
+        facultyApprovedById: { type: integer, nullable: true }
+        facultyApprovedByName: { type: string, nullable: true }
+        cvoVerifiedAt: { type: string, format: date-time, nullable: true }
+        cvoVerifiedById: { type: integer, nullable: true }
+        cvoVerifiedByName: { type: string, nullable: true }
+        publishedAt: { type: string, format: date-time, nullable: true }
+        withdrawnAt: { type: string, format: date-time, nullable: true }
+        isSample: { type: boolean }
+        consultations:
+          type: array
+          items: { $ref: "#/components/schemas/PillarConsultation" }
+        comments:
+          type: array
+          items: { $ref: "#/components/schemas/ReleaseComment" }
+        auditEvents:
+          type: array
+          description: Bounded newest-first audit history (max 50 events).
+          items: { $ref: "#/components/schemas/ReleaseAuditEvent" }
+        createdAt: { type: string, format: date-time }
+        updatedAt: { type: string, format: date-time }
+
+    ReleaseCreateBody:
+      type: object
+      required: [institutionName, namedExpert, publicGuidance]
+      properties:
+        institutionName: { type: string, minLength: 1, maxLength: 200 }
+        namedExpert: { type: string, minLength: 1, maxLength: 200 }
+        publicGuidance: { type: string, minLength: 1, maxLength: 10000 }
+        intendedAudience: { type: string, maxLength: 4000 }
+        sourceAndProvenanceNotes: { type: string, maxLength: 8000 }
+        scopeLimits: { type: string, maxLength: 8000 }
+        recoursePath: { type: string, maxLength: 4000 }
+        externallyCleared: { type: boolean }
+        revenueTermsAcknowledged: { type: boolean }
+        revenueTermsNote: { type: string, maxLength: 2000 }
+
+    ReleaseUpdateBody:
+      type: object
+      properties:
+        institutionName: { type: string, minLength: 1, maxLength: 200 }
+        namedExpert: { type: string, minLength: 1, maxLength: 200 }
+        publicGuidance: { type: string, minLength: 1, maxLength: 10000 }
+        intendedAudience: { type: ["string", "null"], maxLength: 4000 }
+        sourceAndProvenanceNotes: { type: ["string", "null"], maxLength: 8000 }
+        scopeLimits: { type: ["string", "null"], maxLength: 8000 }
+        recoursePath: { type: ["string", "null"], maxLength: 4000 }
+        externallyCleared: { type: boolean }
+        revenueTermsAcknowledged: { type: boolean }
+        revenueTermsNote: { type: ["string", "null"], maxLength: 2000 }
+
+    ReleaseConsultBody:
+      type: object
+      required: [pillarSlugs]
+      properties:
+        pillarSlugs:
+          type: array
+          minItems: 1
+          maxItems: 12
+          items: { type: string }
+
+    FacultySignoffBody:
+      type: object
+      properties:
+        note: { type: string, maxLength: 2000 }
+
+    CvoVerificationBody:
+      type: object
+      properties:
+        note: { type: string, maxLength: 2000 }
+
+    ReleaseComment:
+      type: object
+      required:
+        [
+          id,
+          releaseId,
+          mode,
+          authorId,
+          authorName,
+          kind,
+          body,
+          status,
+          createdAt,
+        ]
+      properties:
+        id: { type: integer }
+        releaseId: { type: integer }
+        mode: { $ref: "#/components/schemas/ReleaseMode" }
+        authorId: { type: integer }
+        authorName: { type: string }
+        kind:
+          type: string
+          enum: [comment, challenge]
+        body: { type: string }
+        status:
+          type: string
+          enum: [open, resolved]
+        resolvedAt: { type: string, format: date-time, nullable: true }
+        resolvedById: { type: integer, nullable: true }
+        resolvedByName: { type: string, nullable: true }
+        createdAt: { type: string, format: date-time }
+        updatedAt: { type: string, format: date-time }
+
+    ReleaseCommentCreateBody:
+      type: object
+      required: [kind, body]
+      properties:
+        kind:
+          type: string
+          enum: [comment, challenge]
+        body: { type: string, minLength: 1, maxLength: 10000 }
+
+    ReleaseCommentUpdateBody:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [open, resolved]
+        body: { type: string, minLength: 1, maxLength: 10000 }
+
+    ReviewLinkCreateBody:
+      type: object
+      properties:
+        expiresInDays: { type: integer, minimum: 1, maximum: 365 }
+
+    ReviewLinkCreated:
+      type: object
+      required: [id, rawToken, expiresAt, createdAt]
+      properties:
+        id: { type: integer }
+        rawToken:
+          {
+            type: string,
+            description: "Returned once only — store immediately.",
+          }
+        expiresAt: { type: string, format: date-time }
+        createdAt: { type: string, format: date-time }
+
+    ReviewLinkRevoked:
+      type: object
+      required: [id, revokedAt]
+      properties:
+        id: { type: integer }
+        revokedAt: { type: string, format: date-time }
+
+    PublicConsultation:
+      type: object
+      description: Externally safe consultation view (no numeric IDs).
+      required:
+        [pillarSlug, pillarName, status, answerText, citations, createdAt]
+      properties:
+        pillarSlug: { type: string }
+        pillarName: { type: string }
+        status:
+          type: string
+          enum: [covered, uncovered, error]
+        answerText: { type: string }
+        citations:
+          type: array
+          items: { $ref: "#/components/schemas/ConsultCitation" }
+        createdAt: { type: string, format: date-time }
+
+    PublicReviewResponse:
+      type: object
+      required: [release, auditSummary]
+      properties:
+        release:
+          type: object
+          description: Externally safe release fields only. No numeric IDs, no internal emails, no source notes, no comments.
+          required:
+            [institutionName, namedExpert, publicGuidance, status, publishedAt]
+          properties:
+            institutionName: { type: string }
+            namedExpert: { type: string }
+            publicGuidance: { type: string }
+            intendedAudience: { type: string, nullable: true }
+            scopeLimits: { type: string, nullable: true }
+            recoursePath: { type: string, nullable: true }
+            status: { $ref: "#/components/schemas/ReleaseStatus" }
+            facultyApprovedByName: { type: string, nullable: true }
+            cvoVerifiedByName: { type: string, nullable: true }
+            publishedAt: { type: string, format: date-time, nullable: true }
+            consultations:
+              type: array
+              items: { $ref: "#/components/schemas/PublicConsultation" }
+        auditSummary:
+          type: object
+          required: [eventCount, lastEventAt]
+          properties:
+            eventCount: { type: integer }
+            lastEventAt: { type: string, format: date-time, nullable: true }
+
+    ReleaseModeSummary:
+      type: object
+      required:
+        [mode, needsAttention, readyToRelease, publishedAndTraceable, recent]
+      properties:
+        mode: { $ref: "#/components/schemas/ReleaseMode" }
+        needsAttention:
+          type: object
+          required: [count, items]
+          properties:
+            count: { type: integer }
+            items:
+              type: array
+              items: { $ref: "#/components/schemas/ReleaseSummary" }
+        readyToRelease:
+          type: object
+          required: [count, items]
+          properties:
+            count: { type: integer }
+            items:
+              type: array
+              items: { $ref: "#/components/schemas/ReleaseSummary" }
+        publishedAndTraceable:
+          type: object
+          required: [count, items]
+          properties:
+            count: { type: integer }
+            items:
+              type: array
+              items: { $ref: "#/components/schemas/ReleaseSummary" }
+        recent:
+          type: array
+          items: { $ref: "#/components/schemas/ReleaseSummary" }
+
+    # ── End CVO Release Governance Schemas ──────────────────────────────────
+    DecisionRoomPillar:
+      type: object
+      required: [slug, name, available]
+      properties:
+        slug: { type: string }
+        name: { type: string }
+        description: { type: ["string", "null"] }
+        stewardName: { type: ["string", "null"] }
+        available:
+          type: boolean
+          description: False for pillars still in preparation (no approved corpus yet).
+    DecisionStatus:
+      type: string
+      enum: [framing, consulting, deciding, decided]
+    DecisionSummary:
+      type: object
+      required:
+        [id, title, question, status, consultationCount, createdAt, updatedAt]
+      properties:
+        id: { type: integer }
+        title: { type: string }
+        question: { type: string }
+        status: { $ref: "#/components/schemas/DecisionStatus" }
+        consultationCount: { type: integer }
+        decidedAt: { type: ["string", "null"], format: date-time }
+        createdAt: { type: string, format: date-time }
+        updatedAt: { type: string, format: date-time }
+    PillarConsultation:
+      type: object
+      required:
+        [id, pillarSlug, pillarName, status, answerText, citations, createdAt]
+      properties:
+        id: { type: integer }
+        pillarSlug: { type: string }
+        pillarName: { type: string }
+        status:
+          type: string
+          enum: [covered, uncovered, error]
+          description: covered = grounded answer with citations; uncovered = the pillar's approved corpus doesn't reach this question (shown honestly, never invented).
+        answerText: { type: string }
+        citations:
+          type: array
+          items: { $ref: "#/components/schemas/ConsultCitation" }
+        createdAt: { type: string, format: date-time }
+    ConsultCitation:
+      type: object
+      required: [title]
+      properties:
+        title: { type: string }
+        authors: { type: ["string", "null"] }
+        year: { type: ["integer", "null"] }
+        sourceUrl: { type: ["string", "null"] }
+    DecisionDetail:
+      type: object
+      required:
+        [
+          id,
+          title,
+          question,
+          context,
+          ownView,
+          finalCall,
+          outcome,
+          status,
+          checkedStepIds,
+          consultations,
+          createdAt,
+          updatedAt,
+        ]
+      properties:
+        id: { type: integer }
+        title: { type: string }
+        question: { type: string }
+        context: { type: ["string", "null"] }
+        ownView:
+          type: ["string", "null"]
+          description: The author's own position, recorded BEFORE any pillar/AI consultation.
+        finalCall: { type: ["string", "null"] }
+        outcome: { type: ["string", "null"] }
+        status: { $ref: "#/components/schemas/DecisionStatus" }
+        checkedStepIds:
+          type: array
+          items: { type: integer }
+        decidedAt: { type: ["string", "null"], format: date-time }
+        consultations:
+          type: array
+          items: { $ref: "#/components/schemas/PillarConsultation" }
+        createdAt: { type: string, format: date-time }
+        updatedAt: { type: string, format: date-time }
+    DecisionInput:
+      type: object
+      required: [title, question]
+      properties:
+        title: { type: string, minLength: 1, maxLength: 200 }
+        question: { type: string, minLength: 1, maxLength: 1000 }
+        context: { type: string, maxLength: 4000 }
+    DecisionUpdate:
+      type: object
+      properties:
+        title: { type: string, minLength: 1, maxLength: 200 }
+        question: { type: string, minLength: 1, maxLength: 1000 }
+        context: { type: ["string", "null"], maxLength: 4000 }
+        ownView: { type: ["string", "null"], maxLength: 8000 }
+        finalCall: { type: ["string", "null"], maxLength: 8000 }
+        outcome: { type: ["string", "null"], maxLength: 8000 }
+        status: { $ref: "#/components/schemas/DecisionStatus" }
+        checkedStepIds:
+          type: array
+          items: { type: integer }
+    ConsultRequest:
+      type: object
+      required: [pillarSlugs]
+      properties:
+        pillarSlugs:
+          type: array
+          minItems: 1
+          maxItems: 12
+          items: { type: string }
+    AiStep:
+      type: object
+      required: [id, text, position]
+      properties:
+        id: { type: integer }
+        text: { type: string }
+        position: { type: integer }
+    AiStepInput:
+      type: object
+      required: [text]
+      properties:
+        text: { type: string, minLength: 1, maxLength: 500 }
+    AiStepUpdate:
+      type: object
+      properties:
+        text: { type: string, minLength: 1, maxLength: 500 }
+        position: { type: integer }
+    DecisionRoomSummary:
+      type: object
+      required: [total, byStatus, recent]
+      properties:
+        total: { type: integer }
+        byStatus:
+          type: object
+          required: [framing, consulting, deciding, decided]
+          properties:
+            framing: { type: integer }
+            consulting: { type: integer }
+            deciding: { type: integer }
+            decided: { type: integer }
+        recent:
+          type: array
+          items: { $ref: "#/components/schemas/DecisionSummary" }
+    MinicastRequest:
+      type: object
+      required: [question, sections]
+      properties:
+        question:
+          type: string
+          minLength: 1
+          maxLength: 600
+        show:
+          type: string
+          enum: [nightly]
+          description: >-
+            The Nightly sleep show with its pinned expert voice.
+        pillar:
+          type: string
+          description: >-
+            Display name of the pillar or topic (e.g. "Sleep & Circadian Rhythms",
+            "Healthful Nutrition"). Used by the host to introduce the subject.
+        expert:
+          type: string
+          description: >-
+            Full name of the faculty expert answering the question (e.g. "Dr. Jamie Zeitzer").
+            Used by the host to introduce and address the expert by name.
+        sections:
+          type: object
+          properties:
+            answer: { type: string }
+            finding: { type: string }
+            action: { type: string }
+    MinicastSegment:
+      type: object
+      required: [role, label, audio]
+      properties:
+        role:
+          type: string
+          enum: [host, expert]
+        label:
+          type: string
+          description: "Segment label: hook | welcome | answer | reaction | action | bridge | finding | takeaway | closing | outro"
+        audio:
+          type: string
+          description: Base64-encoded MP3 audio data
+    MinicastResponse:
+      type: object
+      required: [segments]
+      properties:
+        segments:
+          type: array
+          items:
+            $ref: "#/components/schemas/MinicastSegment"
+    PhoneSubscribeInput:
+      type: object
+      required: [phone, product, consent]
+      properties:
+        phone:
+          type: string
+          description: Phone number in any common format; normalized to E.164 server-side.
+        product:
+          type: string
+          enum: [nightly]
+          description: Which consumer product surface the number was captured on.
+        consent:
+          type: boolean
+          description: Must be true — explicit opt-in to receive texts.
+        source:
+          type: ["string", "null"]
+          description: Optional free-text capture-surface tag.
+    PhoneSubscribeResult:
+      type: object
+      required: [ok]
+      properties:
+        ok: { type: boolean }
+        pending:
+          type: boolean
+          description: True when a confirmation text was (re)issued and confirmation is awaited.
+        alreadySubscribed:
+          type: boolean
+          description: True when the number is already an active subscriber for this product.
+    NotificationChannel:
+      type: string
+      enum: [email, imessage, both]
+      description: How a consumer is notified for a product.
+    NotificationProductPref:
+      type: object
+      required: [product, channel, subscribed]
+      properties:
+        product:
+          type: string
+          enum: [nightly]
+        channel: { $ref: "#/components/schemas/NotificationChannel" }
+        subscribed:
+          type: boolean
+          description: Whether the caller is currently entitled to this product.
+    AccountPhoneStatus:
+      type: object
+      required: [status]
+      properties:
+        number:
+          type: ["string", "null"]
+          description: The account's linked E.164 number, or null when none is linked.
+        status:
+          type: ["string", "null"]
+          enum: [active, pending, opted_out, null]
+          description: >
+            active = confirmed and usable for iMessage; pending = confirmation
+            awaited; opted_out = replied STOP; null = no number linked.
+    NotificationSettings:
+      type: object
+      required: [email, phone, products]
+      properties:
+        email:
+          type: string
+          description: The account email (the email channel target).
+        phone: { $ref: "#/components/schemas/AccountPhoneStatus" }
+        products:
+          type: array
+          items: { $ref: "#/components/schemas/NotificationProductPref" }
+    UpdateNotificationChannelInput:
+      type: object
+      required: [channel]
+      properties:
+        channel: { $ref: "#/components/schemas/NotificationChannel" }
+    AddAccountPhoneInput:
+      type: object
+      required: [phone, consent]
+      properties:
+        phone:
+          type: string
+          description: Phone number in any common format; normalized to E.164 server-side.
+        consent:
+          type: boolean
+          description: Must be true — explicit opt-in to receive texts.
+    AddAccountPhoneResult:
+      type: object
+      required: [ok]
+      properties:
+        ok: { type: boolean }
+        pending:
+          type: boolean
+          description: True when a confirmation text was (re)issued and confirmation is awaited.
+        alreadyConfirmed:
+          type: boolean
+          description: True when this number is already confirmed for the account.
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+      required:
+        - status
+    CrossPillarSummary:
+      type: object
+      required:
+        [id, slug, name, approvedInterpretations, approvedSources, isMine]
+      properties:
+        id: { type: integer }
+        slug: { type: string }
+        name: { type: string }
+        description: { type: ["string", "null"] }
+        approvedInterpretations: { type: integer }
+        approvedSources: { type: integer }
+        isMine: { type: boolean }
+    CrossPillarInterpretation:
+      type: object
+      required:
+        [
+          id,
+          answer,
+          interpretation,
+          pillarId,
+          pillarSlug,
+          pillarName,
+          sourceId,
+          sourceTitle,
+          isMine,
+        ]
+      properties:
+        id: { type: integer }
+        answer: { type: string }
+        interpretation: { type: string }
+        action: { type: ["string", "null"] }
+        tags:
+          type: ["array", "null"]
+          items: { type: string }
+        approvedAt: { type: ["string", "null"], format: date-time }
+        pillarId: { type: integer }
+        pillarSlug: { type: string }
+        pillarName: { type: string }
+        sourceId: { type: integer }
+        sourceTitle: { type: string }
+        sourceAuthors: { type: ["string", "null"] }
+        sourceYear: { type: ["integer", "null"] }
+        authorName: { type: ["string", "null"] }
+        isMine: { type: boolean }
+    CrossPillarMergeRequest:
+      type: object
+      required:
+        [
+          id,
+          status,
+          createdAt,
+          sourceInterpretationId,
+          sourcePillarId,
+          targetPillarId,
+        ]
+      properties:
+        id: { type: integer }
+        status: { type: string, enum: [proposed, approved, declined] }
+        note: { type: ["string", "null"] }
+        declineReason: { type: ["string", "null"] }
+        createdAt: { type: string, format: date-time }
+        reviewedAt: { type: ["string", "null"], format: date-time }
+        sourceInterpretationId: { type: integer }
+        sourcePillarId: { type: integer }
+        targetPillarId: { type: integer }
+        resultingInterpretationId: { type: ["integer", "null"] }
+        interpretationAnswer: { type: ["string", "null"] }
+        sourcePillarName: { type: ["string", "null"] }
+        sourcePillarSlug: { type: ["string", "null"] }
+        requesterName: { type: ["string", "null"] }
+        targetPillarName: { type: ["string", "null"] }
+    ReputationRunInput:
+      type: object
+      properties:
+        engines:
+          type: array
+          items: { type: string }
+          description: Optional override list of engine ids; defaults to all configured.
+    ReputationPromptItem:
+      type: object
+      required: [id, prompt]
+      properties:
+        id: { type: integer }
+        prompt: { type: string }
+        category: { type: ["string", "null"] }
+    ReputationRunSummary:
+      type: object
+      required: [id, topicId, status, engines, startedAt]
+      properties:
+        id: { type: integer }
+        topicId: { type: integer }
+        status: { type: string }
+        engines:
+          type: array
+          items: { type: string }
+        triggeredBy: { type: ["string", "null"] }
+        startedAt: { type: string, format: date-time }
+        completedAt: { type: ["string", "null"], format: date-time }
+        errorMessage: { type: ["string", "null"] }
+        totals:
+          type: object
+          additionalProperties: true
+          description: Aggregate counts (e.g. mentions per signal) computed when run completes.
+    ReputationTopicDetail:
+      type: object
+      required: [id, slug, name, prompts, signalKeywords, seedDomains]
+      properties:
+        id: { type: integer }
+        slug: { type: string }
+        name: { type: string }
+        description: { type: ["string", "null"] }
+        signalKeywords:
+          type: array
+          items: { type: string }
+        seedDomains:
+          type: array
+          items: { type: string }
+        prompts:
+          type: array
+          items: { $ref: "#/components/schemas/ReputationPromptItem" }
+        latestRun:
+          oneOf:
+            - { $ref: "#/components/schemas/ReputationRunSummary" }
+            - { type: "null" }
+        recentRuns:
+          type: array
+          items: { $ref: "#/components/schemas/ReputationRunSummary" }
+    ReputationAnswerItem:
+      type: object
+      required:
+        [
+          id,
+          promptId,
+          engine,
+          model,
+          status,
+          mentionsStanford,
+          mentionsZeitzer,
+          mentionsPalonur,
+          signalHits,
+          citedUrls,
+          citedDomains,
+        ]
+      properties:
+        id: { type: integer }
+        promptId: { type: integer }
+        promptText: { type: ["string", "null"] }
+        engine: { type: string }
+        model: { type: string }
+        status: { type: string }
+        answerText: { type: ["string", "null"] }
+        errorMessage: { type: ["string", "null"] }
+        latencyMs: { type: ["integer", "null"] }
+        mentionsStanford: { type: boolean }
+        mentionsZeitzer: { type: boolean }
+        mentionsPalonur: { type: boolean }
+        signalHits:
+          type: array
+          items: { type: string }
+        citedUrls:
+          type: array
+          items: { type: string }
+        citedDomains:
+          type: array
+          items: { type: string }
+        createdAt: { type: string, format: date-time }
+    ReputationRunDetail:
+      type: object
+      required: [run, answers]
+      properties:
+        run: { $ref: "#/components/schemas/ReputationRunSummary" }
+        answers:
+          type: array
+          items: { $ref: "#/components/schemas/ReputationAnswerItem" }
+    SourceKind:
+      type: string
+      enum: [paper, slm_article, note]
+    SourceStatus:
+      type: string
+      enum: [draft, in_review, approved, archived]
+    SourceRightsBasis:
+      type: string
+      nullable: true
+      enum:
+        [
+          open_license,
+          permission,
+          public_domain,
+          no_documented_full_text_rights,
+        ]
+      description: Contributor-recorded basis for processing a paper's full text.
+    SourceRetentionStatus:
+      type: string
+      nullable: true
+      enum:
+        [
+          needs_review,
+          review_window,
+          retained_with_rights,
+          purged_no_full_text_rights,
+        ]
+      description: Whether paper-derived material is available for faculty review or has been purged.
+    SourceAssessmentStatus:
+      type: string
+      nullable: true
+      enum: [draft, approved]
+      description: >-
+        Reliability-assessment lifecycle, INDEPENDENT of the source's
+        publication status. null = not assessed yet, draft = a steward is
+        working on it (never public), approved = steward-approved and the
+        public trust badge is live.
+    SourceListItem:
+      type: object
+      required:
+        [id, kind, title, status, version, automaticallyDiscovered, excluded, createdAt, updatedAt]
+      properties:
+        id: { type: integer }
+        kind: { $ref: "#/components/schemas/SourceKind" }
+        title: { type: string }
+        authors: { type: string, nullable: true }
+        year: { type: integer, nullable: true }
+        journal: { type: string, nullable: true }
+        doi: { type: string, nullable: true }
+        sourceUrl: { type: string, nullable: true }
+        studyDesign: { type: string, nullable: true }
+        rightsBasis: { $ref: "#/components/schemas/SourceRightsBasis" }
+        retentionStatus: { $ref: "#/components/schemas/SourceRetentionStatus" }
+        rightsRecordedAt: { type: string, format: date-time, nullable: true }
+        purgedAt: { type: string, format: date-time, nullable: true }
+        status: { $ref: "#/components/schemas/SourceStatus" }
+        version: { type: integer }
+        assessmentStatus:
+          { $ref: "#/components/schemas/SourceAssessmentStatus" }
+        rigorScore: { type: integer, nullable: true }
+        reproducibilityScore: { type: integer, nullable: true }
+        opennessScore: { type: integer, nullable: true }
+        automaticallyDiscovered: { type: boolean }
+        excluded: { type: boolean }
+        excludedAt: { type: string, format: date-time, nullable: true }
+        exclusionReason: { type: string, nullable: true }
+        createdAt: { type: string, format: date-time }
+        updatedAt: { type: string, format: date-time }
+    SourceDetail:
+      type: object
+      required: [source, chunkCount, chunks, audit]
+      properties:
+        source:
+          type: object
+          required: [id, kind, title, status, version, createdAt, updatedAt]
+          properties:
+            id: { type: integer }
+            kind: { $ref: "#/components/schemas/SourceKind" }
+            title: { type: string }
+            authors: { type: string, nullable: true }
+            year: { type: integer, nullable: true }
+            journal: { type: string, nullable: true }
+            doi: { type: string, nullable: true }
+            sourceUrl: { type: string, nullable: true }
+            studyDesign: { type: string, nullable: true }
+            status: { $ref: "#/components/schemas/SourceStatus" }
+            version: { type: integer }
+            abstract: { type: string, nullable: true }
+            fullText: { type: string, nullable: true }
+            rightsBasis: { $ref: "#/components/schemas/SourceRightsBasis" }
+            retentionStatus:
+              { $ref: "#/components/schemas/SourceRetentionStatus" }
+            rightsRecordedAt:
+              { type: string, format: date-time, nullable: true }
+            purgedAt: { type: string, format: date-time, nullable: true }
+            assessmentStatus:
+              { $ref: "#/components/schemas/SourceAssessmentStatus" }
+            rigorScore: { type: integer, nullable: true }
+            reproducibilityScore: { type: integer, nullable: true }
+            opennessScore: { type: integer, nullable: true }
+            createdAt: { type: string, format: date-time }
+            updatedAt: { type: string, format: date-time }
+        chunkCount: { type: integer }
+        reviewPassagesAvailable:
+          type: boolean
+          description: True only while faculty may inspect temporary source passages.
+        chunks:
+          type: array
+          items:
+            type: object
+            required: [id, chunkIndex, text]
+            properties:
+              id: { type: integer }
+              chunkIndex: { type: integer }
+              text: { type: string }
+              page: { type: integer, nullable: true }
+              section: { type: string, nullable: true }
+        audit:
+          type: array
+          items:
+            type: object
+            properties:
+              id: { type: integer }
+              action: { type: string }
+              fromStatus: { type: string, nullable: true }
+              toStatus: { type: string, nullable: true }
+              note: { type: string, nullable: true }
+              createdAt: { type: string, format: date-time }
+        role: { type: string, nullable: true }
+    ReliabilityAnswer:
+      type: string
+      enum: [yes, partial, no, unclear]
+      description: >-
+        Per-item judgement. yes=1, partial=0.5, no=0; unclear is EXCLUDED from
+        the axis score (the paper is not punished for an item the text does not
+        address) but lowers coverage.
+    ReliabilityItemAnswer:
+      type: object
+      required: [id, answer, rationale]
+      properties:
+        id: { type: string }
+        answer: { $ref: "#/components/schemas/ReliabilityAnswer" }
+        rationale:
+          type: string
+          description: One-line rationale describing the PAPER, never the steward.
+    ReliabilityAxisAnswers:
+      type: object
+      required: [items]
+      properties:
+        items:
+          type: array
+          items: { $ref: "#/components/schemas/ReliabilityItemAnswer" }
+    ReliabilityRubric:
+      type: object
+      description: >-
+        The full three-axis rubric persisted per source. Server-normalized to
+        the canonical item set on every write, so unknown ids cannot smuggle
+        fields into a public response.
+      required: [rigor, reproducibility, openness]
+      properties:
+        rigor: { $ref: "#/components/schemas/ReliabilityAxisAnswers" }
+        reproducibility: { $ref: "#/components/schemas/ReliabilityAxisAnswers" }
+        openness: { $ref: "#/components/schemas/ReliabilityAxisAnswers" }
+    ReliabilityAxisScore:
+      type: object
+      required: [score, assessed, total]
+      properties:
+        score:
+          type: integer
+          nullable: true
+          description: 0..100, or null when every item is unclear.
+        assessed:
+          type: integer
+          description: Items answered yes/partial/no (coverage numerator).
+        total: { type: integer }
+    SourceAssessmentScores:
+      type: object
+      required: [rigor, reproducibility, openness]
+      properties:
+        rigor: { $ref: "#/components/schemas/ReliabilityAxisScore" }
+        reproducibility: { $ref: "#/components/schemas/ReliabilityAxisScore" }
+        openness: { $ref: "#/components/schemas/ReliabilityAxisScore" }
+    SourceAssessment:
+      type: object
+      description: >-
+        Faculty-facing reliability assessment for one source. Scores are
+        recomputed server-side from the item answers and never trusted from the
+        client. assessedByName appears ONLY on this faculty surface, never in
+        the consumer provenance.
+      required:
+        [
+          assessmentStatus,
+          rubric,
+          scores,
+          aiDraft,
+          aiAcceptance,
+          assessedAt,
+          assessedByName,
+          canEdit,
+        ]
+      properties:
+        assessmentStatus:
+          { $ref: "#/components/schemas/SourceAssessmentStatus" }
+        rubric:
+          oneOf:
+            - { $ref: "#/components/schemas/ReliabilityRubric" }
+            - { type: "null" }
+        scores:
+          oneOf:
+            - { $ref: "#/components/schemas/SourceAssessmentScores" }
+            - { type: "null" }
+        aiDraft:
+          oneOf:
+            - { $ref: "#/components/schemas/ReliabilityRubric" }
+            - { type: "null" }
+        aiAcceptance:
+          type: string
+          nullable: true
+          description: How much of the AI draft the steward kept at approval.
+        assessedAt: { type: string, format: date-time, nullable: true }
+        assessedByName: { type: string, nullable: true }
+        canEdit:
+          type: boolean
+          description: True only for a steward of this pillar.
+        generated:
+          type: boolean
+          description: >-
+            Present on the draft endpoint only. False when the AI was
+            unavailable and the steward must assess by hand.
+    SourceAssessmentInput:
+      type: object
+      required: [rubric, status]
+      properties:
+        rubric:
+          description: >-
+            Loose rubric JSON; server normalizes to the canonical item set and
+            recomputes scores. Client-supplied numbers are ignored.
+        status:
+          type: string
+          enum: [draft, approved]
+          description: Saving with approved IS the steward approval.
+    InterpretationStatus:
+      type: string
+      enum: [proposed, approved, archived]
+    InterpretationOrigin:
+      type: string
+      enum: [faculty, palonur_ai]
+    InterpretationBody:
+      type: object
+      required: [answer, interpretation]
+      properties:
+        answer: { type: string }
+        interpretation: { type: string }
+        notProven: { type: string, nullable: true }
+        action: { type: string, nullable: true }
+        tags:
+          type: array
+          items: { type: string }
+    InterpretationBodyPatch:
+      type: object
+      description: >
+        All fields optional. Only the supplied fields are updated;
+        omitted fields are left as-is. Used by PATCH so contributors
+        and stewards can edit one field at a time without resending
+        the whole body.
+      properties:
+        answer: { type: string }
+        interpretation: { type: string }
+        notProven: { type: string, nullable: true }
+        action: { type: string, nullable: true }
+        tags:
+          type: array
+          items: { type: string }
+    Interpretation:
+      type: object
+      required:
+        [
+          id,
+          status,
+          version,
+          answer,
+          interpretation,
+          tags,
+          createdAt,
+          updatedAt,
+        ]
+      properties:
+        id: { type: integer }
+        status: { $ref: "#/components/schemas/InterpretationStatus" }
+        version: { type: integer }
+        answer: { type: string }
+        interpretation: { type: string }
+        notProven: { type: string, nullable: true }
+        action: { type: string, nullable: true }
+        tags:
+          type: array
+          items: { type: string }
+        authorId: { type: integer, nullable: true }
+        authorName: { type: string, nullable: true }
+        authorEmail: { type: string, nullable: true }
+        origin: { $ref: "#/components/schemas/InterpretationOrigin" }
+        draftedAt: { type: string, format: date-time, nullable: true }
+        reviewedByUserId: { type: integer, nullable: true }
+        reviewedAt: { type: string, format: date-time, nullable: true }
+        lastEditedByUserId: { type: integer, nullable: true }
+        lastEditedAt: { type: string, format: date-time, nullable: true }
+        approvedAt: { type: string, format: date-time, nullable: true }
+        createdAt: { type: string, format: date-time }
+        updatedAt: { type: string, format: date-time }
+    InterpretationVersion:
+      type: object
+      required: [id, interpretationId, version, snapshot, approvedAt]
+      properties:
+        id: { type: integer }
+        interpretationId: { type: integer }
+        version: { type: integer }
+        approverId: { type: integer, nullable: true }
+        approvedAt: { type: string, format: date-time }
+        snapshot:
+          type: object
+          additionalProperties: true
+          description: >
+            Immutable snapshot of the body fields plus transition
+            metadata (event, fromStatus, toStatus, note, supersededIds).
+    InterpretationComment:
+      type: object
+      required: [id, body, createdAt]
+      properties:
+        id: { type: integer }
+        body: { type: string }
+        quotedText: { type: string, nullable: true }
+        parentCommentId: { type: integer, nullable: true }
+        authorId: { type: integer, nullable: true }
+        authorName: { type: string, nullable: true }
+        authorEmail: { type: string, nullable: true }
+        createdAt: { type: string, format: date-time }
+    IngestSourceResponse:
+      type: object
+      required: [id, title, status, version, chunkCount, versioned]
+      properties:
+        id: { type: integer }
+        title: { type: string }
+        status: { $ref: "#/components/schemas/SourceStatus" }
+        version: { type: integer }
+        chunkCount: { type: integer }
+        versioned: { type: boolean }
+        firstDraftId: { type: integer, nullable: true }
+
+    UploadUrlRequest:
+      type: object
+      required: [name, size, contentType]
+      properties:
+        name: { type: string, minLength: 1 }
+        size: { type: integer, minimum: 1 }
+        contentType: { type: string, minLength: 1 }
+    UploadUrlResponse:
+      type: object
+      required: [uploadURL, objectPath]
+      properties:
+        uploadURL: { type: string, format: uri }
+        objectPath: { type: string }
+        metadata: { $ref: "#/components/schemas/UploadUrlRequest" }
+    StorageErrorEnvelope:
+      type: object
+      required: [error]
+      properties:
+        error: { type: string }
+
+    FrameworkStatus:
+      type: string
+      enum: [draft, published, retired]
+    Framework:
+      type: object
+      required:
+        [id, pillarId, name, slug, structure, status, createdAt, updatedAt]
+      properties:
+        id: { type: integer }
+        pillarId: { type: integer }
+        ownerUserId: { type: integer, nullable: true }
+        name: { type: string }
+        slug: { type: string }
+        description: { type: string, nullable: true }
+        structure: { type: string }
+        example: { type: string, nullable: true }
+        status: { $ref: "#/components/schemas/FrameworkStatus" }
+        createdAt: { type: string, format: date-time }
+        updatedAt: { type: string, format: date-time }
+    FrameworkListItem:
+      allOf:
+        - { $ref: "#/components/schemas/Framework" }
+        - type: object
+          properties:
+            pillarName: { type: string, nullable: true }
+            pillarSlug: { type: string, nullable: true }
+            ownerName: { type: string, nullable: true }
+    CreateFrameworkInput:
+      type: object
+      required: [pillarId, name, structure]
+      properties:
+        pillarId: { type: integer }
+        name: { type: string, minLength: 1, maxLength: 200 }
+        description: { type: string, maxLength: 2000 }
+        structure: { type: string, minLength: 1, maxLength: 8000 }
+        example: { type: string, maxLength: 8000 }
+    UpdateFrameworkInput:
+      type: object
+      properties:
+        name: { type: string, minLength: 1, maxLength: 200 }
+        description: { type: string, maxLength: 2000, nullable: true }
+        structure: { type: string, minLength: 1, maxLength: 8000 }
+        example: { type: string, maxLength: 8000, nullable: true }
+    FrameworkApplyInput:
+      type: object
+      required: [draft]
+      properties:
+        draft: { type: string, minLength: 1, maxLength: 12000 }
+        kind: { type: string, enum: [answer, article] }
+    FrameworkAttribution:
+      type: object
+      required: [frameworkId, frameworkName]
+      properties:
+        frameworkId: { type: integer }
+        frameworkName: { type: string }
+        ownerName: { type: string, nullable: true }
+        pillarName: { type: string, nullable: true }
+        pillarSlug: { type: string, nullable: true }
+    FrameworkApplyResult:
+      type: object
+      required: [ok]
+      properties:
+        ok: { type: boolean }
+        reason: { type: string, nullable: true }
+        refused: { type: boolean }
+        uncovered: { type: boolean }
+        draft: { type: string }
+        attribution: { $ref: "#/components/schemas/FrameworkAttribution" }
+        provenance:
+          type: array
+          items: { type: object, additionalProperties: true }
+        citationVerification:
+          type: object
+          nullable: true
+          additionalProperties: true
+        voiceVerification:
+          type: object
+          nullable: true
+          additionalProperties: true
+    FrameworkBookingStatus:
+      type: string
+      enum: [booked, revenue_recorded, settled]
+    FrameworkBookingTarget:
+      type: string
+      enum: [interpretation, newsletter_post, communication_offer, article]
+    FrameworkBooking:
+      type: object
+      required:
+        [
+          id,
+          frameworkId,
+          ownerPillarId,
+          bookerPillarId,
+          status,
+          sharePct,
+          createdAt,
+          updatedAt,
+        ]
+      properties:
+        id: { type: integer }
+        frameworkId: { type: integer }
+        ownerPillarId: { type: integer }
+        ownerUserId: { type: integer, nullable: true }
+        bookerPillarId: { type: integer }
+        bookerUserId: { type: integer, nullable: true }
+        targetType:
+          {
+            $ref: "#/components/schemas/FrameworkBookingTarget",
+            nullable: true,
+          }
+        targetId: { type: integer, nullable: true }
+        targetTitle: { type: string, nullable: true }
+        status: { $ref: "#/components/schemas/FrameworkBookingStatus" }
+        revenueCents: { type: integer, nullable: true }
+        sharePct: { type: integer }
+        ownerShareCents: { type: integer, nullable: true }
+        note: { type: string, nullable: true }
+        createdAt: { type: string, format: date-time }
+        revenueRecordedAt: { type: string, format: date-time, nullable: true }
+        settledAt: { type: string, format: date-time, nullable: true }
+        updatedAt: { type: string, format: date-time }
+    PillarResource:
+      type: object
+      required: [id, title, url, displayOrder]
+      properties:
+        id: { type: integer }
+        title: { type: string }
+        url: { type: string }
+        description: { type: string, nullable: true }
+        category: { type: string, nullable: true }
+        displayOrder: { type: integer }
+    FrameworkBookingListItem:
+      allOf:
+        - { $ref: "#/components/schemas/FrameworkBooking" }
+        - type: object
+          properties:
+            frameworkName: { type: string, nullable: true }
+            ownerName: { type: string, nullable: true }
+            ownerPillarName: { type: string, nullable: true }
+            bookerName: { type: string, nullable: true }
+            bookerPillarName: { type: string, nullable: true }
+    FrameworkBookingSummary:
+      type: object
+      required: [count, owedCents, settledCents, revenueCents]
+      properties:
+        count: { type: integer }
+        owedCents: { type: integer }
+        settledCents: { type: integer }
+        revenueCents: { type: integer }
+    FrameworkBookingsResponse:
+      type: object
+      required: [bookings, summary]
+      properties:
+        bookings:
+          type: array
+          items: { $ref: "#/components/schemas/FrameworkBookingListItem" }
+        summary: { $ref: "#/components/schemas/FrameworkBookingSummary" }
+    BookFrameworkInput:
+      type: object
+      required: [frameworkId, bookerPillarId]
+      properties:
+        frameworkId: { type: integer }
+        bookerPillarId: { type: integer }
+        targetType: { $ref: "#/components/schemas/FrameworkBookingTarget" }
+        targetId: { type: integer }
+        targetTitle: { type: string, maxLength: 300 }
+        note: { type: string, maxLength: 1000 }
+    RecordRevenueInput:
+      type: object
+      required: [revenueCents]
+      properties:
+        revenueCents: { type: integer, minimum: 0 }
+    UpdateBookingInput:
+      type: object
+      properties:
+        status: { $ref: "#/components/schemas/FrameworkBookingStatus" }
+        ownerShareCents: { type: integer, minimum: 0 }
+        note: { type: string, maxLength: 1000, nullable: true }

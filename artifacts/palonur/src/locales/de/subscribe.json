@@ -1,0 +1,184 @@
+{
+  "title": "Abonnieren · Palonur",
+  "pageTitle": "Palonur beitreten · Schlaf + Lifestyle-Medizin",
+  "header": {
+    "yourAccount": "Ihr Konto →"
+  },
+  "notice": {
+    "cancelled": "Kasse abgebrochen — keine Gebühr wurde erhoben.",
+    "takingYouIn": "Sie sind abonniert — wir leiten Sie weiter…"
+  },
+  "checkout": {
+    "badge": "Zahlung erhalten",
+    "welcomeTo": "Willkommen bei {{title}}",
+    "youreSubscribed": "Sie sind abonniert",
+    "heldBody": "Wir haben Ihnen an {{email}} einen Einmal-Anmeldelink geschickt. Öffnen Sie ihn auf diesem Gerät, und Ihre Frage wird automatisch gestellt — die Antwort, für die Sie gekommen sind, wartet auf Sie.",
+    "body": "Wir haben Ihnen an {{email}} einen Einmal-Anmeldelink geschickt. Öffnen Sie ihn, um sich anzumelden und direkt zu {{destination}} zu gelangen.",
+    "yourMemberArea": "Ihrem Mitgliederbereich",
+    "goAccount": "Zu Ihrem Konto →",
+    "noEmail": "Keine E-Mail erhalten? Schauen Sie im Spam-Ordner nach — es kann eine Minute dauern."
+  },
+  "subscribed": {
+    "badge": "Abonnement · Aktiv",
+    "allSet": "Alles bereit.",
+    "signedInAs": "Angemeldet als",
+    "plan": {
+      "annual": "jährliche",
+      "monthly": "monatliche"
+    },
+    "planActive": "Plan ist aktiv.",
+    "planCancels": "Plan ist aktiv und wird am Ende des Abrechnungszeitraums gekündigt.",
+    "accessUntil": "Zugang bis",
+    "renews": "Verlängert",
+    "manageAccount": "Ihr Konto verwalten →",
+    "manageBilling": "Abrechnung verwalten",
+    "signOut": "Abmelden"
+  },
+  "free": {
+    "badge": "Kostenloses Konto · $0 für immer",
+    "headline": "Erstellen Sie Ihr kostenloses Konto.",
+    "bullets": [
+      "1 Schlafffrage pro Tag — kostenlos für immer.",
+      "Speichern Sie Ihre Antworten und lesen Sie sie jederzeit nach.",
+      "Einen wöchentlichen Stanford-Schlaftipp in Ihrem Posteingang."
+    ],
+    "checkInbox": "Schauen Sie in Ihren Posteingang — wir haben Ihnen einen Link geschickt, um Ihr kostenloses Konto fertigzustellen.",
+    "emailPlaceholder": "E-Mail-Adresse",
+    "sending": "Wird gesendet…",
+    "signUp": "Kostenlos anmelden →",
+    "noCard": "Keine Karte erforderlich. Lieber geführt? Der",
+    "course": "7-Nächte-Kurs Insomnie besiegen",
+    "noCardSuffix": "ist auch kostenlos."
+  },
+  "hero": {
+    "badge": "Stanford Lifestyle Medicine",
+    "headline1": "Hören Sie auf zu suchen.",
+    "headline2": "Fragen Sie die Wissenschaftlerin.",
+    "intro": "Es ist wieder 3 Uhr morgens. Das Mittel, das Sie ausprobiert haben, hat nicht geholfen, und jede kostenlose Antwort widerspricht der letzten.",
+    "scienceSignedIntro": "Das ist {{name}}:",
+    "description": "eine Antwort auf Ihre Situation, geschrieben aus der eigenen veröffentlichten Schlafforschung einer namentlich genannten Stanford-Wissenschaftlerin, zitiert bis zur Studie, damit Sie sie überprüfen oder Ihrem Arzt zeigen können. Ruhig, sicher, mit dem Suchen fertig. Und wenn die Forschung Sie noch nicht abdeckt, sagt sie das ehrlich, anstatt zu raten."
+  },
+  "valuePoints": {
+    "sectionLabel": "Wofür Sie bezahlen",
+    "items": [
+      {
+        "h": "Erlaubnis, mit dem Suchen aufzuhören.",
+        "p": "Sie haben das Mittel ausprobiert. Sie haben die widersprüchlichen Ratschläge gelesen. Was Sie kaufen, ist eine Antwort auf Ihre Situation — aus der eigenen veröffentlichten Forschung einer namentlich genannten Stanford-Wissenschaftlerin — und die Ruhe, mit dem Suchen fertig zu sein."
+      },
+      {
+        "h": "Ein Zitat, das Sie jemandem zeigen können.",
+        "p": "Jede Antwort ist bis zur Studie zurückverfolgbar, aus der sie stammt — kein selbstsicher klingendes Raten aus hundert Webseiten. Zeigen Sie es Ihrem Ehepartner, Ihrem Arzt, jedem, der fragt, woher Sie das wissen. Sie gehen zur Quelle."
+      },
+      {
+        "h": "Ehrlich, auch wenn das unbequem ist.",
+        "p": "Manchmal ist die Antwort nicht das, was Sie sich erhofft haben — und manchmal gibt es noch gar keine Antwort. Wenn die Forschung Ihre Frage nicht abdeckt, sagt sie Ihnen genau das, anstatt etwas zu erfinden, um Ihnen zu gefallen. Diese Ehrlichkeit macht den Rest glaubwürdig."
+      }
+    ]
+  },
+  "pillarsGrid": {
+    "sectionLabel": "Jede Säule, freigeschaltet",
+    "comingSoon": "Demnächst",
+    "items": [
+      "Erholsamer Schlaf",
+      "Gesunde Ernährung",
+      "Bewegung & Sport",
+      "Stressmanagement",
+      "Kognitive Verbesserung",
+      "Soziales Engagement",
+      "Dankbarkeit & Sinn",
+      "Social Brain"
+    ]
+  },
+  "testimonials": {
+    "sectionLabel": "Wie sich eine Mitgliedschaft anfühlt",
+    "curiousPrefix": "Neugierig zuerst? Stellen Sie kostenlos eine Frage an den",
+    "curiousLink": "Schlaf-Agenten",
+    "curiousSuffix": "— keine Karte erforderlich."
+  },
+  "card": {
+    "name": "Palonur Pal",
+    "tagline": "Dr. Jamie Zeiters Schlafforschung, plus alle anderen Palonur-Experten.",
+    "loadingPlans": "Pläne werden geladen…",
+    "billedMonthly": "Monatlich abgerechnet · jederzeit kündbar",
+    "billedAnnually": "/Mo., jährlich abgerechnet",
+    "noPrice": {
+      "prefix": "In der Zwischenzeit",
+      "link": "stellen Sie dem Schlaf-Agenten kostenlos eine Frage",
+      "suffix": "— keine Karte erforderlich."
+    },
+    "emailPlaceholder": "E-Mail-Adresse",
+    "redirecting": "Weiterleitung zur Kasse…",
+    "subscribe": "Abonnieren →",
+    "secure": "Sichere Kasse via Stripe. Jederzeit kündbar."
+  },
+  "signIn": {
+    "trigger": "Bereits abonniert? Anmelden →",
+    "checkInbox": "Schauen Sie in Ihren Posteingang — wir haben Ihnen einen Anmeldelink geschickt.",
+    "emailPlaceholder": "Ihre E-Mail",
+    "sendLink": "Link senden"
+  },
+  "billing": {
+    "monthly": "Monatlich",
+    "annual": "Jährlich",
+    "saveLabel": "Sparen",
+    "perMonth": "/Mo.",
+    "perYear": "/Jahr",
+    "mostPopular": "Am beliebtesten",
+    "savePct": "ca. 17 % sparen"
+  },
+  "tiers": {
+    "nightly": {
+      "title": "Pal",
+      "tagline": "Unbegrenzte Antworten aus allen Säulen, jede mit einem Forscher signiert.",
+      "includes": [
+        "Unbegrenzte Antworten aus allen Säulen, zu jeder Stunde",
+        "Jede Antwort mit der Studie zitiert, aus der sie stammt, namentlich signiert",
+        "Eine persönliche Zusammenfassung aus Ihren Fragen",
+        "Zugang zu jedem neuen Palonur-Experten, sobald seine Säule öffnet",
+        "Jederzeit kündigen — keine Bindung"
+      ]
+    },
+    "newsletter": {
+      "title": "Newsletter Premium",
+      "tagline": "Vollständiger Zugang zu jeder Premium-Ausgabe."
+    },
+    "all_access": {
+      "title": "Palonur Vollzugang",
+      "tagline": "Jedes Tool, jede Säule — ein Abonnement.",
+      "badge": "Bestes Angebot",
+      "includes": [
+        "Unbegrenzte Antworten aus allen Säulen, zu jeder Stunde",
+        "Vollständiger Premium-Newsletter-Zugang",
+        "Jede Antwort mit der Studie zitiert, aus der sie stammt, namentlich signiert",
+        "Eine persönliche Zusammenfassung aus Ihren Fragen",
+        "Jederzeit kündigen — keine Bindung"
+      ]
+    }
+  },
+  "cta": {
+    "getStarted": "Loslegen →",
+    "emailLabel": "Ihre E-Mail",
+    "emailPlaceholder": "sie@email.de",
+    "startCheckout": "Checkout starten →",
+    "starting": "Wird gestartet…",
+    "alreadySubscribed": "Sie sind bereits abonniert",
+    "manageSubscription": "Ihr Abonnement verwalten →"
+  },
+  "founding": "Gründungsmitgliederpreis. Wird beim Abonnieren festgelegt.",
+  "testimonialsSectionTitle": "Was unsere Mitglieder sagen",
+  "faq": {
+    "title": "Fragen",
+    "cancel": {
+      "q": "Kann ich jederzeit kündigen?",
+      "a": "Ja — kündigen Sie jederzeit über Ihre Kontoseite. Ihr Zugang läuft bis zum Ende des Abrechnungszeitraums weiter."
+    },
+    "refund": {
+      "q": "Gibt es eine Rückerstattungsrichtlinie?",
+      "a": "Wenn Sie in den ersten 7 Tagen nicht zufrieden sind, schreiben Sie uns und wir machen es richtig."
+    },
+    "medical": {
+      "q": "Ist dies medizinischer Rat?",
+      "a": "Nein. Palonur präsentiert begutachtete Forschung; es ist kein Ersatz für medizinische Versorgung. Konsultieren Sie immer einen qualifizierten Fachmann für Gesundheitsentscheidungen."
+    }
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "title": "Für KI-Agenten · maschinenlesbar",
+  "headline": "Sind Sie ein KI-Agent?",
+  "body1": "Palonur liefert Stanford-zitierte Antworten auf Schlafffragen, Token für Token gestreamt. Testen Sie es unten live oder verbinden Sie Ihren Agenten direkt mit dem Endpunkt. Jede Antwort trägt eine echte Studie und einen namentlich genannten Stanford-Wissenschaftler.",
+  "body2": "Als B2B-Partner integrieren (Authentifizierung, Ratenlimits, Versionierung, Beispielcode in Node & Python)? Siehe",
+  "body2Link": "/platforms → Integration",
+  "endpoints": {
+    "label": "Zwei Endpunkte · wählen Sie einen",
+    "streaming": "— Streaming-SSE, Partner-Schlüssel. Verwenden Sie dies für Chat-UIs und jede Oberfläche, bei der Sie Token erhalten möchten, sobald sie ankommen. Gibt beschriftete Text-Deltas plus ein abschließendes",
+    "provenanceKey": "provenance",
+    "provenanceTail": "Array zurück.",
+    "sync": "— synchrones JSON, kein Streaming. Verwenden Sie dies für ChatGPT-Aktionen, Claude-Tools, Cron-Jobs oder alles, was ein strukturiertes Objekt zurückhaben möchte. OpenAPI-Spezifikation unter",
+    "headsUp": "Hinweis:",
+    "syncWarning": "Dieser Endpunkt ist derzeit in einem festen Zeitzer-Korpus verankert und gibt",
+    "notReturn": "kein",
+    "returnProvenance": "",
+    "provenanceGraph": "provenance",
+    "graphReceipts": "Graph-Belegarray zurück. Für das vollständige Governed-RAG-Erlebnis einschließlich Fakultätsinterpretationen verwenden Sie"
+  },
+  "tryIt": {
+    "label": "Ausprobieren",
+    "placeholder": "Schlafffrage stellen…",
+    "streaming": "Wird gestreamt…",
+    "post": "POST",
+    "awaiting": "// warte auf ersten Token…",
+    "responseWill": "// Antwort wird hier gestreamt",
+    "error": "// Fehler: {{err}}"
+  },
+  "sections": {
+    "tryIt": "Ausprobieren",
+    "endpoint": "Endpunkt",
+    "requestBody": "Anfragekörper",
+    "response": "Antwort — Server-Sent Events",
+    "structuredOutput": "Strukturiertes Antwortformat",
+    "curl": "curl",
+    "graphReceipts": "Graph-Belege",
+    "dropInto": "In ChatGPT / Claude einfügen",
+    "mcp": "Model Context Protocol (MCP)-Server",
+    "subscribe": "Einen Leser für einen Newsletter anmelden"
+  },
+  "notes": {
+    "historyOptional": "ist optional. Die letzten 10 Gesprächsrunden werden gespeichert.",
+    "interpretationId": "!= null bedeutet, dass ein Stanford-Steward (Fakultätsmitglied) den Rahmen geschrieben hat, den das Modell verwendet hat. Der Steward, der ihn genehmigt hat, ist über die Fakultäts-API per ID abfragbar.",
+    "syncGrounded": "Der synchrone Endpunkt ist derzeit in einem fest programmierten Zeitzer-Korpus verankert (kein Streaming, kein",
+    "noProvenance": "provenance",
+    "syncWarning2": "Array). Für das vollständige graph-verankerte Erlebnis einschließlich Fakultätsinterpretationen und Chunk-Belegen verwenden Sie",
+    "mcpKey": "Schlüssel erforderlich.",
+    "mcpKeyBody": "Jede MCP-Anfrage muss einen aktiven",
+    "mcpKeyTail": "(von Palonur gewährt oder bezahlt) enthalten; nicht authentifizierte oder unbezahlte Anfragen werden mit einem klaren",
+    "mcpEachTool": "Jedes Tool-Ergebnis enthält eine maschinenlesbare",
+    "mcpOr": "/",
+    "noTraining": "Keine-Training-Nutzungsrichtlinie",
+    "noTrainingTail": "— ein vertraglicher Lizenzbegriff und eine Zuordnungsanforderung,",
+    "notTechnical": "keine",
+    "techGuarantee": "technische Garantie. Entdecken Sie den Server unter",
+    "and": "und",
+    "structuredBody": "Deltas bilden eine beschriftete Antwort mit fünf Abschnitten. Analysieren Sie diese anhand des Zeilenpräfixes:",
+    "graphReceiptsIntro": "Jede nicht abgelehnte Antwort endet mit einem",
+    "graphReceiptsMid": "Array — der genaue Teilgraph, auf dem die Antwort basiert:",
+    "graphReceiptsTail": "plus Titel, Autoren, Jahr, Journal, DOI und dem Stanford",
+    "graphReceiptsEnd": "des Papiers. Speichern Sie es; Sie können den Zitatblock in Ihrer eigenen Benutzeroberfläche rekonstruieren, prüfen, welche Fakultätsinterpretation die Antwort beeinflusst hat, oder denselben Graphausschnitt später wiedergeben.",
+    "dropIntoBody": "Für Tool-Aufrufe (ChatGPT Custom Actions, Claude-Tools) verwenden Sie den synchronen Endpunkt und fügen Sie die OpenAPI-Spezifikations-URL in das Importfeld Ihres Tools ein:",
+    "mcpIntro": "Verbinden Sie jeden MCP-Client (Claude, ChatGPT oder Ihren eigenen Agenten) direkt mit Palonurs gesteuerter Wissensschicht. Der Server spricht",
+    "mcpExposes": "und stellt zwei Tools bereit:"
+  },
+  "subscribeNote": {
+    "body1": "Die öffentliche Seite jedes Stewards",
+    "body2": "und der SLM-Haus-Newsletter akzeptieren programmgesteuerte kostenlose Anmeldungen. Kein Schlüssel, keine Authentifizierung — rufen Sie es im Namen eines Lesers auf:",
+    "okBody": "Gibt",
+    "okTail": "zurück, unabhängig davon, ob die Adresse neu ist oder bereits abonniert.",
+    "noteIdempotent": "Idempotent",
+    "noteIdempotentBody": "— erneutes Abonnieren derselben E-Mail ist ein No-op (kein Duplikat, kein Fehler).",
+    "noteAnon": "Anonym & CORS-offen",
+    "noteAnonBody": "— kein API-Schlüssel erforderlich; vom Browser aus aufrufbar.",
+    "noteRate": "IP-basiertes Ratenlimit.",
+    "noteDiscovery": "Der Slug der Publikation, die Themensäulen und dieser genaue Abonnement-Aufruf sind auch als maschinenlesbarer JSON-Block eingebettet",
+    "noteDiscoveryTail": "im Head der Seite, und die Aktion wird in der OpenAPI-Spezifikation veröffentlicht unter"
+  },
+  "footer": {
+    "tagline": "Geroutet durch die Stanford Sleep Knowledge Map. Antworten verifiziert von Prof. Jamie Zeitzer.",
+    "cta": "Schreiben Sie uns →"
+  }
+}

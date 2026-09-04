@@ -1,0 +1,83 @@
+{
+  "title": "For AI agents · machine-readable",
+  "headline": "Are you an AI Agent?",
+  "body1": "Palonur returns Stanford-cited answers to sleep questions, streamed token-by-token. Test it live below, or wire your agent against the endpoint directly. Every answer carries a real paper and a named Stanford scientist.",
+  "body2": "Integrating as a B2B partner (auth, rate limits, versioning, sample code in Node & Python)? See",
+  "body2Link": "/platforms → Integration",
+  "endpoints": {
+    "label": "Two endpoints · pick one",
+    "streaming": "— streaming SSE, partner-keyed. Use this for chat UIs and any surface where you want tokens as they arrive. Returns labelled text deltas plus a final",
+    "provenanceKey": "provenance",
+    "provenanceTail": "array.",
+    "sync": "— synchronous JSON, no streaming. Use this for ChatGPT actions, Claude tools, cron jobs, or anything that wants one structured object back. OpenAPI spec at",
+    "headsUp": "Heads-up:",
+    "syncWarning": "this endpoint is currently grounded in a fixed Zeitzer corpus and does",
+    "notReturn": "not",
+    "returnProvenance": "return the",
+    "provenanceGraph": "provenance",
+    "graphReceipts": "graph receipts. For the full governed-RAG experience including faculty interpretations, use"
+  },
+  "tryIt": {
+    "label": "Try it",
+    "placeholder": "Ask a sleep question…",
+    "streaming": "Streaming…",
+    "post": "POST",
+    "awaiting": "// awaiting first token…",
+    "responseWill": "// response will stream here",
+    "error": "// error: {{err}}"
+  },
+  "sections": {
+    "tryIt": "Try it",
+    "endpoint": "Endpoint",
+    "requestBody": "Request body",
+    "response": "Response — Server-Sent Events",
+    "structuredOutput": "Structured answer format",
+    "curl": "curl",
+    "graphReceipts": "Graph receipts",
+    "dropInto": "Drop into ChatGPT / Claude",
+    "mcp": "Model Context Protocol (MCP) server",
+    "subscribe": "Subscribe a reader to a newsletter"
+  },
+  "notes": {
+    "historyOptional": "is optional. Last 10 turns are kept.",
+    "interpretationId": "!= null means a Stanford steward (faculty member) wrote the framing the model used. The steward who approved it is queryable by id via the faculty API.",
+    "syncGrounded": "The synchronous endpoint is currently grounded in a hardcoded Zeitzer corpus (no streaming, no",
+    "noProvenance": "provenance",
+    "syncWarning2": "array). For the full graph-grounded experience including faculty interpretations and chunk-level receipts, use",
+    "mcpKey": "Key required.",
+    "mcpKeyBody": "Every MCP request must carry an active",
+    "mcpKeyTail": "(granted by Palonur or paid); unauthenticated or unpaid requests are refused with a clear",
+    "mcpEachTool": "Each tool result carries a machine-readable",
+    "mcpOr": "/",
+    "noTraining": "no-training usage policy",
+    "noTrainingTail": "— a contractual license term and attribution requirement,",
+    "notTechnical": "not",
+    "techGuarantee": "a technical guarantee. Discover the server at",
+    "and": "and",
+    "structuredBody": "deltas form a labelled response with five sections. Parse them by line prefix:",
+    "graphReceiptsIntro": "Every non-refused answer ends with a",
+    "graphReceiptsMid": "array — the exact subgraph the answer was grounded in:",
+    "graphReceiptsTail": "plus the paper's title, authors, year, journal, DOI, and the Stanford",
+    "graphReceiptsEnd": "it belongs to. Store it; you can reconstruct the citation block in your own UI, audit which faculty interpretation drove the answer, or replay the same graph slice later.",
+    "dropIntoBody": "For tool calls (ChatGPT Custom Actions, Claude tools), use the synchronous endpoint and paste the OpenAPI spec URL into your tool's import field:",
+    "mcpIntro": "Connect any MCP client (Claude, ChatGPT, or your own agent) directly to Palonur's governed knowledge layer. The server speaks",
+    "mcpExposes": "and exposes two tools:"
+  },
+  "subscribeNote": {
+    "body1": "Every steward's public page",
+    "body2": "and the Stanford Lifestyle Medicine house newsletter accept programmatic free signups. No key, no auth — call it on a reader's behalf:",
+    "okBody": "Returns",
+    "okTail": "whether the address is new or already subscribed.",
+    "noteIdempotent": "Idempotent",
+    "noteIdempotentBody": "— re-subscribing the same email is a no-op (no duplicate, no error).",
+    "noteAnon": "Anonymous & CORS-open",
+    "noteAnonBody": "— no API key required; callable from the browser.",
+    "noteRate": "Rate-limited by IP.",
+    "noteDiscovery": "The publication's slug, topic pillars, and this exact subscribe call are also embedded as a machine-readable JSON block",
+    "noteDiscoveryTail": "in the page's head, and the action is published in the OpenAPI spec at"
+  },
+  "footer": {
+    "tagline": "Routed through the Stanford Sleep Knowledge Map. Answers verified by Prof. Jamie Zeitzer.",
+    "cta": "Talk to us →"
+  }
+}

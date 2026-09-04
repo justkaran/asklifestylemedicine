@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Palonur · Angel Investor Overview</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Spectral:wght@300;400;500;600&display=swap');
+  :root{
+    --ink:#241c13; --paper:#FBF8F2; --sub:#6f6457; --rule:#e9e0d0; --rule-2:#dccfba;
+    --red:#8C1515; --red-2:#a8332c; --gold:#B0883C; --card:#ffffff;
+    --serif:'Spectral',Georgia,'Times New Roman',serif;
+    --display:'Fraunces',Georgia,serif;
+    --sans:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:#26221d;color:var(--ink);font-family:var(--serif)}
+  body{padding:80px 0 120px}
+
+  /* Toolbar */
+  .toolbar{
+    position:fixed;top:0;left:0;right:0;height:56px;background:#16120d;color:#fff;
+    display:flex;align-items:center;justify-content:space-between;padding:0 24px;
+    z-index:9999;font-family:var(--sans);font-size:13px;border-bottom:1px solid #2b251d;
+  }
+  .toolbar .left{display:flex;align-items:center;gap:14px}
+  .toolbar .brand{font-weight:600;letter-spacing:.04em}
+  .toolbar .hint{color:#9c9082}
+  .toolbar button{
+    background:transparent;border:1px solid #4a3f31;color:#fff;padding:8px 14px;border-radius:6px;
+    cursor:pointer;font:inherit;margin-left:8px
+  }
+  .toolbar button:hover{background:#221d16;border-color:#6a5b46}
+  .toolbar a.pdf-link{
+    display:inline-block;background:var(--red);border:1px solid var(--red);color:#fff;
+    text-decoration:none;border-radius:6px;padding:7px 12px;font:inherit;font-size:12.5px;cursor:pointer;
+  }
+  .toolbar a.pdf-link:hover{background:#741010;border-color:#741010}
+
+  /* Page */
+  .page{
+    width:8.5in;min-height:11in;background:var(--paper);margin:24px auto;
+    padding:42px 54px 30px;box-shadow:0 12px 44px rgba(0,0,0,.45);position:relative;
+    border-top:3px solid var(--red);
+  }
+
+  .page-header{
+    display:flex;justify-content:space-between;align-items:baseline;
+    font-family:var(--sans);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--sub);
+    border-bottom:1px solid var(--rule);padding-bottom:8px;margin-bottom:18px;
+  }
+  .page-header .wordmark{font-family:var(--display);font-size:15px;font-weight:600;letter-spacing:.34em;color:var(--red);text-transform:uppercase}
+
+  h1{font-family:var(--display);font-size:36px;line-height:1.06;font-weight:500;letter-spacing:-.01em;margin:0 0 4px;color:var(--ink)}
+  .hook-sub{font-family:var(--serif);font-size:14px;color:var(--sub);margin:0 0 18px;line-height:1.4}
+
+  .rule-label{
+    font-family:var(--sans);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:5px;font-weight:600
+  }
+  .rule-label.red{color:var(--red)}
+
+  p{font-size:12.5px;line-height:1.4;margin:0 0 5px;color:#352e25}
+
+  /* Market stat strip */
+  .mkt-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}
+  .mkt-strip > div{background:var(--card);border:1px solid var(--rule);border-top:3px solid var(--gold);border-radius:7px;padding:10px 13px}
+  .mkt-strip .mk{font-family:var(--sans);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--sub);margin-bottom:4px}
+  .mkt-strip .mv{font-family:var(--display);font-size:26px;font-weight:500;color:var(--ink);line-height:1}
+  .mkt-strip .ms{font-family:var(--sans);font-size:10.5px;color:var(--sub);margin-top:2px}
+
+  /* Product cards */
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:16px}
+  .product-card{background:var(--card);border:1px solid var(--rule);border-top:3px solid var(--red);border-radius:8px;padding:14px 16px}
+  .product-card.gold-top{border-top-color:var(--gold)}
+  .pc-name{font-family:var(--sans);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--red);margin-bottom:1px}
+  .product-card.gold-top .pc-name{color:var(--gold)}
+  .pc-expert{font-family:var(--serif);font-size:11.5px;color:var(--sub);font-style:italic;margin-bottom:10px}
+
+  .stat-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px}
+  .stat-row > div{text-align:center}
+  .stat-row .sk{font-family:var(--sans);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--sub);margin-bottom:2px}
+  .stat-row .sv{font-family:var(--display);font-size:22px;font-weight:500;color:var(--ink);line-height:1}
+  .stat-row .su{font-family:var(--sans);font-size:9px;color:var(--sub)}
+
+  .pc-bullets{margin:0;padding-left:0;list-style:none}
+  .pc-bullets li{font-size:11.5px;line-height:1.35;color:#352e25;margin-bottom:3px;padding-left:12px;position:relative}
+  .pc-bullets li::before{content:"";position:absolute;left:1px;top:.52em;width:4px;height:4px;background:var(--gold);border-radius:50%}
+  .product-card.gold-top .pc-bullets li::before{background:var(--gold)}
+
+  .price-band{display:flex;align-items:center;justify-content:space-between;margin-top:10px;padding-top:8px;border-top:1px solid var(--rule)}
+  .price-tag{font-family:var(--sans);font-size:14px;font-weight:700;color:var(--red)}
+  .product-card.gold-top .price-tag{color:var(--gold)}
+  .price-sub{font-family:var(--sans);font-size:10px;color:var(--sub)}
+
+  /* Break-even strip */
+  .bestrip{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+  .bestrip > div{background:#faf3e6;border:1px solid var(--rule-2);border-radius:6px;padding:6px 9px;text-align:center}
+  .bestrip .bk{font-family:var(--sans);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--sub);margin-bottom:1px}
+  .bestrip .bv{font-family:var(--sans);font-size:12px;font-weight:700;color:var(--ink)}
+
+  /* Cap table */
+  .cap-section{background:var(--card);border:1px solid var(--rule);border-top:3px solid var(--ink);border-radius:8px;padding:14px 16px;margin-bottom:16px}
+  .cap-bar{display:flex;height:14px;border-radius:4px;overflow:hidden;margin:8px 0 10px}
+  .cap-bar .cb-karan{background:var(--red);width:76%}
+  .cap-bar .cb-allison{background:var(--gold);width:4%}
+  .cap-bar .cb-pool{background:#d8ccbc;width:20%}
+  .cap-legend{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .cap-legend > div{display:flex;align-items:baseline;gap:5px}
+  .cap-legend .cl-dot{width:9px;height:9px;border-radius:2px;flex-shrink:0;margin-top:1px}
+  .cap-legend .cl-pct{font-family:var(--display);font-size:20px;font-weight:500;color:var(--ink);line-height:1}
+  .cap-legend .cl-name{font-family:var(--sans);font-size:9.5px;color:var(--sub);line-height:1.2}
+
+  /* SAFE terms */
+  .safe-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .safe-item{background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:8px 10px}
+  .safe-item .sk{font-family:var(--sans);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--sub);margin-bottom:3px}
+  .safe-item .sv{font-size:12.5px;color:var(--ink);font-weight:600;line-height:1.2}
+
+  .page-footer{
+    display:flex;justify-content:space-between;font-family:var(--sans);
+    font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--sub);
+    border-top:1px solid var(--rule);padding-top:8px;margin-top:14px;
+  }
+
+  [contenteditable=true]{outline:none;transition:background .15s}
+  [contenteditable=true]:hover{background:rgba(140,21,21,.05)}
+  [contenteditable=true]:focus{background:rgba(140,21,21,.09);box-shadow:inset 0 0 0 1px rgba(140,21,21,.22);border-radius:3px}
+
+  #save-indicator{color:#8fbf8f;font-size:12px;margin-left:14px;opacity:0;transition:opacity .3s}
+  #save-indicator.show{opacity:1}
+
+  @media print{
+    *{ -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; }
+    html, body{ background:#fff !important; margin:0 !important; padding:0 !important; }
+    .toolbar, #save-indicator{ display:none !important; }
+    .page{
+      width: 8.5in !important; height: 11in !important; min-height:0 !important; max-height:11in !important;
+      margin:0 !important; padding:0.42in 0.54in 0.3in !important; box-shadow:none !important; border-radius:0 !important;
+      overflow:hidden; position:relative; border-top:3px solid var(--red) !important;
+      page-break-after: always; break-after: page;
+    }
+    .page:last-child{ page-break-after:auto; break-after:auto; }
+    .mkt-strip,.cols,.bestrip,.cap-section,.safe-grid,.stat-row,.cap-legend{ page-break-inside: avoid; break-inside: avoid; }
+    [contenteditable=true]:hover, [contenteditable=true]:focus{ background:none !important; box-shadow:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="left">
+    <span class="brand">Palonur · Angel Overview</span>
+    <span class="hint">Enable editing to change any text · saved in this browser</span>
+  </div>
+  <div class="right">
+    <span id="save-indicator">Saved</span>
+    <button id="edit-mode-btn" onclick="toggleEditMode()">Enable editing</button>
+    <button onclick="resetAll()">Reset</button>
+    <button onclick="saveHTML()">Download HTML</button>
+    <a class="pdf-link" id="pdf-btn" href="/angels.html?print=1" target="_blank" rel="noopener">Download PDF</a>
+  </div>
+</div>
+
+<section class="page">
+  <div class="page-header">
+    <span class="wordmark" contenteditable="false">Palonur</span>
+    <span contenteditable="false">For business angels · Confidential</span>
+  </div>
+
+  <h1 contenteditable="false">A name behind every answer.</h1>
+  <p class="hook-sub" contenteditable="false">Hundreds of millions of people ask AI health questions every day. No mainstream product names the expert behind its answers. Palonur does. Every answer is drawn from research a named expert has approved. If science does not cover a question, the platform says so.</p>
+
+  <!-- Market numbers -->
+  <div class="mkt-strip">
+    <div>
+      <div class="mk">Daily AI health queries</div>
+      <div class="mv">100M+</div>
+      <div class="ms">No accountability. No name.</div>
+    </div>
+    <div>
+      <div class="mk">Member ceiling (model)</div>
+      <div class="mv">2M</div>
+      <div class="ms">Shared across channels</div>
+    </div>
+    <div>
+      <div class="mk">Expert keeps</div>
+      <div class="mv">80%</div>
+      <div class="ms">Palonur keeps 20%</div>
+    </div>
+  </div>
+
+  <!-- Two products -->
+  <div class="rule-label" contenteditable="false">Two flagship products, live today</div>
+  <div class="cols" style="margin-top:8px">
+
+    <div class="product-card gold-top">
+      <div class="pc-name" contenteditable="false">Ask Lifestyle Medicine</div>
+      <div class="pc-expert" contenteditable="false">Stanford Lifestyle Medicine Program</div>
+      <div class="stat-row">
+        <div>
+          <div class="sk">Monthly visitors</div>
+          <div class="sv">120k</div>
+          <div class="su">organic, today</div>
+        </div>
+        <div>
+          <div class="sk">Pillar stewards</div>
+          <div class="sv">6</div>
+          <div class="su">named Stanford faculty</div>
+        </div>
+        <div>
+          <div class="sk">Target</div>
+          <div class="sv">1M</div>
+          <div class="su">paying members</div>
+        </div>
+      </div>
+      <ul class="pc-bullets">
+        <li contenteditable="false">Sleep, nutrition, movement, stress, social connection, and more</li>
+        <li contenteditable="false">Each pillar: one named faculty expert approves every answer</li>
+        <li contenteditable="false">Break-even: month 46 (conservative) · 23 (middle) · 14 (super-growth)</li>
+      </ul>
+      <div class="price-band">
+        <span class="price-tag" contenteditable="false">USD 9 / month</span>
+        <span class="price-sub" contenteditable="false">Stanford SLM 80% · Palonur 20%</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Cap table -->
+  <div class="rule-label" contenteditable="false">Cap table</div>
+  <div class="cap-section" style="margin-top:8px">
+    <div class="cap-bar">
+      <div class="cb-karan"></div>
+      <div class="cb-allison"></div>
+      <div class="cb-pool"></div>
+    </div>
+    <div class="cap-legend">
+      <div>
+        <div class="cl-dot" style="background:var(--red)"></div>
+        <div>
+          <div class="cl-pct">76%</div>
+          <div class="cl-name">Karan Dehghani<br>Founder &amp; CEO</div>
+        </div>
+      </div>
+      <div>
+        <div class="cl-dot" style="background:var(--gold)"></div>
+        <div>
+          <div class="cl-pct">4%</div>
+          <div class="cl-name">Allison Kluger<br>Stanford GSB</div>
+        </div>
+      </div>
+      <div>
+        <div class="cl-dot" style="background:#d8ccbc"></div>
+        <div>
+          <div class="cl-pct">20%</div>
+          <div class="cl-name">Employee &amp; advisor<br>option pool</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SAFE -->
+  <div class="rule-label red" style="margin-top:14px" contenteditable="false">Investing now via a SAFE</div>
+  <div class="safe-grid" style="margin-top:8px">
+    <div class="safe-item">
+      <div class="sk">Instrument</div>
+      <div class="sv">SAFE note</div>
+    </div>
+    <div class="safe-item">
+      <div class="sk">Valuation</div>
+      <div class="sv">Set at first priced round</div>
+    </div>
+    <div class="safe-item">
+      <div class="sk">Ticket size</div>
+      <div class="sv">EUR 25,000 per tranche</div>
+    </div>
+    <div class="safe-item">
+      <div class="sk">Terms</div>
+      <div class="sv">Same for all angels</div>
+    </div>
+  </div>
+  <p style="margin-top:7px;font-size:11px;font-style:italic;color:var(--sub)" contenteditable="false">No valuation today. The SAFE converts at the first priced round, reflecting the recurring revenue built by then. Full model and terms on request.</p>
+
+  <div class="page-footer">
+    <span contenteditable="false">karan@palonur.com · Palo Alto, CA</span>
+    <span contenteditable="false">palonur.com · Confidential</span>
+  </div>
+</section>
+
+<script>
+(function(){
+  const KEY = 'angels-en-v4';
+  let editing = false;
+
+  function save(){
+    localStorage.setItem(KEY, document.body.innerHTML);
+    const ind = document.getElementById('save-indicator');
+    ind.classList.add('show');
+    setTimeout(()=>ind.classList.remove('show'), 1200);
+  }
+
+  window.toggleEditMode = function(){
+    editing = !editing;
+    document.querySelectorAll('[contenteditable]').forEach(el=>{
+      el.contentEditable = editing ? 'true' : 'false';
+    });
+    document.getElementById('edit-mode-btn').textContent = editing ? 'Disable editing' : 'Enable editing';
+    if(editing) document.addEventListener('input', save);
+    else document.removeEventListener('input', save);
+  };
+
+  window.resetAll = function(){
+    if(confirm('Reset to original? All local changes will be lost.')){
+      localStorage.removeItem(KEY);
+      location.reload();
+    }
+  };
+
+  window.saveHTML = function(){
+    const blob = new Blob([document.documentElement.outerHTML], {type:'text/html'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'angels-palonur.html';
+    a.click();
+  };
+
+  if(location.search.includes('print=1')){
+    document.querySelector('.toolbar').style.display='none';
+    setTimeout(()=>window.print(), 400);
+  }
+
+  const saved = localStorage.getItem(KEY);
+  if(saved) document.body.innerHTML = saved;
+})();
+</script>
+</body>
+</html>

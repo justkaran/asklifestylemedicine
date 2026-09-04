@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Palonur · Day 1 to $100M — investor one-pager</title>
+<meta name="robots" content="noindex,nofollow" />
+<style>
+  :root{
+    --paper:#FAF8F4; --ink:#0A0A0F; --red:#E8352A; --muted:#5b5b66;
+    --rule:rgba(10,10,15,.12); --card:#ffffff;
+    --serif:Georgia,'Times New Roman',serif;
+    --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;background:#e9e6df;color:var(--ink);font-family:var(--sans);}
+  .page{
+    width:8.5in; min-height:11in; margin:24px auto; padding:0.55in 0.6in;
+    background:var(--paper); position:relative; overflow:hidden;
+    box-shadow:0 8px 40px rgba(0,0,0,.18);
+  }
+  header{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--rule);padding-bottom:10px;margin-bottom:14px;}
+  .lockup{display:flex;align-items:center;gap:10px;}
+  .flower{width:22px;height:22px;}
+  .brand{font-family:var(--serif);font-weight:400;font-size:20px;letter-spacing:.01em;}
+  .partner{font-family:var(--serif);font-style:italic;color:var(--muted);font-size:11.5px;}
+  .partner b{color:var(--red);font-style:normal;font-weight:600;}
+  .doctag{font-family:var(--sans);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);}
+  h1{font-family:var(--serif);font-weight:500;font-size:28px;line-height:1.14;margin:6px 0 4px;letter-spacing:-.005em;}
+  h1 em{font-style:italic;color:var(--red);font-weight:500;}
+  .lede{font-family:var(--serif);font-size:12.5px;line-height:1.45;color:#222;margin:4px 0 12px;max-width:7.1in;}
+  h2{font-family:var(--sans);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin:14px 0 6px;font-weight:700;}
+
+  .day1{
+    background:#fff;border:1px solid var(--rule);border-radius:10px;padding:12px 14px;
+    display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;
+  }
+  .stat{font-family:var(--serif);font-size:42px;line-height:1;color:var(--red);font-weight:600;letter-spacing:-.01em;}
+  .statsub{font-family:var(--sans);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-top:4px;}
+  .day1 p{font-family:var(--serif);font-size:12.5px;line-height:1.45;margin:0;color:#222;}
+  .day1 p b{color:var(--ink);font-weight:600;}
+
+  .ladder{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:8px;}
+  .step{background:#fff;border:1px solid var(--rule);border-radius:10px;padding:10px 11px;display:flex;flex-direction:column;}
+  .stepyr{font-family:var(--sans);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);font-weight:700;}
+  .steph{font-family:var(--serif);font-size:13.5px;font-weight:600;margin:4px 0 6px;line-height:1.18;}
+  .stepb{font-family:var(--sans);font-size:11px;line-height:1.42;color:#222;}
+  .steparr{font-family:var(--serif);font-size:18px;color:var(--red);text-align:right;margin-top:auto;}
+
+  table.math{width:100%;border-collapse:collapse;margin-top:6px;font-size:11.2px;background:#fff;border:1px solid var(--rule);border-radius:10px;overflow:hidden;}
+  table.math th, table.math td{padding:7px 10px;text-align:right;border-bottom:1px solid var(--rule);}
+  table.math th:first-child, table.math td:first-child{text-align:left;font-family:var(--serif);font-weight:600;}
+  table.math thead th{background:#f3efe8;font-family:var(--sans);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700;}
+  table.math tfoot td{font-family:var(--serif);font-size:13px;color:var(--red);font-weight:600;border-top:2px solid var(--ink);border-bottom:none;}
+
+  .pull{font-family:var(--serif);font-size:13px;line-height:1.45;border-left:3px solid var(--red);padding:6px 12px;margin:10px 0 0;color:#1a1a22;background:#fff;}
+
+  .assume{display:grid;grid-template-columns:1fr 1fr;gap:6px 18px;font-size:10.5px;color:var(--muted);margin-top:8px;}
+  .assume b{color:var(--ink);font-family:var(--serif);font-size:11px;font-weight:600;}
+
+  footer{position:absolute;left:.6in;right:.6in;bottom:.4in;display:flex;justify-content:space-between;border-top:1px solid var(--rule);padding-top:8px;font-size:10px;color:var(--muted);}
+  footer b{color:var(--ink);font-weight:600;}
+  @media print{
+    html,body{background:#fff;}
+    .page{box-shadow:none;margin:0;width:auto;min-height:auto;padding:.45in .55in;}
+    @page{size:Letter;margin:0;}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <div class="lockup">
+      <svg class="flower" viewBox="0 0 48 48" fill="none" stroke="#0A0A0F" stroke-width="1.6">
+        <circle cx="24" cy="24" r="9"/><circle cx="24" cy="15" r="9"/>
+        <circle cx="31.8" cy="19.5" r="9"/><circle cx="31.8" cy="28.5" r="9"/>
+        <circle cx="24" cy="33" r="9"/><circle cx="16.2" cy="28.5" r="9"/>
+        <circle cx="16.2" cy="19.5" r="9"/>
+      </svg>
+      <div>
+        <div class="brand">Palonur</div>
+        <div class="partner"><i>in partnership with</i> <b>Stanford</b> Lifestyle Medicine</div>
+      </div>
+    </div>
+    <div class="doctag">Investor · 3 of 3 · Day 1 → $100M</div>
+  </header>
+
+  <h1>Stanford on day one. <em>$100M ARR</em> on the path it unlocks.</h1>
+  <p class="lede">
+    Palonur launches embedded in <b>lifestylemedicine.stanford.edu</b> — Stanford's
+    own consumer-facing program — on day one. That is not a marketing channel. That
+    is a Stanford-owned distribution surface that compounds with every signed answer.
+  </p>
+
+  <h2>Day 1 distribution — the unfair launch</h2>
+  <div class="day1">
+    <div>
+      <div class="stat">~120k</div>
+      <div class="statsub">monthly visitors · est. SLM site</div>
+    </div>
+    <p>
+      Stanford Lifestyle Medicine's public site already attracts a six-figure monthly
+      audience of people actively searching for sleep, nutrition, exercise, and
+      stress answers. We are the <b>only AI surface on it.</b> That is a category
+      we own from the first user — no paid acquisition, no influencer arbitrage,
+      no SEO compounding period required.
+    </p>
+  </div>
+
+  <h2>The four-year ladder</h2>
+  <div class="ladder">
+    <div class="step">
+      <div class="stepyr">Year 1 · 2026</div>
+      <div class="steph">Sleep, signed by Zeitzer.</div>
+      <div class="stepb">Live on the SLM site. Free consumer surface + <b>Palonur Nightly</b> ($9/mo) for tracking and the 7-night Cure Insomnia course.</div>
+      <div class="steparr">→</div>
+    </div>
+    <div class="step">
+      <div class="stepyr">Year 2 · 2027</div>
+      <div class="steph">Seven pillars, seven faculty.</div>
+      <div class="stepb">Exercise (Fredericson), nutrition, stress, social, substances, environment. Each adds its own consumer surface and corpus.</div>
+      <div class="steparr">→</div>
+    </div>
+    <div class="step">
+      <div class="stepyr">Year 3 · 2028</div>
+      <div class="steph">Trust-OS licensing.</div>
+      <div class="stepb">B2B API live. Wearables, telehealth, insurer bots, AI assistants license <code>/api/agent/spec</code> at $250k–$2M ACV.</div>
+      <div class="steparr">→</div>
+    </div>
+    <div class="step">
+      <div class="stepyr">Year 4 · 2029</div>
+      <div class="steph">Beyond Stanford.</div>
+      <div class="stepb">Global tier-1 faculty stack on each pillar. Palonur becomes the operating system every consumer-facing AI calls into for longevity.</div>
+      <div class="steparr">→</div>
+    </div>
+  </div>
+
+  <h2>The math to $100M ARR</h2>
+  <table class="math">
+    <thead>
+      <tr><th>Line</th><th>Users / contracts</th><th>ARPU / ACV</th><th>ARR</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Palonur Nightly (consumer subs)</td><td>250,000</td><td>$108 / yr</td><td>$27.0M</td></tr>
+      <tr><td>Cure Insomnia 7-night course</td><td>80,000 / yr</td><td>$49</td><td>$3.9M</td></tr>
+      <tr><td>Trust-OS API · wearables &amp; AI</td><td>20 partners</td><td>$1.2M ACV</td><td>$24.0M</td></tr>
+      <tr><td>Trust-OS API · telehealth &amp; insurers</td><td>30 partners</td><td>$900k ACV</td><td>$27.0M</td></tr>
+      <tr><td>Stanford-co-branded enterprise wellness</td><td>40 employers</td><td>$450k ACV</td><td>$18.0M</td></tr>
+    </tbody>
+    <tfoot>
+      <tr><td>Total ARR @ year 4</td><td></td><td></td><td>$99.9M</td></tr>
+    </tfoot>
+  </table>
+
+  <div class="assume">
+    <div><b>Why this is conservative.</b> 250k consumer subs = ~0.005% of the global insomnia population (300M+). The B2B side is 50 contracts — a single insurer category alone has more.</div>
+    <div><b>What we control.</b> The faculty network, the corpus, the receipts. Every line above is upstream of one moat: a name on an answer. That is what compounds.</div>
+  </div>
+
+  <p class="pull">
+    The path to $100M ARR is not a marketing exercise. It is the natural shape of a
+    business where every consumer AI in lifestyle medicine eventually has to call
+    something to be allowed to answer. <em>We are building that something.</em>
+  </p>
+
+  <footer>
+    <span>Palonur · Confidential · Illustrative — not a forecast or financial promise</span>
+    <span><b>palonur.com</b> · partners@palonur.com</span>
+  </footer>
+</div>
+</body>
+</html>

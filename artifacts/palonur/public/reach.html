@@ -1,0 +1,1175 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Palonur · Reach Capital · Editable</title>
+<style>
+  :root{
+    --ink:#0b0b10; --paper:#faf8f4; --sub:#5a5a66; --rule:#e6e2d8;
+    --red:#e8352a; --gold:#b88a2d; --card:#ffffff;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:#2a2a30;color:var(--ink);font-family:Georgia,'Times New Roman',serif}
+  body{padding:80px 0 120px}
+
+  /* Toolbar */
+  .toolbar{
+    position:fixed;top:0;left:0;right:0;height:56px;background:#0b0b10;color:#fff;
+    display:flex;align-items:center;justify-content:space-between;padding:0 24px;
+    z-index:9999;font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;font-size:13px;
+    border-bottom:1px solid #222;
+  }
+  .toolbar .left{display:flex;align-items:center;gap:14px}
+  .toolbar .brand{font-weight:600;letter-spacing:.04em}
+  .toolbar .hint{color:#9a9aa6}
+  .toolbar button{
+    background:transparent;border:1px solid #444;color:#fff;padding:8px 14px;border-radius:6px;
+    cursor:pointer;font:inherit;margin-left:8px
+  }
+  .toolbar button:hover{background:#1c1c22;border-color:#666}
+  .toolbar button.primary{background:#e8352a;border-color:#e8352a}
+  .toolbar button.primary:hover{background:#c92a20}
+  .toolbar a.pdf-link{
+    display:inline-block;background:#e8352a;border:1px solid #e8352a;color:#fff;
+    text-decoration:none;border-radius:6px;padding:7px 12px;font:inherit;font-size:12.5px;
+    cursor:pointer;
+  }
+  .toolbar a.pdf-link:hover{background:#c92a20;border-color:#c92a20}
+
+  /* Page (each "slide") */
+  .page{
+    width:8.5in;min-height:11in;background:var(--paper);margin:24px auto;
+    padding:64px 72px;box-shadow:0 4px 24px rgba(0,0,0,.4);position:relative;
+  }
+  .page.dark{background:#0b0b10;color:#fff}
+  .page.dark .sub,.page.dark .rule-label{color:#bdb9af}
+
+  .page-header{
+    display:flex;justify-content:space-between;align-items:baseline;
+    font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;font-size:10.5px;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--sub);
+    border-bottom:1px solid var(--rule);padding-bottom:10px;margin-bottom:36px;
+  }
+  .page.dark .page-header{border-bottom-color:#2a2a30;color:#9a9aa6}
+
+  h1{font-size:42px;line-height:1.1;font-weight:500;margin:0 0 18px}
+  h2{font-size:28px;line-height:1.15;font-weight:500;margin:0 0 14px}
+  h3{font-size:18px;font-weight:600;margin:0 0 10px;font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;letter-spacing:.04em;text-transform:uppercase}
+  p{font-size:14.5px;line-height:1.55;margin:0 0 12px;color:#2a2a32}
+  .page.dark p{color:#d4d2cc}
+  .lead{font-size:17px;line-height:1.5;color:#3a3a44}
+  .page.dark .lead{color:#e2e0d8}
+
+  .rule-label{
+    font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;font-size:10.5px;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--sub);margin-bottom:8px
+  }
+  .red{color:var(--red)}
+  .italic{font-style:italic}
+  .gold{color:var(--gold)}
+
+  /* Cards */
+  .card{
+    position:relative;background:var(--card);border:1px solid var(--rule);
+    border-radius:10px;padding:22px 24px;margin:0 0 16px;
+  }
+  .page.dark .card{background:#15151c;border-color:#2a2a30}
+  .card .num{
+    font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;font-size:11px;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--red);font-weight:600;margin-bottom:6px
+  }
+  .card .label{
+    font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;font-size:10.5px;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--sub);margin-bottom:8px
+  }
+  .card h4{font-size:16px;margin:0 0 8px;font-weight:600}
+  .card p{font-size:13.5px;margin:0 0 8px}
+
+  .delete-btn{
+    position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:50%;
+    background:#0b0b10;color:#fff;border:none;cursor:pointer;font-size:14px;line-height:1;
+    display:none;align-items:center;justify-content:center;font-family:Helvetica,Arial,sans-serif;
+  }
+  [data-card]{position:relative}
+  [data-card]:hover > .delete-btn{display:flex}
+  .delete-btn:hover{background:var(--red)}
+  #save-indicator{color:#7fbf7f;font-size:12px;margin-left:14px;opacity:0;transition:opacity .3s}
+  #save-indicator.show{opacity:1}
+
+  /* Grids */
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+  .grid-4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px}
+
+  /* Stat */
+  .stat{font-size:34px;font-weight:600;margin:8px 0 2px;color:var(--ink)}
+  .page.dark .stat{color:#fff}
+  .stat-label{font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--sub)}
+  .kv{display:flex;justify-content:space-between;font-size:13px;padding:4px 0;border-bottom:1px dotted var(--rule)}
+  .kv:last-child{border-bottom:none}
+  .kv .k{color:var(--sub);font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+  .kv .v{font-weight:600}
+
+  /* Table */
+  table{width:100%;border-collapse:collapse;font-size:13.5px;margin:8px 0}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--rule);vertical-align:top}
+  th{font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--sub);border-bottom:1.5px solid var(--ink)}
+  tr.row{position:relative}
+  tr.row .delete-btn{top:6px;right:6px}
+
+  /* Footer */
+  .page-footer{
+    position:absolute;bottom:24px;left:72px;right:72px;
+    display:flex;justify-content:space-between;font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;
+    font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--sub)
+  }
+
+  /* Editable hover */
+  [contenteditable=true]{outline:none;transition:background .15s}
+  [contenteditable=true]:hover{background:rgba(232,53,42,.04)}
+  [contenteditable=true]:focus{background:rgba(232,53,42,.08);box-shadow:inset 0 0 0 1px rgba(232,53,42,.25);border-radius:3px}
+  .page.dark [contenteditable=true]:hover{background:rgba(255,255,255,.04)}
+  .page.dark [contenteditable=true]:focus{background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)}
+
+  .ask-band{background:#fff;border:1px solid var(--rule);border-left:4px solid var(--red);padding:18px 22px;border-radius:8px;margin:18px 0}
+  .ask-band .rule-label{margin-bottom:4px}
+
+  /* Page numbers (auto-injected by JS) */
+  .page-num{
+    position:absolute;bottom:24px;left:0;right:0;text-align:center;
+    font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;
+    font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--sub);
+    pointer-events:none;user-select:none;
+  }
+  .page.dark .page-num{color:#9a9aa6}
+
+  /* Print — produce a clean, agency-grade PDF */
+  @page{
+    size: 8.5in 11in;
+    margin: 0;
+  }
+  @media print{
+    /* Keep ink colors and dark backgrounds */
+    *{
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      color-adjust: exact !important;
+    }
+    html, body{
+      background:#fff !important;
+      margin:0 !important;
+      padding:0 !important;
+    }
+    /* Hide all chrome */
+    .toolbar,
+    #save-indicator,
+    .delete-btn{
+      display:none !important;
+    }
+    /* Each .page becomes one printed page, exactly */
+    .page{
+      width: 8.5in !important;
+      height: 11in !important;
+      min-height: 0 !important;
+      max-height: 11in !important;
+      margin: 0 !important;
+      padding: 0.55in 0.65in 0.75in 0.65in !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
+      page-break-after: always;
+      break-after: page;
+      page-break-inside: avoid;
+      break-inside: avoid;
+      overflow: hidden;
+      position: relative;
+    }
+    .page:last-child{
+      page-break-after: auto;
+      break-after: auto;
+    }
+    .page.dark{
+      background:#0b0b10 !important;
+      color:#fff !important;
+    }
+    /* Avoid splitting atomic blocks across pages */
+    .card,
+    .ask-band,
+    tr.row,
+    .kv,
+    .grid-2,
+    .grid-3,
+    .grid-4{
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    /* No edit affordances in print */
+    [contenteditable=true]:hover,
+    [contenteditable=true]:focus{
+      background:none !important;
+      box-shadow:none !important;
+      outline:none !important;
+    }
+    /* Slightly tighten typography so chapters fit one printed page */
+    h1{font-size: 36px !important; line-height: 1.08 !important}
+    h2{font-size: 24px !important; line-height: 1.15 !important}
+    .lead{font-size: 15px !important; line-height: 1.45 !important}
+    p{font-size: 13px !important; line-height: 1.5 !important}
+    .card{padding: 14px 16px !important; margin-bottom: 10px !important}
+    .card h4{font-size: 14px !important}
+    .card p{font-size: 12px !important}
+    .stat{font-size: 28px !important}
+    table{font-size: 12px !important}
+    th, td{padding: 7px 9px !important}
+    .page-header{margin-bottom: 22px !important; padding-bottom: 8px !important}
+    /* Cards in print get a thin border instead of shadow */
+    .card{box-shadow:none !important}
+    /* Suppress any sticky/fixed elements that could occlude content */
+    *{position: static !important}
+    .page, .delete-btn, .page-footer{position: relative !important}
+    .page-footer{position: absolute !important; bottom: 0.3in; left: 0.65in; right: 0.65in}
+    .page-num{position: absolute !important; bottom: 0.3in !important; left: 0 !important; right: 0 !important; text-align: center !important; color:#6a6a72 !important}
+    .page.dark .page-num{color:#bdb9af !important}
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="left">
+    <span class="brand">Palonur · Editable Deck</span>
+    <span class="hint">Click any text to edit · hover a card to delete it</span>
+  </div>
+  <div class="right">
+    <span id="save-indicator">Saved</span>
+    <button id="edit-mode-btn" onclick="toggleEditMode()">Enable editing</button>
+    <button onclick="recoverFromLocalStorage()" title="Push your browser's old auto-saved version into the cloud deck">Recover browser backup</button>
+    <button onclick="resetAll()">Reset</button>
+    <button onclick="saveHTML()">Download HTML</button>
+    <a class="pdf-link" id="pdf-btn" href="/reach.html?print=1" target="_blank" rel="noopener">Download PDF</a>
+  </div>
+</div>
+<section class="page dark" data-card>
+  <button class="delete-btn" onclick="deletePage(this)">×</button>
+  <div class="page-header">
+    <span contenteditable="true">Palonur · in partnership with Stanford Lifestyle Medicine</span>
+    <span contenteditable="true">Confidential</span>
+  </div>
+  <div style="margin-top:120px">
+    <div class="rule-label" contenteditable="true">For Reach Capital</div>
+    <h1 contenteditable="true">AI is the interface for health decisions. There is no trusted layer behind it.</h1>
+    <p class="lead" contenteditable="true">We're building it in partnership with Stanford Lifestyle Medicine Program. This document shows the tech and why it's defensible, who are the users, how it scales, and how it makes money.</p>
+  </div>
+  <div style="margin-top:80px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;font-size:13px">
+    <div><div class="stat-label" contenteditable="true">Stage</div><div contenteditable="true" style="margin-top:6px">Live in beta</div></div>
+    <div><div class="stat-label" contenteditable="true">Location</div><div contenteditable="true" style="margin-top:6px">Palo Alto, CA</div></div>
+    <div><div class="stat-label" contenteditable="true">Contact</div><div contenteditable="true" style="margin-top:6px">karan@palonur.com</div></div>
+  </div>
+  <div class="page-footer">
+    <span contenteditable="true">Backed by Stanford Lifestyle Medicine &amp; Stanford GSB faculty</span>
+    <span contenteditable="true">palonur.com</span>
+  </div>
+</section>
+
+<section class="page" data-card>
+  <button class="delete-btn" onclick="deletePage(this)">×</button>
+  <div class="page-header"><span contenteditable="true">The shift that is happening now</span><span contenteditable="true">The gap</span></div>
+  <h2 contenteditable="true">The gap we are closing</h2>
+  <p class="lead" contenteditable="true">150 million lifestyle health questions are asked via AI every day sleep, nutrition, stress, meaningfulness, gratitude. This user behavior is forming now, and not one of those answers is in partnership with a trusted institution. The default health advisor for a generation is currently being formed in real time.</p>
+
+  <div style="margin-top:24px">
+    <div class="card" data-card contenteditable="true">
+      <button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="label" contenteditable="true">The user</div>
+      <p contenteditable="true">Gets medically and scientifically unvetted advice, delivered with full AI confidence. Take this user's case: Emma, 55 years old, can't tell wellness theater from trustworthy advice. She can't sleep waking up at 3 a.m., night after night. She asks a chatbot. Gets a confident, well-sourced answer. And has absolutely no idea whether to believe it.&nbsp;</p>
+    </div>
+    <div class="card" data-card contenteditable="true">
+      <button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="label" contenteditable="true">The institution</div>
+      <p contenteditable="true"></p><p class="font-claude-response-body break-words whitespace-normal leading-[1.7]" contenteditable="true">Stanford's research isn't credited in Emma's answer. By design. Neither is the guidance behind the 150 million similar questions people ask AI chatbots every day. The world's best health science sits behind the interface, never inside it. No one designed for Emma.</p><p class="font-claude-response-body break-words whitespace-normal leading-[1.7]" contenteditable="true">The citations exist. But the research is a moving target: a faculty member can revise her position on a paper she published in 2008. Palonur knows immediately. LLMs don't, their knowledge is always partial, frozen at the moment they were trained. If they want to fetch from updated data, they will need to refer to us. The trust architecture LLMs can't deliver, Palonur can.</p><p class="font-claude-response-body break-words whitespace-normal leading-[1.7]" contenteditable="true"></p><p class="font-claude-response-body break-words whitespace-normal leading-[1.7]" contenteditable="true">Without it, AI in health is irrelevance disguised as progress.</p><p contenteditable="true"></p>
+    </div>
+    <div class="card" data-card contenteditable="true">
+      <button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="label" contenteditable="true">The AI company</div>
+      <p contenteditable="true">ChatGPT, Gemini, Perplexity and Grok try to manufacture institutional credibility by training across many institutions at once, which strips authorship and muddies the source. Palonur is not another LLM in that race. We are the credible source those systems route to. The fountain, not the river: each institution's content stays clean, attributed, intact. They can solve this only with us.</p>
+    </div>
+  </div>
+
+  <p style="margin-top:16px;font-style:italic;color:var(--sub)" contenteditable="true">Same gap, three angles. The user, the university, and the AI company are all stuck on one missing piece, a credible, attributable answer. We are that piece.</p>
+  <p contenteditable="true">We start where AI already owns the relationship: lifestyle medicine, beginning with Sleep, led by Prof. Jamie Zeitzer at Stanford. One pillar at a time, faculty in control. Live distribution from day one, Stanford Lifestyle Medicine's site already draws ~120k monthly visitors asking exactly these questions, with zero paid acquisition.</p>
+</section>
+
+<section class="page dark" data-card>
+  <button class="delete-btn" onclick="deletePage(this)">×</button>
+  <div class="page-header"><span contenteditable="true">Section 1 of 3</span><span contenteditable="true">The Technology</span></div>
+  <div style="margin-top:80px">
+    <div class="stat" data-card style="font-size:80px;color:var(--red);font-weight:300" contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>01</div>
+    <div class="rule-label" data-card style="margin-top:18px" contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>The Technology</div>
+    <h1 data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>How it works, and why it is defensible.</h1>
+    <p class="lead" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>A question routes through a Stanford-curated corpus, is answered in a structured format and ships with a queryable receipt. The corpus, and the signed-answer ledger are the assets a competitor cannot scrape into existence and all is built, tested, and in production today.</p>
+    
+  </div>
+</section>
+
+<section class="page" data-card>
+  <button class="delete-btn" onclick="deletePage(this)">×</button>
+  <div class="page-header"><span contenteditable="true">The verification pipeline</span><span contenteditable="true">In production</span></div>
+  <h2 contenteditable="true">A question becomes a signed Stanford answer.</h2>
+  <p class="lead" contenteditable="true">Seven stages plus a closed loop: science as the source of truth. Every stage runs on every consumer query in production today. There is no prompt-only fallback: every shipped answer has a human name attached, or it is refused, on the record.</p>
+
+  <div class="grid-2" style="margin-top:18px">
+    <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="num" contenteditable="true">1 · Question</div>
+      <p contenteditable="true">Consumer app or partner API call. SSE streaming; partner calls pass through a tiered, metered API key.</p></div>
+    <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="num" contenteditable="true">2 · Retrieve</div>
+      <p contenteditable="true">Pillar-keyed vector search over the Stanford-curated corpus. Faculty-approved interpretations weighted 1.25× over raw paper chunks.</p></div>
+    <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="num" contenteditable="true">3 · Structure</div>
+      <p contenteditable="true">Model emits five labeled sections + two refusal modes. Structure enforced server-side, not requested in prose.</p></div>
+    <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="num" contenteditable="true">4 · Faculty queue if Necessary</div>
+      <p contenteditable="true">Pillar steward reviews delicate questions, edits, approves. Only the named pillar steward's team can approve, enforced by middleware.</p></div>
+    <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="num" contenteditable="true">5 · Sign</div>
+      <p contenteditable="true">Approval writes signer + timestamp + version + content hash. The signer is queryable from any answer ever shipped.</p></div>
+    <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="num" contenteditable="true">6 · Serve &amp; Protect</div>
+      <p contenteditable="true">Cached, attributed answer returned. Rate-limit + concurrency caps, ToS headers attached. Source never leaves our servers.</p></div>
+    <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="num" contenteditable="true">7 · Receipt</div>
+      <p contenteditable="true">A SQL-queryable graph: question → corpus chunk → paper → faculty signer → timestamp. The receipt is the product; the chat is the demo.</p></div>
+    <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="num" contenteditable="true">∞ · Closed loop</div>
+      <p contenteditable="true">Every uncovered query is logged, clustered, and surfaced to the right pillar's inbox, end-to-end tested.</p></div>
+  </div>
+
+  <div class="ask-band" style="margin-top:18px">
+    <div class="rule-label" contenteditable="true">Refuse path</div>
+    <p style="margin:0" contenteditable="true">If the answer isn't in the faculty corpus, we return REFUSE / UNCOVERED. No silent confabulation. Refusal compliance is a first-class numeric metric, measured on every release via a blinded faculty-graded eval harness with adversarial prompt-injection seeds in the test set.</p>
+  </div>
+</section>
+
+<section class="page" data-card>
+  <button class="delete-btn" onclick="deletePage(this)">×</button>
+  <div class="page-header"><span contenteditable="true">Same question · very different answer</span><span contenteditable="true">The proof</span></div>
+  <h2 contenteditable="true">What the trust layer actually changes.</h2>
+  <p class="lead" contenteditable="true">Q: How much sleep does a collegiate athlete need for peak recovery?</p>
+
+  <div class="grid-2" style="margin-top:18px">
+    <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="label" contenteditable="true">Generic AI</div>
+      <p contenteditable="true">"Most adults need 7–9 hours; athletes are generally the same. Some sources suggest 9–10 hours, though individual needs vary. You can also try napping to help recovery."</p>
+      <div class="stat-label" style="margin-top:10px" contenteditable="true">Sources: Reddit threads · fitness blogs · general guidelines</div>
+    </div>
+    <div class="card" data-card style="border-left:4px solid var(--red)" contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="label red" contenteditable="true">With Palonur</div>
+      <p contenteditable="true">Asks for context — sport, training phase, current sleep — then returns a specific windowed protocol with physiological rationale, signed by the faculty lead. Citation auto-verified against the retrieved Stanford paper before it ships.</p>
+      <div class="stat-label" style="margin-top:10px" contenteditable="true">Source: Scientific team under Prof. Jamie Zeitzer, Stanford Medicine</div>
+      <div style="margin-top:10px;font-family:ui-monospace,Menlo,monospace;font-size:12px;color:var(--sub)" contenteditable="true">Receipt #ZEI-2026-04-12-0042</div>
+    </div>
+  </div>
+  <p style="margin-top:18px;font-style:italic;color:var(--sub)" contenteditable="true">The difference isn't fluency, generic AI is already fluent. The difference is that one answer carries a Stanford name, a real paper underneath, an automatic check that the citation maps to that paper, and a refusal where the science runs out.&nbsp;</p>
+</section>
+
+<section class="page" data-card>
+  <button class="delete-btn" onclick="deletePage(this)">×</button>
+  <div class="page-header"><span contenteditable="true">Three things a competitor cannot reproduce</span><span contenteditable="true">Defensibility</span></div>
+  <h2 contenteditable="true">A new entrant can copy stationary RAG. They cannot copy this.</h2>
+  <p class="lead" contenteditable="true">The structural barrier. LLMs are built to be the source of truth, they cannot defer to an external authority and remain themselves. Universities will not hand their breathing research to a model that strips authorship. The control point sits exactly where OpenAI and co structurally cannot go.</p>
+
+  <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>
+    <div class="num" contenteditable="true">1 · The receipt graph exists in production today</div>
+    <p contenteditable="true">Every served answer joins back to the approving faculty member and the underlying paper, in SQL, with timestamps. "Zeitzer approved this on 2026-04-12" is queryable from any answer ID, not a marketing claim, an audit log. Cryptographic per-answer signing ships when the first partner contract requires it.</p>
+    <p style="color:var(--sub);font-style:italic" contenteditable="true"><br></p>
+  </div>
+  <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>
+    <div class="num" contenteditable="true">2 · The refusal path is a measured first-class metric</div>
+    <p contenteditable="true">REFUSE and UNCOVERED are enforced output tokens. A blinded faculty-graded eval harness produces a numeric refusal-compliance rate on every release, against a seed set that includes deliberate adversarial prompt injections.</p>
+    <p style="color:var(--sub);font-style:italic" contenteditable="true">Its Stanford's answer, or no answer.</p>
+  </div>
+  <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>
+    <div class="num" contenteditable="true">3 · The faculty queue + governed retriever change outputs mechanically</div>
+    <p contenteditable="true">Faculty-approved interpretations are weighted 1.25× in retrieval, so steward work materially shifts what the model says. Every uncovered query is logged, clustered, and surfaced to the right pillar's inbox, end-to-end tested.</p>
+    <p style="color:var(--sub);font-style:italic" contenteditable="true">We have a user insight: Faculty want to curate their papers. A large part that drives the moat is in the curation, encoded. A competitor must build the bench, the queue, the lifecycle, the clustering, and the eval discipline with the relationships first.&nbsp;</p>
+  </div>
+  <p style="margin-top:18px;font-style:italic" contenteditable="true">The loop: more faculty → more credible answers → more query demand → more visibility → more faculty. Mass attracts mass. It compounds, and it is already compounding.</p>
+</section>
+
+<section class="page dark" data-card>
+  <button class="delete-btn" onclick="deletePage(this)">×</button>
+  <div class="page-header"><span contenteditable="true">Section 2 of 3</span><span contenteditable="true">Onboarding</span></div>
+  <div style="margin-top:80px">
+    <div class="stat" data-card style="font-size:80px;color:var(--red);font-weight:300" contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>02</div>
+    <div class="rule-label" data-card style="margin-top:18px" contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>Onboarding</div>
+    <h1 data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>Three sides, one loop.</h1>
+    <p class="lead" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>Faculty supply credibility. AI providers supply distribution. Users supply demand. Each side has a distinct, low-friction way in and each turn of the loop lowers our cost to add the next faculty member.</p>
+    
+  </div>
+</section>
+
+<section class="page" data-card>
+  <button class="delete-btn" onclick="deletePage(this)">×</button>
+  <div class="page-header"><span contenteditable="true">Three doors, one engine</span><span contenteditable="true">Sign-up</span></div>
+  <h2 contenteditable="true">How and why each side comes on.</h2>
+
+  <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>
+    <div class="label" contenteditable="true">Faculty</div>
+    <p contenteditable="true"></p><p class="font-claude-response-body break-words whitespace-normal leading-[1.7]" contenteditable="true">Our first step is onboarding all seven pillars of the Stanford Lifestyle Medicine Program (SLM) as Palonurs. The system will generate a base RAG from existing content, and each pillar steward's team will be able to review answers through an AI-supported queue. The warm introduction comes naturally through the existing SLM structure at almost no CAC.</p>
+<p class="font-claude-response-body break-words whitespace-normal leading-[1.7]" contenteditable="true">Because answers are cached, faculty time scales with the log of usage not linearly. The more Palonur is used, the less it costs them per answer. In return, they receive authorship credit and lab visibility at scale, across every AI platform their content appears on.</p>
+<p class="font-claude-response-body break-words whitespace-normal leading-[1.7]" contenteditable="true">Low time commitment and broad visibility are the core reasons faculty will want to participate. We will also reimburse each contributor: every time a faculty member's interpretation or content is served in response to a query, they are compensated for that call. The exact pricing model is still to be determined.</p><p contenteditable="true"></p>
+  </div>
+  <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>
+    <div class="label" contenteditable="true">End users</div>
+    <p contenteditable="true"></p><p class="font-claude-response-body break-words whitespace-normal leading-[1.7]" contenteditable="true">The low-hanging fruit is already there: the Stanford Lifestyle Medicine site draws roughly 120,000 active users a month with 390.000 "events". Day one, zero paid acquisition.</p>
+<p class="font-claude-response-body break-words whitespace-normal leading-[1.7]" contenteditable="true">We are offering a consumer surface that acts as a personal OS for longevity, starting with sleep, then expanding across the other SLM pillars: nutrition, stress, gratitude, cognitive enhancement, social engagement, and physical fitness. It combines tracking and structured courses into a coherent companion that understands how these pillars interact, how sleep shapes nutrition, how nutrition shapes sleep, rather than treating each one in isolation.</p><p contenteditable="true"></p>
+  </div>
+  <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>
+    <div class="label" contenteditable="true">AI providers</div>
+    <p contenteditable="true">Self-serve. One documented endpoint and a machine-readable spec, keyed, metered, ToS prohibits training, receipts prove which partner served which answer when. Developer integration converts to an enterprise contract as volume grows.</p>
+  </div>
+  <p style="margin-top:16px;font-style:italic;color:var(--sub)" contenteditable="true">Faculty supply credibility, AI providers supply distribution, users supply demand and each turn of the loop lowers our cost to add the next faculty member.</p>
+</section>
+
+<section class="page dark" data-card>
+  <button class="delete-btn" onclick="deletePage(this)">×</button>
+  <div class="page-header"><span contenteditable="true">Section 3 of 3</span><span contenteditable="true">The Money</span></div>
+  <div style="margin-top:80px">
+    <div class="stat" data-card style="font-size:80px;color:var(--red);font-weight:300" contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>03</div>
+    <div class="rule-label" data-card style="margin-top:18px" contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>The Money</div>
+    <h1 data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>We monetize the trust layer.</h1>
+    <p class="lead" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>Three revenue lines, all metered to query volume. The structural point: revenue scales with usage while faculty cost scales with the log of it, so gross margin expands as we grow.</p>
+    
+  </div>
+</section>
+
+<section class="page" data-card>
+  <button class="delete-btn" onclick="deletePage(this)">×</button>
+  <div class="page-header"><span contenteditable="true">Revenue scales with volume · cost scales with its log</span><span contenteditable="true">Business model</span></div>
+  <h2 contenteditable="true">Four ways we monetize trust.</h2>
+  <button class="delete-btn" onclick="deleteRow(this)">×</button><button class="delete-btn" onclick="deleteRow(this)">×</button><button class="delete-btn" onclick="deleteRow(this)">×</button><table>
+    <thead><tr><th contenteditable="true">Line</th><th contenteditable="true">Who pays &amp; why</th><th contenteditable="true">Structure</th></tr></thead>
+    <tbody>
+      <tr class="row" data-card><td contenteditable="true"><strong>API</strong></td><td contenteditable="true">AI platforms, for a credible, attributable answer they cannot generate and cannot afford vagueness.</td><td contenteditable="true">Per-query or annual license</td></tr>
+      <tr class="row" data-card><td contenteditable="true"><strong>Enterprise</strong></td><td contenteditable="true"><strong>Health systems &amp; insurers</strong> need answers they can defend. Palonur delivers exactly that: high-quality, sourced responses with a graph receipt.&nbsp;</td><td contenteditable="true">Annual contract value</td></tr>
+      <tr class="row" data-card><td contenteditable="true"><strong>Platform</strong></td><td contenteditable="true">Universities &amp; premium users, licensing on the spec, plus a consumer subscription on the owned surface. Millions of people get access to a clinician who per day might see only 12 patients.</td><td contenteditable="true">License + subscription</td></tr>
+      <tr class="row" data-card><td contenteditable="true"><strong>Sports &amp; athletes</strong></td><td contenteditable="true">Pro teams, university athletics programs, and individual elite athletes pay for <strong>Michael-as-AI</strong> deployed inside their medical and performance room — with Michael Fredericson (Director, Stanford Lifestyle Medicine; CMO, USA Track &amp; Field) as the named faculty.</td><td contenteditable="true">Per-roster license + integration</td></tr>
+    </tbody>
+  </table>
+  <p style="margin-top:18px" contenteditable="true"><br></p>
+  <div class="ask-band">
+    <div class="rule-label" contenteditable="true">Why the Margin Expands</div>
+    <p style="margin:0" contenteditable="true"></p><p class="font-claude-response-body break-words whitespace-normal leading-[1.7]" contenteditable="true">Approved answers are cached by question cluster and corpus version. When a similar question comes in, it is served from cache, no faculty involvement required. Only genuinely novel or sensitive questions escalate to the faculty queue. We estimate this will represent fewer than 1% of all queries, a figure we will need to validate.</p>
+<p class="font-claude-response-body break-words whitespace-normal leading-[1.7]" contenteditable="true">The implication is structural: faculty time grows with the logarithm of usage, not linearly. Doubling the user base does not double their workload. Each additional partner therefore adds volume with minimal added cost, approaching pure margin.</p><p contenteditable="true"></p>
+  </div>
+</section>
+
+<section class="page" data-card>
+  <button class="delete-btn" onclick="deletePage(this)">×</button>
+  <div class="page-header"><span contenteditable="true">CAC and lifetime value · three customer types</span><span contenteditable="true">Unit economics</span></div>
+  <h2 contenteditable="true">Every segment clears the bar, for a different reason.</h2>
+  <p class="lead" contenteditable="true">Consumer is cheap to acquire because distribution is owned. Universities lock in for years. AI systems carry near-zero marginal cost. The blended picture is a low-CAC consumer top of funnel feeding two high-value B2B engines.</p>
+
+  <div class="grid-3" style="margin-top:16px">
+    <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="label" contenteditable="true">End users · freemium</div>
+      <div class="stat" contenteditable="true">~6:1</div><div class="stat-label" contenteditable="true">LTV : CAC</div>
+      <div style="margin-top:12px">
+        <div class="kv"><span class="k" contenteditable="true">CAC</span><span class="v" contenteditable="true">~$28</span></div>
+        <div class="kv"><span class="k" contenteditable="true">Subscription</span><span class="v" contenteditable="true">$9 / mo</span></div>
+        <div class="kv"><span class="k" contenteditable="true">Gross margin</span><span class="v" contenteditable="true">~85%</span></div>
+        <div class="kv"><span class="k" contenteditable="true">Avg. life</span><span class="v" contenteditable="true">~22 mo</span></div>
+        <div class="kv"><span class="k" contenteditable="true">CLV</span><span class="v" contenteditable="true">~$170</span></div>
+        <div class="kv"><span class="k" contenteditable="true">Payback</span><span class="v" contenteditable="true">&lt; 4 mo</span></div>
+      </div>
+      <p style="margin-top:10px;font-size:12px;color:var(--sub)" contenteditable="true">Why CAC is tiny: ~120k/mo already arrive on Stanford SLM's site. No paid acquisition.</p>
+    </div>
+    <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="label" contenteditable="true">Universities · platform</div>
+      <div class="stat" contenteditable="true">~13:1</div><div class="stat-label" contenteditable="true">LTV : CAC</div>
+      <div style="margin-top:12px">
+        <div class="kv"><span class="k" contenteditable="true">CAC</span><span class="v" contenteditable="true">~$22k</span></div>
+        <div class="kv"><span class="k" contenteditable="true">ACV</span><span class="v" contenteditable="true">~$60k</span></div>
+        <div class="kv"><span class="k" contenteditable="true">Gross margin</span><span class="v" contenteditable="true">~80%</span></div>
+        <div class="kv"><span class="k" contenteditable="true">Avg. life</span><span class="v" contenteditable="true">~6 yr</span></div>
+        <div class="kv"><span class="k" contenteditable="true">CLV</span><span class="v" contenteditable="true">~$290k</span></div>
+        <div class="kv"><span class="k" contenteditable="true">Payback</span><span class="v" contenteditable="true">~9 mo</span></div>
+      </div>
+      <p style="margin-top:10px;font-size:12px;color:var(--sub)" contenteditable="true">Why it locks in: 6–12 mo sale, then multi-year retention &gt;90%.</p>
+    </div>
+    <div class="card" data-card style="border-left:4px solid var(--red)" contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="label red" contenteditable="true">AI systems · API</div>
+      <div class="stat" contenteditable="true">~20:1</div><div class="stat-label" contenteditable="true">LTV : CAC</div>
+      <div style="margin-top:12px">
+        <div class="kv"><span class="k" contenteditable="true">CAC</span><span class="v" contenteditable="true">~$26k</span></div>
+        <div class="kv"><span class="k" contenteditable="true">ACV</span><span class="v" contenteditable="true">~$140k</span></div>
+        <div class="kv"><span class="k" contenteditable="true">Gross margin</span><span class="v" contenteditable="true">~88%</span></div>
+        <div class="kv"><span class="k" contenteditable="true">Avg. life</span><span class="v" contenteditable="true">~5 yr</span></div>
+        <div class="kv"><span class="k" contenteditable="true">CLV</span><span class="v" contenteditable="true">~$615k</span></div>
+        <div class="kv"><span class="k" contenteditable="true">Payback</span><span class="v" contenteditable="true">~3 mo</span></div>
+      </div>
+      <p style="margin-top:10px;font-size:12px;color:var(--sub)" contenteditable="true">Why margin is highest: cached answers cost ~nothing; receipt graph creates compliance lock-in.</p>
+    </div>
+  </div>
+  <p style="margin-top:18px;font-size:12px;color:var(--sub);font-style:italic" contenteditable="true">Sports &amp; athletes is a fourth, smaller line — pricing per roster + integration depth, formalized as the first deals close. Sized as upside, not as a planned segment in this raise.</p>
+</section>
+
+<section class="page" data-card>
+  <button class="delete-btn" onclick="deletePage(this)">×</button>
+  <div class="page-header"><span contenteditable="true">Traction · university pipeline and sports leads</span><span contenteditable="true">Already in motion</span></div>
+  <h2 contenteditable="true">Already in motion.</h2>
+  <p class="lead" contenteditable="true">Inbound university deals · sports medicine leads · Stanford faculty access.</p>
+
+  <h3 style="margin-top:24px" contenteditable="true">University platform · active sales talks</h3>
+  <p class="lead" contenteditable="true">Each university gets <strong>the same Stanford-grade system Stanford itself runs</strong>. Stanford does not pay — they are the faculty partner and the brand. Everyone else does. $5K / month is the published entry tier for mid-sized research universities; premium institutions and large health systems sit materially higher.</p>
+  <div class="grid-3">
+    <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="label" contenteditable="true">In talks</div>
+      <h4 contenteditable="true">Universität Gießen</h4>
+      <p style="font-size:12px;color:var(--sub)" contenteditable="true">Justus-Liebig-Universität Gießen</p>
+      <div class="stat" contenteditable="true">$5,000</div><div class="stat-label" contenteditable="true">/ month base</div>
+      <p style="margin-top:8px;font-size:12px" contenteditable="true">+ additional token usage</p>
+    </div>
+    <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="label" contenteditable="true">In talks</div>
+      <h4 contenteditable="true">TH Mittelhessen</h4>
+      <p style="font-size:12px;color:var(--sub)" contenteditable="true">Technische Hochschule Mittelhessen</p>
+      <div class="stat" contenteditable="true">$5,000</div><div class="stat-label" contenteditable="true">/ month base</div>
+      <p style="margin-top:8px;font-size:12px" contenteditable="true">+ additional token usage</p>
+    </div>
+    <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="label" contenteditable="true">In talks</div>
+      <h4 contenteditable="true">Universität Marburg</h4>
+      <p style="font-size:12px;color:var(--sub)" contenteditable="true">Philipps-Universität Marburg</p>
+      <div class="stat" contenteditable="true">$5,000</div><div class="stat-label" contenteditable="true">/ month base</div>
+      <p style="margin-top:8px;font-size:12px" contenteditable="true">+ additional token usage</p>
+    </div>
+  </div>
+  <p style="margin-top:8px;font-style:italic;color:var(--sub)" contenteditable="true">Combined pipeline: $15,000 / month base. 3 institutions inbound, founder-time acquisition, no sales org.</p>
+
+  <h3 style="margin-top:24px" contenteditable="true">Sports and athlete leads</h3>
+  <p class="lead" contenteditable="true">With <strong>Michael Fredericson</strong> — Director of Stanford Lifestyle Medicine and CMO of USA Track &amp; Field — we own <em>the</em> faculty for the sports &amp; athletes pillar. We turn his judgment into an AI that sits inside the medical and performance rooms of <strong>pro teams, university athletics programs, and individual elite athletes</strong>, alongside their existing physios and S&amp;C staff, not replacing them. Pricing tied to roster size and integration depth. Today: Bayern Munich, ratiopharm Ulm, and Dennis Schröder in early talks; same wedge scales across every Bundesliga / NBA / NCAA program.</p>
+  <div class="grid-3">
+    <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="label" contenteditable="true">First talks</div>
+      <h4 contenteditable="true">Bayern Munich</h4>
+      <p style="font-size:12px;color:var(--sub)" contenteditable="true">Football / Bundesliga</p>
+      <p style="font-size:13px" contenteditable="true">Intro to medical and performance teams.</p>
+    </div>
+    <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="label" contenteditable="true">First talks</div>
+      <h4 contenteditable="true">ratiopharm Ulm</h4>
+      <p style="font-size:12px;color:var(--sub)" contenteditable="true">Basketball / BBL</p>
+      <p style="font-size:13px" contenteditable="true">First talks via Thorsten Leibenart, intro to medical teams.</p>
+    </div>
+    <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="label" contenteditable="true">Lead</div>
+      <h4 contenteditable="true">Dennis Schröder</h4>
+      <p style="font-size:12px;color:var(--sub)" contenteditable="true">NBA Guard (Cleveland)</p>
+      <p style="font-size:13px" contenteditable="true">Personal performance and longevity. Owner of pro team in Germany. Already in talks with management.</p>
+    </div>
+  </div>
+</section>
+
+<section class="page" data-card>
+  <button class="delete-btn" onclick="deletePage(this)">×</button>
+  <div class="page-header"><span contenteditable="true">Stanford Lifestyle Medicine · program members</span><span contenteditable="true">Faculty bench</span></div>
+  <h2 contenteditable="true">The faculty bench, by pillar.</h2>
+
+  <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button><div class="label" contenteditable="true">Program leadership</div><p contenteditable="true">Michael Fredericson, MD (Director) · Anne Friedlander, PhD (Assoc. Director) ·&nbsp; Amy Khokhar</p></div>
+  <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button><div class="label" contenteditable="true">Movement and exercise</div><p contenteditable="true">Jonathan Bonnet, MD · Marcia Stefanick, PhD · Robert C. Oh, MD · Levi Frehlich, PhD · Corey Rovzar, PhD DPT · Peter Park, CSCS · Kelly Starrett, DPT · Juliet Starrett, JD · Tala Khalaf, DPT · Keith Baar, PhD · Brooke Gurland, MD · Matt Kaufman, MD · M. Javad Ershad, MD</p></div>
+  <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button><div class="label" contenteditable="true">Healthful nutrition</div><p contenteditable="true">Marily Oppezzo, PhD (Head) · Stacy Sims, PhD · Michelle Hauser, MD · Rachele Pojednic, PhD · Jessica Hope, RN · Ken Vereschagin, MD · Carlie Arbaugh, MD · Beth Gillepsie, MS · Cindy Kin, MD · Sean Spencer, MD PhD</p></div>
+  <div class="card" data-card style="border-left:4px solid var(--red)" contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button><div class="label red" contenteditable="true">Restorative sleep · live</div><p contenteditable="true">Cheri Mah, MD MS (Co-Head) · Jamie Zeitzer, PhD (Co-Head) · Rafael Pelayo, MD · Katie Cederberg, PhD</p></div>
+  <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button><div class="label" contenteditable="true">Cognitive enhancement</div><p contenteditable="true">Shaliza Shorey, PsyD (Head) · Douglas Noordsy, MD · Maris Loeffler, LMFT · Fanglin Zhang, MD PhD</p></div>
+  <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button><div class="label" contenteditable="true">Social engagement</div><p contenteditable="true">Steven Crane, MS (Head) · Rusly Harsono, MD · David Shi-Ann Chang, MD · BJ Fogg, PhD · Ann Hsing, PhD</p></div>
+  <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button><div class="label" contenteditable="true">Stress management</div><p contenteditable="true">Sarah Meyer Tapia, PhD (Head) · Alia Crum, PhD · Eva Weinlander, MD</p></div>
+  <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button><div class="label" contenteditable="true">Gratitude and purpose</div><p contenteditable="true">Bruce Feldstein, MD (Co-Head) · Akivah Dixon Northern, DSc · Lisa Shah, PA-C · Diane Friedlaender, PhD</p></div>
+  <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button><div class="label" contenteditable="true">Advisory board</div><p contenteditable="true">Maz Brumand · Ronjon Nag, PhD · Jack Russo, JD MBA · Elizabeth Frates, MD · Walter Bortz II, MD (Founding Advisor)</p></div>
+</section>
+
+<section class="page" data-card>
+  <button class="delete-btn" onclick="deletePage(this)">×</button>
+  <div class="page-header"><span contenteditable="true">Freemium, fed by owned Stanford distribution</span><span contenteditable="true">Subscription engine</span></div>
+  <h2 contenteditable="true">Free earns trust. Trust converts to subscription.</h2>
+
+  <div class="grid-2" style="margin-top:16px">
+    <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="label" contenteditable="true">Free · the hook</div>
+      <div class="stat" contenteditable="true">$0</div>
+      <ul style="font-size:13.5px;line-height:1.6;padding-left:18px;color:#2a2a32">
+        <li contenteditable="true">Ask any lifestyle-health question, get a Stanford-signed answer</li>
+        <li contenteditable="true">See the receipt: faculty name, paper, timestamp</li>
+        <li contenteditable="true">Honest refusal where the science runs out</li>
+        <li contenteditable="true">Met on the Stanford SLM site they already trust</li>
+      </ul>
+    </div>
+    <div class="card" data-card style="border-left:4px solid var(--red)" contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="label red" contenteditable="true">Palonur Plus · the subscription</div>
+      <div class="stat" contenteditable="true">$9 / month</div>
+      <ul style="font-size:13.5px;line-height:1.6;padding-left:18px;color:#2a2a32">
+        <li contenteditable="true">Longevity OS: all 7 pillars interacting (starting with sleep ×&nbsp; then: stress × nutrition × meaningfulness)</li>
+        <li contenteditable="true">Personalized protocols, current Stanford faculty knowledge updated continuously</li>
+        <li contenteditable="true">Unlimited questions, saved history, follow-ups</li>
+        <li contenteditable="true">Renews on routine and trust, not novelty</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="ask-band">
+    <div class="rule-label" contenteditable="true">Why $9 / month</div>
+    <p style="margin:0" contenteditable="true">Arrived at through end-user interviews. Way below the $20 general AI benchmark, making the trust layer an additive, taxing spend. The 55+ cohort wants a Stanford signature; at $9 it converts more easily.</p>
+  </div>
+
+  <h3 style="margin-top:24px" contenteditable="true">The Palonur pipeline — one product per pillar</h3>
+  <div class="grid-4">
+    <div class="card" data-card style="border-top:4px solid var(--red)" contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button><div class="label red" contenteditable="true">Live</div><h4 contenteditable="true">Palonur One: Sleep</h4></div>
+    <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button><div class="label" contenteditable="true">Next</div><h4 contenteditable="true">Palonur Two: Stress</h4></div>
+    <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button><div class="label" contenteditable="true">NEXT</div><h4 contenteditable="true">Palonur Three: Nutrition</h4></div>
+    <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button><div class="label" contenteditable="true">NEXT</div><h4 contenteditable="true">Palonur Four: Meaningfulness</h4></div>
+    <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button><div class="label" contenteditable="true">NEXT</div><h4 contenteditable="true">Palonur Five:<br>Social Engagement</h4></div>
+    <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button><div class="label" contenteditable="true">NEXT</div><h4 contenteditable="true">Palonur Six:<br>Cognitive Enhancement</h4></div>
+    <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button><div class="label" contenteditable="true">NEXT</div><h4 contenteditable="true">Palonur Seven: Gratitude</h4></div>
+  </div>
+
+  <h3 style="margin-top:24px" contenteditable="true">Conversion path&nbsp;</h3>
+  <div class="grid-4">
+    <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button><div class="stat" contenteditable="true">~120k</div><div class="stat-label" contenteditable="true">Monthly visitors Stanford SLM</div></div>
+    <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button><div class="stat" contenteditable="true">~8%</div><div class="stat-label" contenteditable="true">Engage AI answer surface</div></div>
+    <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button><div class="stat" contenteditable="true">~25%</div><div class="stat-label" contenteditable="true">Create free account</div></div>
+    <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button><div class="stat" contenteditable="true">~5%</div><div class="stat-label" contenteditable="true">Free to Plus (compounding)</div></div>
+  </div>
+</section>
+
+<section class="page" data-card>
+  <button class="delete-btn" onclick="deletePage(this)">×</button>
+  <div class="page-header"><span contenteditable="true">Build once · scale across every interface</span><span contenteditable="true">Scale &amp; market</span></div>
+  <h2 contenteditable="true">Why the model compounds.</h2>
+  <p class="lead" contenteditable="true">Same pipeline → every AI platform. Same corpus → every pillar. Warm-intro recruiting → cost per pillar falls. Cache the signature → repeat questions are free. Distribution scales faster than content creation.</p>
+  <p contenteditable="true">We are infrastructure, not a vertical product. These are the markets of the highest-frequency health decisions already being made by AI today:</p>
+
+  <button class="delete-btn" onclick="deleteRow(this)">×</button><button class="delete-btn" onclick="deleteRow(this)">×</button><button class="delete-btn" onclick="deleteRow(this)">×</button><button class="delete-btn" onclick="deleteRow(this)">×</button><button class="delete-btn" onclick="deleteRow(this)">×</button><button class="delete-btn" onclick="deleteRow(this)">×</button><table style="margin-top:12px">
+    <tbody><tr class="row" data-card><td contenteditable="true"><strong>Healthy Nutrition</strong></td><td contenteditable="true">$700B+ · Nutrition &amp; food market</td></tr>
+    <tr class="row" data-card><td contenteditable="true"><strong>Movement &amp; Fitness</strong></td><td contenteditable="true">$100B+ · Global fitness economy</td></tr>
+    <tr class="row" data-card><td contenteditable="true"><strong>Restorative Sleep</strong></td><td contenteditable="true">$80B+ · Global sleep economy</td></tr>
+    <tr class="row" data-card><td contenteditable="true"><strong>Social Engagement</strong></td><td contenteditable="true">$46B+ · Social wellness industry</td></tr>
+    <tr class="row" data-card><td contenteditable="true"><strong>Cognitive Enhancement</strong></td><td contenteditable="true">$35B+ · Brain health &amp; nootropics</td></tr>
+    <tr class="row" data-card><td contenteditable="true"><strong>Stress Management</strong></td><td contenteditable="true">$21B+ · Mental wellness market</td></tr>
+  </tbody></table>
+  <p style="margin-top:18px;font-style:italic" contenteditable="true">We don't need to win these markets. We need to be the trusted layer behind the AI answers that already shape decisions across all of them.</p>
+</section>
+
+<section class="page" data-card>
+  <button class="delete-btn" onclick="deletePage(this)">×</button>
+  <div class="page-header"><span contenteditable="true">The builder and the people who make it credible</span><span contenteditable="true">The team</span></div>
+  <h2 contenteditable="true">Faculty don't advise this. They run it.</h2>
+
+  <h3 style="margin-top:18px" contenteditable="true">Faculty</h3>
+  <div class="grid-3">
+    <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <h4 style="font-size: medium;" contenteditable="true"><span style="color: rgb(90, 90, 102); font-family: -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif; font-size: 10.5px; font-weight: 400; letter-spacing: 1.89px; text-transform: uppercase;">Partner</span></h4><h4 contenteditable="true">Michael Fredericson, MD</h4>
+      <p style="font-size:12.5px" contenteditable="true">Director, Stanford Lifestyle Medicine. CMO, USA Track and Field.</p></div>
+    <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <h4 style="font-size: medium;" contenteditable="true"><span style="color: rgb(90, 90, 102); font-family: -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif; font-size: 10.5px; font-weight: 400; letter-spacing: 1.89px; text-transform: uppercase;">Partner</span></h4><h4 contenteditable="true">Jamie Zeitzer, PhD</h4>
+      <p style="font-size:12.5px" contenteditable="true">Co-Director, Stanford Sleep Research. NASA sleep advisor. Leads pillar one.</p></div>
+    <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <h4 style="font-size: medium;" contenteditable="true"><span style="color: rgb(90, 90, 102); font-family: -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif; font-size: 10.5px; font-weight: 400; letter-spacing: 1.89px; text-transform: uppercase;">Partner</span></h4><h4 contenteditable="true">Anne Friedlander, PhD</h4>
+      <p style="font-size:12.5px" contenteditable="true">Exercise science and geroscience. NIH-funded. Co-Director LM Fellowship.</p></div>
+    <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <h4 style="font-size: medium;" contenteditable="true"><span style="color: rgb(90, 90, 102); font-family: -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif; font-size: 10.5px; font-weight: 400; letter-spacing: 1.89px; text-transform: uppercase;">Partner</span></h4><h4 contenteditable="true">Allison Kluger</h4>
+      <p style="font-size:12.5px" contenteditable="true">Stanford GSB faculty. Branding/PR. ABC News, MSNBC. Supports communication and storytelling.</p></div>
+    <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <h4 style="font-size: medium;" contenteditable="true"><span style="color: rgb(90, 90, 102); font-family: -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif; font-size: 10.5px; font-weight: 400; letter-spacing: 1.89px; text-transform: uppercase;">Advisor</span></h4><h4 contenteditable="true">Karen Parker, PhD</h4>
+      <p style="font-size:12.5px" contenteditable="true">Professor and Associate Chair, Department of Psychiatry and Behavioral Sciences, Stanford University. Strategic advisor on health and performance.</p></div>
+    <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <h4 style="font-size: medium;" contenteditable="true"><span style="color: rgb(90, 90, 102); font-family: -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif; font-size: 10.5px; font-weight: 400; letter-spacing: 1.89px; text-transform: uppercase;">Postdoc (HirE)</span></h4><h4 contenteditable="true">Stanford SLM AI Lab</h4>
+      <p style="font-size:12.5px" contenteditable="true">Co-works closely with Karan: product, faculty liaison, pillar expansion.</p></div>
+  </div>
+
+  <div class="card" data-card style="border-left:4px solid var(--red);margin-top:18px;padding:14px 18px" contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>
+    <div class="label red" style="margin-bottom:4px" contenteditable="true">Founder and CEO · AI Lab Co-Director</div>
+    <h4 style="margin:0 0 4px" contenteditable="true">Karan Dehghani</h4>
+    <p style="font-size:12.5px;line-height:1.45;margin:0" contenteditable="true">Built and scaled an AI knowledge product globally with Apple and BlackRock. One prior exit to a publicly traded company. Stanford GSB Fellow. Biomarker and AI work for Olympic and NBA athletes. Co-directs the Palonur × Stanford SLM AI Lab.</p>
+  </div>
+</section>
+
+<section class="page" data-card>
+  <button class="delete-btn" onclick="deletePage(this)">×</button>
+  <div class="page-header"><span contenteditable="true">The people building the company and the cap table</span><span contenteditable="true">The team · operations</span></div>
+  <h2 contenteditable="true">The team running the build — and who owns it.</h2>
+
+  <h3 style="margin-top:18px" contenteditable="true">Operational &amp; development team</h3>
+  <div class="grid-2">
+    <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <h4 style="font-size: medium;" contenteditable="true"><span style="color: rgb(90, 90, 102); font-family: -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif; font-size: 10.5px; font-weight: 400; letter-spacing: 1.89px; text-transform: uppercase;">AI / RAG Lead</span></h4><h4 contenteditable="true">Nicolas Ritoutet</h4>
+      <p style="font-size:12.5px" contenteditable="true">25 years AI and RAG expertise. CTO, Incubateur des Territoires. LLM products in production.</p></div>
+    <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <h4 style="font-size: medium;" contenteditable="true"><span style="color: rgb(90, 90, 102); font-family: -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif; font-size: 10.5px; font-weight: 400; letter-spacing: 1.89px; text-transform: uppercase;">Ops Manager</span></h4><h4 contenteditable="true">Amy Khokhar</h4>
+      <p style="font-size:12.5px" contenteditable="true">Ops Manager, already embedded with Stanford Lifestyle Medicine.</p></div>
+    <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <h4 style="font-size: medium;" contenteditable="true"><span style="color: rgb(90, 90, 102); font-family: -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif; font-size: 10.5px; font-weight: 400; letter-spacing: 1.89px; text-transform: uppercase;">Technical Lead (TBA)</span></h4><h4 contenteditable="true">Stanford Medicine</h4>
+      <p style="font-size:12.5px" contenteditable="true">Senior technical lead from the Stanford Medicine ecosystem integrating us into Stanford's system.</p></div>
+    <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <h4 style="font-size: medium;" contenteditable="true"><span style="color: rgb(90, 90, 102); font-family: -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif; font-size: 10.5px; font-weight: 400; letter-spacing: 1.89px; text-transform: uppercase;">US Sales Lead</span></h4><h4 contenteditable="true">Nicole Knauber</h4>
+      <p style="font-size:12.5px" contenteditable="true">Former CEO at Rittal ($3.1B revenue). Leads US university onboarding and enterprise acquisition.</p></div>
+  </div>
+
+  <h3 style="margin-top:28px" contenteditable="true">Cap table — pre-financing</h3>
+  <button class="delete-btn" onclick="deleteRow(this)">×</button><button class="delete-btn" onclick="deleteRow(this)">×</button><table>
+    <thead><tr><th contenteditable="true">Shareholder</th><th contenteditable="true">Ownership</th></tr></thead>
+    <tbody>
+      <tr class="row" data-card><td contenteditable="true">Karan Dehghani</td><td contenteditable="true">95%</td></tr>
+      <tr class="row" data-card><td contenteditable="true">Allison Kluger</td><td contenteditable="true">5%</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="page" data-card>
+  <button class="delete-btn" onclick="deletePage(this)">×</button>
+  <div class="page-header"><span contenteditable="true">What we're raising and what it buys</span><span contenteditable="true">The ask</span></div>
+  <h2 contenteditable="true">Building the trusted knowledge layer for AI in health.</h2>
+  <div class="ask-band">
+    <div class="rule-label red" contenteditable="true">Raising $500K to $750K</div>
+    <p style="margin:0" contenteditable="true">12 to 18 months to: stand up all seven Palonur lifestyle-medicine pillars with named Stanford faculty, launch on the Stanford Lifestyle Medicine website, convert universities and end-users to paying customers, sign the first AI-provider integrations, accumulate faculty-signed answers in the ledger, and stand up the Palonur × Stanford SLM AI Lab.</p>
+  </div>
+
+  <div class="grid-2" style="margin-top:18px">
+    <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="label" contenteditable="true">Fully viable · 12 months</div>
+      <h4 contenteditable="true">$500K — Core plan</h4>
+      <ul style="font-size:13.5px;line-height:1.6;padding-left:18px;color:#2a2a32">
+        <li contenteditable="true">Full team: Karan, Postdoc (Stanford SLM AI Lab), Amy Khokhar (Ops), Sales Rep, Nicolas Ritoutet (AI/RAG, part-time)</li>
+        <li contenteditable="true">Basically all 7 pillars live with named Stanford faculty leads — recruited through Michael Fredericson and Anne Friedlander</li>
+        <li contenteditable="true">Paying users: universities on SaaS contracts + end-users via the Stanford Lifestyle Medicine website</li>
+        <li contenteditable="true">First AI-provider integration shipped; partner API hardened</li>
+        <li contenteditable="true">Sufficient to prove the model and unlock Series A milestones</li>
+      </ul>
+    </div>
+    <div class="card" data-card style="border-left:4px solid var(--red)" contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="label red" contenteditable="true">More runway · 18 months</div>
+      <h4 contenteditable="true">$750K — Same team, longer runway</h4>
+      <ul style="font-size:13.5px;line-height:1.6;padding-left:18px;color:#2a2a32">
+        <li contenteditable="true">Everything in the core plan, plus:</li>
+        <li contenteditable="true">6 additional months of full-team runway (12 → 18 months)</li>
+        <li contenteditable="true">SLM AI Lab fully operational, publishing</li>
+        <li contenteditable="true">Hits Series A milestones with margin</li>
+      </ul>
+    </div>
+  </div>
+
+  <p style="margin-top:18px;font-style:italic;color:var(--sub)" contenteditable="true">Both plans fund the same five people. The choice is runway, not scope: 12 months gets us to all 7 pillars and paying users; 18 months adds depth, more AI-provider partners, and the AI Lab going live.</p>
+  <p style="margin-top:24px;font-size:12px;color:var(--sub)" contenteditable="true">karan@palonur.com · Palo Alto, CA · In partnership with Stanford Lifestyle Medicine and GSB faculty</p>
+</section>
+
+<section class="page" data-card>
+  <button class="delete-btn" onclick="deletePage(this)">×</button>
+  <div class="page-header"><span contenteditable="true">$500,000 (12-mo) · $750,000 (18-mo)</span><span contenteditable="true">Use of funds</span></div>
+  <h2 contenteditable="true">Where the money goes, and what it buys.</h2>
+  <button class="delete-btn" onclick="deleteRow(this)">×</button><button class="delete-btn" onclick="deleteRow(this)">×</button><button class="delete-btn" onclick="deleteRow(this)">×</button><button class="delete-btn" onclick="deleteRow(this)">×</button><button class="delete-btn" onclick="deleteRow(this)">×</button><button class="delete-btn" onclick="deleteRow(this)">×</button><button class="delete-btn" onclick="deleteRow(this)">×</button><button class="delete-btn" onclick="deleteRow(this)">×</button><button class="delete-btn" onclick="deleteRow(this)">×</button><button class="delete-btn" onclick="deleteRow(this)">×</button><table>
+    <thead><tr><th contenteditable="true">Line</th><th style="text-align:right" contenteditable="true">12-mo budget</th><th style="text-align:right" contenteditable="true">18-mo budget</th></tr></thead>
+    <tbody>
+      <tr class="row" data-card><td contenteditable="true"><strong>Postdoc — Stanford SLM AI Lab</strong><br><span style="color:var(--sub);font-size:12px">Co-directs with Karan. Faculty liaison, pillar expansion, lab operations. At-market for a Stanford-ecosystem postdoc, fully loaded (base + benefits) at ~$90K/yr — not discounted.</span></td><td style="text-align:right" contenteditable="true">$90,000</td><td style="text-align:right" contenteditable="true">$135,000</td></tr>
+      <tr class="row" data-card><td contenteditable="true"><strong>Nicolas Ritoutet — AI / RAG Lead (part-time)</strong><br><span style="color:var(--sub);font-size:12px">Part-time senior support at $30K/yr. Owns RAG architecture, eval harness, partner API, and the multi-provider LLM abstraction. The pipeline is already in production — Karan is the primary builder; Nicolas is the senior shoulder, not a second full-time builder, until partner volume justifies more.</span></td><td style="text-align:right" contenteditable="true">$30,000</td><td style="text-align:right" contenteditable="true">$45,000</td></tr>
+      <tr class="row" data-card><td contenteditable="true"><strong>Amy Khokhar — Ops Manager</strong><br><span style="color:var(--sub);font-size:12px">Faculty ops, partner coordination, admin. Already embedded in SLM. $90K/yr.</span></td><td style="text-align:right" contenteditable="true">$90,000</td><td style="text-align:right" contenteditable="true">$135,000</td></tr>
+      <tr class="row" data-card><td contenteditable="true"><strong>Sales Representative</strong><br><span style="color:var(--sub);font-size:12px">Partner outreach, university onboarding, enterprise conversion. $90K/yr base; commission paid out of closed partner revenue, not out of this raise.</span></td><td style="text-align:right" contenteditable="true">$90,000</td><td style="text-align:right" contenteditable="true">$135,000</td></tr>
+      <tr class="row" data-card><td contenteditable="true"><strong>Karan Dehghani — Founder / CEO</strong><br><span style="color:var(--sub);font-size:12px">Development, sales, product, AI Lab co-direction. $120K/yr.</span></td><td style="text-align:right" contenteditable="true">$120,000</td><td style="text-align:right" contenteditable="true">$180,000</td></tr>
+      <tr class="row" data-card><td contenteditable="true"><strong>Marketing — co-branded content and events</strong><br><span style="color:var(--sub);font-size:12px">Lean spend. Distribution mostly earned via Stanford SLM traffic.</span></td><td style="text-align:right" contenteditable="true">$5,000</td><td style="text-align:right" contenteditable="true">$7,500</td></tr>
+      <tr class="row" data-card><td contenteditable="true"><strong>Travel — faculty visits and partner meetings</strong><br><span style="color:var(--sub);font-size:12px">In-person faculty and company recruiting.</span></td><td style="text-align:right" contenteditable="true">$40,000</td><td style="text-align:right" contenteditable="true">$60,000</td></tr>
+      <tr class="row" data-card><td contenteditable="true"><strong>Office — Palo Alto, $1K / month</strong></td><td style="text-align:right" contenteditable="true">$12,000</td><td style="text-align:right" contenteditable="true">$18,000</td></tr>
+      <tr class="row" data-card><td contenteditable="true"><strong>Tax and bookkeeping</strong></td><td style="text-align:right" contenteditable="true">$8,000</td><td style="text-align:right" contenteditable="true">$12,000</td></tr>
+      <tr class="row" data-card><td contenteditable="true"><strong>Infra, devices, compute, legal</strong><br><span style="color:var(--sub);font-size:12px">Lean: Postgres + pgvector hosted, LLM tokens, partner contracts, one-time laptops + phones for the team and dev devices for real-hardware testing. Heaviest device spend is year-one; year-two is recurring infra only.</span></td><td style="text-align:right" contenteditable="true">$15,000</td><td style="text-align:right" contenteditable="true">$22,500</td></tr>
+      <tr><td contenteditable="true"><strong>Total</strong></td><td style="text-align:right" contenteditable="true"><strong>$500,000</strong></td><td style="text-align:right" contenteditable="true"><strong>$750,000</strong></td></tr>
+    </tbody>
+  </table>
+
+  <p style="margin-top:10px;font-size:12px;color:var(--sub)" contenteditable="true">Both columns are shown so you can choose the runway that fits the round. Salaries are annualized; the 18-mo column is 1.5× the 12-mo column for each person. The 12-mo plan ($500K) gets us to all 7 pillars live with named Stanford faculty, paying users (universities + end-users via SLM), and the first AI-provider integration. The 18-mo plan ($750K) is the same team for 6 more months. Sales commission is paid out of closed partner revenue, not this raise, so the raise stays pure runway.</p>
+
+  <div class="grid-3" style="margin-top:18px">
+    <div class="card" data-card style="border-left:4px solid var(--red)" contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="label red" contenteditable="true">Go-to-market</div><div class="stat" contenteditable="true">87%</div>
+      <p style="font-size:12.5px" contenteditable="true">Karan, Postdoc, Amy, Sales Rep, travel, marketing. The product is built; this raise is supply (faculty) + demand (partners) and the people who go get both.</p></div>
+    <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="label" contenteditable="true">Product &amp; infra</div><div class="stat" contenteditable="true">9%</div>
+      <p style="font-size:12.5px" contenteditable="true">Nicolas (part-time, AI/RAG, eval, partner API) + Postgres, LLM tokens, partner contracts, team devices.</p></div>
+    <div class="card" data-card contenteditable="true"><button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="label" contenteditable="true">Overhead</div><div class="stat" contenteditable="true">4%</div>
+      <p style="font-size:12.5px" contenteditable="true">$1K/month Palo Alto workspace, books, tax.</p></div>
+  </div>
+  <p style="margin-top:18px;font-style:italic;color:var(--sub)" contenteditable="true">Read this raise as a GTM raise. The verification pipeline, the receipts graph, and the faculty console are already shipped. Capital buys faculty pillars (supply), AI-platform partners (demand), and the operators who close both — with infra kept lean.</p>
+</section>
+
+<script>
+  // Server-backed persistence. Anyone can view; only editors with the
+  // password can save. Edit mode is gated by a password stored in
+  // sessionStorage (cleared when the tab closes).
+  const API_URL = '/api/reach-deck';
+  const PASSWORD_KEY = 'palonur-reach-edit-password';
+  const LOCAL_BACKUP_KEY = 'palonur-reach-deck-backup';
+
+  function setIndicator(text, ok){
+    const ind = document.getElementById('save-indicator');
+    if (!ind) return;
+    ind.textContent = text;
+    ind.style.color = ok === false ? '#e26a6a' : '#7fbf7f';
+    ind.classList.add('show');
+    clearTimeout(setIndicator._t);
+    setIndicator._t = setTimeout(() => ind.classList.remove('show'), 2200);
+  }
+
+  function isEditMode(){
+    return !!sessionStorage.getItem(PASSWORD_KEY);
+  }
+
+  function refreshEditAffordances(){
+    const editing = isEditMode();
+    // Toggle button label.
+    const btn = document.getElementById('edit-mode-btn');
+    if (btn) btn.textContent = editing ? 'Editing on · click to exit' : 'Enable editing';
+    // Show/hide delete buttons.
+    document.querySelectorAll('.delete-btn').forEach(b => {
+      b.style.display = editing ? '' : 'none';
+    });
+    // Toggle contenteditable on whole cards/rows when in edit mode.
+    document.querySelectorAll('.card, td, .page-header span, .stat, .rule-label, h1, h2, h4, p, li, th').forEach(el => {
+      if (editing) {
+        if (!el.closest('.toolbar') && !el.classList.contains('delete-btn')) {
+          el.setAttribute('contenteditable', 'true');
+        }
+      } else {
+        el.removeAttribute('contenteditable');
+      }
+    });
+    document.querySelectorAll('.delete-btn').forEach(b => b.setAttribute('contenteditable', 'false'));
+  }
+
+  function toggleEditMode(){
+    if (isEditMode()){
+      sessionStorage.removeItem(PASSWORD_KEY);
+      refreshEditAffordances();
+      setIndicator('View only', true);
+      return;
+    }
+    const pw = prompt('Enter edit password:');
+    if (!pw) return;
+    sessionStorage.setItem(PASSWORD_KEY, pw);
+    refreshEditAffordances();
+    // Try a save with empty-noop just to validate the password.
+    saveToServer(true).then(ok => {
+      if (!ok) {
+        sessionStorage.removeItem(PASSWORD_KEY);
+        refreshEditAffordances();
+        setIndicator('Wrong password', false);
+      } else {
+        setIndicator('Editing enabled', true);
+      }
+    });
+  }
+
+  async function saveToServer(validateOnly){
+    if (!isEditMode()) return false;
+    const pages = Array.from(document.querySelectorAll('.page')).map(p => p.outerHTML);
+    // Local backup in case the network blips.
+    try { localStorage.setItem(LOCAL_BACKUP_KEY, JSON.stringify(pages)); } catch(_){}
+    try {
+      const resp = await fetch(API_URL, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-edit-password': sessionStorage.getItem(PASSWORD_KEY) || '',
+        },
+        body: JSON.stringify({ content: pages }),
+      });
+      if (resp.status === 401) {
+        setIndicator('Wrong password — edits not saved', false);
+        return false;
+      }
+      if (!resp.ok) {
+        setIndicator('Save failed (server)', false);
+        return false;
+      }
+      if (!validateOnly) setIndicator('Saved to cloud ' + new Date().toLocaleTimeString(), true);
+      return true;
+    } catch(e){
+      setIndicator('Save failed (offline) — kept local backup', false);
+      return false;
+    }
+  }
+
+  let saveTimer;
+  function autoSave(){
+    if (!isEditMode()) return;
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(() => { saveToServer(false); }, 600);
+  }
+
+  function deleteCard(btn){
+    if (!isEditMode()) return;
+    const card = btn.closest('[data-card]');
+    if (card && confirm('Delete this block?')){ card.remove(); autoSave(); }
+  }
+  function deletePage(btn){
+    if (!isEditMode()) return;
+    const page = btn.closest('.page');
+    if (page && confirm('Delete this entire page?')){ page.remove(); renumberPages(); autoSave(); }
+  }
+  function renumberPages(){
+    const pages = document.querySelectorAll('.page');
+    const total = pages.length;
+    pages.forEach((p, i) => {
+      const existing = p.querySelector(':scope > .page-num');
+      if (i === 0){
+        if (existing) existing.remove();
+        return;
+      }
+      let badge = existing;
+      if (!badge){
+        badge = document.createElement('div');
+        badge.className = 'page-num';
+        p.appendChild(badge);
+      }
+      badge.textContent = 'P.' + (i + 1) + ' · of ' + total;
+    });
+  }
+  function deleteRow(btn){
+    if (!isEditMode()) return;
+    const row = btn.closest('tr');
+    if (row && confirm('Delete this row?')){ row.remove(); autoSave(); }
+  }
+  // Build the print-ready HTML for a popup window. Strips edit chrome and
+  // injects @media-print rules so the OS "Save as PDF" dialog produces a
+  // clean, agency-grade letter-page PDF with backgrounds + footer intact.
+  function buildPrintDocument(){
+    const clone = document.documentElement.cloneNode(true);
+    clone.querySelectorAll('.delete-btn, .toolbar, #save-indicator').forEach(n => n.remove());
+    clone.querySelectorAll('[contenteditable]').forEach(n => n.removeAttribute('contenteditable'));
+    const printOverride = `
+      <style id="palonur-print-window">
+        html,body{background:#fff !important;margin:0 !important;padding:0 !important}
+        *{ -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; }
+        @page{ size: 8.5in 11in; margin: 0; }
+        .page{
+          width: 8.5in !important; height: 11in !important;
+          min-height: 0 !important; max-height: 11in !important;
+          margin: 0 !important; padding: 0.55in 0.65in 0.7in 0.65in !important;
+          box-shadow:none !important; border-radius:0 !important;
+          position: relative !important; overflow: hidden !important;
+          page-break-after: always; break-after: page;
+          page-break-inside: avoid; break-inside: avoid;
+        }
+        .page:last-child{ page-break-after: auto; break-after: auto; }
+        .page.dark{ background:#0b0b10 !important; color:#fff !important; }
+        .page-num{
+          position:absolute !important; bottom: 0.3in !important;
+          left: 0 !important; right: 0 !important; text-align: center !important;
+          font-size: 10px !important; letter-spacing: .18em; text-transform: uppercase;
+          color:#6a6a72 !important;
+        }
+        .page.dark .page-num{ color:#bdb9af !important; }
+        .card, .ask-band, tr.row, .kv, .grid-2, .grid-3, .grid-4{
+          page-break-inside: avoid; break-inside: avoid;
+        }
+      </style>
+    `;
+    const head = clone.querySelector('head');
+    if (head) head.insertAdjacentHTML('beforeend', printOverride);
+    return '<!doctype html>\n' + clone.outerHTML;
+  }
+
+  async function generatePDF(){
+    const btn = document.getElementById('pdf-btn');
+    const originalLabel = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = 'Opening PDF…';
+    try {
+      const html = buildPrintDocument();
+      // Open a clean popup with the print-ready document and trigger the
+      // browser's native print dialog. The user picks "Save as PDF" to get
+      // a flawless export — backgrounds preserved, page numbers in place.
+      const w = window.open('', '_blank');
+      if (!w) throw new Error('Popup blocked. Please allow popups for this site.');
+      w.document.open();
+      w.document.write(html);
+      w.document.close();
+      // Wait for layout + fonts in the popup before firing print.
+      const fire = async () => {
+        try { if (w.document.fonts && w.document.fonts.ready) await w.document.fonts.ready; } catch(_){}
+        setTimeout(() => { try { w.focus(); w.print(); } catch(_){} }, 250);
+      };
+      if (w.document.readyState === 'complete') fire();
+      else w.addEventListener('load', fire);
+      btn.textContent = 'Print dialog ✓';
+      setTimeout(() => { btn.textContent = originalLabel; btn.disabled = false; }, 1500);
+    } catch (e) {
+      console.error(e);
+      btn.textContent = 'PDF failed';
+      setTimeout(() => { btn.textContent = originalLabel; btn.disabled = false; }, 2000);
+      alert('Could not open print window: ' + (e?.message || e) + '\n\nFalling back to the current-tab print dialog. In the dialog: choose "Save as PDF", uncheck "Headers and footers", set Margins to "None".');
+      window.print();
+    }
+  }
+
+  function saveHTML(){
+    const clone = document.documentElement.cloneNode(true);
+    clone.querySelectorAll('.delete-btn, .toolbar, #save-indicator').forEach(n => n.remove());
+    clone.querySelectorAll('[contenteditable]').forEach(n => n.removeAttribute('contenteditable'));
+    // Force print layout for any external HTML→PDF converter that doesn't
+    // honor @media print (e.g. wkhtmltopdf, some online tools). Each .page
+    // becomes an exact letter-sized page with a safe bottom band for the
+    // .page-num footer so it never gets clipped.
+    const printOverride = `
+      <style id="palonur-print-export">
+        html,body{background:#fff !important;margin:0 !important;padding:0 !important}
+        *{ -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; }
+        @page{ size: 8.5in 11in; margin: 0; }
+        .page{
+          width: 8.5in !important; height: 11in !important;
+          min-height: 0 !important; max-height: 11in !important;
+          margin: 0 !important; padding: 0.55in 0.65in 0.75in 0.65in !important;
+          box-shadow:none !important; border-radius:0 !important;
+          position: relative !important; overflow: hidden !important;
+          page-break-after: always; break-after: page;
+          page-break-inside: avoid; break-inside: avoid;
+        }
+        .page:last-child{ page-break-after: auto; break-after: auto; }
+        .page.dark{ background:#0b0b10 !important; color:#fff !important; }
+        .page-num{
+          position:absolute !important; bottom: 0.3in !important;
+          left: 0 !important; right: 0 !important; text-align: center !important;
+          font-size: 10px !important; letter-spacing: .18em; text-transform: uppercase;
+          color:#6a6a72 !important;
+        }
+        .page.dark .page-num{ color:#bdb9af !important; }
+        .card, .ask-band, tr.row, .kv, .grid-2, .grid-3, .grid-4{
+          page-break-inside: avoid; break-inside: avoid;
+        }
+      </style>
+    `;
+    const head = clone.querySelector('head');
+    if (head) head.insertAdjacentHTML('beforeend', printOverride);
+    const html = '<!doctype html>\n' + clone.outerHTML;
+    const blob = new Blob([html], {type:'text/html'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'palonur_reach_capital_edited.html';
+    document.body.appendChild(a); a.click(); a.remove();
+    URL.revokeObjectURL(url);
+  }
+  async function resetAll(){
+    if (!isEditMode()){ alert('Enable editing first to reset the deck.'); return; }
+    if (!confirm('Reset the cloud-saved deck back to the original source? This affects everyone viewing the deck.')) return;
+    try {
+      const resp = await fetch(API_URL, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-edit-password': sessionStorage.getItem(PASSWORD_KEY) || '',
+        },
+        body: JSON.stringify({ content: [] }),
+      });
+      if (!resp.ok){ setIndicator('Reset failed', false); return; }
+      localStorage.removeItem(LOCAL_BACKUP_KEY);
+      location.reload();
+    } catch(e){ setIndicator('Reset failed (offline)', false); }
+  }
+
+  async function recoverFromLocalStorage(){
+    // Look at every legacy and current localStorage key we might have used.
+    const candidateKeys = [
+      'palonur-reach-deck-backup',
+      'palonur-reach-deck-v2',
+      'palonur-reach-deck-v1',
+      'palonur-reach-deck-v3',
+    ];
+    const found = [];
+    for (const key of candidateKeys){
+      const raw = localStorage.getItem(key);
+      if (!raw) continue;
+      try {
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed) && parsed.length > 0 && parsed.every(x => typeof x === 'string')){
+          found.push({ key, pages: parsed, bytes: raw.length });
+        }
+      } catch(_){}
+    }
+    if (found.length === 0){
+      alert('No browser backup found in this tab. Your old edits were only saved on whichever device + browser you used to make them — try opening reach.html on that device.');
+      return;
+    }
+    // Pick the largest payload (most edits) — fallback if multiple keys exist.
+    found.sort((a,b) => b.bytes - a.bytes);
+    const choice = found[0];
+    const msg = 'Found backup in localStorage key "' + choice.key + '":\n  ' +
+      choice.pages.length + ' pages, ' + choice.bytes + ' bytes.\n\n' +
+      'Push this version into the cloud deck? This will REPLACE the current cloud version for everyone.';
+    if (!confirm(msg)) return;
+    // Need edit mode (password) to save.
+    if (!isEditMode()){
+      const pw = prompt('Enter edit password to save:');
+      if (!pw) return;
+      sessionStorage.setItem(PASSWORD_KEY, pw);
+    }
+    try {
+      const resp = await fetch(API_URL, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-edit-password': sessionStorage.getItem(PASSWORD_KEY) || '',
+        },
+        body: JSON.stringify({ content: choice.pages }),
+      });
+      if (resp.status === 401){
+        sessionStorage.removeItem(PASSWORD_KEY);
+        alert('Wrong password — recovery aborted, nothing was changed.');
+        return;
+      }
+      if (!resp.ok){
+        alert('Recovery save failed (server). Nothing was changed.');
+        return;
+      }
+      alert('Recovered ' + choice.pages.length + ' pages from "' + choice.key + '" into the cloud deck. Reloading.');
+      location.reload();
+    } catch(e){
+      alert('Recovery failed (offline). Nothing was changed.');
+    }
+  }
+
+  async function loadFromServer(){
+    try {
+      const resp = await fetch(API_URL + '?t=' + Date.now(), { cache: 'no-store' });
+      if (!resp.ok) return false;
+      const data = await resp.json();
+      const pages = Array.isArray(data?.content) ? data.content : null;
+      if (!pages || pages.length === 0) return false;
+      const existing = document.querySelectorAll('.page');
+      const parent = existing[0] ? existing[0].parentNode : document.body;
+      const anchor = existing[existing.length - 1] ? existing[existing.length - 1].nextSibling : null;
+      existing.forEach(p => p.remove());
+      pages.forEach(html => {
+        const wrap = document.createElement('div');
+        wrap.innerHTML = html;
+        const node = wrap.firstElementChild;
+        if (node) parent.insertBefore(node, anchor);
+      });
+      if (data.updatedAt) {
+        setIndicator('Loaded · last edit ' + new Date(data.updatedAt).toLocaleString(), true);
+      }
+      return true;
+    } catch(e){ return false; }
+  }
+
+  window.addEventListener('DOMContentLoaded', async () => {
+    await loadFromServer();
+    renumberPages();
+    refreshEditAffordances();
+    document.addEventListener('input', autoSave, true);
+    // ?print=1 — open in a top-level tab, strip edit chrome, fire native
+    // print dialog so the user can "Save as PDF" with backgrounds + footer.
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('print') === '1') {
+      document.querySelectorAll('.toolbar, #save-indicator, .delete-btn').forEach(n => n.remove());
+      document.querySelectorAll('[contenteditable]').forEach(n => n.removeAttribute('contenteditable'));
+      try { if (document.fonts && document.fonts.ready) await document.fonts.ready; } catch(_){}
+      setTimeout(() => { try { window.focus(); window.print(); } catch(_){} }, 400);
+    }
+  });
+</script>
+</body>
+</html>

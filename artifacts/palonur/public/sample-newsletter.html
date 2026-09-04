@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="An illustrative sample issue of The Wellness Journey — the Stanford Lifestyle Medicine newsletter, produced with Palonur.">
+<title>Sample Issue · The Wellness Journey · SLM × Palonur</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Spectral:wght@300;400;500;600&display=swap');
+  :root{
+    --ink:#2b2017; --paper:#FBF8F2; --sub:#6f6457; --rule:#e9e0d0; --rule-2:#dccfba;
+    --red:#8C1515; --red-2:#a8332c; --gold:#B0883C; --gold-2:#caa24a; --gold-ink:#866321;
+    --serif:'Spectral',Georgia,'Times New Roman',serif;
+    --display:'Fraunces',Georgia,serif;
+    --sans:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:#ede4d4;color:var(--ink);font-family:var(--serif)}
+  body{padding:80px 16px 100px}
+
+  /* Toolbar (editing chrome — not part of the issue, never printed) */
+  .toolbar{
+    position:fixed;top:0;left:0;right:0;height:56px;background:#1f1812;color:#fff;
+    display:flex;align-items:center;justify-content:space-between;padding:0 24px;
+    z-index:9999;font-family:var(--sans);font-size:13px;border-bottom:1px solid #3a3024;
+  }
+  .toolbar .left{display:flex;align-items:center;gap:14px}
+  .toolbar .brand{font-weight:600;letter-spacing:.04em}
+  .toolbar .hint{color:#a99c8a}
+  .toolbar button{
+    background:transparent;border:1px solid #4a3f31;color:#fff;padding:8px 14px;border-radius:6px;
+    cursor:pointer;font:inherit;margin-left:8px
+  }
+  .toolbar button:hover{background:#2b241b;border-color:#6a5b46}
+  .toolbar a.pdf-link{
+    display:inline-block;background:var(--red);border:1px solid var(--red);color:#fff;
+    text-decoration:none;border-radius:6px;padding:7px 12px;font:inherit;font-size:12.5px;cursor:pointer;
+  }
+  .toolbar a.pdf-link:hover{background:#741010;border-color:#741010}
+
+  /* Issue (email-width) */
+  .page{
+    width:100%;max-width:660px;margin:26px auto;background:var(--paper);
+    box-shadow:0 18px 50px rgba(90,55,20,.14);position:relative;border-radius:16px;overflow:hidden;
+    border:1px solid var(--rule-2);
+  }
+
+  /* Masthead */
+  .masthead{background:linear-gradient(160deg,#8C1515 0%, #6f1010 100%);color:#fff;padding:30px 38px 26px;text-align:center}
+  .masthead .eyebrow{font-family:var(--sans);font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:#f3d7b9;margin-bottom:10px}
+  .masthead h1{font-family:var(--display);font-size:34px;font-weight:600;letter-spacing:-.01em;margin:0;line-height:1.05}
+  .masthead .meta{font-family:var(--sans);font-size:11px;letter-spacing:.08em;color:#f0cdb0;margin-top:12px}
+  .masthead .meta b{color:#fff;font-weight:600}
+
+  .body{padding:30px 38px 34px}
+
+  .eyebrow{font-family:var(--sans);font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-ink);font-weight:600;margin-bottom:9px}
+  .eyebrow.red{color:var(--red)}
+  h2{font-family:var(--display);font-size:23px;font-weight:600;color:var(--ink);line-height:1.12;margin:0 0 8px}
+  h3{font-family:var(--display);font-size:16px;font-weight:600;color:var(--ink);margin:0 0 6px}
+  p{font-size:15px;line-height:1.66;color:#3b3328;margin:0 0 12px}
+  .byline{font-family:var(--sans);font-size:11.5px;letter-spacing:.04em;color:var(--sub);margin:0 0 14px}
+  .byline b{color:var(--ink);font-weight:600}
+
+  .intro{font-size:15.5px;line-height:1.7;color:#473d31;font-style:italic;border-left:3px solid var(--gold);padding-left:16px;margin:0 0 26px}
+
+  /* Tonight callout */
+  .callout{background:#fff;border:1px solid var(--rule);border-top:3px solid var(--gold);border-radius:13px;padding:16px 18px;margin:0 0 28px;box-shadow:0 6px 18px rgba(90,45,20,.05)}
+  .callout .ck{font-family:var(--sans);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-ink);font-weight:600;margin-bottom:7px}
+  .callout .ct{font-family:var(--display);font-size:17px;font-weight:600;color:var(--ink);margin:0 0 4px}
+  .callout p{margin:0;font-size:13.5px;line-height:1.5;color:#5f5446}
+
+  .divider{height:1px;background:var(--rule);margin:28px 0}
+
+  /* Pull quote */
+  .pull{font-family:var(--display);font-size:18px;line-height:1.4;font-weight:500;color:var(--red);
+    border-top:1px solid var(--rule-2);border-bottom:1px solid var(--rule-2);padding:16px 0;margin:18px 0;font-style:italic}
+
+  /* "Alive" chip */
+  .ask{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--rule-2);border-radius:999px;
+    padding:9px 16px;font-family:var(--sans);font-size:12px;color:var(--ink);box-shadow:0 4px 12px rgba(90,45,20,.06);margin:4px 0 6px}
+  .ask .dot{width:7px;height:7px;border-radius:50%;background:var(--gold-2)}
+  .ask b{color:var(--red);font-weight:600}
+  .source{font-family:var(--sans);font-size:11px;letter-spacing:.03em;color:var(--sub);margin:8px 0 0}
+
+  /* Quiz / tip cards */
+  .twocard{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:6px 0 4px}
+  .qc{background:#fff;border:1px solid var(--rule);border-radius:13px;padding:16px 17px;box-shadow:0 5px 16px rgba(90,45,20,.05)}
+  .qc .qk{font-family:var(--sans);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);font-weight:600;margin-bottom:7px}
+  .qc h3{font-size:15px;margin:0 0 5px}
+  .qc p{font-size:13px;line-height:1.5;color:#5f5446;margin:0 0 12px}
+  .qbtn{display:inline-block;background:var(--red);color:#fff;font-family:var(--sans);font-size:11.5px;font-weight:600;border-radius:8px;padding:9px 15px;text-decoration:none}
+
+  /* Footer */
+  .foot{background:#F4ECDD;border-top:1px solid var(--rule-2);padding:24px 38px 28px;text-align:center}
+  .foot p{font-family:var(--sans);font-size:11.5px;line-height:1.6;color:var(--sub);margin:0 0 8px}
+  .foot .links{font-family:var(--sans);font-size:11.5px;color:var(--red);margin:0 0 10px}
+  .foot .links a{color:var(--red);text-decoration:none;border-bottom:1px solid rgba(140,21,21,.3)}
+  .foot .brandline{font-family:var(--display);font-size:12px;letter-spacing:.06em;color:var(--gold-ink);font-style:italic}
+  .foot .illus{font-family:var(--sans);font-size:10.5px;letter-spacing:.04em;color:#7c6e58;margin-top:10px}
+
+  [contenteditable=true]{outline:none;transition:background .15s}
+  [contenteditable=true]:hover{background:rgba(140,21,21,.05)}
+  [contenteditable=true]:focus{background:rgba(140,21,21,.09);box-shadow:inset 0 0 0 1px rgba(140,21,21,.22);border-radius:3px}
+  .masthead [contenteditable=true]:hover{background:rgba(255,255,255,.08)}
+  .masthead [contenteditable=true]:focus{background:rgba(255,255,255,.12);box-shadow:inset 0 0 0 1px rgba(255,255,255,.3)}
+
+  .delete-btn{
+    position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:50%;
+    background:#1f1812;color:#fff;border:none;cursor:pointer;font-size:14px;line-height:1;
+    display:none;align-items:center;justify-content:center;font-family:var(--sans);z-index:5;
+  }
+  [data-card]{position:relative}
+  [data-card]:hover > .delete-btn{display:flex}
+  .delete-btn:hover{background:var(--red)}
+  #save-indicator{color:#8fbf8f;font-size:12px;margin-left:14px;opacity:0;transition:opacity .3s}
+  #save-indicator.show{opacity:1}
+
+  @media (max-width:560px){
+    .masthead{padding:26px 22px 22px}
+    .body{padding:24px 22px 28px}
+    .foot{padding:22px 22px 26px}
+    .twocard{grid-template-columns:1fr}
+  }
+
+  @media print{
+    *{ -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; }
+    html, body{ background:#fff !important; margin:0 !important; padding:0 !important; }
+    .toolbar, #save-indicator, .delete-btn{ display:none !important; }
+    .page{ width:100% !important; max-width:100% !important; margin:0 !important; box-shadow:none !important; border:none !important; border-radius:0 !important; }
+    .callout, .qc, .pull, .twocard, .ask{ page-break-inside: avoid; break-inside: avoid; }
+    [contenteditable=true]:hover, [contenteditable=true]:focus{ background:none !important; box-shadow:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="left">
+    <span class="brand">Sample issue · The Wellness Journey</span>
+    <span class="hint">Enable editing to change any text · saved in this browser</span>
+  </div>
+  <div class="right">
+    <span id="save-indicator">Saved</span>
+    <button id="edit-mode-btn" onclick="toggleEditMode()">Enable editing</button>
+    <button onclick="resetAll()">Reset</button>
+    <button onclick="saveHTML()">Download HTML</button>
+    <a class="pdf-link" id="pdf-btn" href="/sample-newsletter.html?print=1" target="_blank" rel="noopener">Download PDF</a>
+  </div>
+</div>
+
+<section class="page" data-card>
+
+  <!-- Masthead -->
+  <div class="masthead">
+    <div class="eyebrow" contenteditable="false">Stanford Lifestyle Medicine</div>
+    <h1 contenteditable="false">The Wellness Journey</h1>
+    <div class="meta" contenteditable="false"><b>Issue No. 1</b> · June 2026 · produced with Palonur</div>
+  </div>
+
+  <div class="body">
+
+    <!-- From the editors -->
+    <p class="intro" contenteditable="false">Welcome to your first issue. Each month we'll send one piece of faculty-grade science — and one small step you can take tonight. No overwhelm, just a steady path to feeling better.</p>
+
+    <!-- Tonight's step -->
+    <div class="callout" data-card>
+      <button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="ck" contenteditable="false">Tonight's small step</div>
+      <div class="ct" contenteditable="false">Dim your screens 60 minutes before bed.</div>
+      <p contenteditable="false">Bright light late in the evening tells your brain it's still daytime. Easing off an hour early helps melatonin rise on schedule — the simplest lever in tonight's article.</p>
+    </div>
+
+    <!-- Feature article -->
+    <div data-card>
+      <button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="eyebrow red" contenteditable="false">This month's feature · Sleep</div>
+      <h2 contenteditable="false">Three ways to reset your circadian clock</h2>
+      <div class="byline" contenteditable="false">By <b>the Stanford Lifestyle Medicine faculty</b></div>
+      <p contenteditable="false">Your body runs on an internal 24-hour clock that decides when you feel alert and when you feel sleepy. When that clock drifts out of sync with your schedule, you feel it as restless nights and groggy mornings. The good news: the same clock that drifts can be nudged back — gently, and without medication.</p>
+      <p contenteditable="false">First, anchor your morning. Getting bright light within an hour of waking is the strongest signal you can send your clock that the day has begun. Second, keep your wake time steady, even on weekends — a consistent morning does more for your sleep than a consistent bedtime. Third, dim the evening: lower the lights and step away from screens an hour before bed, so melatonin can rise on its own.</p>
+      <div class="pull" contenteditable="false">"A consistent morning does more for your sleep than a perfect bedtime."</div>
+      <p contenteditable="false">None of these requires a new gadget or a strict regimen — just a few small, repeatable choices. Pick one this week, and let the others follow.</p>
+
+      <div class="ask" contenteditable="false"><span class="dot"></span> <span><b>Ask this article:</b> "How long until I notice a difference?"</span></div>
+      <p class="source" contenteditable="false">Answered only from faculty-approved Stanford knowledge — not the open web. Based on Stanford Lifestyle Medicine research.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Reader story -->
+    <div data-card>
+      <button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="eyebrow" contenteditable="false">From the community</div>
+      <h3 contenteditable="false">What worked for one reader</h3>
+      <p contenteditable="false" style="font-style:italic">"I stopped trying to fix my bedtime and just set one alarm for the same time every morning — weekends included. Within two weeks I was falling asleep earlier without forcing it. The mornings were the part I never expected to matter."</p>
+      <p class="source" contenteditable="false">Shared anonymously by a Stanford Lifestyle Medicine member.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Quiz + tip -->
+    <div class="twocard" data-card>
+      <button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="qc">
+        <div class="qk" contenteditable="false">2-minute quiz</div>
+        <h3 contenteditable="false">How's your sleep hygiene?</h3>
+        <p contenteditable="false">Five quick questions, one personalized tip at the end.</p>
+        <a class="qbtn" href="#" onclick="return false" contenteditable="false">Take the quiz</a>
+      </div>
+      <div class="qc">
+        <div class="qk" contenteditable="false">Tip of the month</div>
+        <h3 contenteditable="false">Keep caffeine before noon</h3>
+        <p contenteditable="false">Caffeine can linger for 6+ hours. An early cutoff protects the deep sleep you build at night.</p>
+        <a class="qbtn" href="#" onclick="return false" contenteditable="false">More tips</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="foot">
+    <p contenteditable="false">You're receiving <b>The Wellness Journey</b> because you're part of the Stanford Lifestyle Medicine community.</p>
+    <div class="links" contenteditable="false"><a href="#" onclick="return false">Manage subscription</a> · <a href="#" onclick="return false">Unsubscribe</a></div>
+    <p contenteditable="false">Available in English · Español · Français · Deutsch — translated by Palonur AI.</p>
+    <div class="brandline" contenteditable="false">Faculty-grade science, one small step at a time — produced with Palonur.</div>
+    <div class="illus" contenteditable="false">Illustrative sample issue · not for distribution</div>
+  </div>
+
+</section>
+
+<script>
+  // Self-contained persistence. Edits are stored only in this browser
+  // (localStorage); there is no server sync. Use Download HTML / PDF to
+  // share a snapshot. Edit mode is a sessionStorage flag (clears on tab close).
+  const LOCAL_KEY = 'palonur-sample-newsletter-v1';
+  const EDIT_FLAG = 'palonur-sample-newsletter-edit';
+
+  function setIndicator(text, ok){
+    const ind = document.getElementById('save-indicator');
+    if (!ind) return;
+    ind.textContent = text;
+    ind.style.color = ok === false ? '#e26a6a' : '#7fbf7f';
+    ind.classList.add('show');
+    clearTimeout(setIndicator._t);
+    setIndicator._t = setTimeout(() => ind.classList.remove('show'), 2200);
+  }
+
+  function isEditMode(){ return !!sessionStorage.getItem(EDIT_FLAG); }
+
+  function refreshEditAffordances(){
+    const editing = isEditMode();
+    const btn = document.getElementById('edit-mode-btn');
+    if (btn) btn.textContent = editing ? 'Editing on · click to exit' : 'Enable editing';
+    document.querySelectorAll('.delete-btn').forEach(b => { b.style.display = editing ? '' : 'none'; });
+    document.querySelectorAll('.eyebrow, .masthead h1, .meta, .intro, h2, h3, p, .byline, .pull, .ask, .ck, .ct, .source, .qk, .qbtn, .links, .brandline, .illus').forEach(el => {
+      if (editing){
+        if (!el.closest('.toolbar') && !el.classList.contains('delete-btn')) el.setAttribute('contenteditable', 'true');
+      } else {
+        el.removeAttribute('contenteditable');
+      }
+    });
+    document.querySelectorAll('.delete-btn').forEach(b => b.setAttribute('contenteditable', 'false'));
+  }
+
+  function toggleEditMode(){
+    if (isEditMode()){
+      sessionStorage.removeItem(EDIT_FLAG);
+      refreshEditAffordances();
+      setIndicator('View only', true);
+      return;
+    }
+    sessionStorage.setItem(EDIT_FLAG, '1');
+    refreshEditAffordances();
+    setIndicator('Editing enabled · saved in this browser', true);
+  }
+
+  async function saveLocal(){
+    if (!isEditMode()) return false;
+    const pages = Array.from(document.querySelectorAll('.page')).map(p => p.outerHTML);
+    try {
+      localStorage.setItem(LOCAL_KEY, JSON.stringify(pages));
+      setIndicator('Saved in this browser ' + new Date().toLocaleTimeString(), true);
+      return true;
+    } catch(e){
+      setIndicator('Save failed (browser storage full?)', false);
+      return false;
+    }
+  }
+
+  let saveTimer;
+  function autoSave(){
+    if (!isEditMode()) return;
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(() => { saveLocal(); }, 600);
+  }
+
+  function deleteCard(btn){
+    if (!isEditMode()) return;
+    const card = btn.closest('[data-card]');
+    if (card && confirm('Delete this block?')){ card.remove(); autoSave(); }
+  }
+
+  const PRINT_OVERRIDE = `
+    <style id="palonur-print-window">
+      html,body{background:#fff !important;margin:0 !important;padding:0 !important}
+      *{ -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; }
+      @page{ size: 8.5in 11in; margin: 0.5in; }
+      .page{ width:100% !important; max-width:100% !important; margin:0 !important; box-shadow:none !important; border:none !important; border-radius:0 !important; }
+      .callout, .qc, .pull, .twocard, .ask{ page-break-inside: avoid; break-inside: avoid; }
+    </style>
+  `;
+
+  function buildPrintDocument(){
+    const clone = document.documentElement.cloneNode(true);
+    clone.querySelectorAll('.delete-btn, .toolbar, #save-indicator').forEach(n => n.remove());
+    clone.querySelectorAll('[contenteditable]').forEach(n => n.removeAttribute('contenteditable'));
+    const head = clone.querySelector('head');
+    if (head) head.insertAdjacentHTML('beforeend', PRINT_OVERRIDE);
+    return '<!doctype html>\n' + clone.outerHTML;
+  }
+
+  async function generatePDF(){
+    try {
+      const html = buildPrintDocument();
+      const w = window.open('', '_blank');
+      if (!w) throw new Error('Popup blocked. Please allow popups for this site.');
+      w.document.open(); w.document.write(html); w.document.close();
+      const fire = async () => {
+        try { if (w.document.fonts && w.document.fonts.ready) await w.document.fonts.ready; } catch(_){}
+        setTimeout(() => { try { w.focus(); w.print(); } catch(_){} }, 250);
+      };
+      if (w.document.readyState === 'complete') fire();
+      else w.addEventListener('load', fire);
+    } catch (e) {
+      alert('Could not open print window: ' + (e?.message || e) + '\n\nFalling back to the current-tab print dialog. In the dialog: choose "Save as PDF", uncheck "Headers and footers", set Margins to "None".');
+      window.print();
+    }
+  }
+
+  function saveHTML(){
+    const clone = document.documentElement.cloneNode(true);
+    clone.querySelectorAll('.delete-btn, .toolbar, #save-indicator').forEach(n => n.remove());
+    clone.querySelectorAll('[contenteditable]').forEach(n => n.removeAttribute('contenteditable'));
+    const head = clone.querySelector('head');
+    if (head) head.insertAdjacentHTML('beforeend', PRINT_OVERRIDE.replace('palonur-print-window','palonur-print-export'));
+    const html = '<!doctype html>\n' + clone.outerHTML;
+    const blob = new Blob([html], {type:'text/html'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'palonur_slm_sample_newsletter.html';
+    document.body.appendChild(a); a.click(); a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  function resetAll(){
+    if (!confirm('Reset this issue back to the original? This clears the edits saved in THIS browser.')) return;
+    localStorage.removeItem(LOCAL_KEY);
+    location.reload();
+  }
+
+  function loadLocal(){
+    try {
+      const raw = localStorage.getItem(LOCAL_KEY);
+      if (!raw) return false;
+      const pages = JSON.parse(raw);
+      if (!Array.isArray(pages) || pages.length === 0 || !pages.every(x => typeof x === 'string')) return false;
+      const existing = document.querySelectorAll('.page');
+      const parent = existing[0] ? existing[0].parentNode : document.body;
+      const anchor = existing[existing.length - 1] ? existing[existing.length - 1].nextSibling : null;
+      existing.forEach(p => p.remove());
+      pages.forEach(html => {
+        const wrap = document.createElement('div');
+        wrap.innerHTML = html;
+        const node = wrap.firstElementChild;
+        if (node) parent.insertBefore(node, anchor);
+      });
+      setIndicator('Loaded your saved edits', true);
+      return true;
+    } catch(e){ return false; }
+  }
+
+  document.getElementById('pdf-btn').addEventListener('click', function(e){
+    e.preventDefault();
+    generatePDF();
+  });
+
+  window.addEventListener('DOMContentLoaded', async () => {
+    loadLocal();
+    refreshEditAffordances();
+    document.addEventListener('input', autoSave, true);
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('print') === '1') {
+      document.querySelectorAll('.toolbar, #save-indicator, .delete-btn').forEach(n => n.remove());
+      document.querySelectorAll('[contenteditable]').forEach(n => n.removeAttribute('contenteditable'));
+      const head = document.querySelector('head');
+      if (head) head.insertAdjacentHTML('beforeend', PRINT_OVERRIDE);
+      try { if (document.fonts && document.fonts.ready) await document.fonts.ready; } catch(_){}
+      setTimeout(() => { try { window.focus(); window.print(); } catch(_){} }, 400);
+    }
+  });
+</script>
+</body>
+</html>

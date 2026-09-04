@@ -1,0 +1,133 @@
+{
+  "title": "Newsletter · Palonur · Stanford Lifestyle Medicine",
+  "pageTitle": "Newsletter · Palonur · Stanford Lifestyle Medicine",
+  "page": {
+    "backLink": "← Palonur",
+    "name": "The Palonur newsletter",
+    "subline": "Sleep science you can actually use, written for humans — plus real, anonymized stories from our community. A few times a month, no noise.",
+    "namePlaceholder": "First name (optional)",
+    "noShare": "We never share your email. Every issue has a one-click unsubscribe."
+  },
+  "form": {
+    "subscribing": "Subscribing…",
+    "done": "Subscribed ✓",
+    "default": "Subscribe free",
+    "errorFallback": "Something went wrong. Please try again.",
+    "networkError": "Network error. Please try again."
+  },
+  "whatYouGet": {
+    "headline": "What you'll get",
+    "items": [
+      {
+        "title": "Research, translated",
+        "desc": "Findings from sleep and lifestyle-medicine researchers, written so you can use them tonight."
+      },
+      {
+        "title": "Real stories, anonymized",
+        "desc": "Honest accounts from people in our community — always with names and identifying details removed."
+      },
+      {
+        "title": "Nothing to sell you",
+        "desc": "No spam, no daily blasts. Just a thoughtful issue when there's something worth your time."
+      }
+    ]
+  },
+  "pillars": {
+    "eyebrow": "Stanford Lifestyle Medicine",
+    "headline": "The stewards behind every issue",
+    "body": "Seven pillars of lifestyle medicine, each led by a Stanford faculty steward who reviews and approves the science we publish."
+  },
+  "premium": {
+    "badge": "Palonur Premium",
+    "headline": "Support our work — get every issue in full",
+    "body": "Free subscribers get a preview of premium issues. Members get the complete edition — every research deep-dive and story — and keep this work independent.",
+    "loading": "Loading plans…",
+    "annual": "Annual",
+    "monthly": "Monthly",
+    "mostPopular": "MOST POPULAR",
+    "bestValue": "BEST VALUE",
+    "fullAccess": "Full premium access",
+    "redirecting": "Redirecting to checkout…",
+    "upgradeCta": "Upgrade to premium →",
+    "manageSummary": "Already a member? Manage your subscription",
+    "manageSending": "Sending…",
+    "manageSent": "Link sent ✓",
+    "manageBtn": "Email me a manage link",
+    "manageMsg": "If that email has a premium subscription, we've sent a link to manage it. Check your inbox.",
+    "manageError": "Could not send the link. Please try again."
+  },
+  "hero": {
+    "eyebrow": "The Palonur newsletter",
+    "headline": "Stanford lifestyle medicine,",
+    "headlineEm": "in your inbox.",
+    "subline": "Signed by name. A few times a month."
+  },
+  "subscribe": {
+    "label": "Your email",
+    "namePlaceholder": "Your name (optional)",
+    "emailPlaceholder": "you@email.com",
+    "button": "Subscribe free",
+    "subscribing": "Subscribing…",
+    "done": "You're on the list!",
+    "alreadySubscribed": "You're already subscribed.",
+    "pending": "Check your email to confirm your subscription.",
+    "errorFallback": "Something went wrong. Please try again."
+  },
+  "pillarsSection": {
+    "headline": "Seven pillars. Seven faculty stewards.",
+    "body": "The newsletter covers all seven pillars of Stanford Lifestyle Medicine — each stewarded by a faculty expert whose published research grounds every answer."
+  },
+  "premiumSection": {
+    "eyebrow": "Newsletter Premium",
+    "headline": "Full access to every issue.",
+    "body": "Upgrade to read every premium issue — deep dives, featured stories, and the research behind the research.",
+    "monthly": "Monthly",
+    "annual": "Annual",
+    "mostPopular": "Most popular",
+    "getAccess": "Get access →",
+    "selectPlan": "Select a plan above",
+    "emailLabel": "Your email",
+    "emailPlaceholder": "you@email.com",
+    "startCheckout": "Start checkout →",
+    "starting": "Starting…"
+  },
+  "manage": {
+    "headline": "Manage your subscription",
+    "body": "Enter the email you subscribed with to manage your preferences or unsubscribe.",
+    "emailPlaceholder": "you@email.com",
+    "button": "Send management link",
+    "sending": "Sending…",
+    "sent": "Check your email — we've sent you a management link.",
+    "errorFallback": "Something went wrong. Please try again."
+  },
+  "subscribed": {
+    "label": "The Palonur newsletter",
+    "pending": {
+      "headline": "Almost there.",
+      "headlineEm": "Check your inbox.",
+      "body": "We just emailed you a confirmation link. Click it to start receiving the newsletter — we won't send you anything until you do. (No email after a minute? Check your spam folder.)",
+      "cta": "Ask Stanford about your sleep →"
+    },
+    "already": {
+      "headline": "You're already on the list —",
+      "headlineEm": "welcome back.",
+      "body": "We already had your email, so nothing changed — you'll keep getting one thing to try tonight, the research behind it, and real stories from our community, signed by name.",
+      "cta": "Ask Stanford about your sleep →"
+    },
+    "expired": {
+      "headline": "This link's",
+      "headlineEm": "no longer valid.",
+      "body": "This confirmation link has expired or was already used. Subscribe again and we'll send you a fresh link to confirm.",
+      "cta": "Subscribe again →"
+    },
+    "confirmed": {
+      "headline": "You're in.",
+      "headlineEm": "Watch your inbox.",
+      "bodyConfirmed": "Your subscription is confirmed. A few times a month you'll get one thing to try tonight, the research behind it, and real anonymized stories from our community — signed by name, never spam.",
+      "bodyDefault": "A few times a month you'll get one thing to try tonight, the research behind it, and real anonymized stories from our community — signed by name, never spam.",
+      "cta": "Ask Stanford about your sleep →"
+    },
+    "backHome": "Back to home",
+    "collab": "Palonur · in collab with Stanford Lifestyle Medicine"
+  }
+}

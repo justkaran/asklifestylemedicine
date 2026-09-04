@@ -1,0 +1,80 @@
+{
+  "title": "Why we are building Palonur",
+  "hero": {
+    "eyebrow": "Why we are building Palonur",
+    "headline": "AI at scale needs {{em}} humans at scale {{/em}}",
+    "body1": "In a year, more health questions will be answered by an AI than by a doctor. The question is no longer whether people will ask a model what's keeping them up at night — they already do. The question is whether the answer has anyone's name on it.",
+    "body2": "Palonur is the trust layer for that moment. Every sleep question routes through Stanford faculty. Every answer comes back with a person, a paper, and a finding behind it. When there isn't one, we say so.",
+    "aside": "\"Confidence becomes a bug, not a feature.\""
+  },
+  "problem": {
+    "eyebrow": "The problem",
+    "headline": "Confidence becomes {{em}} a bug {{/em}}, not a feature",
+    "body1": "Today's models answer every health question with the same calm certainty — whether they're right, wrong, or making it up. You can't tell which one you got. Neither can the app that served it to you. Neither can the doctor on the other end.",
+    "body2": "The fix isn't a smarter model. It's a named human standing behind the answer, willing to refuse when the evidence isn't there. That's the contract we're building.",
+    "aside": "\"The issue isn't that AI is wrong — it's that you can't tell the difference.\""
+  },
+  "founder": {
+    "eyebrow": "Founder",
+    "name": "Karan Dehghani",
+    "role": "Founder, Palonur · Advisory Board Member, Stanford Lifestyle Medicine · Ambassador, Stanford GSB",
+    "origin1": "Karan Dehghani serves on the Advisory Board of the Stanford Lifestyle Medicine Program. Palonur grew out of his ongoing conversations there with Prof. Jamie Zeitzer, Prof. Michael Fredericson, and Prof. Anne Friedlander. What began as a question over coffee, how does great science reach the people who need it, became a shared project. Today they are building Palonur together.",
+    "origin2": "At the Stanford Graduate School of Business, where Karan is an Ambassador, Allison Kluger brings her expertise in reputation management and personal branding to the same mission: when an answer carries a professor's name, it has to be worthy of that name.",
+    "body1": "For Karan this is personal. He has a young daughter, and he wants to be strong, sharp, and present for every chapter of her life. Aging well is not an abstract topic at his house. It is the reason he asks the same questions Palonur's visitors ask: about sleep, about movement, about staying connected. He wants the answers to come from people who actually know.",
+    "body2": "Palonur exists to restore that accountability: every answer stewarded by a named researcher who has read it, verified it, and signed it. The fastest answer and the most trustworthy answer should be the same thing.",
+    "cta": "Send Karan a message",
+    "formDesc": "Leave your name and email and Karan will get back to you.",
+    "namePlaceholder": "Your name",
+    "emailPlaceholder": "Your email",
+    "msgPlaceholder": "Your message (optional)",
+    "send": "Send",
+    "sending": "Sending…",
+    "cancel": "Cancel",
+    "success": "✓ Message sent. Karan will get back to you."
+  },
+  "why": {
+    "eyebrow": "Why the founder built this",
+    "headline": "Palonur exists for {{em}} two reasons {{/em}}",
+    "body1": "The first is personal. When the founder's daughter got sick, the search for answers led everywhere and nowhere: confident advice from anonymous sources, no way to know what was true. What the family needed were answers that were reliable, and credited to a real expert who put their name on them.",
+    "body2": "The second is something the founder kept seeing everywhere: past 45, the questions about your body, your sleep, your mind get harder, and the support gets thinner. People in the second half of life need far more support than they actually get.",
+    "body3": "Palonur is the answer to both. Every response comes from the published research of a named Stanford faculty member, cited and signed. Support you can check, at any hour, for the years when you need it most.",
+    "pullQuote": "We are putting a {{em}} name {{/em}} back on the answer.",
+    "pullSub": "One question. One Stanford faculty member. One answer they signed.",
+    "closing": "That family, and every person asking a hard question tonight, deserves an answer they can trust, from someone whose name is on it.",
+    "tenets": {
+      "name": {
+        "title": "A name, not a model",
+        "text": "Every answer is signed by the Stanford faculty member whose lab produced the research. A real person with a reputation to protect."
+      },
+      "citation": {
+        "title": "A citation you can check",
+        "text": "Each answer carries the paper it came from, verified against that source before you ever see it. You can read the study yourself."
+      },
+      "limits": {
+        "title": "Honest when it doesn't know",
+        "text": "If the research doesn't cover your question, Palonur tells you clearly. It never fills a gap with a confident guess."
+      }
+    }
+  },
+  "team": {
+    "eyebrow": "The team that makes this credible",
+    "headline": "Real names. Real labs. {{em}} Real refusals {{/em}}",
+    "body": "Stanford Lifestyle Medicine is one use case for Palonur. Sleep is led by Prof. Jamie Zeitzer at the Stanford School of Medicine. The broader team brings the pillars that come next —",
+    "pillarsLink": "see all the pillars"
+  },
+  "comparison": {
+    "eyebrow": "The same question · two answers",
+    "headline": "What plain AI says vs. {{em}} what Stanford says {{/em}}",
+    "question": "You: \"Does scrolling my phone in bed actually wreck my sleep?\"",
+    "plainLabel": "Plain AI · without Palonur",
+    "stanfordLabel": "Same AI · through Palonur",
+    "plainAnswer": "\"Yes, for a lot of people it does — but not because 'screens are evil.' Mental stimulation keeps the brain alert. Blue light can delay melatonin, though the effect is probably smaller than headlines suggest. A 10-minute scroll easily becomes 45, cutting sleep. Try keeping the phone farther and dimmer, avoid stimulating apps in the last 30–60 minutes, and turn on Night Shift.\"",
+    "stanfordAnswer": "\"Most of the effect is brightness, not color. About 100 lux — dimmer than a typical lit living room — already cuts evening melatonin in half and pushes sleep later. A phone held close to your face easily clears that. Dimming the whole room in the hour before bed moves the needle more than night-mode on any single screen.\"",
+    "plainMeta": "No source · No citation · Generic",
+    "stanfordMeta": "Zeitzer et al. · J Physiol, 2000 · Stanford"
+  },
+  "footer": {
+    "copyright": "© Palonur",
+    "backHome": "← Back to palonur.com"
+  }
+}

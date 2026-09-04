@@ -1,0 +1,479 @@
+{
+  "nav": {
+    "back": "← Palonur",
+    "home": "Palonur",
+    "sleep": "Schlaf",
+    "about": "Über uns",
+    "pillars": "Die Säulen",
+    "stewards": "Die Stewards",
+    "newsletter": "Newsletter",
+    "readingRoom": "Leseraum",
+    "forAgents": "Für KI-Agenten",
+    "forPlatforms": "Für Plattformen",
+    "terms": "Nutzungsbedingungen",
+    "privacy": "Datenschutz",
+    "askPalonur": "Palonur fragen",
+    "whatIsPalonur": "Was ist Palonur?",
+    "aiWithoutTraining": "KI ohne Training"
+  },
+  "footer": {
+    "tagline": "Wissenschaftliche Integrität in der KI.",
+    "subTagline": "Für Endnutzer, KI-Agenten und KI-Plattformen.",
+    "cta": "Kontakt aufnehmen →",
+    "copyright": "© Palonur",
+    "disclaimer": "Palonur veröffentlicht Bildungsinhalte. Es bietet keine medizinische Beratung, Diagnose oder Behandlung. Wenden Sie sich bei klinischen Entscheidungen an Ihre Ärztin oder Ihren Arzt.",
+    "slogan": "Die beste Fakultät der Welt auf Knopfdruck.",
+    "newsletter": {
+      "label": "Der Palonur-Newsletter",
+      "description": "Nutzbare Schlafwissenschaft und anonymisierte Gemeinschaftsgeschichten. Einige Male im Monat.",
+      "placeholder": "sie@email.de",
+      "subscribe": "Abonnieren",
+      "subscribing": "…",
+      "subscribed": "Abonniert ✓",
+      "errorFallback": "Bitte versuchen Sie es erneut.",
+      "networkError": "Netzwerkfehler. Bitte versuchen Sie es erneut."
+    }
+  },
+  "newsletterPitch": {
+    "label": "Der Palonur-Newsletter",
+    "headline": "Stanford-Schlafwissenschaft,",
+    "headlineEm": "in Ihrem Posteingang.",
+    "body": "Eine Sache, die Sie heute Nacht ausprobieren können, die Forschung dahinter und echte anonymisierte Geschichten aus unserer Gemeinschaft. Namentlich unterzeichnet. Ein paarmal im Monat, niemals Spam.",
+    "placeholder": "sie@email.de",
+    "subscribe": "Abonnieren",
+    "subscribing": "…",
+    "subscribed": "Abonniert ✓",
+    "errorFallback": "Bitte versuchen Sie es erneut.",
+    "networkError": "Netzwerkfehler. Bitte versuchen Sie es erneut."
+  },
+  "lang": {
+    "switcherLabel": "Sprache",
+    "en": "EN",
+    "de": "DE"
+  },
+  "stanford": "Stanford",
+  "slm": "Lifestyle Medicine",
+  "tagline": "Die beste Fakultät der Welt auf Knopfdruck",
+  "ask": "Fragen",
+  "askArrow": "Fragen →",
+  "scrollCue": "Warum wir das bauen ↓",
+  "whyWeBuiltThis": "Warum wir das bauen ↓",
+  "refuseCard": {
+    "heading": "Ich kann nur mit geprüfter Forschung zu Schlaf und Lifestyle-Medizin antworten",
+    "subline": "Du kannst weiterfragen. Frage zu Schlaf, Gesundheit oder Alltag, dann suche ich nach passender Forschung."
+  },
+  "uncoveredCard": {
+    "heading": "Dazu habe ich noch keine geprüfte Forschung",
+    "subline": "Du kannst weiterfragen. Stelle die Frage genauer oder frage zu einem verwandten Schlafthema.",
+    "teamNotified": "Team benachrichtigt",
+    "autoNotice": "Unser Team wurde benachrichtigt und sucht nach Stanford-Material zu diesem Thema. Alles, was wir finden, wird zuerst von unseren Fakultäts-Stewards geprüft, bevor es zitiert wird.",
+    "followUpPrompt": "Mochtest du personlich informiert werden? Hinterlasse deine E-Mail:",
+    "placeholder": "deine@email.de (optional)",
+    "button": "Informiere mich",
+    "sending": "Wird gesendet...",
+    "emailSent": "Verstanden. Wir melden uns, wenn wir eine fundierte Antwort haben.",
+    "error": "Etwas ist schiefgelaufen. Bitte versuche es erneut."
+  },
+  "boundaryEvidence": {
+    "label": "Ein echter Fall, kein Versprechen",
+    "triggerLabel": "Was ihn ausgelöst hat",
+    "trigger": "Am {{date}} fragte jemand: „{{question}}“ Nichts in unserem geprüften Bestand war belastbar genug, also wurde daraus nichts zitiert.",
+    "nextLabel": "Was danach geschah",
+    "nextApproved": "Unser System durchsuchte die Stanford-Seiten, fand „{{title}}“ und legte es dem Steward für {{pillar}} vor. Der Steward hat es inzwischen geprüft und freigegeben. Diese Frage bekommt jetzt eine fundierte, zitierfähige Antwort.",
+    "nextPending": "Unser System durchsuchte die Stanford-Seiten, fand „{{title}}“ und legte es dem Steward für {{pillar}} zur Prüfung vor. Zitiert wird nichts, bevor ein benannter Steward es freigibt.",
+    "aggregate": "In den letzten 30 Tagen erreichten {{n}} Fragen den Rand unseres geprüften Wissens. Jede einzelne wurde protokolliert. Genau so wächst die Karte."
+  },
+  "popup": {
+    "title": "Sicher dir den Gründerpreis.",
+    "subTitle": "Dein Preis, wenn du jemals abonnierst: $19.90/Monat.",
+    "body": "Heute keine Zahlung. Wenn du abonnierst, und das kannst du später entscheiden, zahlst du $19.90/Monat statt der regulären $89/Monat.",
+    "socialProof": "{{count}} Personen haben sich bereits einen Gründungsplatz reserviert.",
+    "emailPlaceholder": "E-Mail",
+    "legal": "Mit der Anmeldung stimmst du zu, Updates von Palonur zu erhalten. Heute keine Zahlung — und auch nicht, bis wir starten. Jederzeit abmeldbar.",
+    "saving": "Speichere...",
+    "claimSpot": "Meinen Platz reservieren",
+    "noThanks": "Nein, danke",
+    "successTitle": "Du bist dabei.",
+    "successBody": "Dein Gründerpreis von $19.90/Monat ist reserviert. Keine Zahlung bis zum Start — wir melden uns zuerst.",
+    "continue": "WEITER",
+    "errorGeneric": "Etwas ist schiefgelaufen.",
+    "errorServer": "Server nicht erreichbar. Bitte Verbindung prüfen."
+  },
+  "sleepAgent": {
+    "greeting": {
+      "morning": "Guten Morgen",
+      "afternoon": "Guten Tag",
+      "evening": "Guten Abend",
+      "night": "Gute Nacht"
+    },
+    "yourJourney": "Deine Reise →",
+    "searchPlaceholder": "Frage Stanford alles über deinen Schlaf…",
+    "askButton": "Fragen",
+    "conversation": {
+      "tryThis": "Probieren Sie das:",
+      "listen": "Anhören",
+      "stopListening": "Stopp",
+      "continueLabel": "Gespräch fortsetzen",
+      "placeholder": "Eine Anschlussfrage stellen...",
+      "send": "Senden",
+      "askAboutThis": "Hierzu fragen",
+      "askAboutPrompt": "Kannst du diesen Teil genauer erklären?",
+      "selectedExcerpt": "Aus der Antwort",
+      "removeSelectedExcerpt": "Ausgewählten Text entfernen",
+      "answerSelectionHint": "Antworttext. Wähle eine Stelle aus und drücke dann Alt+A, um dazu zu fragen.",
+      "speakQuestion": "Frage einsprechen",
+      "stopRecording": "Aufnahme beenden",
+      "recordingHint": "Wir hören zu... tippen Sie auf das Quadrat zum Beenden",
+      "transcribing": "Ihre Frage wird transkribiert...",
+      "transcribeError": "Wir konnten die Aufnahme nicht verstehen. Bitte versuchen Sie es erneut oder tippen Sie Ihre Frage.",
+      "micError": "Wir konnten nicht auf Ihr Mikrofon zugreifen. Bitte erlauben Sie den Mikrofonzugriff oder tippen Sie Ihre Frage.",
+      "turnsLeft": "{{count}} kostenlose Anschlussfragen in diesem Gespräch übrig",
+      "paywall": {
+        "eyebrow": "Weitermachen",
+        "heading": "Sie haben Ihre kostenlosen Anschlussfragen für dieses Gespräch aufgebraucht",
+        "body": "Abonnenten können jedes Gespräch beliebig lange fortsetzen, mit Antworten, die in steward-geprüfter Forschung verankert sind.",
+        "cta": "Abo-Optionen ansehen",
+        "newQuestionHint": "Sie können morgen auch eine neue Frage stellen: Ihre tägliche kostenlose Frage wird jeden Tag zurückgesetzt."
+      },
+      "rail": {
+        "title": "Über diese Antwort",
+        "open": "Über diese Antwort",
+        "close": "Schließen",
+        "detailsOpen": "Alle Details",
+        "earlierTurn": "Sie sehen eine frühere Antwort in diesem Gespräch.",
+        "backToLatest": "Zur neuesten Antwort",
+        "pillar": "Säule",
+        "sources": "Quellen",
+        "alsoAnswered": "Auch beantwortet von",
+        "coverage": {
+          "covered": "Steward-verifiziert",
+          "fallback": "Breitere Stanford-Forschung",
+          "boundary": "Grenze der Forschung",
+          "refuse": "Außerhalb des Themas",
+          "unverified": "Nicht verifiziert"
+        },
+        "coverageNote": {
+          "covered": "Im geprüften Korpus dieser Säule verankert und zitatgeprüft.",
+          "fallback": "Aus breiterer Stanford-Forschung, noch nicht steward-geprüft.",
+          "boundary": "Noch keine geprüfte Quelle beantwortet diese Frage. Du kannst weiterfragen.",
+          "refuse": "Diese Frage liegt außerhalb dessen, was dieser Dienst abdeckt.",
+          "unverified": "Diese Antwort konnte nicht gegen den geprüften Korpus verifiziert werden."
+        },
+        "share": {
+          "title": "Dieses Wissen teilen",
+          "body": "Geben Sie diese Antwort an jemanden weiter, dem sie helfen könnte.",
+          "copy": "Text zum Teilen kopieren",
+          "copied": "Kopiert"
+        },
+        "trust": {
+          "title": "Ihre Einschätzung",
+          "question": "Haben Sie das Gefühl, dieser Antwort vertrauen zu können?",
+          "yes": "Ja",
+          "no": "Nein",
+          "thanks": "Danke. Ihr Feedback hilft den Fachleuten hinter diesem Dienst, ihn zu verbessern."
+        }
+      }
+    },
+    "contact": {
+      "button": "Persönliche Hilfe",
+      "title": "Persönliche Hilfe erhalten",
+      "intro": "Schreiben Sie unserem Team. Wir lesen jede Nachricht und antworten per E-Mail.",
+      "name": "Ihr Name",
+      "namePlaceholder": "Ihr Name",
+      "email": "Ihre E-Mail",
+      "emailPlaceholder": "sie@beispiel.de",
+      "message": "Wie können wir helfen?",
+      "messagePlaceholder": "Erzählen Sie uns kurz, worum es geht…",
+      "send": "Nachricht senden",
+      "sending": "Wird gesendet…",
+      "sentTitle": "Nachricht gesendet",
+      "sentBody": "Danke. Unser Team antwortet Ihnen bald per E-Mail.",
+      "error": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
+      "close": "Schließen"
+    },
+    "loading": {
+      "details": "Einen Moment, wir holen ein paar Details…",
+      "consulting": "Stanford-Forschung wird konsultiert…"
+    },
+    "error": {
+      "couldNotReach": "Entschuldigung, der Dienst konnte nicht erreicht werden. ({{message}})"
+    },
+    "intake": {
+      "label": "Ein paar kurze Fragen",
+      "subheading": "Damit Stanfords Forschung präziser antworten kann.",
+      "instruction": "Tippe, was passt, oder schreibe deine eigene Antwort. Beantworte, was du möchtest, oder überspringe direkt zur Antwort.",
+      "typeYourOwn": "Oder eigene Antwort eingeben…",
+      "getAnswer": "Meine Antwort erhalten",
+      "skip": "Überspringen — einfach antworten"
+    },
+    "emptyState": {
+      "whatsOnMind": "Was beschäftigt dich?",
+      "nightlyLabel": "Palonur Pal",
+      "nightlyHeading": "Unbegrenzte evidenzbasierte Antworten, alle Säulen.",
+      "nightlyBody": "Deine erste Frage pro Tag ist kostenlos. Keine Karte erforderlich. Abonniere Pal für unbegrenzte Antworten über alle Säulen, basierend auf Stanford-Forschung.",
+      "subscribeCta": "Abonnieren →"
+    },
+    "situationCards": [
+      {
+        "label": "Durchschlafen",
+        "title": "Ich wache um 3 Uhr nachts auf und kann nicht wieder einschlafen",
+        "q": "Warum wache ich um 3 Uhr auf und kann nicht wieder einschlafen?"
+      },
+      {
+        "label": "Morgennebel",
+        "title": "Ich bin stundenlang benommen, selbst nach einer vollen Nacht",
+        "q": "Warum bin ich morgens so benommen, obwohl ich genug geschlafen habe?"
+      },
+      {
+        "label": "Abendlicht",
+        "title": "Bildschirme vor dem Schlafengehen stören meinen Schlaf",
+        "q": "Wie beeinflussen Bildschirme und Handy-Licht vor dem Schlafengehen meinen Schlaf?"
+      },
+      {
+        "label": "Tagesmüdigkeit",
+        "title": "Ich bin den ganzen Tag müde, egal wie viel ich schlafe",
+        "q": "Warum bin ich den ganzen Tag müde, obwohl ich genug geschlafen habe?"
+      },
+      {
+        "label": "Jetlag und Reisen",
+        "title": "Reisen bringt meinen Schlaf völlig durcheinander",
+        "q": "Wie erhole ich mich vom Jetlag nach Zeitzonenreisen?"
+      },
+      {
+        "label": "Schlaf und Alter",
+        "title": "Ich bin älter und schlafe weniger als früher",
+        "q": "Warum schlafen ältere Menschen weniger und was kann ich dagegen tun?"
+      },
+      {
+        "label": "Koffein",
+        "title": "Kaffee: Wann hört er auf, meinen Schlaf zu beeinflussen?",
+        "q": "Wann sollte ich aufhören Kaffee zu trinken, damit er meinen Schlaf nicht stört?"
+      },
+      {
+        "label": "Sport",
+        "title": "Ich bewege mich regelmäßig, schlafe aber trotzdem schlecht",
+        "q": "Ich bewege mich regelmäßig, schlafe aber trotzdem schlecht. Was ist los?"
+      }
+    ],
+    "voteCard": {
+      "label": "Hilf uns zu entscheiden, was wir als nächstes bauen",
+      "body": "Die gleiche Antwort, drei Wege. Probiere jeden aus und stimme für deinen Favoriten.",
+      "options": {
+        "text": {
+          "label": "Text",
+          "desc": "Lesen, wie die obige Antwort"
+        },
+        "podcast": {
+          "label": "Podcast",
+          "desc": "Eine produzierte Zwei-Stimmen-Episode"
+        },
+        "avatar": {
+          "label": "Avatar",
+          "desc": "Ein Moderator spricht es für dich"
+        }
+      },
+      "podcastBlurb": "Ein Moderator und der Experte besprechen deine Frage.",
+      "yourPick": "Deine Wahl ✓",
+      "voteFor": "Für {{label}} stimmen",
+      "thanks": "Danke für deine Stimme. Du kannst deine Wahl jederzeit ändern."
+    },
+    "avatarDemo": {
+      "preparing": "Wird vorbereitet…",
+      "stop": "Stopp",
+      "preview": "Avatar-Vorschau",
+      "blurb": "Frühe Demo: {{name}} spricht die Antwort. Video folgt."
+    },
+    "answer": {
+      "answerSteward": "Antwort-Experte",
+      "slmFallbackTitle": "Aus der breiteren Stanford-Forschung",
+      "slmFallbackNote": "Noch nicht von unseren Fakultätsexperten geprüft.",
+      "advisorTip": "Möchtest du das mit jemandem besprechen? Hier ist, wie du es kommunizieren kannst →",
+      "tryThis": "Das ausprobieren",
+      "source": "Quelle",
+      "copyCredentialTitle": "Zertifikat mit Zitat kopieren",
+      "credentialCopied": "Zertifikat kopiert",
+      "copyCredential": "Zertifikat kopieren",
+      "ttsLoading": "Wird geladen…",
+      "ttsStop": "Stopp",
+      "ttsListen": "Anhören",
+      "seeFullSource": "Vollständige Quelle anzeigen ↓",
+      "readCitation": "Zitat öffnen",
+      "doi": "DOI öffnen ↗",
+      "sourceLink": "Quelle öffnen ↗",
+      "interpretedBy": "Interpretiert von {{author}}",
+      "reviewedBySteward": "Vom Experten geprüft",
+      "hidePassage": "Passage ausblenden",
+      "showPassage": "Passage anzeigen",
+      "close": "Schließen",
+      "dismiss": "Schließen",
+      "sourcesUsed": "Verwendete Quellen",
+      "groundedInInterps_one": "Diese Antwort basiert auf {{count}} von Stanford genehmigten Interpretation.",
+      "groundedInInterps_other": "Diese Antwort basiert auf {{count}} von Stanford genehmigten Interpretationen.",
+      "groundedInPapers_one": "Diese Antwort basiert auf {{count}} wissenschaftlicher Arbeit.",
+      "groundedInPapers_other": "Diese Antwort basiert auf {{count}} wissenschaftlichen Arbeiten.",
+      "groundedInBoth": "Diese Antwort basiert auf {{interpCount}} von Stanford genehmigten Interpretation(en) und {{paperCount}} wissenschaftliche(n) Arbeit(en).",
+      "groundedDefault": "Diese Antwort basiert auf von Stanford genehmigten Quellen.",
+      "stewardNote": "Anmerkung des Experten",
+      "stewardNameNote": "Anmerkung von {{name}}",
+      "visitPillar": "{{name}} besuchen →",
+      "readMoreSlm": "Mehr von Stanford Lifestyle Medicine lesen: ",
+      "shareNudge": {
+        "label": "Mit jemandem teilen",
+        "body": "Kennst du jemanden mit Schlafproblemen? Schenke ihm 5 kostenlose Fragen.",
+        "copied": "Kopiert!",
+        "copyLink": "Link kopieren"
+      },
+      "shareStory": {
+        "label": "Für den Stanford-Lifestyle-Medicine-Newsletter",
+        "cta": "Hat das geholfen? Teile deine Schlaferfahrung →",
+        "body": "Hat das geholfen?",
+        "ctaLink": "Teile deine Schlaferfahrung →"
+      },
+      "clarifyPlaceholder": "Deine Antwort…",
+      "flag": {
+        "done": "Danke. Diese Antwort wurde zur Überprüfung durch Stanford-Lehrkräfte markiert.",
+        "whatWrong": "Was stimmt mit dieser Antwort nicht? (optional)",
+        "placeholder": "z.B. beantwortet meine Frage nicht wirklich oder widerspricht dem, was ich anderswo gelesen habe…",
+        "sending": "Wird gesendet…",
+        "sendToFaculty": "An Lehrkräfte senden",
+        "cancel": "Abbrechen",
+        "flagForReview": "Diese Antwort zur Überprüfung markieren"
+      },
+      "journey": {
+        "premiumLabel": "Palonur Premium",
+        "premiumBody": "Frage weiter, bis du deine Antwort findest. Wenn du dort bist, drücke den Knopf unten.",
+        "foundAnswer": "Ich habe meine Antwort gefunden ✓",
+        "completeHeading": "Reise abgeschlossen",
+        "completeBody": "Die automatische Verlängerung ist deaktiviert. Du behältst Zugang für die 90 Tage, die du bereits bezahlt hast. Wir hoffen, du hast gefunden, was du gesucht hast.",
+        "inviteHeading": "Komm morgen zurück und lass uns gemeinsam sehen, ob sich das über 7 Nächte ändert.",
+        "inviteHeadingTopics": {
+          "caffeine": "Komm morgen zurück und lass uns gemeinsam sehen, ob dein Koffein-Timing über 7 Nächte einen Unterschied macht.",
+          "alcohol": "Komm morgen zurück und lass uns gemeinsam sehen, ob sich dein Schlaf ohne den Abenddrink über 7 Nächte verändert.",
+          "screens": "Komm morgen zurück und lass uns gemeinsam sehen, ob sich eine ruhigere Abendroutine über 7 Nächte auszahlt.",
+          "dreams": "Komm morgen zurück und lass uns gemeinsam sehen, ob sich deine Träume über 7 Nächte verändern.",
+          "wake3am": "Komm morgen zurück und lass uns gemeinsam sehen, ob sich dein nächtliches Aufwachen über 7 Nächte verändert.",
+          "earlyWake": "Komm morgen zurück und lass uns gemeinsam sehen, ob sich dein frühes Aufwachen über 7 Nächte verändert.",
+          "fallAsleep": "Komm morgen zurück und lass uns gemeinsam sehen, ob dir das Einschlafen über 7 Nächte leichter fällt.",
+          "daytime": "Komm morgen zurück und lass uns gemeinsam sehen, ob du dich über 7 Nächte tagsüber wacher fühlst."
+        },
+        "inviteSubtitle": "Dauert 15 Sekunden. Dein Fortschritt bleibt privat.",
+        "begin": "Meine 7 Nächte beginnen →"
+      },
+      "saveAnswer": {
+        "heading": "Möchtest du diese Antwort behalten?",
+        "body": "Wir schicken dir diese Antwort und deine Quellen per E-Mail, damit du jederzeit darauf zurückkommen kannst.",
+        "placeholder": "du@beispiel.de",
+        "button": "Antwort per E-Mail senden",
+        "sending": "Wird gesendet…",
+        "dismiss": "Schließen",
+        "newsletterLabel": "Schick mir auch den Stanford Lifestyle Medicine Newsletter. Optional: du bekommst zuerst eine Bestätigungs-E-Mail, und nichts startet, bevor du bestätigst.",
+        "sentHeading": "Schau in dein Postfach: deine Antwort und ihre Quellen sind unterwegs.",
+        "sentBody": "Die E-Mail enthält einen Link, der dich anmeldet, damit du genau dort weitermachen kannst, wo du aufgehört hast.",
+        "sentNewsletterPending": "Wir haben dir außerdem eine separate Newsletter-Bestätigung geschickt. Nichts startet, bevor du sie bestätigst.",
+        "errorStillSaving": "Deine Antwort wird noch gespeichert. Bitte versuche es in ein paar Sekunden erneut.",
+        "errorTooMany": "Zu viele Anfragen. Bitte versuche es gleich noch einmal.",
+        "errorGeneric": "Etwas ist schiefgelaufen. Bitte versuche es erneut.",
+        "errorConnection": "Verbindungsproblem. Bitte versuche es erneut."
+      }
+    },
+    "share": {
+      "tryThis": "Das ausprobieren: {{text}}",
+      "jamiesTake": "— Jamies Einschätzung —",
+      "source": "— Quelle —",
+      "finding": "Ergebnis: {{text}}",
+      "verifiedBy": "Verifiziert von Prof. Jamie Zeitzer · Stanford School of Medicine",
+      "viaPalonur": "über Palonur — palonur.com",
+      "credential": "✓ Verifiziert von Prof. Jamie Zeitzer · Stanford School of Medicine",
+      "stewardsTake": "— {{name}}s Einschätzung —",
+      "verifiedByName": "Verifiziert von {{name}}",
+      "credentialName": "✓ Verifiziert von {{name}}",
+      "expertsTake": "— Die Einschätzung des Experten —",
+      "verifiedGeneric": "Verifiziert anhand des geprüften Stanford-Korpus",
+      "credentialGeneric": "✓ Verifiziert anhand des geprüften Stanford-Korpus",
+      "stewardsTakeApos": "— {{name}}' Einschätzung —"
+    },
+    "privacyFooter": {
+      "body": "Wir speichern deine Fragen (anonym, ohne Name oder E-Mail), damit Stanford-Lehrkräfte Lücken erkennen und Antworten verbessern können. Es werden keine persönlichen Daten gespeichert.",
+      "resumeSharing": "Fragen wieder teilen",
+      "dontLog": "Fragen nicht speichern",
+      "paused": "✓ Speicherung auf diesem Gerät pausiert."
+    },
+    "sourceSheet": {
+      "header": "Stanford-Quelle",
+      "loading": "Wird geladen…",
+      "loadError": "Diese Quelle konnte nicht geladen werden. ({{error}})",
+      "stanfordsTake": "Stanfords Einschätzung",
+      "notProven": "Nicht bewiesen:",
+      "tryThis": "Das ausprobieren:",
+      "abstract": "Zusammenfassung",
+      "noAbstract": "Noch kein Abstract für diese Quelle vorhanden.",
+      "openPaper": "Artikel öffnen (DOI) ↗",
+      "openSource": "Quelle öffnen ↗"
+    },
+    "onboarding": {
+      "welcomeName": "Willkommen, {{name}}.",
+      "journeyBegins": "Deine 7-Nächte-Reise beginnt heute Nacht.",
+      "comeBackTomorrow": "Komm morgen wieder und halte die Serie am Laufen.",
+      "firstStep": "Du hast gerade deinen ersten Schritt gemacht.",
+      "tomorrowQuestion": "Eine Frage morgen früh: Hat es funktioniert? Das ist alles. Der Rest baut sich Nacht für Nacht auf.",
+      "firstNamePlaceholder": "Dein Vorname (optional)",
+      "emailPlaceholder": "Deine E-Mail",
+      "loading": "Einen Moment…",
+      "startTonight": "Heute Nacht beginnen →",
+      "maybeLater": "Vielleicht später"
+    },
+    "premiumModal": {
+      "badge": "$49 / Monat · Früher Zugang",
+      "heading": "Ein Arzt, der sich ganz deinem Schlaf widmet.",
+      "body": "Es gibt eine Warteliste für Palonurs persönliches Schlafprogramm: ein engagierter Schlafmediziner, basierend auf Stanford-Forschung, der persönlich mit dir arbeitet.",
+      "subBody": "Hinterlasse deine Daten und wir melden uns, wenn ein Platz frei wird.",
+      "namePlaceholder": "Dein Name",
+      "emailPlaceholder": "E-Mail-Adresse",
+      "savingBtn": "Wird gespeichert…",
+      "reserveSpot": "Meinen Platz reservieren →",
+      "noCharge": "Keine Zahlung jetzt. Wir melden uns, wenn ein Platz frei wird.",
+      "waitlistHeading": "Du stehst auf der Warteliste.",
+      "waitlistBody": "Wir melden uns, sobald ein Platz frei wird. Erkunde in der Zwischenzeit deinen Schlaf mit dem KI-Agenten.",
+      "backToQuestions": "Zurück zu meinen Fragen"
+    },
+    "paywallModal": {
+      "badge": "Palonur Premium",
+      "heading": "Möchtest du nachfragen? Speichere deine Antwort und mach weiter.",
+      "waitlistDoneHeading": "Du stehst auf der Liste.",
+      "waitlistDoneBody": "Wir schreiben dir, wenn weitere Plätze frei werden, zusammen mit deinem Mitgliederrabatt.",
+      "waitlistBody": "Wir laden Nutzer derzeit in Gruppen ein. Gib deine E-Mail ein und wir benachrichtigen dich, wenn ein Platz frei wird. Frühe Mitglieder erhalten einen Rabatt.",
+      "emailPlaceholder": "deine@email.de",
+      "notifyMe": "Benachrichtige mich",
+      "loading": "…",
+      "maybeLater": "Vielleicht später"
+    },
+    "phoneCapture": {
+      "heading": "Unterstützung per Nachricht?",
+      "blurb": "Optionale Erinnerungen für deine Schlafexperimente. Text, E-Mail oder beides. Eine Bestätigungsnachricht, sonst nichts bis du mit JA antwortest."
+    },
+    "trajectory": {
+      "title": "So ist diese Antwort entstanden",
+      "whereWeLooked": "Wo wir gesucht haben",
+      "searchedOne": "Wir haben in der Säule {pillar} gesucht — einer Sammlung von Forschung, die Fakultäts-Stewards vorab freigegeben haben.",
+      "searchedMany": "Wir haben in diesen Säulen gesucht — Sammlungen von Forschung, die Fakultäts-Stewards vorab freigegeben haben: {pillars}.",
+      "whatWeFound": "Was wir gefunden haben",
+      "foundSources": "{count} freigegebene Quelle(n) passten genau genug zu Ihrer Frage, um diese Antwort zu bauen:",
+      "foundNone": "Keine freigegebene Quelle passte genau genug zu Ihrer Frage. Statt zu raten, haben wir Ihnen gesagt, was wir noch nicht abdecken.",
+      "foundFallback": "Keine freigegebene Quelle passte genau genug, deshalb stützt sich diese Antwort auf die breitere Stanford-Lifestyle-Medicine-Forschung und ist entsprechend gekennzeichnet.",
+      "checksWeRan": "Unsere Prüfungen",
+      "checkApproved": "Jede verwendete Quelle wurde vorab von einem Fakultäts-Steward freigegeben.",
+      "checkCoveragePassed": "Abdeckungsprüfung bestanden — die Forschung passte genau genug zu Ihrer Frage.",
+      "checkCoverageNotPassed": "Abdeckungsprüfung nicht bestanden — deshalb haben wir das gesagt, statt ohne Grundlage zu antworten.",
+      "checkCitationPassed": "Zitatprüfung bestanden — die in der Antwort zitierte Studie stimmt mit einer Quelle auf dieser Liste überein.",
+      "checkCitationFailed": "Die Zitatprüfung konnte die zitierte Studie nicht automatisch mit der freigegebenen Liste abgleichen.",
+      "foundSuppressed": "Freigegebene Quellen stützen diese Antwort, aber unsere automatische Zitatprüfung konnte die genaue Übereinstimmung nicht bestätigen, daher wird die Liste hier nicht angezeigt."
+    }
+  },
+  "limitNotices": {
+    "fewSources_one": "Diese Antwort stützt sich auf {{count}} freigegebene Quelle.",
+    "fewSources_other": "Diese Antwort stützt sich auf {{count}} freigegebene Quellen.",
+    "pendingReview_one": "{{count}} weiterer relevanter Entwurf wartet noch auf die Prüfung durch die Fakultät.",
+    "pendingReview_other": "{{count}} weitere relevante Entwürfe warten noch auf die Prüfung durch die Fakultät.",
+    "nearThreshold": "Diese Frage liegt nahe am Rand des geprüften Materials. Die Antwort bleibt innerhalb dessen, was bisher freigegeben wurde."
+  }
+}

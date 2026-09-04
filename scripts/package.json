@@ -1,0 +1,44 @@
+{
+  "name": "@workspace/scripts",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "hello": "tsx ./src/hello.ts",
+    "faculty-admin": "tsx ./src/faculty-admin.ts",
+    "dump-ohayon-sql": "tsx ./src/dump-ohayon-sql.ts",
+    "dump-zeitzer-screens-sql": "tsx ./src/dump-zeitzer-screens-sql.ts",
+    "dump-abrahams-sql": "tsx ./src/dump-abrahams-sql.ts",
+    "merge-orphan-stewards": "tsx ./src/merge-orphan-stewards.ts",
+    "purge-test-faculty": "tsx ./src/purge-test-faculty.ts",
+    "recover-faculty-names": "tsx ./src/recover-faculty-names.ts",
+    "seed-stanford-faculty": "tsx ./src/seed-stanford-faculty.ts",
+    "partner-keys": "tsx ./src/partner-keys.ts",
+    "seed-demo": "tsx ./src/seed-demo.ts",
+    "seed-sleep": "tsx ./src/seed-sleep.ts",
+    "sync-dev-schema": "tsx ./src/sync-dev-schema.ts",
+    "backfill-publications": "tsx ./src/backfill-publications.ts",
+    "seed-corpus-gaps": "tsx ./src/seed-corpus-gaps.ts",
+    "seed-reputation-sleep": "tsx ./src/seed-reputation-sleep.ts",
+    "reembed-chunks": "tsx ./src/reembed-chunks.ts",
+    "seed-stripe-products": "tsx ./src/seed-stripe-products.ts",
+    "mint-sponsored-checkouts": "tsx ./src/mint-sponsored-checkouts.ts",
+    "seed-dementia-resources": "tsx ./src/seed-dementia-resources.ts",
+    "eval": "tsx ./src/run-eval.ts",
+    "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@huggingface/transformers": "^4.2.0",
+    "@workspace/db": "workspace:*",
+    "drizzle-orm": "catalog:",
+    "pg": "^8.20.0",
+    "stripe": "^22.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "@types/pg": "^8.18.0",
+    "tsx": "catalog:",
+    "vitest": "catalog:"
+  }
+}

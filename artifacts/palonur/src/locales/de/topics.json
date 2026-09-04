@@ -1,0 +1,131 @@
+{
+  "page": {
+    "eyebrowWhy": "Warum das wichtig ist",
+    "eyebrowRisk": "Was auf dem Spiel steht",
+    "eyebrowAsk": "Den Steward fragen",
+    "eyebrowOther": "Andere Säulen",
+    "eyebrowMeet": "Den Steward kennenlernen",
+    "askButton": "Diese Frage stellen →",
+    "askAnything": "Alles über {{pillar}} fragen →",
+    "askSleep": "Eine Schlafffrage stellen →",
+    "exploreOther": "Erkunden →",
+    "publicationLink": "Newsletter lesen →",
+    "stewardLabel": "Fakultätssteward",
+    "institutionLabel": "Institution",
+    "loading": "Wird geladen…",
+    "notFound": "Säule nicht gefunden"
+  },
+  "pillars": {
+    "sleep": {
+      "dek": "Der nächtliche Reparaturzyklus, von dem jede andere Säule abhängt.",
+      "whyItMatters": [
+        "Schlaf ist die Zeit, in der der Körper Erinnerungen festigt, Hormone reguliert, Stoffwechselnebenprodukte aus dem Gehirn beseitigt und das Immunsystem zurücksetzt. Jahrzehnte der Forschung verknüpfen konsistenten, ausreichenden Schlaf mit besserer kardiovaskulärer Gesundheit, emotionaler Stabilität, Lernen und Stoffwechselfunktion.",
+        "Es ist auch die Säule, bei der die meisten Menschen mit den unzuverlässigsten Informationen versuchen, sie zu verbessern. Die Forschung zu zirkadianer Rhythmik, Lichtexposition und Schlafarchitektur ist tiefgründig — aber sie überlebt selten den Weg durch Schlagzeilen und Feeds unversehrt."
+      ],
+      "atRisk": [
+        "Die Literatur dokumentiert Zusammenhänge zwischen chronisch kurzem oder fragmentiertem Schlaf und höheren Raten von Bluthochdruck, beeinträchtigter Glukoseregulation, Gewichtszunahme und gedrückter Stimmung. Aufmerksamkeit, Reaktionszeit und Entscheidungsfindung nehmen messbar ab, selbst nach einer einzigen Nacht mit eingeschränktem Schlaf.",
+        "Das bedeutet nicht, dass eine schlechte Nacht gefährlich ist — die Forschung betrifft Muster über die Zeit, und das ehrliche Bild enthält viele offene Fragen. Genau deshalb kommen Antworten hier mit Zitaten, die Sie überprüfen können."
+      ],
+      "subTopics": [
+        { "label": "Aufwachen um 3 Uhr", "question": "Warum wache ich immer wieder um 3 Uhr morgens auf und wie erklärt die Forschung das?" },
+        { "label": "Licht und die innere Uhr", "question": "Wie beeinflusst Lichtexposition tagsüber und abends meinen Schlaf?" },
+        { "label": "Koffein-Timing", "question": "Was sagt die Forschung darüber, wie spät im Tag Koffein den Schlaf beeinflusst?" },
+        { "label": "Schlaf und Gedächtnis", "question": "Was sagt die Forschung darüber, wie Schlaf Gedächtnis und Lernen beeinflusst?" }
+      ]
+    },
+    "stress-management": {
+      "dek": "Nicht die Abwesenheit von Stress — sondern die Fähigkeit, sich davon zu erholen.",
+      "whyItMatters": [
+        "Die Stressreaktion selbst ist gesund und uralt; das Problem, auf das die Forschung hinweist, ist eine Reaktion, die nie abschaltet. Wie schnell Herzfrequenz, Cortisol und Aufmerksamkeit nach einem Stressor auf das Ausgangsniveau zurückkehren, sagt mehr über die langfristige Gesundheit aus als der Stressor selbst.",
+        "Forschung zu Atemtechniken, kognitivem Reframing und Erholungsgewohnheiten zeigt, dass dies erlernbare Fähigkeiten sind — messbar in der Physiologie, nicht nur in der Stimmung."
+      ],
+      "atRisk": [
+        "Chronischer, nicht erholter Stress wird in der Literatur mit erhöhtem Blutdruck, gestörtem Schlaf, beeinträchtigter Immunantwort und höheren Raten von Angst und Depression assoziiert. Er erodiert auch still die anderen Säulen: Gestresste Menschen schlafen schlechter, essen schlechter und bewegen sich weniger.",
+        "Die Forschung ist hier sorgfältig, und wir auch: Stress ist kein moralisches Versagen, und nicht jede Technik funktioniert für jeden. Die ehrliche Antwort ist das, was die Studien tatsächlich gemessen haben."
+      ],
+      "subTopics": [
+        { "label": "Atem und Nervensystem", "question": "Was sagt die Forschung über Atemübungen und die Stressreaktion?" },
+        { "label": "Stress und Schlaf", "question": "Wie beeinflusst chronischer Stress den Schlaf, laut der Forschung?" },
+        { "label": "Erholung messen", "question": "Was sagt die Forschung über Herzratenvariabilität als Maß für die Stresserholung?" }
+      ]
+    },
+    "nutrition": {
+      "dek": "Die umstrittenste Säule — und die, bei der Zitate am dringendsten gebraucht werden.",
+      "whyItMatters": [
+        "Das Ernährungsmuster gehört zu den stärksten veränderbaren Prädiktoren für langfristige Gesundheit in der epidemiologischen Literatur — verknüpft mit kardiovaskulären Ergebnissen, Stoffwechselgesundheit und gesundem Altern in großen Kohortenstudien über Jahrzehnte.",
+        "Es ist auch die lauteste Ecke der Gesundheitsinformation. Eine Studie wird zur Schlagzeile wird zur Regel, beraubt von Dosis, Population und Konfidenz. Bei der Ernährung ist 'den Wissenschaftler fragen, das Zitat erhalten' am wichtigsten."
+      ],
+      "atRisk": [
+        "Diäten mit wenig Vollwertkost und viel hochverarbeiteten Lebensmitteln werden in der Forschung konsistent mit höheren Raten von Typ-2-Diabetes, Herz-Kreislauf-Erkrankungen und Gesamtmortalität assoziiert. Insbesondere die Ballaststoffaufnahme korreliert mit Ergebnissen in Dutzenden von großen Studien.",
+        "Aber Ernährungswissenschaft ist wirklich schwierig — beobachtend, konfundiert, langsam. Das ehrliche Bild beinhaltet, was die Forschung noch nicht sagen kann, und Antworten hier werden Ihnen sagen, wenn das der Fall ist."
+      ],
+      "subTopics": [
+        { "label": "Hochverarbeitete Lebensmittel", "question": "Was sagt die Forschung tatsächlich über hochverarbeitete Lebensmittel und Gesundheit?" },
+        { "label": "Mahlzeiten-Timing", "question": "Was sagt die Forschung darüber, wann wir essen — Mahlzeiten-Timing und zeitbeschränktes Essen?" },
+        { "label": "Ballaststoffe und Darm", "question": "Was sagt die Forschung über Ballaststoffe und langfristige Gesundheit?" }
+      ]
+    },
+    "movement": {
+      "dek": "Das Nächste, was die Forschung zu einem universellen Rezept hat.",
+      "whyItMatters": [
+        "Regelmäßige körperliche Aktivität erscheint in der Literatur als schützend in fast jedem gemessenen System: kardiovaskulär, metabolisch, muskuloskeletal, kognitiv und Stimmung. Die Dosis-Wirkungs-Kurve ist am steilsten am unteren Ende — die größten dokumentierten Gewinne kommen vom Bewegen überhaupt versus nicht bewegen.",
+        "Kraft im Besonderen hat sich in den Mittelpunkt der Alternsforschung verschoben: Muskelmasse und Griffstärke sind unter den besseren Prädiktoren für Unabhängigkeit und Resilienz im späteren Leben."
+      ],
+      "atRisk": [
+        "Längere Inaktivität wird in der Forschung mit schnellerem Verlust von Muskelmasse nach 50, sinkender Knochendichte, reduzierter Insulinsensitivität und höheren Raten von Herz-Kreislauf-Erkrankungen assoziiert. Sitzende Zeit scheint Risiken zu tragen, selbst bei Menschen, die Sport treiben.",
+        "Der ermutigende Gegenpunkt, ebenfalls dokumentiert: Vieles davon ist in jedem Alter auf Änderungen ansprechbar. Krafttraining-Studien bei Erwachsenen in den 70ern und darüber zeigen immer noch bedeutungsvolle Gewinne."
+      ],
+      "subTopics": [
+        { "label": "Kraft nach 50", "question": "Was sagt die Forschung über den Aufbau von Kraft nach 50?" },
+        { "label": "Tägliche Schritte", "question": "Was zeigt die Forschung tatsächlich über tägliche Schrittanzahl und Gesundheit?" },
+        { "label": "Bewegung und Schlaf", "question": "Wie beeinflusst Bewegung die Schlafqualität, laut der Forschung?" }
+      ]
+    },
+    "social-connection": {
+      "dek": "Beziehungen sind ein Gesundheitsverhalten, kein weiches.",
+      "whyItMatters": [
+        "Die Stärke der sozialen Bindungen einer Person ist einer der robusteren Prädiktoren für Langlebigkeit in der epidemiologischen Literatur — in der gleichen Größenordnung wie etablierte klinische Risikofaktoren in mehreren großen Meta-Analysen.",
+        "Die Forschung geht über Einsamkeitsumfragen hinaus: Soziale Integration zeigt messbare Assoziationen mit Immunfunktion, kardiovaskulären Markern, kognitiver Resilienz und Erholung von Krankheiten."
+      ],
+      "atRisk": [
+        "Chronische soziale Isolation und Einsamkeit werden in der Literatur mit höheren Raten von Herz-Kreislauf-Erkrankungen, Depression, kognitivem Abbau und früherer Sterblichkeit assoziiert. Diese Assoziationen bestehen nach Kontrolle vieler üblicher Störfaktoren.",
+        "Die Forschung ist ebenso klar, dass Qualität wichtiger ist als Quantität, und dass Verbindung aufbaubar ist — was genau die Art von Nuancen ist, die zwischen der Studie und der Schlagzeile verloren geht."
+      ],
+      "subTopics": [
+        { "label": "Einsamkeit und Langlebigkeit", "question": "Was sagt die Forschung über Einsamkeit und langfristige Gesundheit?" },
+        { "label": "Verbindung und das Gehirn", "question": "Wie beeinflusst soziale Verbindung die kognitive Gesundheit, laut der Forschung?" }
+      ]
+    },
+    "cognitive-enhancement": {
+      "dek": "Was die Forschung tatsächlich sagt, was den Geist scharf hält.",
+      "whyItMatters": [
+        "Die kognitive Gesundheitsforschung hat sich auf einen hoffnungsvollen Befund konzentriert: Das Gehirn bleibt über die gesamte Lebensspanne plastisch, und die Verhaltensweisen, die mit der Bewahrung von Aufmerksamkeit, Gedächtnis und Verarbeitungsgeschwindigkeit assoziiert sind, sind weitgehend die anderen Säulen — Schlaf, Bewegung, Verbindung — plus anhaltende geistige Herausforderung.",
+        "Das macht diese Säule zum Integrationspunkt. Die Literatur zur kognitiven Reserve legt nahe, dass Jahrzehnte alltäglicher Gewohnheiten prägen, wie das Gehirn das Altern bewältigt."
+      ],
+      "atRisk": [
+        "Die Forschung assoziiert chronischen Schlafmangel, Inaktivität und Isolation mit schnellerem altersbedingten kognitiven Abbau. Unbehandelter Hörverlust und kardiovaskuläre Risikofaktoren in der Mitte des Lebens erscheinen ebenfalls wiederholt in der Demenz-Risiko-Literatur.",
+        "Was die Forschung nicht unterstützt, ist das meiste, was als 'Gehirntraining' verkauft wird. Das ehrliche Bild trennt das gut Dokumentierte vom gut Vermarkteten — mit Zitaten."
+      ],
+      "subTopics": [
+        { "label": "Gedächtnis und Altern", "question": "Was sagt die Forschung über normale Gedächtnisveränderungen mit dem Alter versus Abbau?" },
+        { "label": "Gehirntraining-Behauptungen", "question": "Was zeigt die Forschung tatsächlich über Gehirntraining-Spiele und Kognition?" },
+        { "label": "Schlaf und das alternde Gehirn", "question": "Wie beeinflusst Schlaf die langfristige Gehirngesundheit, laut der Forschung?" }
+      ]
+    },
+    "gratitude-purpose": {
+      "dek": "Die Wissenschaft der Bedeutung — gemessen, nicht gepredigt.",
+      "whyItMatters": [
+        "Ein Sinn für Zweck ist nicht nur ein Gefühl; in longitudinalen Studien ist es mit niedrigerer Sterblichkeit, besserem Schlaf, mehr körperlicher Aktivität und größerer Resilienz nach Rückschlägen assoziiert. Dankbarkeitspraktiken, in kontrollierten Versuchen untersucht, zeigen messbare Effekte auf Stimmung und Schlafqualität.",
+        "Dies ist eine der jüngeren Säulen der Lifestyle-Medizin, was Strenge wichtiger macht, nicht weniger: Das Feld ist leicht zu überverkaufen und die ehrlichen Effektgrößen verdienen es, so berichtet zu werden, wie sie sind."
+      ],
+      "atRisk": [
+        "Geringer Sinn für Zweck wird in der Forschung mit höheren Raten von Depression, schlechterem Schlaf und reduziertem Engagement in den Gesundheitsverhaltensweisen assoziiert, die die anderen Säulen antreiben. Zweck scheint teilweise als Motivationsschicht unter allem anderen zu funktionieren.",
+        "Die Forschung warnt auch vor Überbehauptungen: Dankbarkeit ist keine Behandlung, und keine Journaling-Praxis ersetzt Pflege. Antworten hier werden Ihnen sagen, was die Studien gemessen haben und was nicht."
+      ],
+      "subTopics": [
+        { "label": "Zweck und Langlebigkeit", "question": "Was sagt die Forschung über Sinn für Zweck und Langlebigkeit?" },
+        { "label": "Dankbarkeitspraktiken", "question": "Was zeigen kontrollierte Studien tatsächlich über Dankbarkeitspraktiken?" }
+      ]
+    }
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "title": "Ihr Konto · Palonur",
+  "headline": "Ihr Palonur-Konto",
+  "loading": "Ihr Konto wird geladen…",
+  "notSignedIn": "Nicht angemeldet",
+  "signIn": "Melden Sie sich mit Ihrer E-Mail-Adresse an, um Ihr Konto einzusehen.",
+  "emailLabel": "Ihre E-Mail",
+  "emailPlaceholder": "sie@email.de",
+  "sendLink": "Anmeldelink senden",
+  "sending": "Wird gesendet…",
+  "linkSent": "Schauen Sie in Ihre E-Mails — wir haben Ihnen einen Anmeldelink geschickt.",
+  "signInHeadline": "Anmelden, um Ihre Abonnements zu verwalten.",
+  "signInBody": "Wir senden Ihnen einen sicheren Anmeldelink per E-Mail — kein Passwort erforderlich.",
+  "signInEmailPlaceholder": "Ihre E-Mail",
+  "sendLinkBtn": "Link senden",
+  "checkInbox": "Schauen Sie in Ihren Posteingang — wir haben Ihnen einen Anmeldelink geschickt.",
+  "allAccess": "Sie haben Vollzugang.",
+  "yourSubscriptions": "Ihre Abonnements.",
+  "signedInAs": "Angemeldet als",
+  "open": "Öffnen →",
+  "locked": "Gesperrt",
+  "capabilities": {
+    "headline": "Ihr Zugang",
+    "sectionLabel": "Was Sie nutzen können",
+    "nightly": "Pal (unbegrenzte Antworten, alle Säulen)",
+    "nightlyLabel": "Pal. Ihr persönlicher Forschungsbegleiter",
+    "nightlyBlurb": "Unbegrenzte evidenzbasierte Antworten über alle Säulen.",
+    "joysanBlurb": "Unbegrenzte Antworten zu Gesundheitsspanne und Langlebigkeit.",
+    "newsletter": "Newsletter Premium",
+    "newsletterLabel": "Premium-Newsletter",
+    "newsletterBlurb": "Vollständiger Zugang zu jeder Premium-Ausgabe.",
+    "noAccess": "Keine aktiven Abonnements",
+    "upgrade": "Pläne ansehen →"
+  },
+  "weeklyCall": {
+    "sectionLabel": "Ihr wöchentliches Gespräch",
+    "bookedBadge": "DIESE WOCHE GEBUCHT",
+    "scheduledFor": "Ihr Gespräch ist geplant für {{time}}. Wir senden Ihnen vorher eine Erinnerung.",
+    "bookedWeek": "Sie haben Ihr Gespräch für die Woche vom {{week}} gebucht. Planen Sie im Scheduler um, wenn Sie eine andere Zeit benötigen.",
+    "manageScheduler": "Im Scheduler verwalten →",
+    "cancelThisWeek": "Diese Woche stornieren",
+    "schedulingOpens": "Ihr Plan beinhaltet ein Gespräch pro Woche. Die Planung öffnet bald — wir senden Ihnen den Link per E-Mail.",
+    "whenCall": "Wann ist Ihr Gespräch? (optional — damit wir Sie erinnern können)",
+    "openingScheduler": "Scheduler wird geöffnet…",
+    "bookCall": "Gespräch buchen →"
+  },
+  "billing": {
+    "sectionLabel": "Abrechnung",
+    "freeTier": "Sie nutzen den kostenlosen Tarif — noch kein bezahlter Plan.",
+    "cancels": "Wird gekündigt",
+    "trialEnds": "Testphase endet",
+    "renews": "Verlängert sich",
+    "everyN": "alle {{count}} {{interval}}",
+    "perInterval": "{{interval}}",
+    "perMonth": "/Mo.",
+    "perYear": "/Jahr",
+    "intervalLabels": {
+      "day": {
+        "singular": "täglich",
+        "plural": "Tage"
+      },
+      "week": {
+        "singular": "wöchentlich",
+        "plural": "Wochen"
+      },
+      "month": {
+        "singular": "monatlich",
+        "plural": "Monate"
+      },
+      "year": {
+        "singular": "jährlich",
+        "plural": "Jahre"
+      }
+    },
+    "subscription": "Abonnement",
+    "askQuestion": "Frage stellen →",
+    "manageBilling": "Abrechnung verwalten"
+  },
+  "subscriptions": {
+    "headline": "Aktive Abonnements",
+    "noSubs": "Keine aktiven Abonnements",
+    "status": "Status",
+    "active": "Aktiv",
+    "canceled": "Wird am Periodenende gekündigt",
+    "renewsOn": "Verlängert am",
+    "endsOn": "Endet am",
+    "manage": "Abrechnung verwalten →",
+    "cancel": "Abonnement kündigen"
+  },
+  "upgradeCard": {
+    "eyebrow": "Upgrade",
+    "title": "Vollzugang",
+    "tagline": "Alles, was Palonur bietet — ein Abonnement.",
+    "includes": [
+      "Unbegrenzte Antworten aus allen Säulen (Pal)",
+      "Vollständiger Zugang zu jeder Premium-Newsletter-Ausgabe"
+    ],
+    "cta": "Auf Vollzugang upgraden →"
+  },
+  "newsletters": {
+    "sectionLabel": "Ihre Newsletter",
+    "headline": "Newsletter-Mitgliedschaften",
+    "readingRoom": "Leseraum betreten →",
+    "browseNewsletters": "Newsletter durchsuchen →",
+    "unsubscribe": "Abmelden",
+    "unsubscribed": "Abgemeldet",
+    "noNewsletters": "Für keine Newsletter angemeldet.",
+    "house": "Haus"
+  },
+  "portal": {
+    "openPortal": "Abrechnung verwalten →",
+    "opening": "Wird geöffnet…"
+  },
+  "name": {
+    "sectionLabel": "Ihr Name",
+    "prompt": "Sagen Sie uns, wie wir Sie nennen sollen. Sie können es jederzeit ändern.",
+    "placeholder": "Ihr Name",
+    "save": "Speichern",
+    "saving": "Wird gespeichert…",
+    "change": "Ändern",
+    "notSet": "Noch kein Name",
+    "error": "Das konnten wir nicht speichern. Bitte versuchen Sie es noch einmal."
+  },
+  "signOut": "Abmelden",
+  "readingRoom": "Leseraum besuchen →",
+  "upgrade": "Ihren Plan upgraden →"
+}

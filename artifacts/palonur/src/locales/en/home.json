@@ -1,0 +1,478 @@
+{
+  "hero": {
+    "eyebrow": "Governed answers for real life",
+    "headline": "Palonur is the authority router for the AI era.",
+    "subhead": "Palonur routes each question to the right human faculty authority, we call them Palonur Stewards, with ownership, sources, and governance attached.",
+    "headlinePrefix": "Ask a",
+    "headlineSuffix": "Professor about",
+    "topics": ["Sleep", "Nutrition", "Movement", "Stress", "Memory", "Purpose"],
+    "trust": "Expert-backed. Cited. Clear about what it does not know.",
+    "placeholderNight": "Type your question here",
+    "placeholderDay": "Type your question here",
+    "sampleQ0": "Why do I wake up at 3 a.m.?",
+    "sampleQ1": "How much protein do I actually need after 60?",
+    "sampleQ2": "What does chronic stress do to my body?",
+    "sampleQ3": "Is my memory lapse something to worry about?",
+    "sampleLabel": "Try a real question",
+    "inputLabel": "Ask Palonur a question",
+    "askLabel": "Ask Palonur a question",
+    "scrollCue": "Why we built this ↓",
+    "lateNight": "It's {{time}}. Sleep changes after 50. Ask {{faculty}} what yours is telling you.",
+    "morning": "Aging well means real decisions. Make them with {{faculty}}, not a dozen conflicting opinions.",
+    "evening": "Your body is different after 50. Ask {{faculty}} what the science says.",
+    "night": "It's {{time}}. Sleep after 50 is different. Real different. Ask {{faculty}} why.",
+    "faculty": "Stanford faculty",
+    "askButton": "Ask Palonur",
+    "tagline": "Make life's important decisions with the world's finest faculty behind you.",
+    "chips": {
+      "sleep": "Sleep after 50",
+      "muscle": "Muscle loss",
+      "brain": "Brain health",
+      "stress": "Chronic stress",
+      "connect": "Staying connected",
+      "purpose": "Sense of purpose"
+    },
+    "headlineA": "Ask",
+    "headlineB": "Faculty",
+    "headlineC": "Real Science for Life's Big Decisions",
+    "freeLine": "Free to ask. No account needed.",
+    "ctaApply": "Apply to become a steward",
+    "ctaHow": "See how it works"
+  },
+  "pillars": {
+    "eyebrow": "Showcase: Stanford Lifestyle Medicine Program",
+    "headline": "A direct line to the best faculty on the {{em}} science of aging well {{/em}}",
+    "body1": "For adults in the second half of life, how you sleep, move, eat, connect, and find meaning shapes long-term health more than almost anything a doctor can prescribe. Stanford Lifestyle Medicine has organized that evidence into seven pillars, each led by a faculty expert who puts their name on every answer.",
+    "body2": "Bring a real decision from your real life: how to sleep, eat, move, stay connected. The pillar answers with the published research of a named expert, so you decide with the science behind you, not a feed, not an influencer, not a guess.",
+    "exploreAll": "Explore all the pillars →",
+    "askQuestion": "Ask a question →",
+    "exploreTopic": "Explore the topic →",
+    "cards": {
+      "sleep": {
+        "name": "Sleep",
+        "description": "Sleep changes in your 50s and 60s in ways most advice has never caught up with. The science is specific and gives you real options.",
+        "linkLabel": "Ask a sleep question →"
+      },
+      "stress-management": {
+        "name": "Stress Management",
+        "description": "Stress works differently as you get older. Understanding how is the first step to managing it.",
+        "linkLabel": "Ask a question →"
+      },
+      "nutrition": {
+        "name": "Nutrition",
+        "description": "What your body needs shifts after 50. The research is specific enough to guide your choices in ways general nutrition advice never does.",
+        "linkLabel": "Ask a question →"
+      },
+      "movement": {
+        "name": "Movement",
+        "description": "The right movement after 50 keeps you strong for decades. The science behind what works is clearer than most people realize.",
+        "linkLabel": "Ask a question →"
+      },
+      "social-connection": {
+        "name": "Social Engagement",
+        "description": "Connection turns out to be one of the most powerful things you can do for your health after 50.",
+        "linkLabel": "Ask a question →"
+      },
+      "cognitive-enhancement": {
+        "name": "Cognitive Enhancement",
+        "description": "Memory lapses feel alarming after 50. Most are normal. Some signal something you can act on now.",
+        "linkLabel": "Ask a question →"
+      },
+      "gratitude-purpose": {
+        "name": "Gratitude & Purpose",
+        "description": "People with a clear sense of purpose live longer and recover from illness faster.",
+        "linkLabel": "Ask a question →"
+      }
+    }
+  },
+  "sleep": {
+    "eyebrow": "Showcase: The Sleep Pillar",
+    "headline": "{{em}} Sleep {{/em}}",
+    "body1": "We began with sleep because it is where the hardest questions arrive at 3 a.m., with no one to ask. Every sleep answer on Palonur comes from one lab at the Stanford School of Medicine and carries its steward's name.",
+    "body2": "Every pillar works the same way: one field, one faculty steward, one signature on every answer. Ask anything above and Palonur routes your question to the right one.",
+    "visitSleep": "Visit the sleep pillar →",
+    "orAsk": "or ask tonight's question",
+    "stewardCaption": "Stewarded by Prof. Jamie Zeitzer",
+    "meetBelow": "meet him below"
+  },
+  "access": {
+    "eyebrow": "The access",
+    "headline": "Stanford faculty, {{em}} within reach {{/em}}",
+    "body1": "Stanford Lifestyle Medicine faculty includes teaching professors, lecturers, guest speakers, and class ambassadors who lead their fields. They are the people who ran the studies, wrote the papers, and trained the next generation of physicians.",
+    "body2": "In the Stanford Lifestyle Medicine use case, each faculty steward puts their own published research and their name behind every answer on their pillar. That kind of direct access is new.",
+    "cards": {
+      "hard": {
+        "title": "The people who did the research",
+        "text": "Palonur's stewards are the faculty who ran the labs and published the studies your doctor's advice is based on. Their expertise, direct to you."
+      },
+      "door": {
+        "title": "They put their names on it",
+        "text": "Every answer is curated from a steward's own peer-reviewed work and carries their name. Not a model. Not a summary. The source."
+      },
+      "yours": {
+        "title": "Ask anything, any hour",
+        "text": "No appointment. No waitlist. Ask tonight, and get back a cited, verified answer signed by the steward whose research it came from."
+      }
+    },
+    "meetStewards": "Meet the stewards →"
+  },
+  "authorityRouter": {
+    "eyebrow": "The authority router",
+    "headline": "Before an agent answers, it should know {{em}} who speaks for the field {{/em}}",
+    "intro": "When an agent enters a field, it needs more than a fluent response. It needs to know who has standing to define the field, what record supports that standing, and which version is current.",
+    "graphLabel": "An agent asks who is authoritative in a field, Palonur resolves the field and steward, and the agent receives an inspectable authority result.",
+    "loopLabel": "When authority is unclear:",
+    "loopText": "Palonur returns the gap for review instead of inventing an expert or presenting a guess as consensus.",
+    "request": {
+      "label": "Agent request",
+      "question": "Who is authoritative in this field?",
+      "fieldLabel": "Field",
+      "fieldValue": "A defined knowledge domain",
+      "intentLabel": "Intent",
+      "intentValue": "Evaluate authority"
+    },
+    "resolveLabel": "Palonur resolves",
+    "resolveText": "field → steward → record",
+    "result": {
+      "label": "Authority result",
+      "badge": "structured output",
+      "level": "Named · current · attributable",
+      "fieldLabel": "Field",
+      "fieldText": "The knowledge domain this authority governs.",
+      "stewardLabel": "Steward",
+      "stewardText": "A named expert or institution with standing in the field.",
+      "recordLabel": "Record",
+      "recordText": "Approved work with a visible version.",
+      "traceLabel": "Trace",
+      "traceText": "Citations and release history."
+    }
+  },
+  "technical": {
+    "eyebrow": "Technical side",
+    "headline": "This is the technical side of Palonur.",
+    "intro": "This is how Palonur connects a question to the right authority, keeps the record visible, and carries the answer into the AI tools people already use."
+  },
+  "nightly": {
+    "eyebrow": "Palonur Pal",
+    "headline": "A {{em}} brief {{/em}} from your own data, every morning",
+    "body": "Palonur Pal is a private morning summary of your previous night. Written in plain language, grounded in the same research, and calibrated to what you have told us about your situation. No fitness tracker required.",
+    "cta": "Be among the first to get access →",
+    "price": "$19.90 / month, founding rate",
+    "priceReg": "reg. $89 for 90 days",
+    "productName": "Palonur Pal",
+    "tryFree": "try one question free first",
+    "features": [
+      "Unlimited answers from all pillars, any hour",
+      "Every answer cited to the study it came from, signed by name",
+      "A personal brief built from what you asked",
+      "Access to every new Palonur expert as their pillar opens"
+    ]
+  },
+  "agents": {
+    "eyebrow": "Already using ChatGPT or Claude?",
+    "headline": "Add faculty-signed answers to {{em}} any AI you already use {{/em}}",
+    "body": "Paste in Palonur's agent spec and your AI starts answering health questions with the same governed, cited research. A named Stanford scientist behind every response. Stanford Lifestyle Medicine is one use case; the same model can support other institutions, disciplines, and expert communities. Works with ChatGPT, Claude, or any agent you build.",
+    "cta": "API + MCP docs →",
+    "forAgents": "For AI agents →",
+    "forPlatforms": "For platforms →",
+    "agentAccess": "Agent & API access →",
+    "specLabel": "Agent spec",
+    "specDesc": "Paste it into ChatGPT or Claude and ask a sleep question the answer comes back signed.",
+    "mcpLabel": "MCP server",
+    "mcpDesc": "Agent builders connect over the Model Context Protocol with a partner key. Same governed corpus, same citations."
+  },
+  "stewards": {
+    "viewAll": "Meet all the stewards →",
+    "spotlight": {
+      "fredericson": {
+        "title": "Director, Stanford Lifestyle Medicine · Sports-medicine physician",
+        "blurb": "Chief Medical Officer of USA Track & Field and professor of Physical Medicine & Rehabilitation, he has kept Olympians moving for decades. He leads Stanford Lifestyle Medicine, and now his movement research answers you directly.",
+        "linkLabel": "Explore Movement & Exercise"
+      },
+      "friedlander": {
+        "title": "Co-Director, Stanford Lifestyle Medicine · Exercise physiologist",
+        "blurb": "An NIH-funded exercise physiologist who studies how movement slows aging, she co-directs the Lifestyle Medicine fellowship that trains the next generation of physicians. Her science of staying strong is open to your questions.",
+        "linkLabel": "Explore Movement & Exercise"
+      },
+      "zeitzer": {
+        "title": "Sleep & circadian scientist · Co-Director, Center for Sleep Research",
+        "blurb": "He has advised NASA on astronaut sleep and runs the Zeitzer Lab at Stanford, one of the world's leading circadian labs. Every sleep answer on Palonur is drawn from his lab's published research and carries his name. Ask it anything, tonight.",
+        "linkLabel": "Ask his research now"
+      },
+      "parker": {
+        "title": "Psychiatry & Behavioral Sciences researcher",
+        "blurb": "A Stanford lab director, Kavli Fellow, and Simons Foundation and Department of Defense-backed neuroscientist studying the social brain. Her pillar is being prepared with the same care as the rest.",
+        "comingSoon": "Her pillar opens soon"
+      }
+    },
+    "eyebrow": "The Stanford Lifestyle Medicine program",
+    "headline": "Join {{em}} these colleagues {{/em}}",
+    "body": "These experts come from the Stanford Lifestyle Medicine program. Stanford Lifestyle Medicine (SLM) is one use case for Palonur: a faculty-led program where experts steward a body of knowledge and put their names behind the answers. Each curated what their pillar draws from, approves every interpretation, and signs every answer with their name.",
+    "ask": "Ask {{name}} a question →",
+    "body2": "They chose Palonur because it scales their expertise without diluting it. Same standards, same evidence, their name on the result.",
+    "joinCta": "Join these fantastic colleagues"
+  },
+  "whyNow": {
+    "eyebrow": "Why this matters today",
+    "headline": "The next 20 years are decided {{em}} now {{/em}}",
+    "quote": "Help me stay strong, sharp, and independent for the next 20 years.",
+    "quoteCaption": "The question behind every question we receive.",
+    "body1": "Strength, memory, sleep, connection, none of them fail overnight. They erode quietly, year by year, and the erosion compounds. The research is unambiguous: what you do in your 50s and 60s largely determines whether your 70s and 80s are lived on your own terms.",
+    "body2": "That is why waiting is the one strategy the evidence rules out. Every pillar on Palonur is a lever you can still pull today, with a Stanford faculty member telling you exactly how, from their own published research.",
+    "closing": "The best day to start was ten years ago. The second best is today."
+  },
+  "karen": {
+    "eyebrow": "What will launch soon",
+    "launchEyebrow": "What will launch soon",
+    "launchAttribution": "Karen Parker · Psychiatry & Behavioral Sciences · Stanford",
+    "department": "Psychiatry & Behavioral Sciences · Stanford",
+    "headline": "The neuroscience of {{em}} why we connect {{/em}}",
+    "body1": "Karen Parker runs one of the few labs in the world that studies the biology of the social brain from the inside. How oxytocin shapes bonding. What neuroscience reveals about human connection. Why the same circuits that make us vulnerable to isolation are the ones that keep us well.",
+    "body2": "Her research crosses from animal models to human clinical trials, funded by the Kavli Fellowship, the Simons Foundation, and the Department of Defense because the stakes of understanding the social brain are that high. When her pillar opens, it will answer questions that no lifestyle advice has ever tried to ground in this science.",
+    "badge0": "Kavli Fellowship",
+    "badge1": "Simons Foundation",
+    "badge2": "Dept. of Defense",
+    "badge3": "Stanford Lab Director",
+    "value1Label": "The research that matters",
+    "value1Text": "Parker's lab doesn't study connection abstractly. She maps its molecular machinery: the neuropeptides, the circuits, the clinical interventions that work.",
+    "value2Label": "Answers you can act on",
+    "value2Text": "When her pillar opens, every answer will come from her published, peer-reviewed work: cited, verified, and signed with her name, not a model's.",
+    "value3Label": "Science at its source",
+    "value3Text": "Normally her expertise is locked behind a clinic waitlist or a journal paywall. Palonur puts it one question away.",
+    "askHeadline": "Ask Karen's research anything",
+    "askSub": "These questions will be live when her pillar opens. Get notified first.",
+    "sampleQ0": "Why does time with people I love help me recover from stress faster?",
+    "sampleQ1": "What does neuroscience reveal about how all of us connect?",
+    "sampleQ2": "How does social isolation actually affect physical health?",
+    "emailPlaceholder": "your@email.com",
+    "notifyMe": "Notify me",
+    "onList": "You're on the list. We'll let you know the moment Karen's pillar opens.",
+    "podcastLabel": "Podcast",
+    "podcastTitle": "The Social Brain with Karen Parker",
+    "podcastBody": "Conversations on oxytocin, social bonding, and the neuroscience of human connection. Each episode in Karen's own words, grounded in her published research.",
+    "comingSoon": "Coming soon"
+  },
+  "demo": {
+    "eyebrow": "What an answer looks like",
+    "headline": "One question. {{em}} One Stanford faculty answer. {{/em}}",
+    "question": "I had coffee at 4 p.m. Can I still fall asleep at 11?",
+    "stanfordSigned": "STANFORD-SIGNED",
+    "professor": "Prof. Jamie Zeitzer · Stanford School of Medicine",
+    "answer": "Probably yes but expect to fall asleep about",
+    "answerDelay": "40 minutes later",
+    "answerTail": "than usual, and to spend less time in deep sleep.",
+    "body": "Caffeine has a half-life of roughly five hours, so a 4 p.m. cup still has a quarter of its dose circulating at bedtime. That's enough to delay sleep onset and blunt slow-wave sleep, even if you don't feel \"wired\".",
+    "paper": "Paper",
+    "tryTonight": "Try tonight",
+    "paperTitle": "\"Caffeine effects on sleep taken 0, 3, or 6 hours before going to bed.\"",
+    "paperCitation": "Drake et al., J Clin Sleep Med, 2013",
+    "tryText": "Cap caffeine at 2 p.m. for the next three nights. See if onset gets faster.",
+    "nowAsk": "Now ask your own question →",
+    "orPaste": "Or paste",
+    "intoChatGPT": "into ChatGPT or Claude."
+  },
+  "sampleAnswer": {
+    "eyebrow": "What an answer looks like",
+    "headline": "Not a chatbot reply. A _signed answer._",
+    "question": "Why do I wake up at 3 a.m. and can't get back to sleep?",
+    "answer1": "Waking at night is part of normal sleep architecture. Everyone surfaces briefly between sleep cycles. After 50, deep sleep declines, so those surfacings are more likely to become full awakenings you remember.",
+    "answer2": "The problem usually isn't the waking. It's what happens next: checking the clock, doing the arithmetic, trying hard to sleep. Effort is the enemy of sleep. If you've been awake for what feels like twenty minutes, get up, keep the lights low, do something quiet, and return to bed only when you feel sleepy.",
+    "citationLabel": "Cited source",
+    "citationTitle": "Psychological and behavioral treatment of insomnia: update of the recent evidence",
+    "citationMeta": "Morin et al. · Sleep, 2006 · peer-reviewed",
+    "signedBy": "Dr. Jamie Zeitzer",
+    "signedRole": "Professor, Stanford",
+    "note": "Every answer works this way: a named Stanford faculty member behind it, and the research it stands on cited underneath. When the approved research doesn't cover your question, Palonur says so instead of guessing.",
+    "cta": "Ask your own question"
+  },
+  "how": {
+    "eyebrow": "How it works",
+    "headline": "Your expertise, {{em}} on your terms {{/em}}",
+    "intro": "You stay in control of every step. Palonur is not a chatbot trained on your data. It answers only from work you have published and approved.",
+    "steps": {
+      "boundaries": {
+        "title": "You set the boundaries",
+        "text": "You decide which of your published papers your pillar may draw from. Nothing is used without your approval."
+      },
+      "retrieval": {
+        "title": "Palonur answers only from your work",
+        "text": "Every answer is built from your approved work alone. If the research isn't there, Palonur says so instead of guessing."
+      },
+      "named": {
+        "title": "Every answer is named and cited",
+        "text": "Answers carry your name and cite the study they came from, so readers can check the source themselves."
+      },
+      "gaps": {
+        "title": "Gaps route back to you",
+        "text": "When questions fall outside your approved sources, they come back to you as drafts to review. You decide what your pillar covers next."
+      },
+      "noTraining": {
+        "title": "Your work never trains an AI",
+        "text": "Palonur never uses your content to train AI models. Think of it as a faucet: your work flows through to your readers, cited and unchanged. It is never absorbed into a model."
+      },
+      "reach": {
+        "title": "Your answers go where people are",
+        "text": "The same answers can appear on your website, in newsletters, and in chat, so people meet your expertise wherever they already ask questions. That is how you reach millions."
+      }
+    },
+    "diagram": {
+      "source": "Your work",
+      "sourceSub": "Only what you approve",
+      "vault": "Protected inside Palonur",
+      "vaultSub": "Never used to train AI",
+      "out": "Only answers leave",
+      "outSub": "Named and cited",
+      "channels": ["Website", "Newsletter", "Chat"]
+    }
+  },
+  "benefits": {
+    "eyebrow": "Why stewards join",
+    "headline": "Scale your expertise {{em}} without losing it {{/em}}",
+    "cards": {
+      "scale": {
+        "title": "Scale without dilution",
+        "text": "Answer thousands of questions a night, each one built only from work you approved."
+      },
+      "governance": {
+        "title": "Governance without friction",
+        "text": "You review sources and interpretations on your own schedule. The platform handles the rest."
+      },
+      "identity": {
+        "title": "Identity that stays yours",
+        "text": "Your name, your photo, your institution appear on every answer from your pillar."
+      },
+      "trust": {
+        "title": "Trust that compounds",
+        "text": "Every cited, signed answer builds your public record. When your pillar can't answer, it says so."
+      }
+    }
+  },
+  "provenance": {
+    "eyebrow": "Defensible knowledge",
+    "headline": "From faculty access to {{em}} traceable knowledge {{/em}}",
+    "intro1": "The access above creates knowledge that is hard to build and easy to copy. So Palonur is built as a chain of custody: every answer can be followed from the faculty member who approved it to wherever the text travels next.",
+    "intro2": "To be clear about what this is: a provenance feature, not a security one. It does not prevent copying. Its value is that unauthorized reuse becomes detectable and attributable.",
+    "stages": {
+      "faculty": {
+        "title": "Faculty access",
+        "text": "It starts with working relationships with Stanford Lifestyle Medicine faculty, built expert by expert. There is no shortcut past the people."
+      },
+      "protocols": {
+        "title": "Proprietary expert protocols",
+        "text": "Each steward decides which of their published work their pillar may draw from and approves every interpretation. That curation — what counts, what doesn't, how it may be said — exists only on Palonur."
+      },
+      "knowledge": {
+        "title": "The Palonur knowledge layer",
+        "text": "Approved sources live in a versioned, snapshotted corpus inside our systems. Every answer is built from that corpus alone, cited to its study, and signed by its steward."
+      },
+      "marks": {
+        "title": "Traceable watermarks",
+        "text": "Today, text copied from Palonur carries an invisible marker you can test on our checker page. We are building on that with cryptographic hashes and canary passages designed to make an answer's origin checkable later."
+      },
+      "licensing": {
+        "title": "Controlled licensing",
+        "text": "Programmatic access runs through revocable partner keys under a written no-training license. Every keyed answer carries machine-readable license and attribution headers that point back to the terms."
+      },
+      "detection": {
+        "title": "Unauthorized reuse becomes detectable",
+        "text": "The point of the chain: we are building per-licensee fingerprints and black-box tests designed to indicate when a model has ingested Palonur content — statistical evidence to support a claim, not courtroom proof."
+      }
+    },
+    "limits": "We say this the same way everywhere on the site: watermarks can be stripped, and detection evidence is statistical, not proof. The chain doesn't stop copying — it makes copying attributable, and that changes the conversation with whoever did it.",
+    "ctaAccess": "How agent access works →",
+    "ctaLicense": "Read the usage license →"
+  },
+  "aiVisibility": {
+    "eyebrow": "How AI sees you",
+    "headline": "See what AI tells people about {{em}} your field {{/em}} today",
+    "body1": "Every day, people ask ChatGPT and Claude the questions you spent a career answering. Sometimes those answers name you. Often they don't, or they quote you loosely, or they point people to someone else entirely.",
+    "body2": "Palonur shows you the before-picture: a one-page report of what leading AI assistants actually answer on your topics right now, whether you are mentioned, how you are described, and who gets recommended instead.",
+    "body3": "Then comes the after-picture. Your Palonur pillar answers those same questions from your own approved work, cited and signed with your name. See how AI talks about you today — then take back the pen.",
+    "cta": "Become a steward",
+    "example": {
+      "label": "Illustrative example — not a real steward's data",
+      "title": "How AI sees Dr. Example",
+      "question": "How do I stay mentally sharp after retirement?",
+      "rows": {
+        "a": {
+          "assistant": "ChatGPT",
+          "verdict": "Not mentioned",
+          "finding": "Gives generic advice and recommends two other authors. Dr. Example's research on this exact question never comes up."
+        },
+        "b": {
+          "assistant": "Claude",
+          "verdict": "Mentioned, loosely",
+          "finding": "Names Dr. Example once, but paraphrases a finding without a source and mixes it with unrelated advice."
+        }
+      },
+      "afterLabel": "With a Palonur pillar:",
+      "afterText": "the same questions are answered from Dr. Example's approved work only, cited and signed with their name."
+    }
+  },
+  "applyForm": {
+    "eyebrow": "Become a steward",
+    "headline": "Bring your field to {{em}} the people asking {{/em}}",
+    "body": "Apply directly through the faculty portal. It takes a few minutes, and we review every application personally.",
+    "steps": {
+      "apply": "Create your account and tell us about your field.",
+      "verify": "Confirm your institutional email address.",
+      "admit": "We review your application and welcome you to your pillar."
+    },
+    "cta": "Apply to become a steward",
+    "note": "We use your details only to review your application."
+  },
+  "facultyTribute": {
+    "eyebrow": "A lineage of inquiry",
+    "line1": "Centuries past, decades past.",
+    "line2": "Innovations came and went, kings came and went.",
+    "line3": "But the universities and their faculty stayed, because they keep on asking: {{em}}what is true?{{/em}}",
+    "payoffHeadline": "Now, that same asking can {{em}}reach millions.{{/em}}",
+    "payoffBody": "Your rigorous standards do not have to mean a limited reach. Your approved sources and your exact words can now guide the decisions people make every single day, with your name proudly behind them."
+  },
+  "story": {
+    "slm": {
+      "eyebrow": "Showcase: Stanford Lifestyle Medicine Program",
+      "placeholder": "Why do I wake up at 3am each night?",
+      "caption": "This is the real entry field of the Stanford Lifestyle Medicine pillar. Try it. Every answer comes back named, cited, and grounded only in faculty-approved work."
+    }
+  },
+  "introVideo": {
+    "eyebrow": "See it in action",
+    "headline": "Palonur in one minute",
+    "close": "Close"
+  },
+  "landingDemo": {
+    "ariaLabel": "Palonur authority routing demonstration",
+    "you": "You",
+    "routing": "Routing your question...",
+    "thinking": "Thinking...",
+    "startOver": "Start over",
+    "followUpLabel": "Ask a follow-up question",
+    "followUpPlaceholder": "Ask about {{topic}}",
+    "ask": "Ask",
+    "genericError": "The demo could not complete this request.",
+    "noMatch": "No matching Steward was found for this question.",
+    "eyebrow": "Illustrative routing preview",
+    "searching": "Reviewing verified steward routes",
+    "analyzing": "Checking current expertise",
+    "searchingDetail": "Reviewing Palonur's verified public steward roster in the displayed order...",
+    "analyzingDetail": "Checking documented topic fit without inferring endorsement...",
+    "resultHeadline": "A Palonur Steward match",
+    "noMatchHeadline": "No verified steward match yet",
+    "askAnother": "Ask another",
+    "questionLabel": "Your question",
+    "stewardLabel": "Palonur Steward",
+    "stewardFound": "Ranked by Palonur",
+    "stewardVerified": "Verified roster steward",
+    "noVerifiedSteward": "No steward attributed",
+    "noAttribution": "Palonur will not attach an unrelated faculty name when the verified roster has no current-topic match.",
+    "currentExpertiseLabel": "Current expertise analysis",
+    "matchSignals": "Matching signals",
+    "answerLabel": "Illustrative routing outcome",
+    "sourceLabel": "Governed topic and attached sources",
+    "publicSourceLabel": "External university profile used for the expertise match",
+    "noSourceUntilVerified": "No faculty source is attached until a matching steward is verified.",
+    "searchBasis": "These stages compare public university profiles and Palonur's verified roster. Palonur designates the ranked human authority as a Palonur Steward under its own standards.",
+    "disclaimer": "This is Palonur's own Steward designation. A public profile supports current-expertise matching; while we are rolling out our partnerships with leading universities, it does not state that the person or university has accepted, endorsed, or adopted Palonur."
+  }
+}

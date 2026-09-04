@@ -1,0 +1,20 @@
+[Unit]
+Description=Ask Lifestyle Medicine web server
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=ask-lifestyle-medicine
+Group=ask-lifestyle-medicine
+WorkingDirectory=/opt/ask-lifestyle-medicine/current
+EnvironmentFile=/etc/ask-lifestyle-medicine/ask-lifestyle-medicine.env
+Environment=PORT=22480
+ExecStart=/usr/bin/node artifacts/palonur/server/index.mjs
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,1015 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Palonur · AI Architecture, Data Flow & Governance · For Stanford OTL · Editable</title>
+<style>
+  :root{
+    --ink:#0b0b10; --paper:#faf8f4; --sub:#5a5a66; --rule:#e6e2d8;
+    --cardinal:#8C1515; --cardinal-soft:rgba(140,21,21,.06);
+    --red:#e8352a; --gold:#b88a2d; --card:#ffffff;
+    --good:#2f7d4f; --tech:#2f5d8a;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:#2a2a30;color:var(--ink);font-family:Georgia,'Times New Roman',serif}
+  body{padding:80px 0 120px}
+
+  /* Toolbar */
+  .toolbar{
+    position:fixed;top:0;left:0;right:0;height:56px;background:#0b0b10;color:#fff;
+    display:flex;align-items:center;justify-content:space-between;padding:0 24px;
+    z-index:9999;font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;font-size:13px;
+    border-bottom:1px solid #222;
+  }
+  .toolbar .left{display:flex;align-items:center;gap:14px}
+  .toolbar .brand{font-weight:600;letter-spacing:.04em}
+  .toolbar .hint{color:#9a9aa6}
+  .toolbar button{
+    background:transparent;border:1px solid #444;color:#fff;padding:8px 14px;border-radius:6px;
+    cursor:pointer;font:inherit;margin-left:8px
+  }
+  .toolbar button:hover{background:#1c1c22;border-color:#666}
+  .toolbar button.primary{background:var(--cardinal);border-color:var(--cardinal)}
+  .toolbar button.primary:hover{background:#a01a1a}
+  .toolbar a.pdf-link{
+    display:inline-block;background:var(--cardinal);border:1px solid var(--cardinal);color:#fff;
+    text-decoration:none;border-radius:6px;padding:7px 12px;font:inherit;font-size:12.5px;
+    cursor:pointer;
+  }
+  .toolbar a.pdf-link:hover{background:#a01a1a;border-color:#a01a1a}
+
+  /* Page ("slide") */
+  .page{
+    width:8.5in;min-height:11in;background:var(--paper);margin:24px auto;
+    padding:64px 72px;box-shadow:0 4px 24px rgba(0,0,0,.4);position:relative;
+  }
+  .page.dark{background:#0b0b10;color:#fff}
+  .page.dark .sub,.page.dark .rule-label{color:#bdb9af}
+
+  .page-header{
+    display:flex;justify-content:space-between;align-items:baseline;
+    font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;font-size:10.5px;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--sub);
+    border-bottom:1px solid var(--rule);padding-bottom:10px;margin-bottom:32px;
+  }
+  .page.dark .page-header{border-bottom-color:#2a2a30;color:#9a9aa6}
+
+  h1{font-size:40px;line-height:1.12;font-weight:500;margin:0 0 18px}
+  h2{font-size:27px;line-height:1.15;font-weight:500;margin:0 0 14px}
+  h3{font-size:17px;font-weight:600;margin:0 0 10px;font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;letter-spacing:.03em}
+  p{font-size:14px;line-height:1.55;margin:0 0 11px;color:#2a2a32}
+  .page.dark p{color:#d4d2cc}
+  .lead{font-size:16.5px;line-height:1.5;color:#3a3a44}
+  .page.dark .lead{color:#e2e0d8}
+  ul{margin:6px 0 12px;padding-left:18px}
+  li{font-size:13.5px;line-height:1.5;margin:0 0 6px;color:#2a2a32}
+  .page.dark li{color:#d4d2cc}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;background:var(--cardinal-soft);padding:1px 5px;border-radius:4px;color:#5a2020}
+  .page.dark code{background:rgba(255,255,255,.08);color:#f0d9d9}
+
+  .rule-label{
+    font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;font-size:10.5px;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--sub);margin-bottom:8px
+  }
+  .cardinal{color:var(--cardinal)}
+  .italic{font-style:italic}
+  .muted{color:var(--sub)}
+
+  /* Cards */
+  .card{
+    position:relative;background:var(--card);border:1px solid var(--rule);
+    border-radius:10px;padding:20px 22px;margin:0 0 14px;
+  }
+  .page.dark .card{background:#15151c;border-color:#2a2a30}
+  .card .label{
+    font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;font-size:10.5px;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--sub);margin-bottom:8px
+  }
+  .card h4{font-size:15px;margin:0 0 8px;font-weight:600}
+  .card p{font-size:13px;margin:0 0 8px}
+  .card p:last-child{margin-bottom:0}
+
+  .delete-btn{
+    position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:50%;
+    background:#0b0b10;color:#fff;border:none;cursor:pointer;font-size:14px;line-height:1;
+    display:none;align-items:center;justify-content:center;font-family:Helvetica,Arial,sans-serif;z-index:5;
+  }
+  [data-card]{position:relative}
+  [data-card]:hover > .delete-btn{display:flex}
+  .delete-btn:hover{background:var(--cardinal)}
+  #save-indicator{color:#7fbf7f;font-size:12px;margin-left:14px;opacity:0;transition:opacity .3s}
+  #save-indicator.show{opacity:1}
+
+  /* Grids */
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+
+  /* Cover stats */
+  .stat-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;margin-top:28px;border-top:1px solid #2a2a30;padding-top:22px}
+  .stat-label{font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:#9a9aa6}
+
+  /* Q&A dual panes */
+  .qhead{display:flex;align-items:baseline;gap:12px;margin:0 0 4px}
+  .qnum{font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--cardinal);font-weight:700;white-space:nowrap}
+  .dual{display:grid;grid-template-columns:1fr;gap:13px;margin-top:14px}
+  .pane{position:relative;border-radius:10px;padding:16px 20px;border:1px solid var(--rule)}
+  .pane.lay{background:#f4f8f4;border-left:4px solid var(--good)}
+  .pane.tech{background:#f3f6f9;border-left:4px solid var(--tech)}
+  .pane .tag{display:inline-flex;align-items:center;gap:7px;font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;font-size:10px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;margin-bottom:8px}
+  .pane.lay .tag{color:var(--good)}
+  .pane.tech .tag{color:var(--tech)}
+  .pane .tag .dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+  .pane.lay .tag .dot{background:var(--good)}
+  .pane.tech .tag .dot{background:var(--tech)}
+  .pane p{font-size:13px;margin:0 0 8px}
+  .pane p:last-child{margin-bottom:0}
+  .pane li{font-size:12.5px}
+
+  /* Numbered rail (vertical flow graph) */
+  .rail{position:relative;margin:16px 0 6px;padding-left:2px}
+  .rail::before{content:"";position:absolute;left:16px;top:10px;bottom:24px;width:2px;background:var(--rule)}
+  .rail .step{position:relative;display:flex;gap:16px;align-items:flex-start;padding:0 0 14px}
+  .rail .step:last-child{padding-bottom:0}
+  .rail .badge{flex:0 0 auto;width:32px;height:32px;border-radius:50%;background:var(--cardinal);color:#fff;display:flex;align-items:center;justify-content:center;font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;font-weight:700;font-size:13px;position:relative;z-index:1}
+  .rail .badge.gate{background:var(--good)}
+  .rail .badge.stop{background:#0b0b10}
+  .rail .stepbody{padding-top:3px}
+  .rail .stepbody .st{font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;font-size:11px;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:var(--ink);margin-bottom:2px}
+  .rail .stepbody p{font-size:12.5px;margin:0;color:#3a3a44}
+
+  /* Horizontal flow graph */
+  .flow{display:flex;align-items:stretch;flex-wrap:wrap;gap:8px;margin:16px 0}
+  .flow .node{flex:1 1 0;min-width:120px;background:#fff;border:1px solid var(--rule);border-radius:10px;padding:11px 13px}
+  .flow .node .nt{font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--cardinal);font-weight:700;margin-bottom:4px}
+  .flow .node p{font-size:11.5px;margin:0;color:#3a3a44}
+  .flow .arrow{flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:var(--cardinal);font-size:20px;font-family:Arial,sans-serif}
+
+  /* Trust-boundary diagram */
+  .zones{display:flex;align-items:stretch;margin:18px 0 8px;border:1px solid var(--rule);border-radius:12px;overflow:hidden}
+  .zone{flex:1;padding:18px 20px;position:relative}
+  .zone.gov{background:#f2f7f2}
+  .zone.prov{background:#0b0b10;color:#fff}
+  .zone .ztitle{font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;margin-bottom:10px}
+  .zone.gov .ztitle{color:var(--good)}
+  .zone.prov .ztitle{color:#e9b8b8}
+  .zone .chip{display:block;background:#fff;border:1px solid var(--rule);border-radius:8px;padding:8px 11px;font-size:12px;margin:0 0 7px;color:#2a2a32}
+  .zone.prov .chip{background:#15151c;border-color:#2a2a30;color:#e2e0d8}
+  .zone .chip:last-child{margin-bottom:0}
+  .stamp{display:inline-block;margin-top:10px;border:2px solid #e9b8b8;color:#e9b8b8;border-radius:6px;padding:5px 9px;font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;font-size:10px;letter-spacing:.12em;font-weight:800;text-transform:uppercase;transform:rotate(-3deg)}
+  .divider{flex:0 0 78px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-left:2px dashed var(--cardinal);border-right:2px dashed var(--cardinal);background:repeating-linear-gradient(45deg,#faf8f4,#faf8f4 6px,#f1ede4 6px,#f1ede4 12px);padding:8px 4px}
+  .divider .dl{font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--cardinal);text-align:center;line-height:1.3}
+  .divider .ar{color:var(--cardinal);font-size:16px;font-family:Arial,sans-serif;margin:4px 0}
+  .caption{font-size:11.5px;color:var(--sub);font-style:italic;margin:6px 2px 0}
+
+  /* Promise / highlight */
+  .promise{position:relative;background:#0b0b10;color:#fff;border-radius:12px;padding:20px 24px;border-left:5px solid var(--good);margin:14px 0}
+  .promise .ptitle{font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:#86d29c;margin-bottom:8px}
+  .promise p{color:#ececf2;font-size:14.5px;line-height:1.5;margin:0}
+
+  /* Never / Always checklists */
+  .checklist{list-style:none;margin:8px 0 0;padding:0}
+  .checklist li{position:relative;padding-left:24px;font-size:13px;margin-bottom:9px;color:#2a2a32}
+  .checklist li::before{position:absolute;left:0;top:0;font-family:Arial,sans-serif;font-weight:700}
+  .checklist.never li::before{content:"\2715";color:var(--cardinal)}
+  .checklist.always li::before{content:"\2713";color:var(--good)}
+
+  /* Questions index */
+  .qindex{list-style:none;margin:10px 0 0;padding:0}
+  .qindex li{display:flex;gap:12px;align-items:baseline;padding:10px 0;border-bottom:1px dotted var(--rule);font-size:13.5px}
+  .qindex li:last-child{border-bottom:none}
+  .qindex .qi-q{flex:1;color:#2a2a32}
+  .qindex .qi-where{font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--cardinal);white-space:nowrap;font-weight:600}
+
+  /* Glossary */
+  .gloss{display:grid;grid-template-columns:1fr 1fr;gap:10px 22px}
+  .gloss dt{font-weight:700;font-size:13px;margin-bottom:2px}
+  .gloss dd{margin:0 0 10px;font-size:12.5px;color:#3a3a44;line-height:1.45}
+
+  /* Footer */
+  .page-footer{
+    position:absolute;bottom:24px;left:72px;right:72px;
+    display:flex;justify-content:space-between;font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;
+    font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--sub)
+  }
+  .page.dark .page-footer{color:#9a9aa6}
+
+  /* Editable hover */
+  [contenteditable=true]{outline:none;transition:background .15s}
+  [contenteditable=true]:hover{background:rgba(140,21,21,.04)}
+  [contenteditable=true]:focus{background:rgba(140,21,21,.08);box-shadow:inset 0 0 0 1px rgba(140,21,21,.25);border-radius:3px}
+  .page.dark [contenteditable=true]:hover{background:rgba(255,255,255,.04)}
+  .page.dark [contenteditable=true]:focus{background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)}
+
+  /* Page numbers (auto-injected by JS) */
+  .page-num{
+    position:absolute;bottom:24px;left:0;right:0;text-align:center;
+    font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;
+    font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--sub);
+    pointer-events:none;user-select:none;
+  }
+  .page.dark .page-num{color:#9a9aa6}
+
+  /* Print */
+  @page{ size: 8.5in 11in; margin: 0; }
+  @media print{
+    *{ -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; }
+    html, body{ background:#fff !important; margin:0 !important; padding:0 !important; }
+    .toolbar, #save-indicator, .delete-btn{ display:none !important; }
+    .page{
+      width: 8.5in !important; height: 11in !important; min-height:0 !important; max-height:11in !important;
+      margin:0 !important; padding:0.55in 0.65in 0.75in 0.65in !important;
+      box-shadow:none !important; border-radius:0 !important;
+      page-break-after: always; break-after: page; page-break-inside: avoid; break-inside: avoid;
+      overflow:hidden; position:relative;
+    }
+    .page:last-child{ page-break-after:auto; break-after:auto; }
+    .page.dark{ background:#0b0b10 !important; color:#fff !important; }
+    .card,.pane,.promise,.zones,.flow,.rail .step,.grid-2,.grid-3{ page-break-inside:avoid; break-inside:avoid; }
+    [contenteditable=true]:hover,[contenteditable=true]:focus{ background:none !important; box-shadow:none !important; outline:none !important; }
+    h1{font-size:34px !important;line-height:1.08 !important}
+    h2{font-size:23px !important}
+    .lead{font-size:14.5px !important;line-height:1.45 !important}
+    p{font-size:12.5px !important;line-height:1.48 !important}
+    .page-header{margin-bottom:22px !important;padding-bottom:8px !important}
+    *{position:static !important}
+    .page,.delete-btn,.page-footer,.zone,.divider,.rail,.rail::before,.rail .badge{position:relative !important}
+    .page-footer{position:absolute !important;bottom:0.3in;left:0.65in;right:0.65in}
+    .page-num{position:absolute !important;bottom:0.3in !important;left:0 !important;right:0 !important;text-align:center !important;color:#6a6a72 !important}
+    .page.dark .page-num{color:#bdb9af !important}
+  }
+
+  /* The ?print=1 PDF view applies this same layout on SCREEN, so the cream/dark
+     pages render edge-to-edge with no editor backdrop. "Export as PDF" or
+     "Save as PDF" then never picks up the gray border/shadow around each page. */
+  html.printing{ background:#fff !important; }
+  html.printing body{ background:#fff !important; margin:0 !important; padding:0 !important; }
+  html.printing .toolbar, html.printing #save-indicator, html.printing .delete-btn{ display:none !important; }
+  html.printing .page{
+    width:8.5in !important; height:11in !important; min-height:0 !important; max-height:11in !important;
+    margin:0 auto !important; padding:0.55in 0.65in 0.75in 0.65in !important;
+    box-shadow:none !important; border-radius:0 !important; overflow:hidden; position:relative;
+    page-break-after:always; break-after:page; page-break-inside:avoid; break-inside:avoid;
+  }
+  html.printing .page:last-child{ page-break-after:auto; break-after:auto; }
+  html.printing .page.dark{ background:#0b0b10 !important; color:#fff !important; }
+  html.printing h1{ font-size:34px !important; line-height:1.08 !important; }
+  html.printing h2{ font-size:23px !important; }
+  html.printing .lead{ font-size:14.5px !important; line-height:1.45 !important; }
+  html.printing p{ font-size:12.5px !important; line-height:1.48 !important; }
+  html.printing .page-header{ margin-bottom:22px !important; padding-bottom:8px !important; }
+  html.printing .page-footer{ position:absolute !important; bottom:0.3in; left:0.65in; right:0.65in; }
+  html.printing .page-num{ position:absolute !important; bottom:0.3in !important; left:0 !important; right:0 !important; text-align:center !important; color:#6a6a72 !important; }
+  html.printing .page.dark .page-num{ color:#bdb9af !important; }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="left">
+    <span class="brand">Palonur · OTL Brief · Editable</span>
+    <span class="hint">Click any text to edit · hover a block to delete it</span>
+  </div>
+  <div class="right">
+    <span id="save-indicator">Saved</span>
+    <button id="edit-mode-btn" onclick="toggleEditMode()">Enable editing</button>
+    <button onclick="resetAll()">Reset</button>
+    <button onclick="saveHTML()">Download HTML</button>
+    <a class="pdf-link" id="pdf-btn" href="/otl.html?print=1" target="_blank" rel="noopener">Download PDF</a>
+  </div>
+</div>
+
+<!-- COVER -->
+<section class="page dark" data-card>
+  <button class="delete-btn" onclick="deletePage(this)">×</button>
+  <div class="page-header">
+    <span>Palonur</span>
+    <span>Confidential — prepared for Stanford OTL</span>
+  </div>
+  <div class="rule-label">Technical &amp; Governance Brief</div>
+  <h1>How Palonur works: the AI architecture, the full data flow, and how the research corpus stays protected — and is never trained on.</h1>
+  <p class="lead">Prepared for Jonathan Gortat and the Stanford Office of Technology Licensing, following our first meeting. Every question you raised is answered twice — once in summary, once technically — with diagrams of how data moves through the system.</p>
+  <div class="stat-row">
+    <div><div class="stat-label">Prepared</div><div style="margin-top:6px">June 2026</div></div>
+    <div><div class="stat-label">Status</div><div style="margin-top:6px">Live in closed beta for review</div></div>
+    <div><div class="stat-label">Contact</div><div style="margin-top:6px">karan@palonur.com</div></div>
+  </div>
+  <div class="page-footer"><span></span><span>palonur.com</span></div>
+</section>
+
+<!-- HOW TO READ -->
+<section class="page" data-card>
+  <button class="delete-btn" onclick="deletePage(this)">×</button>
+  <div class="page-header"><span>Orientation</span><span>How to read this brief</span></div>
+  <h2>AI architecture, data flow, security, privacy, interaction, hosting, ip and ownership</h2>
+  <p class="lead">In our meeting you raised five questions you wanted to understand, and this brief answers each of them — plus a sixth topic on who owns what and how this is offered. For each one you get a <strong>summary</strong> anyone can follow, and a <strong>technical</strong> answer for your reviewers — followed by the diagrams that show exactly how data moves.</p>
+
+  <ul class="qindex">
+    <li><span class="qi-q">An AI architecture description</span><span class="qi-where">Question 1</span></li>
+    <li><span class="qi-q">The full data flow</span><span class="qi-where">Question 2</span></li>
+    <li><span class="qi-q">How security &amp; privacy are governed</span><span class="qi-where">Question 3</span></li>
+    <li><span class="qi-q">How the user interacts with the system</span><span class="qi-where">Question 4</span></li>
+    <li><span class="qi-q">Who is hosting it</span><span class="qi-where">Question 5</span></li>
+    <li><span class="qi-q">Who owns what, and how this is offered</span><span class="qi-where">Ownership &amp; commercial model</span></li>
+  </ul>
+
+  <div class="promise" data-card>
+    <button class="delete-btn" onclick="deleteCard(this)">×</button>
+    <div class="ptitle">The one promise behind everything below</div>
+    <p>Raw research data is <strong>never used to train any AI model</strong>. It lives in a governed database, and Stanford's material is intended to sit on Stanford's own servers. To answer a question, only the excerpts needed for <em>that one answer</em> are sent to the AI to draft a reply — used for that single answer, never to train it.</p>
+  </div>
+  <p class="muted" style="font-size:12.5px">This document is editable. Click <strong>Enable editing</strong> in the top bar to revise any wording before you share it, then use <strong>Download PDF</strong> or <strong>Download HTML</strong> to send a snapshot to OTL.</p>
+</section>
+
+<!-- Q1: AI ARCHITECTURE -->
+<section class="page" data-card>
+  <button class="delete-btn" onclick="deletePage(this)">×</button>
+  <div class="page-header"><span>Question 1</span><span>AI architecture</span></div>
+  <div class="qhead"><span class="qnum">Question 1</span></div>
+  <h2>What is the AI architecture?</h2>
+
+  <div class="dual">
+    <div class="pane lay" data-card>
+      <button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="tag"><span class="dot"></span>Summary</div>
+      <p>Palonur is built to behave like a careful <strong>librarian</strong>, not a know-it-all. A normal chatbot answers from memory and can confidently make things up. Palonur does not. For every question it first looks up faculty-approved material, then writes its answer using <em>only</em> what it found, and attaches the citation. If it cannot find approved material, it says so plainly instead of guessing.</p>
+      <p>The AI is a writer, not the source of truth. The source of truth is the faculty-approved library behind it.</p>
+    </div>
+    <div class="pane tech" data-card>
+      <button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="tag"><span class="dot"></span>Technical detail</div>
+      <p>The system is a <strong>governed Retrieval-Augmented Generation (RAG)</strong> pipeline. The components are:</p>
+      <ul>
+        <li><strong>Knowledge layer</strong> — faculty-approved sources and steward-written interpretations, chunked and embedded <strong>in-house</strong> by a self-hosted open-source model (<code>gte-small</code>, 384-dim) running in our own process — the approved text is never sent to a third-party embedding service — stored as <code>halfvec</code> in PostgreSQL/<code>pgvector</code> with an HNSW cosine index.</li>
+        <li><strong>Retrieval</strong> — per-question vector search over <em>approved-only</em> chunks; steward interpretations are weighted above raw paper excerpts.</li>
+        <li><strong>Generation</strong> — Anthropic Claude, called as a service through the Replit AI Integrations proxy, constrained to emit labeled sections (answer, citation, paper, finding, interpretation).</li>
+        <li><strong>Guards</strong> — an observe-only citation guard verifies the cited author/year actually exists in the retrieved set; a voice guard checks tone. Two refusal modes (<code>REFUSE</code> for off-topic, <code>UNCOVERED</code> for "not in the approved corpus").</li>
+      </ul>
+      <p>No model is trained, fine-tuned, or adapted on our data anywhere in the system — the LLM is used purely for inference.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:18px">The architecture at a glance</h3>
+  <div class="flow" data-card>
+    <button class="delete-btn" onclick="deleteCard(this)">×</button>
+    <div class="node"><div class="nt">Knowledge layer</div><p>Faculty-approved sources + steward interpretations, embedded as vectors in Postgres/pgvector.</p></div>
+    <div class="arrow">→</div>
+    <div class="node"><div class="nt">Retrieval</div><p>Per-question vector search over approved-only chunks.</p></div>
+    <div class="arrow">→</div>
+    <div class="node"><div class="nt">Generation</div><p>Claude writes from the retrieved excerpts only — structured + cited.</p></div>
+    <div class="arrow">→</div>
+    <div class="node"><div class="nt">Guards</div><p>Observe-only citation + voice checks; off-topic or no-match questions are refused.</p></div>
+  </div>
+  <p class="caption">The answering model never holds the corpus. It only ever sees the handful of approved excerpts retrieved for the question in front of it.</p>
+</section>
+
+<!-- Q2: DATA FLOW -->
+<section class="page" data-card>
+  <button class="delete-btn" onclick="deletePage(this)">×</button>
+  <div class="page-header"><span>Question 2</span><span>Full data flow</span></div>
+  <div class="qhead"><span class="qnum">Question 2</span></div>
+  <h2>What is the full data flow?</h2>
+
+  <div class="dual">
+    <div class="pane lay" data-card>
+      <button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="tag"><span class="dot"></span>Summary</div>
+      <p>There are two journeys. <strong>First, knowledge gets in:</strong> a faculty steward reviews material and approves it before anything becomes answerable — nothing unapproved is ever reachable. <strong>Second, a question gets answered:</strong> the question comes in, the system looks up approved material, the AI drafts an answer from that material, an automatic check compares the citation against the retrieved sources and flags any mismatch, and the answer streams back. Raw material never goes to the AI in bulk, and never trains it.</p>
+    </div>
+    <div class="pane tech" data-card>
+      <button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="tag"><span class="dot"></span>Technical detail</div>
+      <p>Two pipelines, both shown below. <strong>Ingestion</strong> is human-gated: nothing is retrievable until <code>status = 'approved'</code>; approval records the approver, timestamp, version, and a content snapshot, and the approved chunk text is embedded <em>in-house</em> by a self-hosted model to produce the stored vectors — it is never sent to a third-party embedding service. <strong>Query</strong> is per-request: only the top-k approved excerpts are assembled into the context for a single Claude inference. Answers stream over Server-Sent Events; a post-stream <em>observe-only</em> guard checks the citation against the retrieved set and flags (never rewrites) any mismatch.</p>
+    </div>
+  </div>
+
+  <div class="grid-2" style="margin-top:16px">
+    <div data-card>
+      <button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <h3>Flow A — Knowledge in (human-gated)</h3>
+      <div class="rail">
+        <div class="step"><div class="badge">1</div><div class="stepbody"><div class="st">Submit</div><p>A source or steward interpretation is added as a <em>draft</em>. Not retrievable.</p></div></div>
+        <div class="step"><div class="badge gate">2</div><div class="stepbody"><div class="st">Steward review</div><p>The named pillar steward reads, edits, and decides.</p></div></div>
+        <div class="step"><div class="badge gate">3</div><div class="stepbody"><div class="st">Approve &amp; record</div><p>Records approver + timestamp + version + content snapshot.</p></div></div>
+        <div class="step"><div class="badge">4</div><div class="stepbody"><div class="st">Embed &amp; index</div><p>Chunked; embeddings computed in-house by a self-hosted model; indexed — now retrievable.</p></div></div>
+      </div>
+    </div>
+    <div data-card>
+      <button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <h3>Flow B — A question answered</h3>
+      <div class="rail">
+        <div class="step"><div class="badge">1</div><div class="stepbody"><div class="st">Question</div><p>From the consumer app or a partner API call (streamed).</p></div></div>
+        <div class="step"><div class="badge">2</div><div class="stepbody"><div class="st">Retrieve</div><p>Vector search over <em>approved-only</em> chunks for the pillar.</p></div></div>
+        <div class="step"><div class="badge">3</div><div class="stepbody"><div class="st">Assemble context</div><p>Only the top excerpts needed for this one answer.</p></div></div>
+        <div class="step"><div class="badge">4</div><div class="stepbody"><div class="st">Generate</div><p>Claude drafts a structured, cited answer from that context.</p></div></div>
+        <div class="step"><div class="badge gate">5</div><div class="stepbody"><div class="st">Citation guard (observe-only)</div><p>Flags a citation not in the retrieved set; the UI then hides the source. It never rewrites the answer.</p></div></div>
+        <div class="step"><div class="badge stop">6</div><div class="stepbody"><div class="st">Stream back</div><p>Structured, cited answer streams to the reader.</p></div></div>
+      </div>
+    </div>
+  </div>
+  <p class="caption">The embeddable expert agent is strict: if no approved material clears the bar, it returns <code>UNCOVERED</code> rather than guess. The public consumer agent can additionally fall back to a curated Stanford baseline corpus.</p>
+</section>
+
+<!-- DATA-PROTECTION CENTERPIECE -->
+<section class="page" data-card>
+  <button class="delete-btn" onclick="deletePage(this)">×</button>
+  <div class="page-header"><span>The core guarantee</span><span>Raw data is protected &amp; never trained on</span></div>
+  <h2>Where the data lives, and what crosses the line.</h2>
+  <p class="lead">This is the picture to keep in mind. The research material — the curated corpus of approved sources and steward interpretations, not user or patient data — sits inside a governed environment; for Stanford's material, that environment is intended to live on Stanford's own servers. Approved text is turned into search vectors <em>in-house</em>, by an open-source model we run ourselves — that step never leaves the governed environment. The only outside service we <em>call</em> is the one that drafts a single answer, and only the handful of excerpts for that one question ever reach it. We never run it on the material in bulk and never let it train on the material.</p>
+
+  <div class="zones" data-card>
+    <button class="delete-btn" onclick="deleteCard(this)">×</button>
+    <div class="zone gov">
+      <div class="ztitle">◇ Governed environment</div>
+      <span class="chip">Raw papers &amp; sources</span>
+      <span class="chip">Steward interpretations</span>
+      <span class="chip">Embeddings (in-house model) &amp; vector index</span>
+      <span class="chip">Approval &amp; audit trail</span>
+    </div>
+    <div class="divider">
+      <div class="dl">Trust boundary</div>
+      <div class="ar">→</div>
+      <div class="dl">top-k excerpts to answer (per question)</div>
+      <div class="ar">←</div>
+      <div class="dl">answer</div>
+    </div>
+    <div class="zone prov">
+      <div class="ztitle">Model provider — inference only</div>
+      <span class="chip">Anthropic Claude — drafts one answer (at query)</span>
+      <span class="chip">Called via API, per request — never trained on our data</span>
+      <span class="stamp">Never used for training</span>
+    </div>
+  </div>
+  <p class="caption">Text crosses the boundary only once, and only for inference: the handful of approved excerpts needed to draft a single answer, per question. Embeddings are computed in-house and never leave the governed environment. No AI model is ever trained or fine-tuned on the material; retention of those per-answer excerpts is governed by the provider's API terms (see note below).</p>
+
+  <div class="grid-2" style="margin-top:14px">
+    <div class="card" data-card>
+      <button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="label">What never happens</div>
+      <ul class="checklist never">
+        <li>No model is trained or fine-tuned on the research corpus — ever.</li>
+        <li>The corpus is never sold, published, or handed to a provider to train on.</li>
+        <li>Under the provider's API terms (to be confirmed contractually), the model provider does not train on our inputs or outputs.</li>
+        <li>Embeddings are numeric vectors, not a human-readable copy of the text.</li>
+      </ul>
+    </div>
+    <div class="card" data-card>
+      <button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="label">What always happens</div>
+      <ul class="checklist always">
+        <li>A human steward approves material before it can be used.</li>
+        <li>Every published answer carries a verifiable citation.</li>
+        <li>Approvals are recorded and timestamped — a full audit trail.</li>
+        <li>At query time, only the minimum excerpts for one answer are sent to the model.</li>
+      </ul>
+    </div>
+  </div>
+  <p class="muted" style="font-size:11.5px;margin-top:4px">Note for OTL: the exact contractual language for the provider's no-training / retention terms can be inserted here once finalized — this block is editable.</p>
+</section>
+
+<!-- Q3: SECURITY & PRIVACY -->
+<section class="page" data-card>
+  <button class="delete-btn" onclick="deletePage(this)">×</button>
+  <div class="page-header"><span>Question 3</span><span>Security &amp; privacy governance</span></div>
+  <div class="qhead"><span class="qnum">Question 3</span></div>
+  <h2>How are security and privacy governed?</h2>
+
+  <div class="dual">
+    <div class="pane lay" data-card>
+      <button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="tag"><span class="dot"></span>Summary</div>
+      <p>Three ideas. <strong>Only the right people can see or change things</strong> — faculty review their own pillar, admins run the platform, and roles don't overlap. <strong>We collect as little personal information as possible</strong>, and we never store anything sensitive in plain form. <strong>Every published answer has a named human behind it</strong>, recorded and timestamped, so nothing is anonymous or unaccountable.</p>
+    </div>
+    <div class="pane tech" data-card>
+      <button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="tag"><span class="dot"></span>Technical detail</div>
+      <ul>
+        <li><strong>Authentication</strong> — faculty via Clerk (institutional SSO-capable); editors/investors via single-use magic links → short-lived signed session cookies; admin behind a separate scoped gate.</li>
+        <li><strong>Authorization</strong> — least privilege; write routes enforce steward/role membership in middleware; retrieval is hard-gated to <code>status='approved'</code>.</li>
+        <li><strong>Privacy / PII</strong> — minimal collection; consent captured with timestamp; IP stored only as a salted <code>SHA-256</code> hash, never raw.</li>
+        <li><strong>Secrets</strong> — held in the platform secret store / deployment secrets, never in code or the client bundle.</li>
+        <li><strong>Abuse controls</strong> — per-IP rate limits and concurrency caps on public endpoints.</li>
+        <li><strong>Integrity</strong> — observe-only citation/voice guards plus structured logging; approvals signed and versioned.</li>
+      </ul>
+    </div>
+  </div>
+  <p class="caption">Privacy and security are enforced in the code paths themselves (gated queries, hashed identifiers, role middleware), not just in policy.</p>
+</section>
+
+<!-- Q4: HOW THE USER INTERACTS -->
+<section class="page" data-card>
+  <button class="delete-btn" onclick="deletePage(this)">×</button>
+  <div class="page-header"><span>Question 4</span><span>How the user interacts</span></div>
+  <div class="qhead"><span class="qnum">Question 4</span></div>
+  <h2>How does a user interact with the system?</h2>
+
+  <div class="dual">
+    <div class="pane lay" data-card>
+      <button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="tag"><span class="dot"></span>Summary</div>
+      <p>A reader types a health question and gets a clear, sourced answer — with the study and the faculty interpretation shown alongside it, not buried. Behind the scenes, a Stanford faculty steward uses a private portal to review and approve what the system is allowed to say, and to set the voice it answers in. Outside platforms can also plug in through a controlled connection. The faculty member is always in the loop.</p>
+    </div>
+    <div class="pane tech" data-card>
+      <button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="tag"><span class="dot"></span>Technical detail</div>
+      <ul>
+        <li><strong>Consumer</strong> — asks at the public answer surface; the structured sections render as distinct UI (answer, citation, source, interpretation); responses stream live.</li>
+        <li><strong>Embeddable widget</strong> — a white-label "ask" box an outside expert drops on their own site, hard-locked to one pillar.</li>
+        <li><strong>Faculty steward</strong> — Clerk-authenticated portal: review/approve queue, reliability rubric, and voice profile.</li>
+        <li><strong>Partner / AI platform</strong> — metered API keys with rate tiers.</li>
+        <li><strong>Admin</strong> — internal operations surfaces, separately gated.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 style="margin-top:18px">The people in the loop</h3>
+  <div class="flow" data-card>
+    <button class="delete-btn" onclick="deleteCard(this)">×</button>
+    <div class="node"><div class="nt">Reader / partner</div><p>Asks a question.</p></div>
+    <div class="arrow">→</div>
+    <div class="node"><div class="nt">Palonur</div><p>Answers only from approved, cited material.</p></div>
+    <div class="arrow">→</div>
+    <div class="node"><div class="nt">Faculty steward</div><p>Approves the knowledge &amp; sets the voice — always upstream of the answer.</p></div>
+  </div>
+</section>
+
+<!-- Q5: HOSTING -->
+<section class="page" data-card>
+  <button class="delete-btn" onclick="deletePage(this)">×</button>
+  <div class="page-header"><span>Question 5</span><span>Hosting</span></div>
+  <div class="qhead"><span class="qnum">Question 5</span></div>
+  <h2>Who is hosting it?</h2>
+
+  <div class="dual">
+    <div class="pane lay" data-card>
+      <button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="tag"><span class="dot"></span>Summary</div>
+      <p>For development and review, it currently runs on a managed cloud (AWS, US West) with a managed PostgreSQL database. The model that drafts answers is called as a service from Anthropic (Claude); the model that turns approved text into search vectors runs in-house. This is a development setup only — <strong>all Stanford material should be hosted on Stanford's own servers</strong>, inside Stanford's environment. The system is built from standard, portable parts, so it deploys there without changes.</p>
+    </div>
+    <div class="pane tech" data-card>
+      <button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="tag"><span class="dot"></span>Technical detail</div>
+      <ul>
+        <li><strong>Development / review (current)</strong> — managed cloud (AWS, US West) for the API + web apps, with managed PostgreSQL (pgvector) and object storage; answer model via the Anthropic API, embeddings computed in-house (self-hosted open-source model).</li>
+        <li><strong>Portable by design</strong> — runs in any environment offering Node.js, PostgreSQL with <code>pgvector</code>, object storage, and outbound HTTPS to the model APIs. No proprietary lock-in.</li>
+        <li><strong>Production for Stanford material</strong> — deploy into a Stanford-controlled cloud/VPC with Stanford-managed Postgres, so the stored corpus stays within Stanford's boundary; the answer model is still called per question, under contractually agreed no-training / retention terms.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 style="margin-top:18px">Same system, two homes</h3>
+  <div class="flow" data-card>
+    <button class="delete-btn" onclick="deleteCard(this)">×</button>
+    <div class="node"><div class="nt">Development (today)</div><p>Managed cloud (AWS) + managed Postgres; models called as a service.</p></div>
+    <div class="arrow">→</div>
+    <div class="node"><div class="nt">Portable parts</div><p>Node · PostgreSQL/pgvector · object storage · model APIs.</p></div>
+    <div class="arrow">→</div>
+    <div class="node"><div class="nt">Production at Stanford</div><p>Stanford cloud/VPC + Stanford Postgres; the stored corpus stays in Stanford's environment.</p></div>
+  </div>
+  <p class="caption">The architecture doesn't change when the address does — the same approved-only, never-trained-on guarantees hold wherever it runs.</p>
+</section>
+
+<!-- OWNERSHIP & COMMERCIAL MODEL -->
+<section class="page" data-card>
+  <button class="delete-btn" onclick="deletePage(this)">×</button>
+  <div class="page-header"><span>Ownership &amp; commercial model</span><span>IP, distribution, and revenue</span></div>
+  <h2>Who owns what, and how this is offered.</h2>
+  <p class="lead">Palonur does not own the research or the data, and is not seeking an IP license. The underlying material remains Stanford's. Palonur builds and operates the governed access layer and offers convenient, cited access to it — we sell access and convenience, never the data itself.</p>
+
+  <div class="grid-2" style="margin-top:14px">
+    <div class="card" data-card>
+      <button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="label">Ownership</div>
+      <ul class="checklist always">
+        <li>The research corpus and underlying data remain Stanford's; Palonur never takes ownership.</li>
+        <li>No IP license is required — Palonur licenses nothing from Stanford and claims no rights in the material.</li>
+        <li>Palonur owns only the software that retrieves and presents the approved material.</li>
+      </ul>
+    </div>
+    <div class="card" data-card>
+      <button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="label">Distribution &amp; revenue</div>
+      <ul class="checklist always">
+        <li>Offered to users of Stanford Lifestyle Medicine programs as a freemium service — a free tier, plus a paid tier for fuller access.</li>
+        <li>We propose to share a portion of revenue with Stanford.</li>
+        <li>We also propose to direct funds toward establishing a Stanford Lifestyle Medicine Institute.</li>
+      </ul>
+    </div>
+  </div>
+  <p class="caption">The commercial relationship is access-and-revenue, not a transfer of data or IP. Exact revenue terms and the Institute structure are proposals we would shape together with Stanford.</p>
+  <div class="page-footer"><span>Confidential — prepared for Stanford OTL</span><span>palonur.com</span></div>
+</section>
+
+<!-- CLOSE: GLOSSARY + NEXT -->
+<section class="page" data-card>
+  <button class="delete-btn" onclick="deletePage(this)">×</button>
+  <div class="page-header"><span>Reference</span><span>Glossary &amp; next steps</span></div>
+  <h2>A short glossary, and where we'd value OTL's guidance.</h2>
+
+  <div class="card" data-card>
+    <button class="delete-btn" onclick="deleteCard(this)">×</button>
+    <div class="label">Plain-language glossary</div>
+    <dl class="gloss">
+      <div><dt>RAG</dt><dd>"Retrieval-Augmented Generation" — the AI looks up approved material first, then writes from it. It is not answering from memory.</dd></div>
+      <div><dt>Inference</dt><dd>Using a trained model to produce one answer. The opposite of training — nothing about the model changes.</dd></div>
+      <div><dt>Embedding / vector</dt><dd>A list of numbers that represents the meaning of a passage so similar text can be found. Not a human-readable copy.</dd></div>
+      <div><dt>Steward</dt><dd>The named faculty member who reviews and approves what the system may say for their pillar.</dd></div>
+      <div><dt>Pillar</dt><dd>A subject area (e.g. Sleep), each governed by its own steward.</dd></div>
+      <div><dt>Trust boundary</dt><dd>The line between the governed environment (the curated research corpus + steward interpretations) and the outside model service. Only minimal excerpts cross it, per answer.</dd></div>
+    </dl>
+  </div>
+
+  <div class="card" data-card>
+    <button class="delete-btn" onclick="deleteCard(this)">×</button>
+    <div class="label">Where we'd value OTL's guidance</div>
+    <ul>
+      <li>The preferred hosting boundary for Stanford data (managed cloud vs. Stanford-controlled environment).</li>
+      <li>The exact provider terms (no-training / zero-retention / BAA) Stanford wants reflected.</li>
+      <li>Any additional security or privacy review steps to fold into the steward workflow.</li>
+    </ul>
+    <p style="margin-top:6px">We'd welcome a working session the week of June 29 to walk through any of the above. — <span contenteditable="false">karan@palonur.com</span></p>
+  </div>
+
+  <div class="page-footer"><span>Confidential — prepared for Stanford OTL</span><span>palonur.com</span></div>
+</section>
+
+<!-- GOVERNANCE & ACCOUNTABILITY -->
+<section class="page" data-card data-gov-page="governance-accountability">
+  <button class="delete-btn" onclick="deletePage(this)">×</button>
+  <div class="page-header"><span>Governance &amp; accountability</span><span>Who stands behind every answer</span></div>
+  <h2>Who decides what the system may say — and who answers for it.</h2>
+  <p class="lead">Every answer traces to a named Stanford faculty steward's approval. This page states plainly where authority comes from, what the system is allowed to claim, how information is controlled, and who is accountable when it speaks.</p>
+
+  <div class="grid-2" style="margin-top:14px">
+    <div class="card" data-card>
+      <button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="label">Authority source</div>
+      <ul class="checklist always">
+        <li>Named faculty stewards are the sole source of authority: nothing is served unless a steward approved both the source and the interpretation of it.</li>
+        <li>Approval is recorded per item — who approved it, and when — and is revocable; unapproved or retired material drops out of retrieval immediately.</li>
+        <li>Palonur engineering has no editorial override: the company cannot add or alter claims.</li>
+      </ul>
+    </div>
+    <div class="card" data-card>
+      <button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="label">Allowed claims</div>
+      <ul class="checklist always">
+        <li>The system may state only what appears in steward-approved material; each covered answer carries a citation to the underlying work.</li>
+        <li>A citation guard checks every cited answer against the retrieved provenance; an unverifiable citation is flagged and its source strip is suppressed.</li>
+        <li>Outside the approved corpus the system says so plainly or refuses — it never improvises an answer.</li>
+      </ul>
+    </div>
+    <div class="card" data-card>
+      <button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="label">Information control</div>
+      <ul class="checklist always">
+        <li>The governed corpus lives in Palonur's database; only the minimal excerpts needed for one answer cross to the model provider, under no-training inference terms.</li>
+        <li>Private surfaces — this brief, the dashboards — are gated on the server, and the gates fail closed when unconfigured.</li>
+        <li>User data is never sold and never used to train models.</li>
+      </ul>
+    </div>
+    <div class="card" data-card>
+      <button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="label">Accountability</div>
+      <ul class="checklist always">
+        <li>Every question, answer, citation-check outcome, and steward approval is logged, so any answer can be reconstructed after the fact.</li>
+        <li>Access to governance surfaces is audited — including who opened this brief, and when.</li>
+        <li>A named human answers for each layer: the steward for content, Palonur for operating the platform — <span contenteditable="false">karan@palonur.com</span>.</li>
+      </ul>
+    </div>
+  </div>
+  <p class="caption">This statement is mirrored as a live Governance view in Palonur's internal admin console, so what we state here matches what operators see day to day.</p>
+  <div class="page-footer"><span>Confidential — prepared for Stanford OTL</span><span>palonur.com</span></div>
+</section>
+
+<!-- SECURITY REVIEW PACKAGE (mirrored in api-server/src/lib/otlGovernance.ts — keep in sync) -->
+<section class="page" data-card data-secpkg-page="security-review-package">
+  <button class="delete-btn" onclick="deletePage(this)">×</button>
+  <div class="page-header"><span>Security review</span><span>Written package for IT reviewers</span></div>
+  <h2>A written IT security review package exists — threat model, data flows, compliance posture.</h2>
+  <p class="lead">For Stanford Medicine IT's governance and security review, the claims summarized in this brief are backed by a structured written package maintained alongside the codebase. Request it from <span contenteditable="false">karan@palonur.com</span>.</p>
+  <div class="grid-2" style="margin-top:14px">
+    <div class="card" data-card>
+      <button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="label">What the package contains</div>
+      <ul>
+        <li><strong>Threat model</strong> — assets, trust boundaries, STRIDE-style threats, mitigations with code-level pointers, and an honest accepted-risks list.</li>
+        <li><strong>Data-flow inventory, per surface</strong> — every external provider that receives user or research data, what crosses, and when. The asklifestylemedicine.com answer path is documented separately: in-house embeddings and Anthropic Claude only.</li>
+        <li><strong>Compliance posture</strong> — no SOC 2 today; infrastructure attestations inherited via Replit on AWS; application controls documented in the package, structured to answer a HECVAT Lite questionnaire.</li>
+        <li><strong>One-page posture summary</strong> — authentication, authorization, audit logging, secrets, prompt-injection defenses, and named remediation items.</li>
+      </ul>
+    </div>
+    <div class="card" data-card>
+      <button class="delete-btn" onclick="deleteCard(this)">×</button>
+      <div class="label">Honest by design</div>
+      <ul>
+        <li>Known gaps are listed as gaps — shared-password admin, in-memory rate limits, and the observe-only advice guard are documented, not glossed over.</li>
+        <li>The same honest-claims rules as this brief apply: provider no-training is a contractual posture, and no zero-retention or "corpus never leaves" claims are made.</li>
+        <li>Every claim in the package points at the file in the codebase that implements it.</li>
+      </ul>
+    </div>
+  </div>
+  <p class="caption">Package files: threat_model.md, data-flow-inventory.md, compliance-posture.md, security-posture-summary.md — kept in the repository so the code and its review documents cannot drift apart.</p>
+  <div class="page-footer"><span>Confidential — prepared for Stanford OTL</span><span>palonur.com</span></div>
+</section>
+
+<script>
+  // Edits are persisted to the database (source of truth on load) via
+  // /api/otl-doc, with localStorage kept as a local backup. Use Download
+  // HTML / PDF to share a snapshot. Edit mode is a sessionStorage flag
+  // (clears on tab close); saving to the DB requires an edit password.
+  const LOCAL_KEY = 'palonur-otl-brief';
+  const EDIT_FLAG = 'palonur-otl-edit';
+  const PW_KEY = 'palonur-otl-edit-password';
+  const SERVER_URL = '/api/otl-doc';
+
+  function getPassword(){ return sessionStorage.getItem(PW_KEY) || ''; }
+
+  function setIndicator(text, ok){
+    const ind = document.getElementById('save-indicator');
+    if (!ind) return;
+    ind.textContent = text;
+    ind.style.color = ok === false ? '#e26a6a' : '#7fbf7f';
+    ind.classList.add('show');
+    clearTimeout(setIndicator._t);
+    setIndicator._t = setTimeout(() => ind.classList.remove('show'), 2200);
+  }
+
+  function isEditMode(){ return !!sessionStorage.getItem(EDIT_FLAG); }
+
+  function refreshEditAffordances(){
+    const editing = isEditMode();
+    const btn = document.getElementById('edit-mode-btn');
+    if (btn) btn.textContent = editing ? 'Editing on · click to exit' : 'Enable editing';
+    document.querySelectorAll('.delete-btn').forEach(b => { b.style.display = editing ? '' : 'none'; });
+    document.querySelectorAll('.card, td, .page-header span, .page-footer span, .stat-label, .rule-label, h1, h2, h3, h4, p, li, th, dt, dd, .stepbody .st, .node p, .node .nt, .chip, .ztitle, .qi-q, .caption, .ptitle').forEach(el => {
+      if (editing){
+        if (!el.closest('.toolbar') && !el.classList.contains('delete-btn')) el.setAttribute('contenteditable', 'true');
+      } else {
+        el.removeAttribute('contenteditable');
+      }
+    });
+    // The footer stat VALUES (e.g. "June 2026", the Status, the contact email)
+    // sit in plain sibling divs next to each .stat-label, so make those editable
+    // too. Targeted structurally so it also covers the saved DB snapshot, whose
+    // markup predates any class we could add to the static template.
+    document.querySelectorAll('.stat-label').forEach(lbl => {
+      const val = lbl.nextElementSibling;
+      if (!val) return;
+      if (editing) val.setAttribute('contenteditable', 'true');
+      else val.removeAttribute('contenteditable');
+    });
+    document.querySelectorAll('.delete-btn').forEach(b => b.setAttribute('contenteditable', 'false'));
+  }
+
+  function toggleEditMode(){
+    if (isEditMode()){
+      sessionStorage.removeItem(EDIT_FLAG);
+      refreshEditAffordances();
+      setIndicator('View only', true);
+      return;
+    }
+    if (!getPassword()){
+      const pw = prompt('Enter the edit password to save changes to the database:');
+      if (!pw) { setIndicator('Editing cancelled', false); return; }
+      sessionStorage.setItem(PW_KEY, pw.trim());
+    }
+    sessionStorage.setItem(EDIT_FLAG, '1');
+    refreshEditAffordances();
+    setIndicator('Editing enabled · changes save to the database', true);
+  }
+
+  function currentPages(){
+    return Array.from(document.querySelectorAll('.page')).map(p => p.outerHTML);
+  }
+
+  function saveLocal(){
+    try { localStorage.setItem(LOCAL_KEY, JSON.stringify(currentPages())); }
+    catch(e){ /* localStorage is a best-effort backup only */ }
+  }
+
+  // Migrate any legacy "In plain language" pane label saved before the rename
+  // to "Summary". Non-destructive: only rewrites the label, leaving the dot
+  // and all other edited content untouched.
+  function normalizeLegacyLabels(){
+    let changed = false;
+    document.querySelectorAll('.page .tag').forEach(tag => {
+      if (/in plain language/i.test(tag.textContent || '')){
+        const dot = tag.querySelector('.dot');
+        tag.textContent = '';
+        if (dot) tag.appendChild(dot);
+        else { const s = document.createElement('span'); s.className = 'dot'; tag.appendChild(s); }
+        tag.appendChild(document.createTextNode('Summary'));
+        changed = true;
+      }
+    });
+    return changed;
+  }
+
+  async function saveToServer(){
+    if (!isEditMode()) return false;
+    saveLocal();
+    try {
+      const res = await fetch(SERVER_URL, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', 'x-edit-password': getPassword() },
+        body: JSON.stringify({ content: currentPages() }),
+      });
+      if (res.status === 401){
+        sessionStorage.removeItem(PW_KEY);
+        setIndicator('Wrong edit password — not saved', false);
+        return false;
+      }
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      setIndicator('Saved to database ' + new Date().toLocaleTimeString(), true);
+      return true;
+    } catch(e){
+      setIndicator('Saved locally · database save failed', false);
+      return false;
+    }
+  }
+
+  let saveTimer;
+  function autoSave(){
+    if (!isEditMode()) return;
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(() => { saveToServer(); }, 800);
+  }
+
+  function deleteCard(btn){
+    if (!isEditMode()) return;
+    const card = btn.closest('[data-card]');
+    if (card && confirm('Delete this block?')){ card.remove(); autoSave(); }
+  }
+  function deletePage(btn){
+    if (!isEditMode()) return;
+    const page = btn.closest('.page');
+    if (page && confirm('Delete this entire page?')){ page.remove(); renumberPages(); autoSave(); }
+  }
+  function renumberPages(){
+    const pages = document.querySelectorAll('.page');
+    const total = pages.length;
+    pages.forEach((p, i) => {
+      const existing = p.querySelector(':scope > .page-num');
+      if (i === 0){ if (existing) existing.remove(); return; }
+      let badge = existing;
+      if (!badge){ badge = document.createElement('div'); badge.className = 'page-num'; p.appendChild(badge); }
+      badge.textContent = 'P.' + (i + 1) + ' · of ' + total;
+    });
+  }
+
+  function buildPrintStyleBlock(id){
+    return `
+      <style id="${id}">
+        html,body{background:#fff !important;margin:0 !important;padding:0 !important}
+        *{ -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; }
+        @page{ size: 8.5in 11in; margin: 0; }
+        .page{
+          width: 8.5in !important; height: 11in !important; min-height:0 !important; max-height:11in !important;
+          margin:0 !important; padding:0.55in 0.65in 0.75in 0.65in !important;
+          box-shadow:none !important; border-radius:0 !important; position:relative !important; overflow:hidden !important;
+          page-break-after: always; break-after: page; page-break-inside: avoid; break-inside: avoid;
+        }
+        .page:last-child{ page-break-after:auto; break-after:auto; }
+        .page.dark{ background:#0b0b10 !important; color:#fff !important; }
+        .page-num{ position:absolute !important; bottom:0.3in !important; left:0 !important; right:0 !important; text-align:center !important; font-size:10px !important; letter-spacing:.18em; text-transform:uppercase; color:#6a6a72 !important; }
+        .page.dark .page-num{ color:#bdb9af !important; }
+        .card,.pane,.promise,.zones,.flow,.grid-2,.grid-3,.rail .step{ page-break-inside:avoid; break-inside:avoid; }
+      </style>`;
+  }
+
+  function buildPrintDocument(){
+    const clone = document.documentElement.cloneNode(true);
+    clone.querySelectorAll('.delete-btn, .toolbar, #save-indicator').forEach(n => n.remove());
+    clone.querySelectorAll('[contenteditable]').forEach(n => n.removeAttribute('contenteditable'));
+    const head = clone.querySelector('head');
+    if (head) head.insertAdjacentHTML('beforeend', buildPrintStyleBlock('palonur-otl-print-window'));
+    return '<!doctype html>\n' + clone.outerHTML;
+  }
+
+  function saveHTML(){
+    const clone = document.documentElement.cloneNode(true);
+    clone.classList.add('printing');
+    clone.querySelectorAll('.delete-btn, .toolbar, #save-indicator').forEach(n => n.remove());
+    clone.querySelectorAll('[contenteditable]').forEach(n => n.removeAttribute('contenteditable'));
+    const head = clone.querySelector('head');
+    if (head) head.insertAdjacentHTML('beforeend', buildPrintStyleBlock('palonur-otl-print-export'));
+    const html = '<!doctype html>\n' + clone.outerHTML;
+    const blob = new Blob([html], {type:'text/html'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'palonur_otl_brief.html';
+    document.body.appendChild(a); a.click(); a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  async function resetAll(){
+    if (!confirm('Reset this brief back to the original? This clears the saved edits in the database and in this browser.')) return;
+    let pw = getPassword();
+    if (!pw){
+      const entered = prompt('Enter the edit password to reset the saved version:');
+      if (!entered) { setIndicator('Reset cancelled', false); return; }
+      pw = entered.trim();
+      sessionStorage.setItem(PW_KEY, pw);
+    }
+    try {
+      const res = await fetch(SERVER_URL, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', 'x-edit-password': pw },
+        body: JSON.stringify({ content: [] }),
+      });
+      if (res.status === 401){
+        sessionStorage.removeItem(PW_KEY);
+        alert('Wrong edit password — nothing was reset.');
+        return;
+      }
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+    } catch(e){
+      alert('Could not reset the saved version (database error). Please try again.');
+      return;
+    }
+    localStorage.removeItem(LOCAL_KEY);
+    location.reload();
+  }
+
+  function injectPages(pages){
+    if (!Array.isArray(pages) || pages.length === 0 || !pages.every(x => typeof x === 'string')) return false;
+    const existing = document.querySelectorAll('.page');
+    const parent = existing[0] ? existing[0].parentNode : document.body;
+    const anchor = existing[existing.length - 1] ? existing[existing.length - 1].nextSibling : null;
+    existing.forEach(p => p.remove());
+    pages.forEach(html => {
+      const wrap = document.createElement('div');
+      wrap.innerHTML = html;
+      const node = wrap.firstElementChild;
+      if (node) parent.insertBefore(node, anchor);
+    });
+    return true;
+  }
+
+  async function loadFromServer(){
+    try {
+      const res = await fetch(SERVER_URL, { headers: { 'Accept': 'application/json' } });
+      if (!res.ok) return false;
+      const data = await res.json();
+      const content = data && data.content;
+      // A row exists (array) — the server is authoritative, even when empty
+      // (an empty array means it was reset back to the static original).
+      if (Array.isArray(content)){
+        if (content.length === 0){
+          localStorage.removeItem(LOCAL_KEY); // drop any stale local backup
+          return true;
+        }
+        if (injectPages(content)){
+          setIndicator('Loaded the latest saved edits', true);
+          return true;
+        }
+      }
+      // content === null → nothing saved yet → fall back to localStorage / static
+    } catch(e){ /* fall back to localStorage / static below */ }
+    return false;
+  }
+
+  function loadLocal(){
+    try {
+      const raw = localStorage.getItem(LOCAL_KEY);
+      if (!raw) return false;
+      const pages = JSON.parse(raw);
+      if (injectPages(pages)){
+        setIndicator('Loaded your saved edits', true);
+        return true;
+      }
+      return false;
+    } catch(e){ return false; }
+  }
+
+  // Delegated delete handling. Pages loaded from the database snapshot are
+  // sanitized on save (event-handler attributes stripped), so their delete
+  // buttons have no inline onclick — handle them here. Static buttons that
+  // still carry an inline onclick are skipped to avoid double-firing.
+  document.addEventListener('click', (e) => {
+    const btn = e.target && e.target.closest ? e.target.closest('.delete-btn') : null;
+    if (!btn || btn.getAttribute('onclick')) return;
+    if (btn.parentElement && btn.parentElement.classList.contains('page')) deletePage(btn);
+    else deleteCard(btn);
+  });
+
+  window.addEventListener('DOMContentLoaded', async () => {
+    const fromServer = await loadFromServer();
+    if (!fromServer) loadLocal();
+    if (normalizeLegacyLabels()) saveLocal();
+    renumberPages();
+    refreshEditAffordances();
+    document.addEventListener('input', autoSave, true);
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('print') === '1') {
+      document.documentElement.classList.add('printing');
+      document.querySelectorAll('.toolbar, #save-indicator, .delete-btn').forEach(n => n.remove());
+      document.querySelectorAll('[contenteditable]').forEach(n => n.removeAttribute('contenteditable'));
+      try { if (document.fonts && document.fonts.ready) await document.fonts.ready; } catch(_){}
+      setTimeout(() => { try { window.focus(); window.print(); } catch(_){} }, 400);
+    }
+  });
+</script>
+</body>
+</html>

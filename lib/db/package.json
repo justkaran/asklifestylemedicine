@@ -1,0 +1,39 @@
+{
+  "name": "@workspace/db",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./schema": "./src/schema/index.ts",
+    "./schema/slm": "./src/schema/slm.ts",
+    "./study-design": "./src/study-design.ts",
+    "./source-rigor": "./src/source-rigor.ts",
+    "./sync-schema": "./src/sync-schema.ts",
+    "./seeds/empathy": "./src/seeds/empathy.ts",
+    "./seeds/sleep": "./src/seeds/sleep.ts",
+    "./seeds/steward-roster": "./src/seeds/stewardRoster.ts",
+    "./seeds/corpus-gaps": "./src/seeds/corpus-gaps.ts"
+  },
+  "scripts": {
+    "stanford:generate": "drizzle-kit generate --config ./drizzle.stanford.config.ts",
+    "stanford:check": "drizzle-kit check --config ./drizzle.stanford.config.ts && node ./scripts/validate-migrations.mjs",
+    "stanford:migrate": "node ./scripts/apply-migrations.mjs",
+    "stanford:seed-pillars": "node ./scripts/seed-stanford-pillars.mjs",
+    "stanford:inspect": "node ./scripts/inspect-stanford-database.mjs",
+    "stanford:migration:test": "node ./scripts/validate-migrations.mjs",
+    "push": "drizzle-kit push --config ./drizzle.config.ts",
+    "push-force": "drizzle-kit push --force --config ./drizzle.config.ts"
+  },
+  "dependencies": {
+    "drizzle-orm": "catalog:",
+    "drizzle-zod": "^0.8.3",
+    "pg": "^8.20.0",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "@types/pg": "^8.18.0",
+    "drizzle-kit": "^0.31.9"
+  }
+}

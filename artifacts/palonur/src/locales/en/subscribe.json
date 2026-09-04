@@ -1,0 +1,184 @@
+{
+  "title": "Subscribe · Palonur",
+  "pageTitle": "Join Palonur · Sleep + Lifestyle Medicine",
+  "header": {
+    "yourAccount": "Your account →"
+  },
+  "notice": {
+    "cancelled": "Checkout cancelled — no charge was made.",
+    "takingYouIn": "You're subscribed — taking you in…"
+  },
+  "checkout": {
+    "badge": "Payment received",
+    "welcomeTo": "Welcome to {{title}}",
+    "youreSubscribed": "You're subscribed",
+    "heldBody": "We emailed {{email}} a one-tap sign-in link. Open it on this device and your question is asked automatically — the answer you came for will be waiting.",
+    "body": "We emailed {{email}} a one-tap sign-in link. Open it to sign in and go straight to {{destination}}.",
+    "yourMemberArea": "your member area",
+    "goAccount": "Go to your account →",
+    "noEmail": "Didn't get the email? Check your spam folder — it can take a minute to arrive."
+  },
+  "subscribed": {
+    "badge": "Subscription · Active",
+    "allSet": "You're all set.",
+    "signedInAs": "Signed in as",
+    "plan": {
+      "annual": "annual",
+      "monthly": "monthly"
+    },
+    "planActive": "plan is active.",
+    "planCancels": "plan is active and set to cancel at the end of the period.",
+    "accessUntil": "Access until",
+    "renews": "Renews",
+    "manageAccount": "Manage your account →",
+    "manageBilling": "Manage billing",
+    "signOut": "Sign out"
+  },
+  "free": {
+    "badge": "Free account · $0 forever",
+    "headline": "Create your free account.",
+    "bullets": [
+      "1 sleep question a day — free forever.",
+      "Save your answers and revisit them anytime.",
+      "A weekly Stanford sleep tip in your inbox."
+    ],
+    "checkInbox": "Check your inbox — we sent a link to finish creating your free account.",
+    "emailPlaceholder": "Email address",
+    "sending": "Sending…",
+    "signUp": "Sign up free →",
+    "noCard": "No card required. Prefer a guided plan? The",
+    "course": "7-night Cure Insomnia course",
+    "noCardSuffix": "is free too."
+  },
+  "hero": {
+    "badge": "Stanford Lifestyle Medicine",
+    "headline1": "Stop searching.",
+    "headline2": "Ask the scientist.",
+    "intro": "It's 3 a.m. again. The fix you tried didn't hold, and every free answer contradicts the last one.",
+    "scienceSignedIntro": "This is {{name}}:",
+    "description": "an answer to your situation, written from a named Stanford scientist's own published sleep research, cited to the study so you can check it — or show your doctor. Calm, confident, done searching. And when the research doesn't cover you yet, it says so honestly instead of guessing."
+  },
+  "valuePoints": {
+    "sectionLabel": "What you're paying for",
+    "items": [
+      {
+        "h": "Permission to stop searching.",
+        "p": "You've tried the fix. You've read the contradictory advice. What you're buying is one answer to your situation — written from a named Stanford scientist's own published research — and the calm of being done looking."
+      },
+      {
+        "h": "A citation you can show someone.",
+        "p": "Every answer is traceable to the study it came from — not a confident-sounding guess assembled from a hundred web pages. Show it to your spouse, your doctor, anyone who asks how you know. You go to the source."
+      },
+      {
+        "h": "Honest, even when that's inconvenient.",
+        "p": "Sometimes the answer isn't what you hoped for — and sometimes there's no answer yet at all. When the research doesn't cover your question, it tells you exactly that instead of inventing something to please you. That honesty is what makes the rest believable."
+      }
+    ]
+  },
+  "pillarsGrid": {
+    "sectionLabel": "Every pillar, unlocked",
+    "comingSoon": "Coming soon",
+    "items": [
+      "Restorative Sleep",
+      "Healthful Nutrition",
+      "Movement & Exercise",
+      "Stress Management",
+      "Cognitive Enhancement",
+      "Social Engagement",
+      "Gratitude & Purpose",
+      "Social Brain"
+    ]
+  },
+  "testimonials": {
+    "sectionLabel": "What membership feels like",
+    "curiousPrefix": "Curious first? Ask a question free on the",
+    "curiousLink": "sleep agent",
+    "curiousSuffix": "— no card required."
+  },
+  "card": {
+    "name": "Palonur Pal",
+    "tagline": "Dr. Jamie Zeitzer's sleep science, plus every other Palonur expert.",
+    "loadingPlans": "Loading plans…",
+    "billedMonthly": "Billed monthly · cancel anytime",
+    "billedAnnually": "/mo, billed annually",
+    "noPrice": {
+      "prefix": "In the meantime,",
+      "link": "ask the sleep agent a question free",
+      "suffix": "— no card required."
+    },
+    "emailPlaceholder": "Email address",
+    "redirecting": "Redirecting to checkout…",
+    "subscribe": "Subscribe →",
+    "secure": "Secure checkout via Stripe. Cancel anytime."
+  },
+  "signIn": {
+    "trigger": "Already subscribed? Sign in →",
+    "checkInbox": "Check your inbox — we sent a sign-in link.",
+    "emailPlaceholder": "Your email",
+    "sendLink": "Send link"
+  },
+  "billing": {
+    "monthly": "Monthly",
+    "annual": "Annual",
+    "saveLabel": "Save",
+    "perMonth": "/mo",
+    "perYear": "/yr",
+    "mostPopular": "Most popular",
+    "savePct": "save ~17%"
+  },
+  "tiers": {
+    "nightly": {
+      "title": "Pal",
+      "tagline": "Unlimited answers from all pillars, every answer signed by a named researcher.",
+      "includes": [
+        "Unlimited answers from all pillars, any hour",
+        "Every answer cited to the study it came from, signed by name",
+        "A personal brief built from what you asked",
+        "Access to every new Palonur expert as their pillar opens",
+        "Cancel anytime — no lock-in"
+      ]
+    },
+    "newsletter": {
+      "title": "Newsletter Premium",
+      "tagline": "Full access to every premium issue."
+    },
+    "all_access": {
+      "title": "Palonur All-Access",
+      "tagline": "Every tool, every pillar — one subscription.",
+      "badge": "Best value",
+      "includes": [
+        "Unlimited answers from all pillars, any hour",
+        "Full premium newsletter access",
+        "Every answer cited to the study it came from, signed by name",
+        "A personal brief built from what you asked",
+        "Cancel anytime — no lock-in"
+      ]
+    }
+  },
+  "cta": {
+    "getStarted": "Get started →",
+    "emailLabel": "Your email",
+    "emailPlaceholder": "you@email.com",
+    "startCheckout": "Start checkout →",
+    "starting": "Starting…",
+    "alreadySubscribed": "You're already subscribed",
+    "manageSubscription": "Manage your subscription →"
+  },
+  "founding": "Founding member rate. Locks in when you subscribe.",
+  "testimonialsSectionTitle": "What our members say",
+  "faq": {
+    "title": "Questions",
+    "cancel": {
+      "q": "Can I cancel anytime?",
+      "a": "Yes — cancel any time from your account page. Your access continues through the end of the billing period."
+    },
+    "refund": {
+      "q": "Is there a refund policy?",
+      "a": "If you're not satisfied in the first 7 days, email us and we'll make it right."
+    },
+    "medical": {
+      "q": "Is this medical advice?",
+      "a": "No. Palonur surfaces peer-reviewed research; it is not a substitute for medical care. Always consult a qualified professional for health decisions."
+    }
+  }
+}

@@ -1,0 +1,133 @@
+{
+  "title": "Newsletter · Palonur · Stanford Lifestyle Medicine",
+  "pageTitle": "Newsletter · Palonur · Stanford Lifestyle Medicine",
+  "page": {
+    "backLink": "← Palonur",
+    "name": "Der Palonur-Newsletter",
+    "subline": "Schlafwissenschaft, die Sie wirklich nutzen können, für Menschen geschrieben — plus echte, anonymisierte Geschichten aus unserer Gemeinschaft. Ein paarmal im Monat, kein Lärm.",
+    "namePlaceholder": "Vorname (optional)",
+    "noShare": "Wir geben Ihre E-Mail nie weiter. Jede Ausgabe enthält eine Ein-Klick-Abmeldung."
+  },
+  "form": {
+    "subscribing": "Abonnieren…",
+    "done": "Abonniert ✓",
+    "default": "Kostenlos abonnieren",
+    "errorFallback": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
+    "networkError": "Netzwerkfehler. Bitte versuchen Sie es erneut."
+  },
+  "whatYouGet": {
+    "headline": "Was Sie erhalten",
+    "items": [
+      {
+        "title": "Forschung, übersetzt",
+        "desc": "Erkenntnisse von Schlaf- und Lifestyle-Medizin-Forschern, geschrieben so, dass Sie sie heute Nacht nutzen können."
+      },
+      {
+        "title": "Echte Geschichten, anonymisiert",
+        "desc": "Ehrliche Berichte von Menschen aus unserer Gemeinschaft — immer mit entfernten Namen und identifizierenden Details."
+      },
+      {
+        "title": "Nichts zu verkaufen",
+        "desc": "Kein Spam, keine täglichen Mails. Nur eine durchdachte Ausgabe, wenn es etwas Ihrer Zeit Würdiges gibt."
+      }
+    ]
+  },
+  "pillars": {
+    "eyebrow": "Stanford Lifestyle Medicine",
+    "headline": "Die Stewards hinter jeder Ausgabe",
+    "body": "Sieben Säulen der Lifestyle-Medizin, jede geleitet von einem Stanford-Fakultätssteward, der die von uns veröffentlichte Wissenschaft prüft und genehmigt."
+  },
+  "premium": {
+    "badge": "Palonur Premium",
+    "headline": "Unterstützen Sie unsere Arbeit — erhalten Sie jede Ausgabe vollständig",
+    "body": "Kostenlose Abonnenten erhalten eine Vorschau der Premium-Ausgaben. Mitglieder erhalten die vollständige Ausgabe — jede Forschungstiefe und Geschichte — und halten diese Arbeit unabhängig.",
+    "loading": "Pläne werden geladen…",
+    "annual": "Jährlich",
+    "monthly": "Monatlich",
+    "mostPopular": "AM BELIEBTESTEN",
+    "bestValue": "BESTES ANGEBOT",
+    "fullAccess": "Vollständiger Premium-Zugang",
+    "redirecting": "Weiterleitung zur Kasse…",
+    "upgradeCta": "Auf Premium upgraden →",
+    "manageSummary": "Bereits Mitglied? Ihr Abonnement verwalten",
+    "manageSending": "Wird gesendet…",
+    "manageSent": "Link gesendet ✓",
+    "manageBtn": "Verwaltungslink per E-Mail senden",
+    "manageMsg": "Wenn diese E-Mail ein Premium-Abonnement hat, haben wir Ihnen einen Link zur Verwaltung geschickt. Schauen Sie in Ihren Posteingang.",
+    "manageError": "Der Link konnte nicht gesendet werden. Bitte versuchen Sie es erneut."
+  },
+  "hero": {
+    "eyebrow": "Der Palonur-Newsletter",
+    "headline": "Stanford Lifestyle Medicine,",
+    "headlineEm": "in Ihrem Posteingang.",
+    "subline": "Namentlich unterzeichnet. Ein paarmal im Monat."
+  },
+  "subscribe": {
+    "label": "Ihre E-Mail",
+    "namePlaceholder": "Ihr Name (optional)",
+    "emailPlaceholder": "sie@email.de",
+    "button": "Kostenlos abonnieren",
+    "subscribing": "Abonnieren…",
+    "done": "Sie stehen auf der Liste!",
+    "alreadySubscribed": "Sie sind bereits abonniert.",
+    "pending": "Bestätigen Sie Ihr Abonnement per E-Mail.",
+    "errorFallback": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut."
+  },
+  "pillarsSection": {
+    "headline": "Sieben Säulen. Sieben Fakultätsstewards.",
+    "body": "Der Newsletter behandelt alle sieben Säulen der Stanford Lifestyle Medicine — jede betreut von einem Fakultätsexperten, dessen veröffentlichte Forschung jede Antwort begründet."
+  },
+  "premiumSection": {
+    "eyebrow": "Newsletter Premium",
+    "headline": "Vollständiger Zugang zu jeder Ausgabe.",
+    "body": "Upgraden Sie, um jede Premium-Ausgabe zu lesen — Tiefenanalysen, ausgewählte Geschichten und die Forschung hinter der Forschung.",
+    "monthly": "Monatlich",
+    "annual": "Jährlich",
+    "mostPopular": "Am beliebtesten",
+    "getAccess": "Zugang erhalten →",
+    "selectPlan": "Wählen Sie oben einen Plan",
+    "emailLabel": "Ihre E-Mail",
+    "emailPlaceholder": "sie@email.de",
+    "startCheckout": "Checkout starten →",
+    "starting": "Wird gestartet…"
+  },
+  "manage": {
+    "headline": "Ihr Abonnement verwalten",
+    "body": "Geben Sie die E-Mail-Adresse ein, mit der Sie abonniert haben, um Ihre Einstellungen zu verwalten oder sich abzumelden.",
+    "emailPlaceholder": "sie@email.de",
+    "button": "Verwaltungslink senden",
+    "sending": "Wird gesendet…",
+    "sent": "Schauen Sie in Ihre E-Mails — wir haben Ihnen einen Verwaltungslink geschickt.",
+    "errorFallback": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut."
+  },
+  "subscribed": {
+    "label": "Der Palonur-Newsletter",
+    "pending": {
+      "headline": "Fast geschafft.",
+      "headlineEm": "Schauen Sie in Ihren Posteingang.",
+      "body": "Wir haben Ihnen gerade einen Bestätigungslink per E-Mail geschickt. Klicken Sie ihn, um den Newsletter zu empfangen — wir schicken Ihnen nichts, bevor Sie das nicht getan haben. (Keine E-Mail nach einer Minute? Überprüfen Sie Ihren Spam-Ordner.)",
+      "cta": "Stanford nach Ihrem Schlaf fragen →"
+    },
+    "already": {
+      "headline": "Sie stehen bereits auf der Liste —",
+      "headlineEm": "willkommen zurück.",
+      "body": "Wir hatten Ihre E-Mail bereits, also hat sich nichts geändert — Sie erhalten weiterhin eine Sache, die Sie heute Nacht ausprobieren können, die Forschung dahinter und echte Geschichten aus unserer Gemeinschaft, namentlich unterzeichnet.",
+      "cta": "Stanford nach Ihrem Schlaf fragen →"
+    },
+    "expired": {
+      "headline": "Dieser Link ist",
+      "headlineEm": "nicht mehr gültig.",
+      "body": "Dieser Bestätigungslink ist abgelaufen oder wurde bereits verwendet. Abonnieren Sie erneut und wir senden Ihnen einen neuen Link zur Bestätigung.",
+      "cta": "Erneut abonnieren →"
+    },
+    "confirmed": {
+      "headline": "Sie sind dabei.",
+      "headlineEm": "Behalten Sie Ihren Posteingang im Blick.",
+      "bodyConfirmed": "Ihr Abonnement ist bestätigt. Ein paarmal im Monat erhalten Sie eine Sache, die Sie heute Nacht ausprobieren können, die Forschung dahinter und echte anonymisierte Geschichten aus unserer Gemeinschaft — namentlich unterzeichnet, niemals Spam.",
+      "bodyDefault": "Ein paarmal im Monat erhalten Sie eine Sache, die Sie heute Nacht ausprobieren können, die Forschung dahinter und echte anonymisierte Geschichten aus unserer Gemeinschaft — namentlich unterzeichnet, niemals Spam.",
+      "cta": "Stanford nach Ihrem Schlaf fragen →"
+    },
+    "backHome": "Zurück zur Startseite",
+    "collab": "Palonur · in Zusammenarbeit mit Stanford Lifestyle Medicine"
+  }
+}

@@ -1,0 +1,2272 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Palonur × Stanford Lifestyle Medicine — Partnership Plan · Confidential</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Spectral:wght@300;400;500;600&display=swap');
+  :root{
+    --ink:#241c13; --paper:#FBF8F2; --sub:#6f6457; --rule:#e9e0d0; --rule-2:#dccfba;
+    --red:#8C1515; --red-2:#a8332c; --gold:#B0883C; --card:#ffffff; --green:#2f6b43;
+    --serif:'Spectral',Georgia,'Times New Roman',serif;
+    --display:'Fraunces',Georgia,serif;
+    --sans:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:#26221d;color:var(--ink);font-family:var(--serif)}
+  body{padding:80px 0 120px}
+
+  /* Toolbar */
+  .toolbar{
+    position:fixed;top:0;left:0;right:0;height:56px;background:#16120d;color:#fff;
+    display:flex;align-items:center;justify-content:space-between;padding:0 24px;
+    z-index:9999;font-family:var(--sans);font-size:13px;border-bottom:1px solid #2b251d;
+  }
+  .toolbar .left{display:flex;align-items:center;gap:14px}
+  .toolbar .brand{font-weight:600;letter-spacing:.04em}
+  .toolbar .hint{color:#9c9082}
+  .toolbar .right{display:flex;align-items:center}
+  .toolbar button{
+    background:transparent;border:1px solid #4a3f31;color:#fff;padding:8px 14px;border-radius:6px;
+    cursor:pointer;font:inherit;margin-left:8px
+  }
+  .toolbar button:hover{background:#221d16;border-color:#6a5b46}
+  .toolbar a.pdf-link{
+    display:inline-block;background:var(--red);border:1px solid var(--red);color:#fff;
+    text-decoration:none;border-radius:6px;padding:7px 12px;font:inherit;font-size:12.5px;cursor:pointer;margin-left:8px;
+  }
+  .toolbar a.pdf-link:hover{background:#741010;border-color:#741010}
+
+  /* Page */
+  .page{
+    width:8.5in;min-height:11in;background:var(--paper);margin:24px auto;
+    padding:46px 60px 40px;box-shadow:0 12px 44px rgba(0,0,0,.45);position:relative;
+    border-top:3px solid var(--red);
+  }
+  .page.flow{min-height:auto}
+
+  .page-header{
+    display:flex;justify-content:space-between;align-items:baseline;
+    font-family:var(--sans);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--sub);
+    border-bottom:1px solid var(--rule);padding-bottom:10px;margin-bottom:18px;
+  }
+  .page-header .wordmark{font-family:var(--display);font-size:14px;font-weight:600;letter-spacing:.34em;color:var(--red);text-transform:uppercase}
+
+  h1{font-family:var(--display);font-size:30px;line-height:1.08;font-weight:500;letter-spacing:-.005em;margin:0 0 10px;color:var(--ink)}
+  .eyebrow{font-family:var(--sans);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;font-weight:600}
+  .eyebrow.red{color:var(--red)}
+  h2{font-size:11px;line-height:1.2;font-weight:600;margin:0 0 9px;
+     font-family:var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--red);
+     position:relative;padding-left:13px}
+  h2::before{content:"";position:absolute;left:0;top:.05em;width:4px;height:.9em;background:var(--gold);border-radius:1px}
+  h3{font-family:var(--display);font-size:16px;font-weight:600;margin:0 0 6px;color:var(--ink)}
+  p{font-size:12.5px;line-height:1.5;margin:0 0 8px;color:#352e25}
+  .lead{font-size:14px;line-height:1.5;color:#473d31;margin:0 0 10px}
+  .muted{color:var(--sub)}
+  .small{font-size:11px;line-height:1.45}
+
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:6px}
+  .block{margin-bottom:12px}
+  .block:last-child{margin-bottom:0}
+
+  ul{margin:0 0 8px;padding-left:0;list-style:none}
+  li{font-size:12.5px;line-height:1.5;color:#352e25;margin-bottom:5px;padding-left:14px;position:relative}
+  li::before{content:"";position:absolute;left:1px;top:.6em;width:5px;height:5px;background:var(--gold);border-radius:50%}
+  li strong{font-weight:600;color:var(--ink)}
+
+  .meta-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0 4px}
+  .meta-strip > div{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:9px 11px}
+  .meta-strip .stat-label{font-family:var(--sans);font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--sub);margin-bottom:4px}
+  .meta-strip .stat-val{font-family:var(--display);font-size:16px;font-weight:600;color:var(--ink);line-height:1.05}
+  .meta-strip .stat-val small{font-family:var(--serif);font-size:10.5px;font-weight:400;color:var(--sub)}
+
+  /* Highlight band */
+  .band{background:#fff;border:1px solid var(--rule);border-top:3px solid var(--red);
+    padding:15px 18px;border-radius:10px;margin:12px 0;box-shadow:0 3px 14px rgba(90,45,20,.05)}
+  .band .eyebrow{margin-bottom:6px}
+
+  /* Price hero */
+  .price-hero{display:grid;grid-template-columns:1.1fr 1fr;gap:20px;align-items:center;
+    background:#fff;border:1px solid var(--rule);border-top:3px solid var(--gold);border-radius:12px;padding:18px 22px;margin:12px 0}
+  .price-hero .big{font-family:var(--display);font-size:46px;font-weight:600;color:var(--red);line-height:1;letter-spacing:-.01em}
+  .price-hero .big small{font-family:var(--serif);font-size:14px;font-weight:400;color:var(--sub)}
+  .price-hero .k{font-family:var(--sans);font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--sub);margin-bottom:4px}
+  .price-hero .breakdown div{font-size:12px;color:#352e25;display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px dotted var(--rule)}
+  .price-hero .breakdown div:last-child{border-bottom:none;font-weight:600}
+
+  /* Assumptions grid */
+  .assume-group{margin-bottom:14px}
+  .assume-group > .glabel{font-family:var(--sans);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--red);font-weight:600;margin-bottom:8px}
+  .preset-row{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-bottom:8px}
+  .preset-label{font-family:var(--sans);font-size:9px;letter-spacing:.04em;color:var(--sub);margin-right:2px}
+  button.preset{font-family:var(--sans);font-size:9.5px;letter-spacing:.02em;color:var(--ink);
+    background:#fff;border:1px solid var(--rule-2);border-radius:999px;padding:4px 10px;cursor:pointer;line-height:1.1}
+  button.preset:hover{border-color:var(--gold);color:var(--red)}
+  button.preset.active{background:var(--red);border-color:var(--red);color:#fff}
+  @media print{ .preset-row{display:none} }
+  .assume-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px 16px}
+  .assume{display:flex;flex-direction:column;gap:3px;background:#fff;border:1px solid var(--rule);border-radius:7px;padding:7px 10px}
+  .assume label{font-family:var(--sans);font-size:9px;letter-spacing:.04em;color:var(--sub);line-height:1.3}
+  .assume .ifield{display:flex;align-items:baseline;gap:4px}
+  .assume .pre,.assume .suf{font-family:var(--sans);font-size:11px;color:var(--sub)}
+  .assume input{
+    border:none;border-bottom:1px solid var(--rule-2);background:transparent;width:100%;
+    font-family:var(--display);font-size:16px;font-weight:600;color:var(--ink);padding:1px 0;outline:none;
+  }
+  .assume input:focus{border-bottom-color:var(--red)}
+  .assume input::-webkit-outer-spin-button,.assume input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+  .assume input[type=number]{-moz-appearance:textfield}
+
+  /* Tables */
+  table{width:100%;border-collapse:collapse;font-size:10px;margin:6px 0}
+  th,td{text-align:right;padding:5px 6px;border-bottom:1px solid var(--rule);white-space:nowrap}
+  th:first-child,td:first-child{text-align:left}
+  thead th{font-family:var(--sans);font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:var(--sub);border-bottom:1.5px solid var(--ink);font-weight:600}
+  tbody tr:nth-child(even){background:rgba(176,136,60,.05)}
+  tbody tr.yr-end{background:rgba(140,21,21,.06);font-weight:600}
+  tbody td.pos{color:var(--green)}
+  tbody td.neg{color:var(--red-2)}
+  tfoot td{font-weight:600;border-top:1.5px solid var(--ink);border-bottom:none;font-family:var(--sans)}
+  .annual table{font-size:11px}
+  .annual th,.annual td{padding:7px 9px}
+  table.proj{font-size:9px}
+  table.proj th,table.proj td{padding:4px 4px}
+  table.proj thead th{white-space:normal;letter-spacing:.04em;vertical-align:bottom}
+
+  /* Stat cards row */
+  .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:12px 0}
+  .stat-card{background:#fff;border:1px solid var(--rule);border-radius:10px;padding:12px 14px;border-left:3px solid var(--gold)}
+  .stat-card.red{border-left-color:var(--red)}
+  .stat-card.green{border-left-color:var(--green)}
+  .stat-card .k{font-family:var(--sans);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--sub);margin-bottom:6px}
+  .stat-card .v{font-family:var(--display);font-size:25px;font-weight:600;color:var(--ink);line-height:1}
+  .stat-card .v small{font-family:var(--serif);font-size:11px;font-weight:400;color:var(--sub)}
+  .stat-card .note{font-size:10px;color:var(--sub);margin-top:5px;line-height:1.35}
+
+  .page-footer{
+    display:flex;justify-content:space-between;font-family:var(--sans);
+    font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--sub);
+    border-top:1px solid var(--rule);padding-top:10px;margin-top:16px;
+  }
+
+  /* Cover */
+  .cover{padding-top:54px}
+  .cover h1{font-size:40px;line-height:1.04;margin-bottom:12px}
+  .cover .lead{font-size:15px;max-width:64ch}
+
+  /* Editable */
+  .ed[contenteditable=true]{outline:none;transition:background .15s}
+  .ed[contenteditable=true]:hover{background:rgba(140,21,21,.05)}
+  .ed[contenteditable=true]:focus{background:rgba(140,21,21,.09);box-shadow:inset 0 0 0 1px rgba(140,21,21,.22);border-radius:3px}
+  #save-indicator{color:#8fbf8f;font-size:12px;margin-left:14px;opacity:0;transition:opacity .3s}
+  #save-indicator.show{opacity:1}
+
+  .legend{font-size:10px;color:var(--sub);margin-top:6px;line-height:1.45}
+
+  /* Column explainer tooltip (projection table) */
+  table.proj th[data-tip]{cursor:help}
+  table.proj th[tabindex]:focus-visible{outline:2px solid var(--red);outline-offset:-2px;border-radius:2px}
+  #proj-tip{
+    position:absolute;z-index:9990;max-width:264px;background:#FBF7F0;color:#572020;
+    border:1px solid #E8DDD0;border-left:3px solid var(--red);border-radius:9px;padding:9px 11px;
+    box-shadow:0 12px 32px rgba(90,45,20,.20);font-family:var(--sans);pointer-events:none;
+    opacity:0;visibility:hidden;transform:translateY(-3px);transition:opacity .12s ease,transform .12s ease;
+  }
+  #proj-tip.show{opacity:1;visibility:visible;transform:none}
+  #proj-tip .t-label{display:block;font-weight:700;font-size:11.5px;color:var(--red);letter-spacing:.02em;margin-bottom:3px}
+  #proj-tip .t-def{display:block;font-size:11.5px;line-height:1.45;color:#4a3d31}
+
+  /* Latest-version line in the toolbar */
+  #bp-version{margin-left:14px;font-size:12px;font-weight:600;color:#c9b48a}
+  #bp-version:empty{display:none}
+
+  /* Password gate (soft, client-side) */
+  #pw-gate{position:fixed;inset:0;z-index:100000;background:#16120d;
+    display:flex;align-items:center;justify-content:center;font-family:var(--sans)}
+  #pw-gate .pw-card{background:#1f1a13;border:1px solid #3a3024;border-radius:14px;
+    padding:34px 34px 30px;width:min(92vw,360px);text-align:center;box-shadow:0 18px 60px rgba(0,0,0,.5)}
+  #pw-gate .pw-brand{font-family:var(--display);font-size:15px;font-weight:600;letter-spacing:.34em;color:var(--gold);text-transform:uppercase;margin-bottom:18px}
+  #pw-gate .pw-title{font-family:var(--display);font-size:22px;font-weight:600;color:#fff;margin-bottom:6px}
+  #pw-gate .pw-sub{font-size:12.5px;line-height:1.5;color:#b3a692;margin:0 0 18px}
+  #pw-gate form{display:flex;flex-direction:column;gap:10px}
+  #pw-gate input{font:inherit;font-size:15px;padding:11px 13px;border-radius:8px;border:1px solid #4a3f31;background:#100c08;color:#fff;outline:none}
+  #pw-gate input:focus{border-color:var(--gold)}
+  #pw-gate button{font:inherit;font-size:14px;font-weight:600;padding:11px 13px;border-radius:8px;border:1px solid var(--red);background:var(--red);color:#fff;cursor:pointer}
+  #pw-gate button:hover{background:#741010;border-color:#741010}
+  #pw-gate #pw-error{font-size:11.5px;color:#e2918c;margin-top:12px;opacity:0;transition:opacity .15s}
+  #pw-gate #pw-error.show{opacity:1}
+
+  @media print{
+    *{ -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; }
+    html, body{ background:#fff !important; margin:0 !important; padding:0 !important; }
+    .toolbar, #save-indicator, #proj-tip{ display:none !important; }
+    @page{ size: 8.5in 11in; margin: 0; }
+    .page{
+      width: 8.5in !important; min-height:0 !important;
+      margin:0 !important; padding:0.5in 0.6in !important; box-shadow:none !important; border-radius:0 !important;
+      position:relative; border-top:3px solid var(--red) !important; page-break-after:always; break-after:page;
+    }
+    .page:last-child{page-break-after:auto;break-after:auto}
+    .page.flow{page-break-after:always}
+    .band, .price-hero, .cols, .stat-row, .stat-card, .meta-strip, .assume, tr{ page-break-inside: avoid; break-inside: avoid; }
+    .ed[contenteditable=true]:hover, .ed[contenteditable=true]:focus{ background:none !important; box-shadow:none !important; }
+    .assume input{border-bottom:1px solid var(--rule-2) !important}
+    #pw-gate{display:none !important}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ PASSWORD GATE (soft, client-side) ============ -->
+<div id="pw-gate">
+  <div class="pw-card">
+    <div class="pw-brand">Palonur</div>
+    <div class="pw-title">Partnership business plan</div>
+    <p class="pw-sub">This document is private. Please enter the password to continue.</p>
+    <form id="pw-form" autocomplete="off">
+      <input id="pw-input" type="password" placeholder="Password" autocomplete="off" spellcheck="false" autofocus>
+      <button type="submit">Unlock</button>
+    </form>
+    <div id="pw-error">That password didn't match — please try again.</div>
+  </div>
+</div>
+
+<div class="toolbar">
+  <div class="left">
+    <span class="brand">Palonur × SLM · Partnership Plan</span>
+    <span class="hint">Edit assumptions to recompute · changes save to the shared plan</span>
+    <span id="bp-version"></span>
+  </div>
+  <div class="right">
+    <span id="save-indicator">Saved</span>
+    <button id="edit-mode-btn" onclick="toggleEditMode()">Enable text editing</button>
+    <button onclick="resetAll()">Reset</button>
+    <button onclick="downloadCSV()">Download CSV</button>
+    <button onclick="saveHTML()">Download HTML</button>
+    <a class="pdf-link" id="pdf-btn" href="/business-plan-slm.html?print=1" target="_blank" rel="noopener">Download PDF</a>
+  </div>
+</div>
+
+<!-- ============ COVER ============ -->
+<section class="page cover">
+  <div class="page-header">
+    <span class="wordmark">Palonur</span>
+    <span>Confidential · For Stanford Lifestyle Medicine</span>
+  </div>
+
+  <div class="eyebrow ed">Partnership plan · Stanford Lifestyle Medicine newsletter &amp; subscription</div>
+  <h1 class="ed">A trusted health newsletter for Stanford Lifestyle Medicine — built and run by Palonur, with the majority of value flowing back to Stanford.</h1>
+  <p class="lead ed">Stanford Lifestyle Medicine (SLM) reaches roughly 120,000 visitors a month with no paid acquisition. This plan turns that audience into a recurring subscription — a curated newsletter plus a faculty-grounded AI agent that answers subscribers' lifestyle-health questions. Palonur builds and operates the product and carries the operating cost; Stanford keeps the brand, the faculty relationships, and the majority of the revenue. This version is written for SLM: it focuses on how costs and revenue-sharing develop over time. Every assumption is editable and every table recomputes.</p>
+
+  <div class="meta-strip">
+    <div><div class="stat-label">Launch</div><div class="stat-val ed">Jul 2026</div></div>
+    <div><div class="stat-label">Top of funnel</div><div class="stat-val">120k <small>/mo visitors</small></div></div>
+    <div><div class="stat-label">Steady SLM share</div><div class="stat-val"><span data-out="slmShareAfter">70</span>% <small>to Stanford</small></div></div>
+    <div><div class="stat-label">Cost carried by</div><div class="stat-val">Palonur <small>not SLM</small></div></div>
+  </div>
+
+  <div class="band" style="margin-top:14px">
+    <div class="eyebrow red ed" data-eid="goals-eyebrow">What this partnership sets out to do</div>
+    <ul style="margin:4px 0 0">
+      <li class="ed" data-eid="goal-1"><strong>Turn SLM's existing audience into a subscription.</strong> Convert the ~120k monthly visitors into recurring members with a curated newsletter and a faculty-grounded AI agent — with no paid acquisition and no cost to SLM.</li>
+      <li class="ed" data-eid="goal-2"><strong>Keep the majority of value with Stanford.</strong> Palonur funds and recovers a lean operating cost; the revenue split is structured so SLM keeps the larger, growing share over time.</li>
+      <li class="ed" data-eid="goal-3"><strong>Give back as a year-end gift that builds an Institute.</strong> SLM's share is accrued and gifted annually. That gift funds a standing Stanford Lifestyle Medicine Institute — including a dedicated post-doc and operating support for Amy.</li>
+      <li class="ed" data-eid="goal-4"><strong>Credit and reimburse the faculty — and start a flywheel.</strong> The experts whose science powers the answers are recognised and reimbursed from a defined share of revenue. That sets a self-reinforcing loop in motion: more expert contributors make the content better, better content draws more subscribers, more subscribers grow revenue, and a larger reimbursement pool lets us pay contributors more — which attracts still more experts.</li>
+    </ul>
+  </div>
+
+  <div class="cols" style="margin-top:14px">
+    <div>
+      <div class="block">
+        <h2 class="ed">What SLM contributes</h2>
+        <p class="ed">The brand, the faculty relationships, and an audience already arriving with lifestyle-health questions. SLM approves the science; Palonur never trains on faculty content and never publishes an answer that isn't grounded in approved sources.</p>
+      </div>
+      <div class="block">
+        <h2 class="ed">What Palonur contributes</h2>
+        <p class="ed">The product and the operating partner — all funded up front by Palonur, not by SLM. It is more than a newsletter: a faculty-grounded AI agent that <strong>busts the myths</strong> readers arrive with, gives an <strong>answer tailored to them and a concrete action</strong> to take, and points toward <strong>SLM courses</strong> for those who want to go deeper. Plus the newsletter tooling, billing, and the people who build and steward it.</p>
+      </div>
+    </div>
+    <div>
+      <div class="block">
+        <h2 class="ed">How the money is shared</h2>
+        <p class="ed">Subscription income is shared so that Stanford keeps the majority for the long term. Palonur takes a larger share only while it repays the cost base it funded, then steps down so SLM's share rises to <strong><span data-out="slmShareAfter">70</span>%</strong>. The SLM portion is accrued through the year and <strong>distributed at year-end as a single gift</strong> — a partnership structured as a gift, not a vendor contract.</p>
+      </div>
+      <div class="block">
+        <h2 class="ed">Where the gift goes</h2>
+        <p class="ed">The year-end gift does more than reach Stanford's general fund. It is meant to stand up a <strong>Stanford Lifestyle Medicine Institute</strong> — funding a dedicated post-doc on the science side and operating support for Amy, so the work has a permanent home rather than depending on year-to-year goodwill.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="eyebrow red ed">How to read this document</div>
+    <p style="margin:0" class="ed">This is a numbers-first plan written for SLM. The assumptions panel drives every projection table, the revenue-sharing development, and the cost development. All figures are planning estimates, not commitments. Edit any assumption (or any sentence) directly on the page — changes are saved in this browser only and never leave it. Use Download CSV for the full month-by-month model, Download PDF / HTML for a shareable snapshot.</p>
+  </div>
+
+  <div class="page-footer">
+    <span class="ed">karan@palonur.com · Palo Alto, CA · In partnership with Stanford Lifestyle Medicine</span>
+    <span>palonur.com</span>
+  </div>
+</section>
+
+<!-- ============ THE PARTNERSHIP & REVENUE SHARING ============ -->
+<section class="page">
+  <div class="page-header"><span class="wordmark">Palonur</span><span>The partnership · revenue sharing</span></div>
+  <div class="eyebrow ed">The partnership &amp; how revenue is shared</div>
+  <h1 class="ed">Stanford keeps the majority; Palonur carries the cost.</h1>
+
+  <div class="stat-row">
+    <div class="stat-card"><div class="k">Palonur share</div><div class="v"><span data-out="palShareRec">60</span>% <small>→</small> <span data-out="palShareAfter">30</span>%</div><div class="note ed">A higher share only while Palonur recovers the cost base it funded, stepping down once that outlay is repaid.</div></div>
+    <div class="stat-card green"><div class="k">SLM share — year-end gift</div><div class="v"><span data-out="slmShareRec">40</span>% <small>→</small> <span data-out="slmShareAfter">70</span>%</div><div class="note ed">SLM's share rises after recovery; accrued monthly and gifted once a year, not an ongoing payout.</div></div>
+    <div class="stat-card"><div class="k">Faculty reimbursement</div><div class="v"><span data-out="facReimbPctShown">5</span>%<small> of gross</small></div><div class="note ed">A defined share of gross revenue recognised separately for the faculty who contribute their science.</div></div>
+  </div>
+
+  <div class="cols">
+    <div class="block">
+      <h2 class="ed">Why the SLM share is a gift</h2>
+      <p class="ed">The SLM portion is deliberately structured as a gift rather than a vendor payment. It is accrued through the year and distributed at year-end as a single contribution to Stanford Lifestyle Medicine. This keeps the relationship philanthropic and mission-aligned, and keeps the overwhelming majority of subscription value with Stanford.</p>
+      <p class="ed">It also seeds the longer-term goal: a standing Stanford Lifestyle Medicine Institute, funded by this gift — including a dedicated post-doc and operating support for Amy.</p>
+    </div>
+    <div class="block">
+      <h2 class="ed">Faculty reimbursement, shown separately</h2>
+      <p class="ed">Contributing faculty are reimbursed a defined share of <strong>gross subscription revenue</strong>, recognised separately from the Palonur / SLM split. It is shown for transparency throughout this plan and does not reduce the SLM gift or change the cost recovery math.</p>
+      <p class="ed">As the subscriber base compounds, the reimbursement pool grows alongside the gift — so the experts whose work powers the answers share directly in the product's success.</p>
+      <p class="ed">This is the engine of the partnership — a flywheel, not a one-off content cost. <strong>More expert contributors → better content → more subscribers → more revenue → a larger pool to reimburse contributors → more experts drawn in.</strong> Each turn of the loop funds the next, so the science deepens and the reimbursement pool grows together, year over year.</p>
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="eyebrow red ed">What Palonur funds up front</div>
+    <p style="margin:0" class="ed">There is no marketing spend in the base case — distribution comes free through the SLM audience — so the operating cost is dominated by the people who build and steward the product: a post-doc on the science side and operating support for Amy, plus infrastructure. Palonur funds this flat, lean cost base from launch; SLM carries none of it.</p>
+  </div>
+
+  <div class="page-footer"><span>Confidential · planning estimates only</span><span>palonur.com</span></div>
+</section>
+
+<!-- ============ ASSUMPTIONS ============ -->
+<section class="page flow">
+  <div class="page-header"><span class="wordmark">Palonur</span><span>Assumptions · the model's inputs</span></div>
+  <div class="eyebrow ed">Assumptions — the model's control panel</div>
+  <h1 class="ed">Every number in this plan comes from here.</h1>
+  <p class="lead ed">Shared openly with SLM. Change any field and the revenue-sharing, cost, and faculty-reimbursement tables recompute instantly. Price is the single most important lever.</p>
+
+  <div class="price-hero">
+    <div>
+      <div class="k">Blended revenue per subscriber</div>
+      <div class="big">$<span data-out="monthlyPrice">0</span><small> / month</small></div>
+      <div class="k" style="margin-top:8px">≈ $<span data-out="annualPerSub">0</span> per subscriber per year</div>
+    </div>
+    <div class="breakdown">
+      <div><span>Annual plan (Harvard-style)</span><span>$<span data-out="annualPlanShown">0</span>/yr → $<span data-out="annualPlanMonthly">0</span>/mo</span></div>
+      <div><span>AI usage tier</span><span>$<span data-out="aiTierShown">0</span>/mo</span></div>
+      <div><span>Blended monthly</span><span>$<span data-out="monthlyPrice2">0</span>/mo</span></div>
+    </div>
+  </div>
+  <p class="legend ed">Placeholder pricing — to be confirmed. The annual plan mirrors Harvard Health's affordable content subscription; the AI tier prices the live agent. The figure above is the starting (year-one) price; set an annual price increase below to model price rises in later years.</p>
+
+  <div class="assume-group">
+    <div class="glabel ed">Pricing</div>
+    <div class="assume-grid">
+      <div class="assume"><label>Annual subscription plan</label><div class="ifield"><span class="pre">$</span><input type="number" data-assume="priceAnnual" value="54" step="1" min="0"><span class="suf">/yr</span></div></div>
+      <div class="assume"><label>AI usage tier</label><div class="ifield"><span class="pre">$</span><input type="number" data-assume="aiTierMonthly" value="4" step="0.5" min="0"><span class="suf">/mo</span></div></div>
+      <div class="assume"><label>Annual price increase (later years)</label><div class="ifield"><input type="number" data-assume="priceIncrease" value="5" step="0.5" min="0"><span class="suf">%/yr</span></div></div>
+    </div>
+  </div>
+
+  <div class="assume-group">
+    <div class="glabel ed">Top of funnel &amp; subscriber dynamics</div>
+    <div class="assume-grid">
+      <div class="assume"><label>Monthly SLM visitors</label><div class="ifield"><input type="number" data-assume="visitors" value="120000" step="1000" min="0"></div></div>
+      <div class="assume"><label>Visitor → subscriber conversion</label><div class="ifield"><input type="number" data-assume="convRate" value="1.0" step="0.05" min="0"><span class="suf">%</span></div></div>
+      <div class="assume"><label>Monthly growth in new sign-ups</label><div class="ifield"><input type="number" data-assume="monthlyGrowth" value="1.5" step="0.5"><span class="suf">%</span></div></div>
+      <div class="assume"><label>Monthly churn</label><div class="ifield"><input type="number" data-assume="churn" value="3" step="0.5" min="0"><span class="suf">%</span></div></div>
+    </div>
+  </div>
+
+  <div class="assume-group">
+    <div class="glabel">Revenue share — Palonur / SLM</div>
+    <div class="preset-row">
+      <span class="preset-label">Doable scenarios:</span>
+      <button type="button" class="preset" data-preset="60,30" onclick="applyPreset(60,30)">Stanford-favored · 60 → 30</button>
+      <button type="button" class="preset" data-preset="55,40" onclick="applyPreset(55,40)">Balanced · 55 → 40</button>
+      <button type="button" class="preset" data-preset="70,35" onclick="applyPreset(70,35)">Fast recovery · 70 → 35</button>
+      <button type="button" class="preset" data-preset="50,50" onclick="applyPreset(50,50)">Even · 50 / 50</button>
+    </div>
+    <div class="assume-grid">
+      <div class="assume"><label>Palonur share — during cost recovery</label><div class="ifield"><input type="number" data-assume="palonurSplit" value="60" step="1" min="0" max="100"><span class="suf">%</span></div></div>
+      <div class="assume"><label>Palonur share — after recovery</label><div class="ifield"><input type="number" data-assume="palonurSplitAfter" value="45" step="1" min="0" max="100"><span class="suf">%</span></div></div>
+    </div>
+    <p class="legend">Palonur takes the higher share only until the cost base is repaid, then steps down so SLM keeps the majority long-term. SLM always receives the remainder — e.g. <strong>60 → 45</strong> means SLM gets 40% during recovery and 55% after. Set both fields equal for a single flat split.</p>
+  </div>
+
+  <div class="assume-group" id="palyear-group">
+    <div class="glabel">Split by year <span style="font-weight:400;color:#8a6a5a;font-size:12px;">— optional per-year overrides</span></div>
+    <div class="assume-grid" id="palyear-grid">
+      <div class="assume palyear" data-year="1"><label>Year 1 <small style="color:#8a6a5a;">(Jul '26–Jun '27)</small></label><div class="ifield"><input type="number" data-assume="palYear1" value="" step="1" min="0" max="100" placeholder="auto"><span class="suf">%</span></div></div>
+      <div class="assume palyear" data-year="2"><label>Year 2 <small style="color:#8a6a5a;">(Jul '27–Jun '28)</small></label><div class="ifield"><input type="number" data-assume="palYear2" value="" step="1" min="0" max="100" placeholder="auto"><span class="suf">%</span></div></div>
+      <div class="assume palyear" data-year="3"><label>Year 3 <small style="color:#8a6a5a;">(Jul '28–Jun '29)</small></label><div class="ifield"><input type="number" data-assume="palYear3" value="" step="1" min="0" max="100" placeholder="auto"><span class="suf">%</span></div></div>
+      <div class="assume palyear" data-year="4"><label>Year 4 <small style="color:#8a6a5a;">(Jul '29–Jun '30)</small></label><div class="ifield"><input type="number" data-assume="palYear4" value="" step="1" min="0" max="100" placeholder="auto"><span class="suf">%</span></div></div>
+      <div class="assume palyear" data-year="5"><label>Year 5 <small style="color:#8a6a5a;">(Jul '30–Jun '31)</small></label><div class="ifield"><input type="number" data-assume="palYear5" value="" step="1" min="0" max="100" placeholder="auto"><span class="suf">%</span></div></div>
+      <div class="assume palyear" data-year="6"><label>Year 6 <small style="color:#8a6a5a;">(Jul '31–Jun '32)</small></label><div class="ifield"><input type="number" data-assume="palYear6" value="" step="1" min="0" max="100" placeholder="auto"><span class="suf">%</span></div></div>
+      <div class="assume palyear" data-year="7"><label>Year 7 <small style="color:#8a6a5a;">(Jul '32–Jun '33)</small></label><div class="ifield"><input type="number" data-assume="palYear7" value="" step="1" min="0" max="100" placeholder="auto"><span class="suf">%</span></div></div>
+      <div class="assume palyear" data-year="8"><label>Year 8 <small style="color:#8a6a5a;">(Jul '33–Jun '34)</small></label><div class="ifield"><input type="number" data-assume="palYear8" value="" step="1" min="0" max="100" placeholder="auto"><span class="suf">%</span></div></div>
+      <div class="assume palyear" data-year="9"><label>Year 9 <small style="color:#8a6a5a;">(Jul '34–Jun '35)</small></label><div class="ifield"><input type="number" data-assume="palYear9" value="" step="1" min="0" max="100" placeholder="auto"><span class="suf">%</span></div></div>
+      <div class="assume palyear" data-year="10"><label>Year 10 <small style="color:#8a6a5a;">(Jul '35–Jun '36)</small></label><div class="ifield"><input type="number" data-assume="palYear10" value="" step="1" min="0" max="100" placeholder="auto"><span class="suf">%</span></div></div>
+    </div>
+    <p class="legend">Set a year's Palonur share to fix the split for that 12-month period — SLM receives the remainder. <strong>Leave a year blank ("auto") to use the recovery-based split above</strong> (higher while Palonur recovers its cost base, then stepping down). Only years inside the projection horizon are shown.</p>
+  </div>
+
+  <div class="assume-group">
+    <div class="glabel">Faculty reimbursement</div>
+    <div class="assume-grid">
+      <div class="assume"><label>Faculty reimbursement (share of gross revenue)</label><div class="ifield"><input type="number" data-assume="facultyReimbursePct" value="5" step="0.5" min="0" max="100"><span class="suf">%</span></div></div>
+    </div>
+    <p class="legend">Calculated on gross subscription revenue and shown as a separate line throughout. It does not reduce the SLM gift or Palonur's share in this model — it is a transparency figure for what contributing faculty would be reimbursed.</p>
+  </div>
+
+  <div class="assume-group">
+    <div class="glabel ed">Economics &amp; costs (Palonur-funded)</div>
+    <div class="assume-grid">
+      <div class="assume"><label>Payment processing fee</label><div class="ifield"><input type="number" data-assume="processingFee" value="3" step="0.5" min="0" max="100"><span class="suf">%</span></div></div>
+      <div class="assume"><label>Palonur cost base (post-doc, Amy, infra)</label><div class="ifield"><span class="pre">$</span><input type="number" data-assume="costMonthly" value="40000" step="1000" min="0"><span class="suf">/mo</span></div></div>
+      <div class="assume"><label>AI usage cost per active subscriber</label><div class="ifield"><span class="pre">$</span><input type="number" data-assume="aiCostPerActive" value="0.50" step="0.05" min="0"><span class="suf">/mo</span></div></div>
+      <div class="assume"><label>Projection horizon</label><div class="ifield"><input type="number" data-assume="horizon" value="36" step="1" min="1" max="120"><span class="suf">mo</span></div></div>
+    </div>
+  </div>
+
+  <div class="page-footer"><span>Edit a field above — every table recomputes</span><span>palonur.com</span></div>
+</section>
+
+<!-- ============ REVENUE & SHARING — DEVELOPMENT BY YEAR ============ -->
+<section class="page flow annual">
+  <div class="page-header"><span class="wordmark">Palonur</span><span>Revenue &amp; sharing · by year</span></div>
+  <div class="eyebrow ed">How revenue &amp; sharing develop</div>
+  <h1 class="ed">Revenue, the SLM gift, and faculty reimbursement — year by year.</h1>
+  <p class="lead ed">Each 12-month period from the July 2026 launch: ending subscribers, gross subscription revenue, Palonur's share, the SLM gift, and the faculty reimbursement. As the base compounds and the split steps down after recovery, the SLM gift becomes the largest line.</p>
+
+  <div class="stat-row">
+    <div class="stat-card"><div class="k">Cumulative subscription revenue</div><div class="v">$<span data-out="cumRev">0</span></div></div>
+    <div class="stat-card green"><div class="k">Cumulative SLM gift</div><div class="v">$<span data-out="cumGift">0</span></div></div>
+    <div class="stat-card"><div class="k">Cumulative faculty reimbursement</div><div class="v">$<span data-out="cumFacReimb">0</span></div></div>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Year</th>
+        <th>End subs</th>
+        <th>Palonur / SLM split</th>
+        <th>Sub revenue (gross)</th>
+        <th>Palonur share</th>
+        <th>SLM gift</th>
+        <th>Faculty reimbursement</th>
+      </tr>
+    </thead>
+    <tbody id="rev-share-body"></tbody>
+  </table>
+  <p class="legend ed">The Palonur and SLM shares are split from revenue net of the payment processing fee, so together they sum to less than gross "Sub revenue." Faculty reimbursement is calculated on gross revenue and shown separately. The SLM gift is accrued through each year and distributed at year-end.</p>
+
+  <div class="page-footer"><span>Confidential · planning estimates only</span><span>palonur.com</span></div>
+</section>
+
+<!-- ============ COSTS — DEVELOPMENT BY YEAR ============ -->
+<section class="page flow annual">
+  <div class="page-header"><span class="wordmark">Palonur</span><span>Costs · by year</span></div>
+  <div class="eyebrow ed">How the cost base develops</div>
+  <h1 class="ed">A lean cost base Palonur carries — funded toward the Institute.</h1>
+  <p class="lead ed">The operating cost is flat and lean, funded by Palonur from launch. The SLM year-end gift, in turn, funds the standing Stanford Lifestyle Medicine Institute — a dedicated post-doc and operating support for Amy.</p>
+
+  <div class="stat-row">
+    <div class="stat-card red"><div class="k">Palonur-funded cost base</div><div class="v">$<span data-out="costMonthlyShown">0</span><small>/mo</small></div><div class="note ed">Post-doc, support for Amy, infrastructure — carried by Palonur, not SLM.</div></div>
+    <div class="stat-card green"><div class="k">Cumulative SLM gift</div><div class="v">$<span data-out="cumGiftCost">0</span></div><div class="note ed">Accrued from SLM's share and gifted at year-end — funds the Institute, the post-doc, and Amy.</div></div>
+    <div class="stat-card"><div class="k">Cumulative operating cost</div><div class="v">$<span data-out="cumCostShown">0</span></div><div class="note ed">Total Palonur-funded operating cost over the projection horizon.</div></div>
+  </div>
+
+  <h2 class="ed" style="margin-top:6px">Operating cost, by year</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Year</th>
+        <th>End subs</th>
+        <th>Operating cost</th>
+        <th>Cumulative cost</th>
+      </tr>
+    </thead>
+    <tbody id="cost-body"></tbody>
+  </table>
+  <p class="legend ed">Operating cost is the Palonur cost base plus AI usage that scales with active subscribers. Aggregated by 12-month period. SLM carries none of this.</p>
+
+  <div class="band" style="margin-top:14px">
+    <div class="eyebrow red ed">One stream, one mission</div>
+    <p style="margin:0" class="ed">The SLM newsletter funds Stanford Lifestyle Medicine directly through the year-end gift — and that gift is what stands up a permanent Institute, paying for a post-doc and operating support for Amy. Palonur carries the operating cost; SLM keeps the growing majority and the gift does the building.</p>
+  </div>
+
+  <p class="legend ed" style="margin-top:10px">All figures are planning estimates generated from the editable assumptions and do not constitute commitments. Download CSV for the full month-by-month workings.</p>
+
+  <div class="page-footer"><span>Confidential · planning estimates only</span><span>palonur.com</span></div>
+</section>
+
+<!-- ============ MONTH-BY-MONTH PROJECTION ============ -->
+<section class="page flow">
+  <div class="page-header"><span class="wordmark">Palonur</span><span>Month-by-month projection</span></div>
+  <div class="eyebrow ed">Month-by-month projection · from launch</div>
+  <h1 class="ed">Every month, in full.</h1>
+  <p class="lead ed">Subscriber growth off the SLM audience, gross and net subscription revenue, the revenue split (the SLM share accrued for the year-end gift), faculty reimbursement, and the Palonur-funded operating cost — month by month from the July 2026 launch.</p>
+
+  <table class="proj">
+    <thead>
+      <tr>
+        <th tabindex="0" data-tip="Projection month from the July 2026 launch.">Month</th>
+        <th tabindex="0" data-tip="New subscribers added that month.">New subs</th>
+        <th tabindex="0" data-tip="Total active subscribers after churn (running subscriber count).">Cumulative</th>
+        <th tabindex="0" data-tip="Gross subscription revenue that month (active subs × monthly price), before fees and splits.">Sub revenue (gross)</th>
+        <th tabindex="0" data-tip="Gross revenue minus the payment-processing fee.">Net rev (after fee)</th>
+        <th tabindex="0" data-tip="Palonur's portion of net revenue for the month (net rev × Palonur split %).">Palonur share</th>
+        <th tabindex="0" data-tip="Stanford's portion of net revenue, accrued monthly and gifted at year-end (net rev × (1 − Palonur split %)).">SLM share (gift)</th>
+        <th tabindex="0" data-tip="Faculty reimbursement, calculated on gross revenue and recognised separately.">Faculty reimb</th>
+        <th tabindex="0" data-tip="Palonur-funded operating cost that month (fixed cost base + AI usage cost per active sub).">Monthly cost</th>
+        <th tabindex="0" data-tip="Palonur's net for the month: Palonur share − monthly cost.">Net cash flow</th>
+        <th tabindex="0" data-tip="Running sum of net cash flow (Palonur's cumulative position; negative until cost recovery).">Cumulative cash</th>
+        <th tabindex="0" data-tip="Cumulative Palonur-funded operating cost over the horizon.">Cum. cost</th>
+        <th tabindex="0" data-tip="Cumulative SLM share accrued for Stanford.">Cum. SLM gift</th>
+      </tr>
+    </thead>
+    <tbody id="proj-body"></tbody>
+  </table>
+  <p class="legend ed">Highlighted rows mark the end of each 12-month period. The Palonur and SLM shares are split from revenue net of the payment processing fee, so together they sum to less than gross "Sub revenue." "SLM share (gift)" is accrued monthly and distributed at year-end. "Cum. cost" is the cumulative Palonur-funded operating cost; "Cum. SLM gift" is the cumulative gift to Stanford.</p>
+
+  <div class="page-footer"><span class="ed">karan@palonur.com · In partnership with Stanford Lifestyle Medicine</span><span>palonur.com</span></div>
+</section>
+
+<!-- ============ GROWTH-SCENARIO OVERLAY ============ -->
+  <section class="page cf-overlay-page" data-card>
+    <div class="page-header">
+      <span class="wordmark" contenteditable="false">Palonur</span>
+      <span contenteditable="false">Three growth scenarios · Confidential</span>
+    </div>
+
+    <div class="rule-label" contenteditable="false">Cash-flow projection · 10-year · All three scenarios</div>
+    <h1 contenteditable="false">Same destination, three speeds.</h1>
+    <p class="lead" contenteditable="false">Long-term, middle and super-growth all converge on the same two-million-member ceiling — they differ only in how fast they get there. The three detailed cash-flow pages that follow share every pricing, cost, tax and revenue-split assumption; only the subscriber curve below changes.</p>
+
+    <figure class="cf-overlay" contenteditable="false" style="margin:14px 0 0;padding:0">
+      <figcaption style="font-family:var(--sans);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--sub);margin-bottom:6px">All three scenarios reach the same 2M ceiling — only the speed differs</figcaption>
+      <svg viewBox="0 0 600 230" width="100%" preserveAspectRatio="none" style="display:block;height:auto;overflow:visible" role="img" aria-label="All three scenarios reach the same 2M ceiling — only the speed differs">
+        <line x1="12" y1="14" x2="522" y2="14" stroke="var(--gold)" stroke-width="1" stroke-dasharray="4 3" opacity="0.8"></line>
+        <text x="528" y="17" font-family="var(--sans)" font-size="9" fill="var(--gold)">2M ceiling</text>
+        <path d="M12,205.6 L68.7,204.7 L125.3,201.9 L182,192.9 L238.7,168.4 L295.3,120 L352,66 L408.7,33.3 L465.3,20.2 L522,15.9" fill="none" stroke="var(--sub)" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="5 3"></path><circle cx="12" cy="205.6" r="2.2" fill="var(--sub)"></circle><circle cx="68.7" cy="204.7" r="2.2" fill="var(--sub)"></circle><circle cx="125.3" cy="201.9" r="2.2" fill="var(--sub)"></circle><circle cx="182" cy="192.9" r="2.2" fill="var(--sub)"></circle><circle cx="238.7" cy="168.4" r="2.2" fill="var(--sub)"></circle><circle cx="295.3" cy="120" r="2.2" fill="var(--sub)"></circle><circle cx="352" cy="66" r="2.2" fill="var(--sub)"></circle><circle cx="408.7" cy="33.3" r="2.2" fill="var(--sub)"></circle><circle cx="465.3" cy="20.2" r="2.2" fill="var(--sub)"></circle><circle cx="522" cy="15.9" r="2.2" fill="var(--sub)"></circle>
+        <path d="M12,204.7 L68.7,192.9 L125.3,120 L182,33.3 L238.7,15.9 L295.3,14.2 L352,14 L408.7,14 L465.3,14 L522,14" fill="none" stroke="var(--gold)" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"></path><circle cx="12" cy="204.7" r="2.2" fill="var(--gold)"></circle><circle cx="68.7" cy="192.9" r="2.2" fill="var(--gold)"></circle><circle cx="125.3" cy="120" r="2.2" fill="var(--gold)"></circle><circle cx="182" cy="33.3" r="2.2" fill="var(--gold)"></circle><circle cx="238.7" cy="15.9" r="2.2" fill="var(--gold)"></circle><circle cx="295.3" cy="14.2" r="2.2" fill="var(--gold)"></circle><circle cx="352" cy="14" r="2.2" fill="var(--gold)"></circle><circle cx="408.7" cy="14" r="2.2" fill="var(--gold)"></circle><circle cx="465.3" cy="14" r="2.2" fill="var(--gold)"></circle><circle cx="522" cy="14" r="2.2" fill="var(--gold)"></circle>
+        <path d="M12,199.9 L68.7,82.4 L125.3,15.9 L182,14 L238.7,14 L295.3,14 L352,14 L408.7,14 L465.3,14 L522,14" fill="none" stroke="var(--red)" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"></path><circle cx="12" cy="199.9" r="2.2" fill="var(--red)"></circle><circle cx="68.7" cy="82.4" r="2.2" fill="var(--red)"></circle><circle cx="125.3" cy="15.9" r="2.2" fill="var(--red)"></circle><circle cx="182" cy="14" r="2.2" fill="var(--red)"></circle><circle cx="238.7" cy="14" r="2.2" fill="var(--red)"></circle><circle cx="295.3" cy="14" r="2.2" fill="var(--red)"></circle><circle cx="352" cy="14" r="2.2" fill="var(--red)"></circle><circle cx="408.7" cy="14" r="2.2" fill="var(--red)"></circle><circle cx="465.3" cy="14" r="2.2" fill="var(--red)"></circle><circle cx="522" cy="14" r="2.2" fill="var(--red)"></circle>
+        <text x="12" y="224" font-family="var(--sans)" font-size="8.5" fill="var(--sub)">Yr 1</text>
+        <text x="522" y="224" font-family="var(--sans)" font-size="8.5" fill="var(--sub)" text-anchor="end">Yr 10</text>
+      </svg>
+      <div style="display:flex;flex-wrap:wrap;gap:18px;margin-top:8px;font-family:var(--sans);font-size:9.5px;color:var(--ink)">
+        <span style="display:inline-flex;align-items:center;gap:6px"><span style="display:inline-block;width:18px;height:0;border-top:2.6px dashed var(--sub)"></span><span>Long-term · ~10 yrs</span></span>
+        <span style="display:inline-flex;align-items:center;gap:6px"><span style="display:inline-block;width:18px;height:0;border-top:2.6px solid var(--gold)"></span><span>Middle · ~5 yrs</span></span>
+        <span style="display:inline-flex;align-items:center;gap:6px"><span style="display:inline-block;width:18px;height:0;border-top:2.6px solid var(--red)"></span><span>Super-growth · ~3 yrs</span></span>
+      </div>
+    </figure>
+
+    <div class="page-footer">
+      <span contenteditable="false">karan@palonur.com · In partnership with Stanford Lifestyle Medicine</span>
+      <span contenteditable="false">palonur.com</span>
+    </div>
+  </section>
+
+<!-- ============ EN CASH-FLOW · CONSERVATIVE ============ -->
+  <section class="page" data-card>
+    <style>
+      .cf-table{width:100%;border-collapse:collapse;font-family:var(--sans);margin-top:11px;table-layout:fixed}
+      .cf-table th,.cf-table td{padding:5px 5px;text-align:right;font-size:9.5px;border-bottom:1px solid var(--rule)}
+      .cf-table th{font-size:7.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--sub);font-weight:600;border-bottom:1px solid var(--rule-2);vertical-align:bottom}
+      .cf-table th:first-child,.cf-table td:first-child{text-align:left;font-family:var(--serif);font-size:10.5px;color:var(--ink);width:78px}
+      .cf-table td:first-child small{display:block;font-family:var(--sans);font-size:7.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--sub);margin-top:1px}
+      .cf-table tbody tr:last-child td{border-bottom:none}
+      .cf-table .neg{color:var(--red-2)}
+      .cf-table .pos{color:#2f6b3a}
+      .cf-note{font-size:10px;line-height:1.4;color:var(--sub);margin-top:9px;border-top:1px solid var(--rule);padding-top:7px}
+      .cf-note strong{color:var(--ink);font-weight:600}
+    </style>
+  <div class="page-header">
+      <span class="wordmark" contenteditable="false">Palonur</span>
+      <span contenteditable="false">Cash-flow scenario · Conservative</span>
+    </div>
+
+    <div class="rule-label" contenteditable="false">Cash-flow projection · 10-year · Long-term ramp</div>
+    <h1 contenteditable="false">The long-term case — 2 million members, reached over ten years.</h1>
+    <p class="lead" contenteditable="false">Our most patient case. The existing Stanford SLM audience of ~120,000 monthly visitors is converted into a recurring subscription with no paid acquisition, and the subscriber base climbs gradually toward a shared ceiling of two million members — reached around Year 10, then held there. Same pricing, cost, tax and revenue-split math as the other two cases; only the pace of adoption is slower.</p>
+
+    <div class="meta-strip">
+      <div data-card><div class="stat-label" contenteditable="false">Break-even</div><div contenteditable="false">Month 30 after launch</div></div>
+      <div data-card><div class="stat-label" contenteditable="false">Peak capital needed</div><div contenteditable="false">≈ $431k to then</div></div>
+      <div data-card><div class="stat-label" contenteditable="false">Net income after tax · cumulative (10 yrs)</div><div contenteditable="false">≈ $318.2M</div></div>
+    </div>
+    <div style="font-family:var(--sans);font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--sub);margin:11px 0 5px" contenteditable="false">Key assumptions</div>
+    <div class="meta-strip assump-strip">
+      <div data-card><div class="stat-label" contenteditable="false">One payment / year</div><div contenteditable="false">$54</div><div contenteditable="false" style="font-size:9.5px;color:var(--sub);margin-top:1px">+ $4/mo AI tier</div></div>
+      <div data-card><div class="stat-label" contenteditable="false">Subscriber churn</div><div contenteditable="false">3% / month</div><div contenteditable="false" style="font-size:9.5px;color:var(--sub);margin-top:1px">≈ 31% / year</div></div>
+      <div data-card><div class="stat-label" contenteditable="false">Early growth rate</div><div contenteditable="false">≈ 10% / month</div><div contenteditable="false" style="font-size:9.5px;color:var(--sub);margin-top:1px">→ 2M members by Year 10</div></div>
+    </div>
+
+    <table class="cf-table">
+      <thead>
+        <tr>
+          <th>Period</th>
+        <th>Ending<br>subscribers</th>
+        <th>Revenue</th>
+        <th>Operating<br>costs</th>
+        <th>Pre-tax<br>income</th>
+        <th>US tax<br>(≈ 28%)</th>
+        <th>Net income<br>after tax</th>
+        <th>Cumulative<br>after tax</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Year 1 <small>'26–'27</small></td>
+          <td>3,984</td>
+          <td>$144,744</td>
+          <td>$494,629</td>
+          <td class="neg">−$349,886</td>
+          <td>—</td>
+          <td class="neg">−$349,886</td>
+          <td class="neg">−$349,886</td>
+        </tr>
+        <tr>
+          <td>Year 2 <small>'27–'28</small></td>
+          <td>13,183</td>
+          <td>$503,663</td>
+          <td>$528,482</td>
+          <td class="neg">−$24,819</td>
+          <td>—</td>
+          <td class="neg">−$24,819</td>
+          <td class="neg">−$374,705</td>
+        </tr>
+        <tr>
+          <td>Year 3 <small>'28–'29</small></td>
+          <td>43,165</td>
+          <td>$1,495,788</td>
+          <td>$639,507</td>
+          <td class="pos">$856,281</td>
+          <td>$134,841</td>
+          <td class="pos">$721,440</td>
+          <td class="pos">$346,735</td>
+        </tr>
+        <tr>
+          <td>Year 4 <small>'29–'30</small></td>
+          <td>136,646</td>
+          <td>$4,404,112</td>
+          <td>$992,693</td>
+          <td class="pos">$3,411,419</td>
+          <td>$955,197</td>
+          <td class="pos">$2,456,222</td>
+          <td class="pos">$2,802,956</td>
+        </tr>
+        <tr>
+          <td>Year 5 <small>'30–'31</small></td>
+          <td>392,017</td>
+          <td>$13,863,178</td>
+          <td>$2,016,995</td>
+          <td class="pos">$11,846,183</td>
+          <td>$3,316,931</td>
+          <td class="pos">$8,529,252</td>
+          <td class="pos">$11,332,209</td>
+        </tr>
+        <tr>
+          <td>Year 6 <small>'31–'32</small></td>
+          <td>895,325</td>
+          <td>$36,715,537</td>
+          <td>$4,356,772</td>
+          <td class="pos">$32,358,765</td>
+          <td>$9,060,454</td>
+          <td class="pos">$23,298,311</td>
+          <td class="pos">$34,630,520</td>
+        </tr>
+        <tr>
+          <td>Year 7 <small>'32–'33</small></td>
+          <td>1,458,646</td>
+          <td>$72,244,108</td>
+          <td>$7,744,964</td>
+          <td class="pos">$64,499,144</td>
+          <td>$18,059,760</td>
+          <td class="pos">$46,439,384</td>
+          <td class="pos">$81,069,903</td>
+        </tr>
+        <tr>
+          <td>Year 8 <small>'33–'34</small></td>
+          <td>1,799,148</td>
+          <td>$104,293,522</td>
+          <td>$10,468,472</td>
+          <td class="pos">$93,825,050</td>
+          <td>$26,271,014</td>
+          <td class="pos">$67,554,036</td>
+          <td class="pos">$148,623,939</td>
+        </tr>
+        <tr>
+          <td>Year 9 <small>'34–'35</small></td>
+          <td>1,935,021</td>
+          <td>$123,955,276</td>
+          <td>$11,786,221</td>
+          <td class="pos">$112,169,056</td>
+          <td>$31,407,336</td>
+          <td class="pos">$80,761,720</td>
+          <td class="pos">$229,385,659</td>
+        </tr>
+        <tr>
+          <td>Year 10 <small>'35–'36</small></td>
+          <td>1,980,000</td>
+          <td>$135,624,617</td>
+          <td>$12,261,529</td>
+          <td class="pos">$123,363,088</td>
+          <td>$34,541,665</td>
+          <td class="pos">$88,821,423</td>
+          <td class="pos">$318,207,083</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <figure class="cf-chart" contenteditable="false" style="margin:11px 0 0;padding:0">
+      <figcaption style="font-family:var(--sans);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--sub);margin-bottom:4px">End-of-year members climbing toward the shared 2M ceiling</figcaption>
+      <svg viewBox="0 0 600 130" width="100%" preserveAspectRatio="none" style="display:block;height:auto;overflow:visible" role="img" aria-label="End-of-year members climbing toward the shared 2M ceiling">
+        <line x1="8" y1="12" x2="534" y2="12" stroke="var(--gold)" stroke-width="1" stroke-dasharray="4 3" opacity="0.8"></line>
+        <text x="540" y="15" font-family="var(--sans)" font-size="9" fill="var(--gold)">2M ceiling</text>
+        <path d="M8,112 L8,111.8 L66.4,111.3 L124.9,109.8 L183.3,105.2 L241.8,92.4 L300.2,67.2 L358.7,39.1 L417.1,22 L475.6,15.2 L534,13 L534,112 Z" fill="var(--red)" fill-opacity="0.08"></path>
+        <path d="M8,111.8 L66.4,111.3 L124.9,109.8 L183.3,105.2 L241.8,92.4 L300.2,67.2 L358.7,39.1 L417.1,22 L475.6,15.2 L534,13" fill="none" stroke="var(--red)" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></path>
+        <circle cx="8" cy="111.8" r="2.4" fill="var(--red)"></circle><circle cx="66.4" cy="111.3" r="2.4" fill="var(--red)"></circle><circle cx="124.9" cy="109.8" r="2.4" fill="var(--red)"></circle><circle cx="183.3" cy="105.2" r="2.4" fill="var(--red)"></circle><circle cx="241.8" cy="92.4" r="2.4" fill="var(--red)"></circle><circle cx="300.2" cy="67.2" r="2.4" fill="var(--red)"></circle><circle cx="358.7" cy="39.1" r="2.4" fill="var(--red)"></circle><circle cx="417.1" cy="22" r="2.4" fill="var(--red)"></circle><circle cx="475.6" cy="15.2" r="2.4" fill="var(--red)"></circle><circle cx="534" cy="13" r="2.4" fill="var(--red)"></circle>
+        <text x="8" y="126" font-family="var(--sans)" font-size="8.5" fill="var(--sub)">Yr 1</text>
+        <text x="534" y="126" font-family="var(--sans)" font-size="8.5" fill="var(--sub)" text-anchor="end">Yr 10</text>
+      </svg>
+    </figure>
+
+    <p class="cf-note" contenteditable="false"><strong>Assumptions</strong>: subscription $54/yr plus AI tier $4/mo, 5% annual price increase · 1.0% visitor→subscriber · 3% monthly churn · lean cost base of $40,000/mo plus AI usage per active subscriber · 3% payment fee. <strong>Tax:</strong> combined US rate of ≈ 28% (federal 21% + California 8.84%, deductible), loss carryforward from the start-up years. <strong>Only the paying-subscriber trajectory changes across the three scenarios</strong> — every pricing, cost, tax and revenue-split assumption is identical. Sign-ups follow a saturating adoption curve toward a shared ceiling of 2,000,000 members; the scenarios differ only in how fast they reach it. All figures are planning estimates in USD, not commitments.</p>
+
+    <div class="page-footer">
+      <span contenteditable="false">karan@palonur.com · In partnership with Stanford Lifestyle Medicine</span>
+      <span contenteditable="false">palonur.com</span>
+    </div>
+  </section>
+
+<!-- ============ EN CASH-FLOW · MIDDLE ============ -->
+  <section class="page" data-card>
+    <div class="page-header">
+      <span class="wordmark" contenteditable="false">Palonur</span>
+      <span contenteditable="false">Cash-flow scenario · Middle</span>
+    </div>
+
+    <div class="rule-label" contenteditable="false">Cash-flow projection · 10-year · Middle</div>
+    <h1 contenteditable="false">The middle case — 2 million members, reached in five years.</h1>
+    <p class="lead" contenteditable="false">A faster adoption path: word of mouth, faculty contribution and the AI agent compound, carrying the subscriber base to the same two-million-member ceiling by around Year 5, then holding there for the rest of the decade. Every per-subscriber assumption is identical to the other cases — only the speed of the ramp differs.</p>
+
+    <div class="meta-strip">
+      <div data-card><div class="stat-label" contenteditable="false">Break-even</div><div contenteditable="false">Month 15 after launch</div></div>
+      <div data-card><div class="stat-label" contenteditable="false">Peak capital needed</div><div contenteditable="false">≈ $212k to then</div></div>
+      <div data-card><div class="stat-label" contenteditable="false">Net income after tax · cumulative (10 yrs)</div><div contenteditable="false">≈ $536.3M</div></div>
+    </div>
+    <div style="font-family:var(--sans);font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--sub);margin:11px 0 5px" contenteditable="false">Key assumptions</div>
+    <div class="meta-strip assump-strip">
+      <div data-card><div class="stat-label" contenteditable="false">One payment / year</div><div contenteditable="false">$54</div><div contenteditable="false" style="font-size:9.5px;color:var(--sub);margin-top:1px">+ $4/mo AI tier</div></div>
+      <div data-card><div class="stat-label" contenteditable="false">Subscriber churn</div><div contenteditable="false">3% / month</div><div contenteditable="false" style="font-size:9.5px;color:var(--sub);margin-top:1px">≈ 31% / year</div></div>
+      <div data-card><div class="stat-label" contenteditable="false">Early growth rate</div><div contenteditable="false">≈ 20% / month</div><div contenteditable="false" style="font-size:9.5px;color:var(--sub);margin-top:1px">→ 2M members by Year 5</div></div>
+    </div>
+
+    <table class="cf-table">
+      <thead>
+        <tr>
+          <th>Period</th>
+        <th>Ending<br>subscribers</th>
+        <th>Revenue</th>
+        <th>Operating<br>costs</th>
+        <th>Pre-tax<br>income</th>
+        <th>US tax<br>(≈ 28%)</th>
+        <th>Net income<br>after tax</th>
+        <th>Cumulative<br>after tax</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Year 1 <small>'26–'27</small></td>
+          <td>13,183</td>
+          <td>$327,767</td>
+          <td>$513,128</td>
+          <td class="neg">−$185,361</td>
+          <td>—</td>
+          <td class="neg">−$185,361</td>
+          <td class="neg">−$185,361</td>
+        </tr>
+        <tr>
+          <td>Year 2 <small>'27–'28</small></td>
+          <td>136,646</td>
+          <td>$2,859,764</td>
+          <td>$832,247</td>
+          <td class="pos">$2,027,517</td>
+          <td>$515,804</td>
+          <td class="pos">$1,511,713</td>
+          <td class="pos">$1,326,353</td>
+        </tr>
+        <tr>
+          <td>Year 3 <small>'28–'29</small></td>
+          <td>895,325</td>
+          <td>$22,939,950</td>
+          <td>$3,284,017</td>
+          <td class="pos">$19,655,933</td>
+          <td>$5,503,661</td>
+          <td class="pos">$14,152,272</td>
+          <td class="pos">$15,478,624</td>
+        </tr>
+        <tr>
+          <td>Year 4 <small>'29–'30</small></td>
+          <td>1,799,148</td>
+          <td>$75,058,473</td>
+          <td>$9,217,731</td>
+          <td class="pos">$65,840,743</td>
+          <td>$18,435,408</td>
+          <td class="pos">$47,405,335</td>
+          <td class="pos">$62,883,959</td>
+        </tr>
+        <tr>
+          <td>Year 5 <small>'30–'31</small></td>
+          <td>1,980,000</td>
+          <td>$104,316,701</td>
+          <td>$12,045,475</td>
+          <td class="pos">$92,271,226</td>
+          <td>$25,835,943</td>
+          <td class="pos">$66,435,283</td>
+          <td class="pos">$129,319,242</td>
+        </tr>
+        <tr>
+          <td>Year 6 <small>'31–'32</small></td>
+          <td>1,998,174</td>
+          <td>$113,257,192</td>
+          <td>$12,438,759</td>
+          <td class="pos">$100,818,433</td>
+          <td>$28,229,161</td>
+          <td class="pos">$72,589,272</td>
+          <td class="pos">$201,908,514</td>
+        </tr>
+        <tr>
+          <td>Year 7 <small>'32–'33</small></td>
+          <td>1,999,835</td>
+          <td>$119,292,883</td>
+          <td>$12,476,252</td>
+          <td class="pos">$106,816,631</td>
+          <td>$29,908,657</td>
+          <td class="pos">$76,907,974</td>
+          <td class="pos">$278,816,488</td>
+        </tr>
+        <tr>
+          <td>Year 8 <small>'33–'34</small></td>
+          <td>1,999,985</td>
+          <td>$125,293,122</td>
+          <td>$12,479,661</td>
+          <td class="pos">$112,813,461</td>
+          <td>$31,587,769</td>
+          <td class="pos">$81,225,692</td>
+          <td class="pos">$360,042,180</td>
+        </tr>
+        <tr>
+          <td>Year 9 <small>'34–'35</small></td>
+          <td>1,999,999</td>
+          <td>$131,561,161</td>
+          <td>$12,479,969</td>
+          <td class="pos">$119,081,192</td>
+          <td>$33,342,734</td>
+          <td class="pos">$85,738,458</td>
+          <td class="pos">$445,780,638</td>
+        </tr>
+        <tr>
+          <td>Year 10 <small>'35–'36</small></td>
+          <td>2,000,000</td>
+          <td>$138,139,540</td>
+          <td>$12,479,997</td>
+          <td class="pos">$125,659,543</td>
+          <td>$35,184,672</td>
+          <td class="pos">$90,474,871</td>
+          <td class="pos">$536,255,509</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <figure class="cf-chart" contenteditable="false" style="margin:11px 0 0;padding:0">
+      <figcaption style="font-family:var(--sans);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--sub);margin-bottom:4px">End-of-year members climbing toward the shared 2M ceiling</figcaption>
+      <svg viewBox="0 0 600 130" width="100%" preserveAspectRatio="none" style="display:block;height:auto;overflow:visible" role="img" aria-label="End-of-year members climbing toward the shared 2M ceiling">
+        <line x1="8" y1="12" x2="534" y2="12" stroke="var(--gold)" stroke-width="1" stroke-dasharray="4 3" opacity="0.8"></line>
+        <text x="540" y="15" font-family="var(--sans)" font-size="9" fill="var(--gold)">2M ceiling</text>
+        <path d="M8,112 L8,111.3 L66.4,105.2 L124.9,67.2 L183.3,22 L241.8,13 L300.2,12.1 L358.7,12 L417.1,12 L475.6,12 L534,12 L534,112 Z" fill="var(--red)" fill-opacity="0.08"></path>
+        <path d="M8,111.3 L66.4,105.2 L124.9,67.2 L183.3,22 L241.8,13 L300.2,12.1 L358.7,12 L417.1,12 L475.6,12 L534,12" fill="none" stroke="var(--red)" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></path>
+        <circle cx="8" cy="111.3" r="2.4" fill="var(--red)"></circle><circle cx="66.4" cy="105.2" r="2.4" fill="var(--red)"></circle><circle cx="124.9" cy="67.2" r="2.4" fill="var(--red)"></circle><circle cx="183.3" cy="22" r="2.4" fill="var(--red)"></circle><circle cx="241.8" cy="13" r="2.4" fill="var(--red)"></circle><circle cx="300.2" cy="12.1" r="2.4" fill="var(--red)"></circle><circle cx="358.7" cy="12" r="2.4" fill="var(--red)"></circle><circle cx="417.1" cy="12" r="2.4" fill="var(--red)"></circle><circle cx="475.6" cy="12" r="2.4" fill="var(--red)"></circle><circle cx="534" cy="12" r="2.4" fill="var(--red)"></circle>
+        <text x="8" y="126" font-family="var(--sans)" font-size="8.5" fill="var(--sub)">Yr 1</text>
+        <text x="534" y="126" font-family="var(--sans)" font-size="8.5" fill="var(--sub)" text-anchor="end">Yr 10</text>
+      </svg>
+    </figure>
+
+    <p class="cf-note" contenteditable="false"><strong>Assumptions</strong>: subscription $54/yr plus AI tier $4/mo, 5% annual price increase · 1.0% visitor→subscriber · 3% monthly churn · lean cost base of $40,000/mo plus AI usage per active subscriber · 3% payment fee. <strong>Tax:</strong> combined US rate of ≈ 28% (federal 21% + California 8.84%, deductible), loss carryforward from the start-up years. <strong>Only the paying-subscriber trajectory changes across the three scenarios</strong> — every pricing, cost, tax and revenue-split assumption is identical. Sign-ups follow a saturating adoption curve toward a shared ceiling of 2,000,000 members; the scenarios differ only in how fast they reach it. All figures are planning estimates in USD, not commitments.</p>
+
+    <div class="page-footer">
+      <span contenteditable="false">karan@palonur.com · In partnership with Stanford Lifestyle Medicine</span>
+      <span contenteditable="false">palonur.com</span>
+    </div>
+  </section>
+
+<!-- ============ EN CASH-FLOW · SUPER-GROWTH ============ -->
+  <section class="page" data-card>
+    <div class="page-header">
+      <span class="wordmark" contenteditable="false">Palonur</span>
+      <span contenteditable="false">Cash-flow scenario · Super-growth</span>
+    </div>
+
+    <div class="rule-label" contenteditable="false">Cash-flow projection · 10-year · Super-growth</div>
+    <h1 contenteditable="false">The super-growth case — 2 million members, reached in three years.</h1>
+    <p class="lead" contenteditable="false">The fastest case: the flywheel turns hard and Palonur reaches the same two-million-member ceiling by around Year 3, then holds there for the rest of the decade. Same pricing, cost, tax and revenue-split math as the other two cases — only the subscriber curve is steeper.</p>
+
+    <div class="meta-strip">
+      <div data-card><div class="stat-label" contenteditable="false">Break-even</div><div contenteditable="false">Month 9 after launch</div></div>
+      <div data-card><div class="stat-label" contenteditable="false">Peak capital needed</div><div contenteditable="false">≈ $120k to then</div></div>
+      <div data-card><div class="stat-label" contenteditable="false">Net income after tax · cumulative (10 yrs)</div><div contenteditable="false">≈ $613.2M</div></div>
+    </div>
+    <div style="font-family:var(--sans);font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--sub);margin:11px 0 5px" contenteditable="false">Key assumptions</div>
+    <div class="meta-strip assump-strip">
+      <div data-card><div class="stat-label" contenteditable="false">One payment / year</div><div contenteditable="false">$54</div><div contenteditable="false" style="font-size:9.5px;color:var(--sub);margin-top:1px">+ $4/mo AI tier</div></div>
+      <div data-card><div class="stat-label" contenteditable="false">Subscriber churn</div><div contenteditable="false">3% / month</div><div contenteditable="false" style="font-size:9.5px;color:var(--sub);margin-top:1px">≈ 31% / year</div></div>
+      <div data-card><div class="stat-label" contenteditable="false">Early growth rate</div><div contenteditable="false">≈ 33% / month</div><div contenteditable="false" style="font-size:9.5px;color:var(--sub);margin-top:1px">→ 2M members by Year 3</div></div>
+    </div>
+
+    <table class="cf-table">
+      <thead>
+        <tr>
+          <th>Period</th>
+        <th>Ending<br>subscribers</th>
+        <th>Revenue</th>
+        <th>Operating<br>costs</th>
+        <th>Pre-tax<br>income</th>
+        <th>US tax<br>(≈ 28%)</th>
+        <th>Net income<br>after tax</th>
+        <th>Cumulative<br>after tax</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Year 1 <small>'26–'27</small></td>
+          <td>63,745</td>
+          <td>$969,804</td>
+          <td>$591,747</td>
+          <td class="pos">$378,057</td>
+          <td>$105,856</td>
+          <td class="pos">$272,201</td>
+          <td class="pos">$272,201</td>
+        </tr>
+        <tr>
+          <td>Year 2 <small>'27–'28</small></td>
+          <td>1,287,076</td>
+          <td>$25,754,867</td>
+          <td>$3,785,498</td>
+          <td class="pos">$21,969,370</td>
+          <td>$6,151,424</td>
+          <td class="pos">$15,817,946</td>
+          <td class="pos">$16,090,147</td>
+        </tr>
+        <tr>
+          <td>Year 3 <small>'28–'29</small></td>
+          <td>1,980,000</td>
+          <td>$88,980,597</td>
+          <td>$11,356,359</td>
+          <td class="pos">$77,624,238</td>
+          <td>$21,734,787</td>
+          <td class="pos">$55,889,451</td>
+          <td class="pos">$71,979,598</td>
+        </tr>
+        <tr>
+          <td>Year 4 <small>'29–'30</small></td>
+          <td>1,999,632</td>
+          <td>$102,867,741</td>
+          <td>$12,455,072</td>
+          <td class="pos">$90,412,669</td>
+          <td>$25,315,547</td>
+          <td class="pos">$65,097,121</td>
+          <td class="pos">$137,076,720</td>
+        </tr>
+        <tr>
+          <td>Year 5 <small>'30–'31</small></td>
+          <td>1,999,993</td>
+          <td>$108,231,852</td>
+          <td>$12,479,544</td>
+          <td class="pos">$95,752,309</td>
+          <td>$26,810,646</td>
+          <td class="pos">$68,941,662</td>
+          <td class="pos">$206,018,382</td>
+        </tr>
+        <tr>
+          <td>Year 6 <small>'31–'32</small></td>
+          <td>2,000,000</td>
+          <td>$113,647,689</td>
+          <td>$12,479,992</td>
+          <td class="pos">$101,167,697</td>
+          <td>$28,326,955</td>
+          <td class="pos">$72,840,742</td>
+          <td class="pos">$278,859,124</td>
+        </tr>
+        <tr>
+          <td>Year 7 <small>'32–'33</small></td>
+          <td>2,000,000</td>
+          <td>$119,330,155</td>
+          <td>$12,480,000</td>
+          <td class="pos">$106,850,155</td>
+          <td>$29,918,043</td>
+          <td class="pos">$76,932,112</td>
+          <td class="pos">$355,791,236</td>
+        </tr>
+        <tr>
+          <td>Year 8 <small>'33–'34</small></td>
+          <td>2,000,000</td>
+          <td>$125,296,664</td>
+          <td>$12,480,000</td>
+          <td class="pos">$112,816,664</td>
+          <td>$31,588,666</td>
+          <td class="pos">$81,227,998</td>
+          <td class="pos">$437,019,234</td>
+        </tr>
+        <tr>
+          <td>Year 9 <small>'34–'35</small></td>
+          <td>2,000,000</td>
+          <td>$131,561,497</td>
+          <td>$12,480,000</td>
+          <td class="pos">$119,081,497</td>
+          <td>$33,342,819</td>
+          <td class="pos">$85,738,678</td>
+          <td class="pos">$522,757,912</td>
+        </tr>
+        <tr>
+          <td>Year 10 <small>'35–'36</small></td>
+          <td>2,000,000</td>
+          <td>$138,139,572</td>
+          <td>$12,480,000</td>
+          <td class="pos">$125,659,572</td>
+          <td>$35,184,680</td>
+          <td class="pos">$90,474,892</td>
+          <td class="pos">$613,232,804</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <figure class="cf-chart" contenteditable="false" style="margin:11px 0 0;padding:0">
+      <figcaption style="font-family:var(--sans);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--sub);margin-bottom:4px">End-of-year members climbing toward the shared 2M ceiling</figcaption>
+      <svg viewBox="0 0 600 130" width="100%" preserveAspectRatio="none" style="display:block;height:auto;overflow:visible" role="img" aria-label="End-of-year members climbing toward the shared 2M ceiling">
+        <line x1="8" y1="12" x2="534" y2="12" stroke="var(--gold)" stroke-width="1" stroke-dasharray="4 3" opacity="0.8"></line>
+        <text x="540" y="15" font-family="var(--sans)" font-size="9" fill="var(--gold)">2M ceiling</text>
+        <path d="M8,112 L8,108.8 L66.4,47.6 L124.9,13 L183.3,12 L241.8,12 L300.2,12 L358.7,12 L417.1,12 L475.6,12 L534,12 L534,112 Z" fill="var(--red)" fill-opacity="0.08"></path>
+        <path d="M8,108.8 L66.4,47.6 L124.9,13 L183.3,12 L241.8,12 L300.2,12 L358.7,12 L417.1,12 L475.6,12 L534,12" fill="none" stroke="var(--red)" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></path>
+        <circle cx="8" cy="108.8" r="2.4" fill="var(--red)"></circle><circle cx="66.4" cy="47.6" r="2.4" fill="var(--red)"></circle><circle cx="124.9" cy="13" r="2.4" fill="var(--red)"></circle><circle cx="183.3" cy="12" r="2.4" fill="var(--red)"></circle><circle cx="241.8" cy="12" r="2.4" fill="var(--red)"></circle><circle cx="300.2" cy="12" r="2.4" fill="var(--red)"></circle><circle cx="358.7" cy="12" r="2.4" fill="var(--red)"></circle><circle cx="417.1" cy="12" r="2.4" fill="var(--red)"></circle><circle cx="475.6" cy="12" r="2.4" fill="var(--red)"></circle><circle cx="534" cy="12" r="2.4" fill="var(--red)"></circle>
+        <text x="8" y="126" font-family="var(--sans)" font-size="8.5" fill="var(--sub)">Yr 1</text>
+        <text x="534" y="126" font-family="var(--sans)" font-size="8.5" fill="var(--sub)" text-anchor="end">Yr 10</text>
+      </svg>
+    </figure>
+
+    <p class="cf-note" contenteditable="false"><strong>Assumptions</strong>: subscription $54/yr plus AI tier $4/mo, 5% annual price increase · 1.0% visitor→subscriber · 3% monthly churn · lean cost base of $40,000/mo plus AI usage per active subscriber · 3% payment fee. <strong>Tax:</strong> combined US rate of ≈ 28% (federal 21% + California 8.84%, deductible), loss carryforward from the start-up years. <strong>Only the paying-subscriber trajectory changes across the three scenarios</strong> — every pricing, cost, tax and revenue-split assumption is identical. Sign-ups follow a saturating adoption curve toward a shared ceiling of 2,000,000 members; the scenarios differ only in how fast they reach it. All figures are planning estimates in USD, not commitments.</p>
+
+    <div class="page-footer">
+      <span contenteditable="false">karan@palonur.com · In partnership with Stanford Lifestyle Medicine</span>
+      <span contenteditable="false">palonur.com</span>
+    </div>
+  </section>
+
+<script>
+  // ---------------------------------------------------------------------------
+  // SLM-facing version of the business plan. Self-contained, localStorage-only.
+  //   - Assumptions share the SAME store as the investor plan (kept in sync on
+  //     this browser); narrative text is stored under a separate key.
+  // ---------------------------------------------------------------------------
+  const ASSUME_KEY  = 'palonur-business-plan-assumptions';        // shared with investor plan
+  const CONTENT_KEY = 'palonur-business-plan-slm-content';        // SLM narrative only
+  const EDIT_FLAG   = 'palonur-business-plan-slm-edit';
+  const LAUNCH_YEAR = 2026, LAUNCH_MONTH = 6; // July (0-indexed)
+
+  // ---------- helpers ----------
+  function setIndicator(text, ok){
+    const ind = document.getElementById('save-indicator');
+    if (!ind) return;
+    ind.textContent = text;
+    ind.style.color = ok === false ? '#e26a6a' : '#7fbf7f';
+    ind.classList.add('show');
+    clearTimeout(setIndicator._t);
+    setIndicator._t = setTimeout(() => ind.classList.remove('show'), 2200);
+  }
+  function money(n){ n = Math.round(n||0); return n.toLocaleString('en-US'); }
+  function money2(n){ return (n||0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+  function num(n){ return Math.round(n||0).toLocaleString('en-US'); }
+  function monthLabel(i){
+    const d = new Date(LAUNCH_YEAR, LAUNCH_MONTH + i, 1);
+    return d.toLocaleString('en-US',{month:'short', year:'2-digit'});
+  }
+  function setOut(name, value){
+    document.querySelectorAll('[data-out="'+name+'"]').forEach(el => { el.textContent = value; });
+  }
+
+  // ---------- model ----------
+  function readAssumptions(){
+    const a = {};
+    document.querySelectorAll('[data-assume]').forEach(inp => {
+      const v = parseFloat(inp.value);
+      a[inp.dataset.assume] = isNaN(v) ? 0 : v;
+    });
+    // Per-year Palonur-share overrides: blank ("auto") = null = fall back to the
+    // recovery-based split. Read raw so blank is preserved (not coerced to 0).
+    a.palYears = [];
+    for (let i = 1; i <= 10; i++){
+      const el = document.querySelector('[data-assume="palYear'+i+'"]');
+      const raw = el ? String(el.value).trim() : '';
+      if (raw === ''){ a.palYears[i-1] = null; continue; }
+      const n = parseFloat(raw);
+      a.palYears[i-1] = isNaN(n) ? null : Math.max(0, Math.min(100, n));
+    }
+    return a;
+  }
+
+  function computeModel(a){
+    const horizon = Math.max(1, Math.min(120, Math.round(a.horizon || 36)));
+    const conv    = (a.convRate || 0) / 100;
+    const growth  = (a.monthlyGrowth || 0) / 100;
+    const churn   = (a.churn || 0) / 100;
+    const palShareRec   = (a.palonurSplit || 0) / 100;
+    const palShareAfter = (a.palonurSplitAfter || 0) / 100;
+    const fee     = Math.max(0, Math.min(100, a.processingFee || 0)) / 100;
+    const monthlyPrice = (a.priceAnnual || 0) / 12 + (a.aiTierMonthly || 0);
+    const priceInc = Math.max(0, a.priceIncrease || 0) / 100;
+    const facReimbPct  = Math.max(0, a.facultyReimbursePct || 0) / 100;
+    const baseNew = (a.visitors || 0) * conv;
+
+    const rows = [];
+    let cumSubs = 0, cumCash = 0, cumRev = 0, cumGift = 0, cumFacReimb = 0, cumCost = 0;
+    let peak = 0, breakEven = -1, recovered = false;
+
+    for (let m = 0; m < horizon; m++){
+      const newSubs = baseNew * Math.pow(1 + growth, m);
+      cumSubs = cumSubs * (1 - churn) + newSubs;
+      const monthPrice = monthlyPrice * Math.pow(1 + priceInc, Math.floor(m / 12));
+      const subRev = cumSubs * monthPrice;
+      const netRev = subRev * (1 - fee);
+      // Per-year override wins; otherwise the recovery-based step-down applies.
+      const yOverride = (a.palYears && a.palYears[Math.floor(m / 12)] != null)
+        ? a.palYears[Math.floor(m / 12)] / 100
+        : null;
+      const palShare = yOverride != null ? yOverride : (recovered ? palShareAfter : palShareRec);
+      const palRev = netRev * palShare;
+      const slmRev = netRev * (1 - palShare);
+      const facReimb = subRev * facReimbPct;
+      const varCost = cumSubs * (a.aiCostPerActive || 0);
+      const cost = (a.costMonthly || 0) + varCost;
+      const palNet = palRev - cost;
+      cumCash += palNet;
+      cumRev += subRev;
+      cumGift += slmRev;
+      cumFacReimb += facReimb;
+      cumCost += cost;
+      if (cumCash < peak) peak = cumCash;
+      if (!recovered && cumCash >= 0){ breakEven = m; recovered = true; }
+
+      rows.push({ m, newSubs, cumSubs, subRev, netRev, palShare, palRev, slmRev, facReimb, cost, palNet, cumCash, cumCost, cumGift });
+    }
+    return { rows, horizon, monthlyPrice, palShareRec, palShareAfter, fee, cumRev, cumGift, cumCost, cumFacReimb,
+             peakCapital: -peak, breakEven, endCash: cumCash, endSubs: cumSubs };
+  }
+
+  function annualBuckets(rows){
+    const years = [];
+    for (let i = 0; i < rows.length; i += 12){
+      const slice = rows.slice(i, i + 12);
+      const last = slice[slice.length - 1];
+      years.push({
+        year: (i / 12) + 1,
+        endSubs: last.cumSubs,
+        subRev: slice.reduce((s, r) => s + r.subRev, 0),
+        netRev: slice.reduce((s, r) => s + r.netRev, 0),
+        palRev: slice.reduce((s, r) => s + r.palRev, 0),
+        slmRev: slice.reduce((s, r) => s + r.slmRev, 0),
+        facReimb: slice.reduce((s, r) => s + r.facReimb, 0),
+        cost:   slice.reduce((s, r) => s + r.cost, 0),
+        cumCost: last.cumCost,
+        palNet: slice.reduce((s, r) => s + r.palNet, 0),
+        endCash: last.cumCash,
+        startMonth: i, endMonth: i + slice.length - 1
+      });
+    }
+    return years;
+  }
+
+  // ---------- render ----------
+  let MODEL = null, YEARS = null;
+
+  function render(){
+    const a = readAssumptions();
+    const model = computeModel(a);
+    const years = annualBuckets(model.rows);
+    MODEL = model; YEARS = years;
+
+    // Only show per-year split overrides for years inside the horizon.
+    const nYears = Math.ceil(model.horizon / 12);
+    document.querySelectorAll('#palyear-grid .palyear').forEach(el => {
+      el.style.display = parseInt(el.dataset.year, 10) <= nYears ? '' : 'none';
+    });
+
+    // price hero
+    setOut('monthlyPrice', money2(model.monthlyPrice));
+    setOut('monthlyPrice2', money2(model.monthlyPrice));
+    setOut('annualPerSub', money(model.monthlyPrice * 12));
+    setOut('annualPlanShown', money(a.priceAnnual));
+    setOut('annualPlanMonthly', money2((a.priceAnnual || 0) / 12));
+    setOut('aiTierShown', money2(a.aiTierMonthly));
+
+    // split + costs
+    setOut('costMonthlyShown', money(a.costMonthly));
+    const palRec = Math.round(a.palonurSplit), palAft = Math.round(a.palonurSplitAfter);
+    setOut('palShareRec', palRec);
+    setOut('slmShareRec', 100 - palRec);
+    setOut('palShareAfter', palAft);
+    setOut('slmShareAfter', 100 - palAft);
+    syncPresetButtons(palRec, palAft);
+
+    // faculty reimbursement
+    setOut('facReimbPctShown', (a.facultyReimbursePct || 0));
+    setOut('cumFacReimb', money(model.cumFacReimb));
+
+    // cumulative cards
+    setOut('cumRev', money(model.cumRev));
+    setOut('cumGift', money(model.cumGift));
+
+    // cost-page cards
+    setOut('cumGiftCost', money(model.cumGift));
+    setOut('cumCostShown', money(model.cumCost));
+
+    // revenue & sharing (annual)
+    const rsb = document.getElementById('rev-share-body');
+    if (rsb) rsb.innerHTML = years.map(y => {
+      const pct = y.netRev > 0 ? Math.round((y.palRev / y.netRev) * 100) : 0;
+      return '<tr>' +
+        '<td>Year ' + y.year + '</td>' +
+        '<td>' + num(y.endSubs) + '</td>' +
+        '<td>' + pct + '% / ' + (100 - pct) + '%</td>' +
+        '<td>$' + money(y.subRev) + '</td>' +
+        '<td>$' + money(y.palRev) + '</td>' +
+        '<td>$' + money(y.slmRev) + '</td>' +
+        '<td>$' + money(y.facReimb) + '</td>' +
+      '</tr>';
+    }).join('');
+
+    // costs (annual)
+    const cb = document.getElementById('cost-body');
+    if (cb) cb.innerHTML = years.map(y =>
+      '<tr>' +
+        '<td>Year ' + y.year + '</td>' +
+        '<td>' + num(y.endSubs) + '</td>' +
+        '<td>$' + money(y.cost) + '</td>' +
+        '<td>$' + money(y.cumCost) + '</td>' +
+      '</tr>'
+    ).join('');
+
+    // month-by-month projection
+    const pb = document.getElementById('proj-body');
+    if (pb) pb.innerHTML = model.rows.map(r => {
+      const yearEnd = ((r.m + 1) % 12 === 0);
+      return '<tr class="' + (yearEnd ? 'yr-end' : '') + '">' +
+        '<td>' + monthLabel(r.m) + '</td>' +
+        '<td>' + num(r.newSubs) + '</td>' +
+        '<td>' + num(r.cumSubs) + '</td>' +
+        '<td>$' + money(r.subRev) + '</td>' +
+        '<td>$' + money(r.netRev) + '</td>' +
+        '<td>$' + money(r.palRev) + '</td>' +
+        '<td>$' + money(r.slmRev) + '</td>' +
+        '<td>$' + money(r.facReimb) + '</td>' +
+        '<td>$' + money(r.cost) + '</td>' +
+        '<td class="' + (r.palNet >= 0 ? 'pos' : 'neg') + '">$' + money(r.palNet) + '</td>' +
+        '<td class="' + (r.cumCash >= 0 ? 'pos' : 'neg') + '">$' + money(r.cumCash) + '</td>' +
+        '<td>$' + money(r.cumCost) + '</td>' +
+        '<td>$' + money(r.cumGift) + '</td>' +
+      '</tr>';
+    }).join('');
+  }
+
+  // ---------- assumptions persistence ----------
+  function saveAssumptions(){
+    const a = {};
+    document.querySelectorAll('[data-assume]').forEach(inp => { a[inp.dataset.assume] = inp.value; });
+    try { localStorage.setItem(ASSUME_KEY, JSON.stringify(a)); setIndicator('Saved in this browser', true); }
+    catch(e){ setIndicator('Save failed (storage full?)', false); }
+  }
+  function loadAssumptions(){
+    try {
+      const raw = localStorage.getItem(ASSUME_KEY);
+      if (!raw) return;
+      const a = JSON.parse(raw);
+      document.querySelectorAll('[data-assume]').forEach(inp => {
+        if (a[inp.dataset.assume] !== undefined) inp.value = a[inp.dataset.assume];
+      });
+    } catch(e){}
+  }
+
+  // ---------- narrative persistence ----------
+  function assignEditIds(){
+    let i = 0;
+    document.querySelectorAll('.ed').forEach(el => {
+      if (el.dataset.eid) return;
+      el.dataset.eid = 'e' + i; i++;
+    });
+  }
+  function saveNarrative(){
+    const map = {};
+    document.querySelectorAll('.ed').forEach(el => { map[el.dataset.eid] = el.innerHTML; });
+    try { localStorage.setItem(CONTENT_KEY, JSON.stringify(map)); setIndicator('Saved in this browser', true); }
+    catch(e){ setIndicator('Save failed (storage full?)', false); }
+  }
+  function loadNarrative(){
+    try {
+      const raw = localStorage.getItem(CONTENT_KEY);
+      if (!raw) return;
+      const map = JSON.parse(raw);
+      document.querySelectorAll('.ed').forEach(el => {
+        if (map[el.dataset.eid] !== undefined) el.innerHTML = map[el.dataset.eid];
+      });
+    } catch(e){}
+  }
+
+  // ---------- edit mode ----------
+  function isEditMode(){ return !!sessionStorage.getItem(EDIT_FLAG); }
+  function refreshEditAffordances(){
+    const editing = isEditMode();
+    const btn = document.getElementById('edit-mode-btn');
+    if (btn) btn.textContent = editing ? 'Text editing on · click to exit' : 'Enable text editing';
+    document.querySelectorAll('.ed').forEach(el => {
+      if (editing) el.setAttribute('contenteditable','true');
+      else el.removeAttribute('contenteditable');
+    });
+  }
+  function toggleEditMode(){
+    if (isEditMode()){ sessionStorage.removeItem(EDIT_FLAG); refreshEditAffordances(); setIndicator('Text editing off', true); return; }
+    sessionStorage.setItem(EDIT_FLAG, '1'); refreshEditAffordances();
+    setIndicator('Text editing enabled · saved in this browser', true);
+  }
+
+  // ---------- revenue-share presets ----------
+  function applyPreset(rec, after){
+    const a = document.querySelector('[data-assume="palonurSplit"]');
+    const b = document.querySelector('[data-assume="palonurSplitAfter"]');
+    if (a) a.value = rec;
+    if (b) b.value = after;
+    render(); saveAssumptions();
+    setIndicator('Revenue-share scenario applied · ' + rec + ' → ' + after, true);
+  }
+  function syncPresetButtons(rec, after){
+    document.querySelectorAll('.preset[data-preset]').forEach(btn => {
+      const [r, f] = btn.dataset.preset.split(',').map(Number);
+      btn.classList.toggle('active', r === rec && f === after);
+    });
+  }
+
+  // ---------- CSV export ----------
+  function downloadCSV(){
+    if (!MODEL) render();
+    const a = readAssumptions();
+    const rowsCsv = [];
+    const esc = v => '"' + String(v).replace(/"/g,'""') + '"';
+
+    rowsCsv.push(['Palonur × SLM — Partnership Plan — Financial Model']);
+    rowsCsv.push(['Generated', new Date().toISOString()]);
+    rowsCsv.push(['Note','Planning estimates only. Launch month: July 2026.']);
+    rowsCsv.push([]);
+    rowsCsv.push(['ASSUMPTIONS']);
+    const labels = {
+      priceAnnual:'Annual subscription plan ($/yr)', aiTierMonthly:'AI usage tier ($/mo)', priceIncrease:'Annual price increase (%)',
+      visitors:'Monthly SLM visitors', convRate:'Visitor->subscriber conversion (%)',
+      monthlyGrowth:'Monthly growth in new sign-ups (%)', churn:'Monthly churn (%)',
+      palonurSplit:'Palonur revenue share — during recovery (%)', palonurSplitAfter:'Palonur revenue share — after recovery (%)', facultyReimbursePct:'Faculty reimbursement (% of gross revenue)', processingFee:'Payment processing fee (%)', costMonthly:'Palonur cost base ($/mo)',
+      aiCostPerActive:'AI usage cost per active subscriber ($/mo)', horizon:'Projection horizon (months)'
+    };
+    Object.keys(labels).forEach(k => rowsCsv.push([labels[k], a[k]]));
+    (a.palYears || []).forEach((v, i) => { if (v != null) rowsCsv.push(['Palonur share override — Year ' + (i + 1) + ' (%)', v]); });
+    rowsCsv.push(['Blended price per subscriber ($/mo)', (MODEL.monthlyPrice).toFixed(2)]);
+    rowsCsv.push([]);
+    rowsCsv.push(['MONTH-BY-MONTH PROJECTION']);
+    rowsCsv.push(['Month','New subscribers','Cumulative subscribers','Subscription revenue','Net revenue (after fee)','Palonur share','SLM share (year-end gift)','Faculty reimbursement','Monthly cost','Net cash flow','Cumulative cash','Cumulative cost','Cumulative SLM gift']);
+    MODEL.rows.forEach(r => rowsCsv.push([
+      monthLabel(r.m), Math.round(r.newSubs), Math.round(r.cumSubs),
+      Math.round(r.subRev), Math.round(r.netRev), Math.round(r.palRev), Math.round(r.slmRev), Math.round(r.facReimb),
+      Math.round(r.cost), Math.round(r.palNet), Math.round(r.cumCash), Math.round(r.cumCost), Math.round(r.cumGift)
+    ]));
+    rowsCsv.push([]);
+    rowsCsv.push(['ANNUAL SUMMARY']);
+    rowsCsv.push(['Year','Ending subscribers','Palonur/SLM split (%)','Subscription revenue','Palonur share','SLM gift','Faculty reimbursement','Cost','Cumulative cost']);
+    YEARS.forEach(y => {
+      const pct = y.netRev > 0 ? Math.round((y.palRev / y.netRev) * 100) : 0;
+      rowsCsv.push([
+        'Year ' + y.year, Math.round(y.endSubs), pct + '/' + (100 - pct), Math.round(y.subRev), Math.round(y.palRev),
+        Math.round(y.slmRev), Math.round(y.facReimb), Math.round(y.cost), Math.round(y.cumCost)
+      ]);
+    });
+    rowsCsv.push([]);
+    rowsCsv.push(['KEY OUTPUTS']);
+    rowsCsv.push(['Ending subscribers', Math.round(MODEL.endSubs)]);
+    rowsCsv.push(['Cumulative subscription revenue', Math.round(MODEL.cumRev)]);
+    rowsCsv.push(['Cumulative SLM gift', Math.round(MODEL.cumGift)]);
+    rowsCsv.push(['Cumulative faculty reimbursement', Math.round(MODEL.cumFacReimb)]);
+    rowsCsv.push(['Cumulative operating cost', Math.round(MODEL.cumCost)]);
+
+    const csv = rowsCsv.map(row => row.map(esc).join(',')).join('\r\n');
+    const blob = new Blob([csv], { type:'text/csv;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url; link.download = 'palonur_slm_partnership_financial_model.csv';
+    document.body.appendChild(link); link.click(); link.remove();
+    URL.revokeObjectURL(url);
+    setIndicator('CSV downloaded', true);
+  }
+
+  // ---------- HTML export ----------
+  function saveHTML(){
+    const clone = document.documentElement.cloneNode(true);
+    clone.querySelectorAll('.toolbar, #save-indicator, #bp-collab, #bp-join, #bp-panel, #bp-history, .bp-cbtn, .bp-attr, #bp-collab-style, #proj-tip').forEach(n => n.remove());
+    clone.querySelectorAll('[contenteditable]').forEach(n => n.removeAttribute('contenteditable'));
+    clone.querySelectorAll('table.proj th[data-tip]').forEach(th => { th.removeAttribute('data-tip'); th.removeAttribute('tabindex'); });
+    const gateClone = clone.querySelector('#pw-gate');
+    if (gateClone) gateClone.style.removeProperty('display');
+    const liveInputs = document.querySelectorAll('[data-assume]');
+    clone.querySelectorAll('[data-assume]').forEach((inp, i) => {
+      if (liveInputs[i]) inp.setAttribute('value', liveInputs[i].value);
+    });
+    const html = '<!doctype html>\n' + clone.outerHTML;
+    const blob = new Blob([html], { type:'text/html' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'palonur_slm_partnership_plan.html';
+    document.body.appendChild(a); a.click(); a.remove();
+    URL.revokeObjectURL(url);
+    setIndicator('HTML downloaded', true);
+  }
+
+  function resetAll(){
+    if (!confirm('Reset this plan to its original assumptions and text? This clears edits saved in THIS browser (assumptions are shared with the investor plan).')) return;
+    localStorage.removeItem(ASSUME_KEY);
+    localStorage.removeItem(CONTENT_KEY);
+    location.reload();
+  }
+
+  // ---------- password gate (soft, client-side; case-insensitive) ----------
+  const PW_HASH = '2379340481082047';
+  const PW_UNLOCK_KEY = 'palonur-bp-unlocked';
+  function pwHash(str){
+    let h1 = 0xdeadbeef, h2 = 0x41c6ce57;
+    for (let i = 0, ch; i < str.length; i++){
+      ch = str.charCodeAt(i);
+      h1 = Math.imul(h1 ^ ch, 2654435761);
+      h2 = Math.imul(h2 ^ ch, 1597334677);
+    }
+    h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507); h1 ^= Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+    h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507); h2 ^= Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+    return (4294967296 * (2097151 & h2) + (h1 >>> 0)).toString();
+  }
+  function unlockDoc(){
+    const g = document.getElementById('pw-gate');
+    if (g) g.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+  function initGate(){
+    const gate = document.getElementById('pw-gate');
+    if (!gate) return;
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('print') === '1' || sessionStorage.getItem(PW_UNLOCK_KEY) === '1'){ unlockDoc(); return; }
+    document.body.style.overflow = 'hidden';
+    const form  = document.getElementById('pw-form');
+    const input = document.getElementById('pw-input');
+    const err   = document.getElementById('pw-error');
+    if (form) form.addEventListener('submit', e => {
+      e.preventDefault();
+      const val = (input && input.value ? input.value : '').trim().toLowerCase();
+      if (pwHash(val) === PW_HASH){
+        try { sessionStorage.setItem(PW_UNLOCK_KEY, '1'); } catch(_){}
+        unlockDoc();
+      } else {
+        if (err) err.classList.add('show');
+        if (input){ input.value = ''; input.focus(); }
+      }
+    });
+    if (input) input.focus();
+  }
+
+  // ---------- column explainer tooltips (projection table) ----------
+  function initColumnTips(){
+    const table = document.querySelector('table.proj');
+    if (!table || !table.tHead) return;
+    const ths = Array.from(table.tHead.querySelectorAll('th'));
+    const tip = document.createElement('div');
+    tip.id = 'proj-tip';
+    tip.setAttribute('role', 'tooltip');
+    tip.innerHTML = '<span class="t-label"></span><span class="t-def"></span>';
+    const labelEl = tip.querySelector('.t-label');
+    const defEl = tip.querySelector('.t-def');
+    document.body.appendChild(tip);
+    let activeEl = null;
+
+    function infoFor(cell){
+      if (!cell) return null;
+      if (cell.tagName === 'TH' && cell.dataset.tip) return { label: cell.textContent.trim(), def: cell.dataset.tip };
+      if (cell.tagName === 'TD'){
+        const th = ths[cell.cellIndex];
+        if (th && th.dataset.tip) return { label: th.textContent.trim(), def: th.dataset.tip };
+      }
+      return null;
+    }
+    function position(el){
+      const r = el.getBoundingClientRect();
+      const tr = tip.getBoundingClientRect();
+      const docW = document.documentElement.clientWidth;
+      let left = r.left + r.width / 2 - tr.width / 2 + window.scrollX;
+      left = Math.max(8 + window.scrollX, Math.min(left, window.scrollX + docW - tr.width - 8));
+      let top = r.bottom + 8 + window.scrollY;
+      if (r.bottom + 8 + tr.height > window.innerHeight && r.top - 8 - tr.height > 0){
+        top = r.top - 8 - tr.height + window.scrollY;
+      }
+      tip.style.left = left + 'px';
+      tip.style.top = top + 'px';
+    }
+    function show(cell){
+      const info = infoFor(cell);
+      if (!info){ hide(); return; }
+      activeEl = cell;
+      labelEl.textContent = info.label;
+      defEl.textContent = info.def;
+      tip.classList.add('show');
+      position(cell);
+    }
+    function hide(){ activeEl = null; tip.classList.remove('show'); }
+
+    table.addEventListener('mouseover', (e) => { const c = e.target.closest('th,td'); if (c) show(c); });
+    table.addEventListener('mouseout', (e) => { if (!e.relatedTarget || !table.contains(e.relatedTarget)) hide(); });
+    table.addEventListener('focusin', (e) => { const c = e.target.closest('th,td'); if (c) show(c); });
+    table.addEventListener('focusout', () => hide());
+    table.addEventListener('click', (e) => {
+      const c = e.target.closest('th,td');
+      if (!c) return;
+      if (activeEl === c) hide(); else show(c);
+    });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') hide(); });
+    window.addEventListener('scroll', () => { if (activeEl) position(activeEl); }, true);
+    window.addEventListener('resize', () => { if (activeEl) position(activeEl); });
+  }
+
+  // ---------- boot ----------
+  document.getElementById('pdf-btn').addEventListener('click', function(e){
+    e.preventDefault();
+    const w = window.open('/business-plan-slm.html?print=1', '_blank', 'noopener');
+    if (!w) { alert('Popup blocked — allow popups, then use Download PDF again.'); }
+  });
+
+  window.addEventListener('DOMContentLoaded', async () => {
+    initGate();
+    assignEditIds();
+    loadAssumptions();
+    loadNarrative();
+    render();
+    refreshEditAffordances();
+
+    document.querySelectorAll('[data-assume]').forEach(inp => {
+      inp.addEventListener('input', () => { render(); saveAssumptions(); });
+    });
+    document.addEventListener('input', (e) => {
+      if (isEditMode() && e.target.closest && e.target.closest('.ed')) saveNarrative();
+    }, true);
+
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('print') !== '1') initColumnTips();
+    if (params.get('print') === '1'){
+      document.querySelectorAll('.toolbar, #save-indicator').forEach(n => n.remove());
+      document.querySelectorAll('[contenteditable]').forEach(n => n.removeAttribute('contenteditable'));
+      try { if (document.fonts && document.fonts.ready) await document.fonts.ready; } catch(_){}
+      setTimeout(() => { try { window.focus(); window.print(); } catch(_){} }, 450);
+    }
+  });
+</script>
+
+<!-- ====================================================================== -->
+<!-- Collaboration layer: shared server state + per-field attribution +     -->
+<!-- section-anchored async chat (Karan + Ernesto). Classic script so it    -->
+<!-- can reuse render()/saveAssumptions()/saveNarrative() from above.       -->
+<!-- ====================================================================== -->
+<script>
+(function(){
+  const API = '/api/business-plan';
+  const SS_AUTHOR = 'palonur-bp-collab-author';
+  const SS_PW     = 'palonur-bp-collab-pw';
+
+  // Skip the entire layer in print/PDF mode so exports stay clean.
+  const _params = new URLSearchParams(window.location.search);
+  if (_params.get('print') === '1') return;
+
+  const BP = {
+    author: null, password: null, joined: false,
+    meta: { assumptionsMeta:{}, narrativeMeta:{}, updatedBy:null, updatedAt:null },
+    comments: [], activeSection: null, pollId: null, pushTimer: null,
+    // Keys edited locally since the last successful push. Only these are sent
+    // (field-level sync) and they are never overwritten by a background pull.
+    dirtyAssume: new Set(), dirtyNarr: new Set()
+  };
+
+  function authorColor(name){ return name === 'Ernesto' ? '#1f6f8b' : '#8C1515'; }
+  function esc(s){ return (s==null?'':String(s)).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+  function timeAgo(iso){
+    if (!iso) return '';
+    const t = new Date(iso).getTime();
+    if (isNaN(t)) return '';
+    const s = Math.max(0, (Date.now() - t) / 1000);
+    if (s < 60) return 'just now';
+    if (s < 3600) return Math.floor(s/60) + 'm ago';
+    if (s < 86400) return Math.floor(s/3600) + 'h ago';
+    return Math.floor(s/86400) + 'd ago';
+  }
+  function headers(extra){
+    return Object.assign({
+      'x-bp-password': BP.password || '',
+      'x-bp-author': BP.author || ''
+    }, extra || {});
+  }
+
+  // ---------- styles ----------
+  function injectStyles(){
+    const css = `
+    #bp-collab-btn.joined{ border-color:#8C1515; }
+    #bp-collab-dot{ display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:6px; vertical-align:middle; }
+    .bp-cbtn{ position:absolute; top:8px; right:8px; z-index:5; display:inline-flex; align-items:center; gap:4px;
+      font:600 11px/1 system-ui,sans-serif; color:#8a6a5a; background:rgba(255,255,255,.85); border:1px solid #E8DDD0;
+      border-radius:999px; padding:4px 8px; cursor:pointer; opacity:.45; transition:opacity .15s, border-color .15s; }
+    .bp-cbtn:hover{ opacity:1; }
+    .bp-cbtn.has{ opacity:1; border-color:#c9a227; color:#7a5b12; background:#fff8e6; }
+    .bp-cbtn .n{ font-weight:700; }
+    .bp-host{ position:relative; }
+    .bp-attr{ display:block; margin-top:4px; font:500 10.5px/1.3 system-ui,sans-serif; opacity:.85; }
+    .bp-edited{ box-shadow: inset 2px 0 0 var(--bpc,#8C1515); border-radius:1px; }
+    .bp-edited[data-bp-by="Ernesto"]{ --bpc:#1f6f8b; }
+    .bp-edited[data-bp-by="Karan"]{ --bpc:#8C1515; }
+
+    .bp-overlay{ position:fixed; inset:0; background:rgba(20,12,8,.45); z-index:9998; display:none; }
+    .bp-overlay.open{ display:block; }
+    #bp-join .card{ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:340px; max-width:92vw;
+      background:#FBF7F0; border:1px solid #E8DDD0; border-radius:14px; padding:22px; box-shadow:0 20px 60px rgba(0,0,0,.3);
+      font-family:system-ui,sans-serif; color:#572020; }
+    #bp-join h3{ margin:0 0 4px; font:700 18px/1.2 Georgia,serif; }
+    #bp-join p{ margin:0 0 14px; font-size:12.5px; color:#8a6a5a; }
+    .bp-who{ display:flex; gap:8px; margin-bottom:12px; }
+    .bp-who button{ flex:1; padding:10px; border-radius:9px; border:1.5px solid #E8DDD0; background:#fff; cursor:pointer;
+      font:600 14px system-ui,sans-serif; color:#572020; }
+    .bp-who button.sel{ border-color:#8C1515; background:#fff3f1; }
+    #bp-join input{ width:100%; box-sizing:border-box; padding:10px; border:1px solid #E8DDD0; border-radius:9px; font-size:14px; margin-bottom:12px; }
+    #bp-join .go{ width:100%; padding:11px; border:none; border-radius:9px; background:#8C1515; color:#fff; font:700 14px system-ui; cursor:pointer; }
+    #bp-join .go:hover{ background:#a01a1a; }
+    #bp-join .err{ color:#E8352A; font-size:12px; min-height:16px; margin-top:8px; }
+    #bp-join .leave{ margin-top:12px; text-align:center; }
+    #bp-join .leave button{ background:none; border:none; color:#8a6a5a; font-size:12px; cursor:pointer; text-decoration:underline; }
+
+    #bp-panel{ position:fixed; top:0; right:0; height:100vh; width:370px; max-width:94vw; background:#FBF7F0;
+      border-left:1px solid #E8DDD0; box-shadow:-12px 0 40px rgba(0,0,0,.18); z-index:9997; transform:translateX(102%);
+      transition:transform .22s ease; display:flex; flex-direction:column; font-family:system-ui,sans-serif; color:#572020; }
+    #bp-panel.open{ transform:translateX(0); }
+    #bp-panel header{ padding:14px 16px; border-bottom:1px solid #E8DDD0; display:flex; align-items:center; gap:8px; }
+    #bp-panel header .ttl{ font:700 14px system-ui; flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    #bp-panel header button{ background:none; border:none; cursor:pointer; color:#8a6a5a; font-size:13px; }
+    #bp-back{ font-weight:600; }
+    #bp-body{ flex:1; overflow-y:auto; padding:12px 16px; }
+    .bp-sec-row{ padding:11px 12px; border:1px solid #E8DDD0; border-radius:10px; background:#fff; margin-bottom:8px; cursor:pointer; }
+    .bp-sec-row:hover{ border-color:#c9a227; }
+    .bp-sec-row .lab{ font-weight:600; font-size:13px; }
+    .bp-sec-row .sub{ font-size:11.5px; color:#8a6a5a; margin-top:3px; }
+    .bp-sec-row .badge{ float:right; background:#fff8e6; color:#7a5b12; border:1px solid #c9a227; border-radius:999px; padding:1px 8px; font-size:11px; font-weight:700; }
+    .bp-msg{ margin-bottom:12px; }
+    .bp-msg.res{ opacity:.5; }
+    .bp-msg .who{ font-weight:700; font-size:12.5px; }
+    .bp-msg .when{ font-size:11px; color:#8a6a5a; margin-left:6px; }
+    .bp-msg .txt{ font-size:13px; line-height:1.45; margin-top:3px; white-space:pre-wrap; word-wrap:break-word; }
+    .bp-msg .acts{ margin-top:4px; }
+    .bp-msg .acts button{ background:none; border:none; color:#8a6a5a; font-size:11px; cursor:pointer; text-decoration:underline; padding:0; }
+    .bp-empty{ color:#8a6a5a; font-size:12.5px; text-align:center; padding:24px 8px; }
+    #bp-compose{ border-top:1px solid #E8DDD0; padding:10px 16px; }
+    #bp-compose textarea{ width:100%; box-sizing:border-box; min-height:60px; resize:vertical; padding:8px; border:1px solid #E8DDD0; border-radius:8px; font:13px system-ui; }
+    #bp-compose .row{ display:flex; justify-content:space-between; align-items:center; margin-top:6px; }
+    #bp-compose .row .hint{ font-size:11px; color:#8a6a5a; }
+    #bp-compose button{ background:#8C1515; color:#fff; border:none; border-radius:8px; padding:8px 16px; font:600 13px system-ui; cursor:pointer; }
+    #bp-foot{ border-top:1px solid #E8DDD0; padding:8px 16px; font-size:11px; color:#8a6a5a; display:flex; justify-content:space-between; align-items:center; }
+    #bp-foot button{ background:none; border:none; color:#8C1515; font-size:11px; cursor:pointer; text-decoration:underline; }
+
+    #bp-history{ position:fixed; top:52px; right:16px; width:344px; max-width:92vw; max-height:72vh; display:none; flex-direction:column;
+      background:#FBF7F0; border:1px solid #E8DDD0; border-radius:12px; box-shadow:0 18px 50px rgba(0,0,0,.28); z-index:9996;
+      font-family:system-ui,sans-serif; color:#572020; overflow:hidden; }
+    #bp-history.open{ display:flex; }
+    #bp-history header{ padding:12px 14px; border-bottom:1px solid #E8DDD0; display:flex; align-items:center; gap:8px; }
+    #bp-history header .ttl{ font:700 13px system-ui; flex:1; }
+    #bp-history header button{ background:none; border:none; cursor:pointer; color:#8a6a5a; font-size:14px; line-height:1; }
+    #bp-history .list{ overflow-y:auto; padding:4px 0; }
+    .bp-hrow{ padding:8px 14px; border-bottom:1px solid #f0e8dc; }
+    .bp-hrow:last-child{ border-bottom:none; }
+    .bp-hrow .lab{ font-size:12.5px; line-height:1.35; color:#572020; }
+    .bp-hrow .meta{ font-size:11px; margin-top:2px; font-weight:600; }
+    .bp-hempty{ color:#8a6a5a; font-size:12.5px; text-align:center; padding:22px 12px; }
+    @media print { #bp-collab, #bp-join, #bp-panel, #bp-history, .bp-cbtn, .bp-attr { display:none !important; } .bp-edited{ box-shadow:none !important; } }
+    `;
+    const st = document.createElement('style');
+    st.id = 'bp-collab-style';
+    st.textContent = css;
+    document.head.appendChild(st);
+  }
+
+  // ---------- section anchoring ----------
+  function sectionLabel(unit){
+    const h = unit.querySelector('h2, .glabel, .eyebrow, h1');
+    const t = (h ? h.textContent : '').replace(/\s+/g,' ').trim();
+    return t ? t.slice(0,120) : 'Section';
+  }
+  function assignSections(){
+    const units = document.querySelectorAll('.block, .band, .assume-group');
+    let i = 0;
+    units.forEach(unit => {
+      const id = 'bs' + i; i++;
+      unit.dataset.bpSection = id;
+      unit.classList.add('bp-host');
+      const btn = document.createElement('button');
+      btn.className = 'bp-cbtn';
+      btn.dataset.bpSection = id;
+      btn.type = 'button';
+      btn.innerHTML = '<span>\uD83D\uDCAC</span><span class="n"></span>';
+      btn.title = 'Discuss this section';
+      btn.addEventListener('click', (e) => {
+        e.preventDefault(); e.stopPropagation();
+        if (!BP.joined){ openJoin(); return; }
+        openSection(id);
+      });
+      unit.appendChild(btn);
+    });
+  }
+  function sectionLabelById(id){
+    const unit = document.querySelector('[data-bp-section="'+CSS.escape(id)+'"].bp-host');
+    return unit ? sectionLabel(unit) : id;
+  }
+
+  // ---------- attribution rendering ----------
+  function renderAttribution(){
+    const am = BP.meta.assumptionsMeta || {};
+    document.querySelectorAll('[data-assume]').forEach(inp => {
+      const host = inp.closest('.assume') || inp.parentElement;
+      if (!host) return;
+      let tag = host.querySelector(':scope > .bp-attr');
+      const m = am[inp.dataset.assume];
+      if (m){
+        if (!tag){ tag = document.createElement('span'); tag.className = 'bp-attr'; host.appendChild(tag); }
+        tag.style.color = authorColor(m.by);
+        tag.textContent = 'edited by ' + m.by + ' \u00B7 ' + timeAgo(m.at);
+      } else if (tag){ tag.remove(); }
+    });
+    const nm = BP.meta.narrativeMeta || {};
+    document.querySelectorAll('.ed[data-eid]').forEach(el => {
+      const m = nm[el.dataset.eid];
+      if (m){
+        el.classList.add('bp-edited');
+        el.dataset.bpBy = m.by;
+        el.title = 'Edited by ' + m.by + ' \u00B7 ' + timeAgo(m.at);
+      } else {
+        el.classList.remove('bp-edited');
+        delete el.dataset.bpBy;
+        if (el.title && /^Edited by /.test(el.title)) el.removeAttribute('title');
+      }
+    });
+    renderVersionLine();
+    if (historyOpen()) renderHistory();
+  }
+
+  // Latest-version line in the toolbar: when + who made the most recent change.
+  function renderVersionLine(){
+    const el = document.getElementById('bp-version');
+    if (!el) return;
+    const by = BP.meta.updatedBy, at = BP.meta.updatedAt;
+    if (by && at){
+      el.textContent = 'Latest version · updated ' + timeAgo(at) + ' by ' + by;
+      el.style.color = authorColor(by);
+      try { el.title = 'Last changed ' + new Date(at).toLocaleString(); } catch(_){}
+    } else {
+      el.textContent = '';
+      el.removeAttribute('title');
+    }
+  }
+
+  // ---------- shared state sync ----------
+  function gatherAssumptions(){
+    const a = {};
+    document.querySelectorAll('[data-assume]').forEach(inp => { a[inp.dataset.assume] = inp.value; });
+    return a;
+  }
+  function gatherNarrative(){
+    const m = {};
+    document.querySelectorAll('.ed[data-eid]').forEach(el => { m[el.dataset.eid] = el.innerHTML; });
+    return m;
+  }
+  function applyState(data){
+    if (data.assumptions){
+      document.querySelectorAll('[data-assume]').forEach(inp => {
+        if (data.assumptions[inp.dataset.assume] !== undefined) inp.value = data.assumptions[inp.dataset.assume];
+      });
+    }
+    if (data.narrative){
+      document.querySelectorAll('.ed[data-eid]').forEach(el => {
+        if (data.narrative[el.dataset.eid] !== undefined) el.innerHTML = data.narrative[el.dataset.eid];
+      });
+    }
+    BP.meta = {
+      assumptionsMeta: data.assumptionsMeta || {},
+      narrativeMeta: data.narrativeMeta || {},
+      updatedBy: data.updatedBy || null,
+      updatedAt: data.updatedAt || null
+    };
+    BP.dirtyAssume.clear(); BP.dirtyNarr.clear();
+    try { render(); } catch(_){}
+    try { saveAssumptions(); } catch(_){}
+    try { saveNarrative(); } catch(_){}
+    renderAttribution();
+  }
+  async function pullState(){
+    try {
+      const r = await fetch(API + '/state', { headers: headers(), cache:'no-store' });
+      if (r.status === 401){ onAuthLost(); return; }
+      if (!r.ok) return;
+      applyState(await r.json());
+      setIndicator('Loaded shared plan', true);
+    } catch(_){}
+  }
+  function schedulePush(){
+    if (!BP.joined) return;
+    if (BP.pushTimer) clearTimeout(BP.pushTimer);
+    setIndicator('Syncing\u2026', true);
+    BP.pushTimer = setTimeout(pushState, 900);
+  }
+  function buildBatch(){
+    const a = {}, n = {};
+    BP.dirtyAssume.forEach(k => { const el = document.querySelector('[data-assume="'+CSS.escape(k)+'"]'); if (el) a[k] = el.value; });
+    BP.dirtyNarr.forEach(eid => { const el = document.querySelector('.ed[data-eid="'+CSS.escape(eid)+'"]'); if (el) n[eid] = el.innerHTML; });
+    return { a, n };
+  }
+  function adoptMeta(data){
+    BP.meta = {
+      assumptionsMeta: data.assumptionsMeta || {},
+      narrativeMeta: data.narrativeMeta || {},
+      updatedBy: data.updatedBy || null,
+      updatedAt: data.updatedAt || null
+    };
+  }
+  async function pushState(){
+    if (!BP.joined) return;
+    const { a, n } = buildBatch();
+    if (!Object.keys(a).length && !Object.keys(n).length) return;
+    try {
+      const r = await fetch(API + '/state', {
+        method:'PUT', headers: headers({ 'content-type':'application/json' }),
+        body: JSON.stringify({ assumptions: a, narrative: n })
+      });
+      if (r.status === 401){ onAuthLost(); return; }
+      if (!r.ok){ setIndicator('Sync failed', false); return; }
+      const data = await r.json();
+      // Clear a dirty key only if it still holds the value we just sent
+      // (otherwise it changed mid-flight and must stay queued).
+      Object.keys(a).forEach(k => { const el = document.querySelector('[data-assume="'+CSS.escape(k)+'"]'); if (el && el.value === a[k]) BP.dirtyAssume.delete(k); });
+      Object.keys(n).forEach(eid => { const el = document.querySelector('.ed[data-eid="'+CSS.escape(eid)+'"]'); if (el && el.innerHTML === n[eid]) BP.dirtyNarr.delete(eid); });
+      adoptMeta(data);
+      renderAttribution();
+      setIndicator('Saved for both \u00B7 ' + (BP.author || ''), true);
+    } catch(_){ setIndicator('Sync failed', false); }
+  }
+  // Background merge: pull the shared doc and apply only fields the local user
+  // is NOT currently editing, so a co-author's changes appear without clobbering
+  // in-progress local edits.
+  async function pullMerge(){
+    if (!BP.joined) return;
+    try {
+      const r = await fetch(API + '/state', { headers: headers(), cache:'no-store' });
+      if (r.status === 401){ onAuthLost(); return; }
+      if (!r.ok) return;
+      const data = await r.json();
+      let changed = false;
+      if (data.assumptions){
+        document.querySelectorAll('[data-assume]').forEach(inp => {
+          const k = inp.dataset.assume, v = data.assumptions[k];
+          if (v === undefined || BP.dirtyAssume.has(k)) return;
+          if (inp.value !== v){ inp.value = v; changed = true; }
+        });
+      }
+      if (data.narrative){
+        document.querySelectorAll('.ed[data-eid]').forEach(el => {
+          const eid = el.dataset.eid, v = data.narrative[eid];
+          if (v === undefined || BP.dirtyNarr.has(eid) || document.activeElement === el) return;
+          if (el.innerHTML !== v){ el.innerHTML = v; changed = true; }
+        });
+      }
+      adoptMeta(data);
+      if (changed){ try { render(); } catch(_){} try { saveAssumptions(); } catch(_){} try { saveNarrative(); } catch(_){} }
+      renderAttribution();
+    } catch(_){}
+  }
+  function pollTick(){ loadComments(); pullMerge(); }
+  let _identifyPrompted = false;
+  function onAnyEdit(){
+    if (BP.joined){ schedulePush(); return; }
+    setIndicator('Saved in this browser \u00B7 sign in to save for both', false);
+  }
+  // The first time an editor commits a change while not signed in, ask who they
+  // are so every edit from here on saves to the shared plan (DB), not just to
+  // this browser. localStorage stays as the fast/offline cache.
+  function maybePromptIdentify(){
+    if (BP.joined || _identifyPrompted) return;
+    if (!BP.dirtyAssume.size && !BP.dirtyNarr.size) return;
+    _identifyPrompted = true;
+    openJoin();
+  }
+
+  // ---------- comments ----------
+  async function loadComments(){
+    if (!BP.joined) return;
+    try {
+      const r = await fetch(API + '/comments', { headers: headers(), cache:'no-store' });
+      if (r.status === 401){ onAuthLost(); return; }
+      if (!r.ok) return;
+      const data = await r.json();
+      BP.comments = data.comments || [];
+      updateCounts();
+      if (document.getElementById('bp-panel').classList.contains('open')) renderPanel();
+    } catch(_){}
+  }
+  function updateCounts(){
+    const open = {};
+    BP.comments.forEach(c => { if (!c.resolved) open[c.section] = (open[c.section]||0) + 1; });
+    document.querySelectorAll('.bp-cbtn').forEach(btn => {
+      const n = open[btn.dataset.bpSection] || 0;
+      const span = btn.querySelector('.n');
+      span.textContent = n ? n : '';
+      btn.classList.toggle('has', n > 0);
+    });
+  }
+  async function postComment(section, body){
+    const r = await fetch(API + '/comments', {
+      method:'POST', headers: headers({ 'content-type':'application/json' }),
+      body: JSON.stringify({ section, sectionLabel: sectionLabelById(section), body })
+    });
+    if (r.status === 401){ onAuthLost(); return; }
+    if (!r.ok) return;
+    const c = await r.json();
+    BP.comments.push(c);
+    updateCounts(); renderPanel();
+  }
+  async function resolveComment(id, resolved){
+    const r = await fetch(API + '/comments/' + id, {
+      method:'PATCH', headers: headers({ 'content-type':'application/json' }),
+      body: JSON.stringify({ resolved })
+    });
+    if (!r.ok) return;
+    const c = BP.comments.find(x => x.id === id);
+    if (c) c.resolved = resolved;
+    updateCounts(); renderPanel();
+  }
+
+  // ---------- panel ----------
+  function openSection(id){ BP.activeSection = id; renderPanel(); document.getElementById('bp-panel').classList.add('open'); }
+  function openOverview(){ BP.activeSection = null; renderPanel(); document.getElementById('bp-panel').classList.add('open'); }
+  function closePanel(){ document.getElementById('bp-panel').classList.remove('open'); }
+  function renderPanel(){
+    const ttl = document.getElementById('bp-panel-ttl');
+    const back = document.getElementById('bp-back');
+    const body = document.getElementById('bp-body');
+    const compose = document.getElementById('bp-compose');
+    if (BP.activeSection == null){
+      back.style.display = 'none';
+      ttl.textContent = 'Discussion';
+      compose.style.display = 'none';
+      const withComments = {};
+      BP.comments.forEach(c => {
+        if (!withComments[c.section]) withComments[c.section] = { total:0, open:0, label:c.sectionLabel };
+        withComments[c.section].total++;
+        if (!c.resolved) withComments[c.section].open++;
+        withComments[c.section].label = c.sectionLabel || withComments[c.section].label;
+      });
+      const ids = Object.keys(withComments);
+      if (!ids.length){ body.innerHTML = '<div class="bp-empty">No discussion yet. Tap \uD83D\uDCAC on any section of the plan to start a thread.</div>'; return; }
+      body.innerHTML = ids.map(id => {
+        const s = withComments[id];
+        const lab = esc(s.label || sectionLabelById(id));
+        return '<div class="bp-sec-row" data-go="'+esc(id)+'"><span class="badge">'+s.open+' open</span><div class="lab">'+lab+'</div><div class="sub">'+s.total+' message'+(s.total>1?'s':'')+'</div></div>';
+      }).join('');
+      body.querySelectorAll('.bp-sec-row').forEach(row => row.addEventListener('click', () => openSection(row.dataset.go)));
+      return;
+    }
+    back.style.display = '';
+    ttl.textContent = sectionLabelById(BP.activeSection);
+    compose.style.display = '';
+    const msgs = BP.comments.filter(c => c.section === BP.activeSection)
+      .sort((a,b) => new Date(a.createdAt) - new Date(b.createdAt));
+    if (!msgs.length){
+      body.innerHTML = '<div class="bp-empty">No messages on this section yet. Start the conversation below.</div>';
+    } else {
+      body.innerHTML = msgs.map(c =>
+        '<div class="bp-msg'+(c.resolved?' res':'')+'">'+
+          '<div><span class="who" style="color:'+authorColor(c.author)+'">'+esc(c.author)+'</span>'+
+          '<span class="when">'+timeAgo(c.createdAt)+'</span></div>'+
+          '<div class="txt">'+esc(c.body)+'</div>'+
+          '<div class="acts"><button data-res="'+c.id+'" data-val="'+(c.resolved?'0':'1')+'">'+(c.resolved?'Reopen':'Mark resolved')+'</button></div>'+
+        '</div>'
+      ).join('');
+      body.querySelectorAll('button[data-res]').forEach(b =>
+        b.addEventListener('click', () => resolveComment(Number(b.dataset.res), b.dataset.val === '1')));
+    }
+    body.scrollTop = body.scrollHeight;
+  }
+
+  // ---------- auth / join ----------
+  function onAuthLost(){
+    BP.joined = false; BP.password = null;
+    try { sessionStorage.removeItem(SS_PW); } catch(_){}
+    if (BP.pollId){ clearInterval(BP.pollId); BP.pollId = null; }
+    reflectJoinState();
+    setIndicator('Sign in again to sync', false);
+    openJoin();
+  }
+  function reflectJoinState(){
+    const btn = document.getElementById('bp-collab-btn');
+    const dot = document.getElementById('bp-collab-dot');
+    if (BP.joined){
+      btn.classList.add('joined');
+      dot.style.display = 'inline-block';
+      dot.style.background = authorColor(BP.author);
+      btn.querySelector('.lab').textContent = 'You: ' + BP.author;
+    } else {
+      btn.classList.remove('joined');
+      dot.style.display = 'none';
+      btn.querySelector('.lab').textContent = 'Collaborate';
+    }
+  }
+  let _pendingName = null;
+  function openJoin(){
+    _pendingName = BP.author;
+    document.querySelectorAll('.bp-who button').forEach(b => b.classList.toggle('sel', b.dataset.name === _pendingName));
+    document.getElementById('bp-join-err').textContent = '';
+    const pwEl = document.getElementById('bp-join-pw');
+    pwEl.value = BP.password || '';
+    document.getElementById('bp-leave').style.display = BP.joined ? '' : 'none';
+    document.getElementById('bp-join').classList.add('open');
+    setTimeout(() => pwEl.focus(), 50);
+  }
+  function closeJoin(){ document.getElementById('bp-join').classList.remove('open'); }
+  async function doJoin(){
+    const err = document.getElementById('bp-join-err');
+    const name = _pendingName;
+    const pw = document.getElementById('bp-join-pw').value.trim();
+    if (!name){ err.textContent = 'Pick who you are first.'; return; }
+    if (!pw){ err.textContent = 'Enter the shared password.'; return; }
+    try {
+      const r = await fetch(API + '/auth', { method:'POST', headers: { 'x-bp-password': pw, 'x-bp-author': name } });
+      if (r.status === 401){ err.textContent = 'Wrong password.'; return; }
+      if (r.status === 400){ err.textContent = 'Unknown collaborator.'; return; }
+      if (!r.ok){ err.textContent = 'Could not connect.'; return; }
+      const data = await r.json();
+      BP.author = data.name; BP.password = pw; BP.joined = true;
+      try { sessionStorage.setItem(SS_AUTHOR, BP.author); sessionStorage.setItem(SS_PW, pw); } catch(_){}
+      closeJoin(); reflectJoinState();
+      // Preserve edits made before signing in: merge server values into the
+      // fields we are NOT editing, then flush our pending changes to the DB.
+      if (BP.dirtyAssume.size || BP.dirtyNarr.size){ await pullMerge(); schedulePush(); }
+      else { await pullState(); }
+      await loadComments();
+      if (BP.pollId) clearInterval(BP.pollId);
+      BP.pollId = setInterval(pollTick, 12000);
+    } catch(_){ err.textContent = 'Could not connect.'; }
+  }
+  function leave(){
+    BP.joined = false; BP.password = null;
+    try { sessionStorage.removeItem(SS_PW); } catch(_){}
+    if (BP.pollId){ clearInterval(BP.pollId); BP.pollId = null; }
+    closeJoin(); reflectJoinState();
+    setIndicator('Left collaboration \u00B7 local edits only', true);
+  }
+
+  // ---------- chrome ----------
+  function buildChrome(){
+    const right = document.querySelector('.toolbar .right');
+    const collab = document.createElement('span');
+    collab.id = 'bp-collab';
+    collab.innerHTML =
+      '<button id="bp-collab-btn" type="button"><span id="bp-collab-dot"></span><span class="lab">Collaborate</span></button>'+
+      '<button id="bp-disc-btn" type="button">Discussion</button>'+
+      '<button id="bp-hist-btn" type="button">Recent changes</button>';
+    if (right) right.insertBefore(collab, right.firstChild);
+    document.getElementById('bp-collab-btn').addEventListener('click', openJoin);
+    document.getElementById('bp-disc-btn').addEventListener('click', () => { if (!BP.joined){ openJoin(); return; } openOverview(); });
+    document.getElementById('bp-hist-btn').addEventListener('click', (e) => { e.stopPropagation(); toggleHistory(); });
+
+    const join = document.createElement('div');
+    join.id = 'bp-join'; join.className = 'bp-overlay';
+    join.innerHTML =
+      '<div class="card">'+
+        '<h3>Edit together</h3>'+
+        '<p>Pick who you are and enter the shared password. Your edits and notes are saved for both of you.</p>'+
+        '<div class="bp-who">'+
+          '<button data-name="Karan" type="button">Karan</button>'+
+          '<button data-name="Ernesto" type="button">Ernesto</button>'+
+        '</div>'+
+        '<input id="bp-join-pw" type="password" placeholder="Shared password" autocomplete="off">'+
+        '<button class="go" id="bp-join-go" type="button">Start editing</button>'+
+        '<div class="err" id="bp-join-err"></div>'+
+        '<div class="leave" id="bp-leave"><button type="button">Leave collaboration</button></div>'+
+      '</div>';
+    document.body.appendChild(join);
+    join.addEventListener('click', (e) => { if (e.target === join) closeJoin(); });
+    join.querySelectorAll('.bp-who button').forEach(b => b.addEventListener('click', () => {
+      _pendingName = b.dataset.name;
+      join.querySelectorAll('.bp-who button').forEach(x => x.classList.toggle('sel', x === b));
+    }));
+    document.getElementById('bp-join-go').addEventListener('click', doJoin);
+    document.getElementById('bp-join-pw').addEventListener('keydown', (e) => { if (e.key === 'Enter') doJoin(); });
+    document.getElementById('bp-leave').querySelector('button').addEventListener('click', leave);
+
+    const panel = document.createElement('div');
+    panel.id = 'bp-panel';
+    panel.innerHTML =
+      '<header>'+
+        '<button id="bp-back" type="button">\u2039 All</button>'+
+        '<span class="ttl" id="bp-panel-ttl">Discussion</span>'+
+        '<button id="bp-close" type="button">\u2715</button>'+
+      '</header>'+
+      '<div id="bp-body"></div>'+
+      '<div id="bp-compose">'+
+        '<textarea id="bp-compose-txt" placeholder="Write a note about this section\u2026"></textarea>'+
+        '<div class="row"><span class="hint">Posts as you</span><button id="bp-send" type="button">Post</button></div>'+
+      '</div>'+
+      '<div id="bp-foot"><span>Notes are shared with your co-author</span><button id="bp-refresh" type="button">Refresh plan</button></div>';
+    document.body.appendChild(panel);
+    document.getElementById('bp-close').addEventListener('click', closePanel);
+    document.getElementById('bp-back').addEventListener('click', openOverview);
+    document.getElementById('bp-refresh').addEventListener('click', () => { pullMerge(); loadComments(); });
+    document.getElementById('bp-send').addEventListener('click', () => {
+      const txt = document.getElementById('bp-compose-txt');
+      const body = txt.value.trim();
+      if (!body || BP.activeSection == null) return;
+      txt.value = '';
+      postComment(BP.activeSection, body);
+    });
+    document.getElementById('bp-compose-txt').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)){ document.getElementById('bp-send').click(); }
+    });
+
+    const hist = document.createElement('div');
+    hist.id = 'bp-history';
+    hist.innerHTML =
+      '<header><span class="ttl">Recent changes</span><button id="bp-hist-close" type="button">\u2715</button></header>'+
+      '<div class="list" id="bp-hist-list"></div>';
+    document.body.appendChild(hist);
+    document.getElementById('bp-hist-close').addEventListener('click', closeHistory);
+    // Dismiss on outside click or Escape (the toggle button stops propagation).
+    document.addEventListener('click', (e) => {
+      const h = document.getElementById('bp-history');
+      if (!h || !h.classList.contains('open')) return;
+      if (h.contains(e.target)) return;
+      closeHistory();
+    });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeHistory(); });
+  }
+
+  // ---------- recent changes ----------
+  // Human label for an assumption field (its sidebar <label>), falling back to key.
+  function assumeLabel(k){
+    const inp = document.querySelector('[data-assume="'+CSS.escape(k)+'"]');
+    if (inp){
+      const host = inp.closest('.assume');
+      const lab = host ? host.querySelector('label') : null;
+      if (lab){ const t = lab.textContent.replace(/\s+/g,' ').trim(); if (t) return t; }
+    }
+    return k;
+  }
+  // Human label for a narrative block: its section heading + a short text snippet.
+  function narrLabel(eid){
+    const el = document.querySelector('.ed[data-eid="'+CSS.escape(eid)+'"]');
+    if (el){
+      const unit = el.closest('.block, .band, .assume-group');
+      const sec = unit ? sectionLabel(unit) : '';
+      let snip = (el.textContent || '').replace(/\s+/g,' ').trim();
+      const long = snip.length > 42;
+      snip = snip.slice(0, 42);
+      if (sec && snip) return sec + ' \u2014 \u201C' + snip + (long?'\u2026':'') + '\u201D';
+      return sec || snip || eid;
+    }
+    return eid;
+  }
+  // Newest-first list (max 20) of every attributed field change from server meta.
+  function collectHistory(){
+    const out = [];
+    const am = BP.meta.assumptionsMeta || {};
+    Object.keys(am).forEach(k => { const m = am[k]; if (m && m.at) out.push({ label: assumeLabel(k), by: m.by, at: m.at }); });
+    const nm = BP.meta.narrativeMeta || {};
+    Object.keys(nm).forEach(k => { const m = nm[k]; if (m && m.at) out.push({ label: narrLabel(k), by: m.by, at: m.at }); });
+    out.sort((a,b) => new Date(b.at) - new Date(a.at));
+    return out.slice(0, 20);
+  }
+  function renderHistory(){
+    const list = document.getElementById('bp-hist-list');
+    if (!list) return;
+    const items = collectHistory();
+    if (!items.length){ list.innerHTML = '<div class="bp-hempty">No changes recorded yet.</div>'; return; }
+    list.innerHTML = items.map(it =>
+      '<div class="bp-hrow"><div class="lab">'+esc(it.label)+'</div>'+
+      '<div class="meta" style="color:'+authorColor(it.by)+'">'+esc(it.by)+' \u00B7 '+timeAgo(it.at)+'</div></div>'
+    ).join('');
+  }
+  function historyOpen(){ const h = document.getElementById('bp-history'); return !!(h && h.classList.contains('open')); }
+  function closeHistory(){ const h = document.getElementById('bp-history'); if (h) h.classList.remove('open'); }
+  function toggleHistory(){
+    if (!BP.joined){ openJoin(); return; }
+    const h = document.getElementById('bp-history');
+    if (!h) return;
+    if (h.classList.contains('open')){ closeHistory(); return; }
+    renderHistory();
+    h.classList.add('open');
+  }
+
+  // ---------- wiring ----------
+  function wireEdits(){
+    document.querySelectorAll('[data-assume]').forEach(inp => {
+      inp.addEventListener('input', () => { BP.dirtyAssume.add(inp.dataset.assume); onAnyEdit(); });
+      inp.addEventListener('change', maybePromptIdentify);
+    });
+    document.addEventListener('input', (e) => {
+      const t = e.target;
+      if (!t || !t.closest) return;
+      const ed = t.closest('.ed');
+      if (ed && ed.dataset.eid){ BP.dirtyNarr.add(ed.dataset.eid); onAnyEdit(); }
+    }, true);
+    // Prompt to identify when an edited text block loses focus (contenteditable
+    // has no 'change' event), so the change can be saved to the shared plan.
+    document.addEventListener('focusout', (e) => {
+      const t = e.target;
+      if (t && t.closest && t.closest('.ed')) maybePromptIdentify();
+    }, true);
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    injectStyles();
+    assignSections();
+    buildChrome();
+    wireEdits();
+    reflectJoinState();
+    // Auto-resume a session saved in this tab.
+    let savedName = null, savedPw = null;
+    try { savedName = sessionStorage.getItem(SS_AUTHOR); savedPw = sessionStorage.getItem(SS_PW); } catch(_){}
+    if (savedName && savedPw){
+      BP.author = savedName; BP.password = savedPw;
+      fetch(API + '/auth', { method:'POST', headers: { 'x-bp-password': savedPw, 'x-bp-author': savedName } })
+        .then(r => {
+          if (!r.ok) throw new Error('reauth');
+          BP.joined = true; reflectJoinState();
+          pullState(); loadComments();
+          BP.pollId = setInterval(pollTick, 12000);
+        })
+        .catch(() => { BP.author = savedName; BP.password = null; BP.joined = false; reflectJoinState(); });
+    }
+  });
+})();
+</script>
+</body>
+</html>

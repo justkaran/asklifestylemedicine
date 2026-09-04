@@ -1,0 +1,1250 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Palonur · SLM Newsletter — Business Plan · Confidential</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Spectral:wght@300;400;500;600&display=swap');
+  :root{
+    --ink:#241c13; --paper:#FBF8F2; --sub:#6f6457; --rule:#e9e0d0; --rule-2:#dccfba;
+    --red:#8C1515; --red-2:#a8332c; --gold:#B0883C; --card:#ffffff; --green:#2f6b43;
+    --serif:'Spectral',Georgia,'Times New Roman',serif;
+    --display:'Fraunces',Georgia,serif;
+    --sans:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:#26221d;color:var(--ink);font-family:var(--serif)}
+  body{padding:80px 0 120px}
+
+  /* Toolbar */
+  .toolbar{
+    position:fixed;top:0;left:0;right:0;height:56px;background:#16120d;color:#fff;
+    display:flex;align-items:center;justify-content:space-between;padding:0 24px;
+    z-index:9999;font-family:var(--sans);font-size:13px;border-bottom:1px solid #2b251d;
+  }
+  .toolbar .left{display:flex;align-items:center;gap:14px}
+  .toolbar .brand{font-weight:600;letter-spacing:.04em}
+  .toolbar .hint{color:#9c9082}
+  .toolbar .right{display:flex;align-items:center}
+  .toolbar button{
+    background:transparent;border:1px solid #4a3f31;color:#fff;padding:8px 14px;border-radius:6px;
+    cursor:pointer;font:inherit;margin-left:8px
+  }
+  .toolbar button:hover{background:#221d16;border-color:#6a5b46}
+  .toolbar a.pdf-link{
+    display:inline-block;background:var(--red);border:1px solid var(--red);color:#fff;
+    text-decoration:none;border-radius:6px;padding:7px 12px;font:inherit;font-size:12.5px;cursor:pointer;margin-left:8px;
+  }
+  .toolbar a.pdf-link:hover{background:#741010;border-color:#741010}
+
+  /* Page */
+  .page{
+    width:8.5in;min-height:11in;background:var(--paper);margin:24px auto;
+    padding:46px 60px 40px;box-shadow:0 12px 44px rgba(0,0,0,.45);position:relative;
+    border-top:3px solid var(--red);
+  }
+  .page.flow{min-height:auto}
+
+  .page-header{
+    display:flex;justify-content:space-between;align-items:baseline;
+    font-family:var(--sans);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--sub);
+    border-bottom:1px solid var(--rule);padding-bottom:10px;margin-bottom:18px;
+  }
+  .page-header .wordmark{font-family:var(--display);font-size:14px;font-weight:600;letter-spacing:.34em;color:var(--red);text-transform:uppercase}
+
+  h1{font-family:var(--display);font-size:30px;line-height:1.08;font-weight:500;letter-spacing:-.005em;margin:0 0 10px;color:var(--ink)}
+  .eyebrow{font-family:var(--sans);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;font-weight:600}
+  .eyebrow.red{color:var(--red)}
+  h2{font-size:11px;line-height:1.2;font-weight:600;margin:0 0 9px;
+     font-family:var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--red);
+     position:relative;padding-left:13px}
+  h2::before{content:"";position:absolute;left:0;top:.05em;width:4px;height:.9em;background:var(--gold);border-radius:1px}
+  h3{font-family:var(--display);font-size:16px;font-weight:600;margin:0 0 6px;color:var(--ink)}
+  p{font-size:12.5px;line-height:1.5;margin:0 0 8px;color:#352e25}
+  .lead{font-size:14px;line-height:1.5;color:#473d31;margin:0 0 10px}
+  .muted{color:var(--sub)}
+  .small{font-size:11px;line-height:1.45}
+
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:6px}
+  .block{margin-bottom:12px}
+  .block:last-child{margin-bottom:0}
+
+  ul{margin:0 0 8px;padding-left:0;list-style:none}
+  li{font-size:12.5px;line-height:1.5;color:#352e25;margin-bottom:5px;padding-left:14px;position:relative}
+  li::before{content:"";position:absolute;left:1px;top:.6em;width:5px;height:5px;background:var(--gold);border-radius:50%}
+  li strong{font-weight:600;color:var(--ink)}
+
+  .meta-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0 4px}
+  .meta-strip > div{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:9px 11px}
+  .meta-strip .stat-label{font-family:var(--sans);font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--sub);margin-bottom:4px}
+  .meta-strip .stat-val{font-family:var(--display);font-size:16px;font-weight:600;color:var(--ink);line-height:1.05}
+  .meta-strip .stat-val small{font-family:var(--serif);font-size:10.5px;font-weight:400;color:var(--sub)}
+
+  /* Highlight band */
+  .band{background:#fff;border:1px solid var(--rule);border-top:3px solid var(--red);
+    padding:15px 18px;border-radius:10px;margin:12px 0;box-shadow:0 3px 14px rgba(90,45,20,.05)}
+  .band .eyebrow{margin-bottom:6px}
+
+  /* Price hero */
+  .price-hero{display:grid;grid-template-columns:1.1fr 1fr;gap:20px;align-items:center;
+    background:#fff;border:1px solid var(--rule);border-top:3px solid var(--gold);border-radius:12px;padding:18px 22px;margin:12px 0}
+  .price-hero .big{font-family:var(--display);font-size:46px;font-weight:600;color:var(--red);line-height:1;letter-spacing:-.01em}
+  .price-hero .big small{font-family:var(--serif);font-size:14px;font-weight:400;color:var(--sub)}
+  .price-hero .k{font-family:var(--sans);font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--sub);margin-bottom:4px}
+  .price-hero .breakdown div{font-size:12px;color:#352e25;display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px dotted var(--rule)}
+  .price-hero .breakdown div:last-child{border-bottom:none;font-weight:600}
+
+  /* Assumptions grid */
+  .assume-group{margin-bottom:14px}
+  .assume-group > .glabel{font-family:var(--sans);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--red);font-weight:600;margin-bottom:8px}
+  .preset-row{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-bottom:8px}
+  .preset-label{font-family:var(--sans);font-size:9px;letter-spacing:.04em;color:var(--sub);margin-right:2px}
+  button.preset{font-family:var(--sans);font-size:9.5px;letter-spacing:.02em;color:var(--ink);
+    background:#fff;border:1px solid var(--rule-2);border-radius:999px;padding:4px 10px;cursor:pointer;line-height:1.1}
+  button.preset:hover{border-color:var(--gold);color:var(--red)}
+  button.preset.active{background:var(--red);border-color:var(--red);color:#fff}
+  @media print{ .preset-row{display:none} }
+  .assume-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px 16px}
+  .assume{display:flex;flex-direction:column;gap:3px;background:#fff;border:1px solid var(--rule);border-radius:7px;padding:7px 10px}
+  .assume label{font-family:var(--sans);font-size:9px;letter-spacing:.04em;color:var(--sub);line-height:1.3}
+  .assume .ifield{display:flex;align-items:baseline;gap:4px}
+  .assume .pre,.assume .suf{font-family:var(--sans);font-size:11px;color:var(--sub)}
+  .assume input{
+    border:none;border-bottom:1px solid var(--rule-2);background:transparent;width:100%;
+    font-family:var(--display);font-size:16px;font-weight:600;color:var(--ink);padding:1px 0;outline:none;
+  }
+  .assume input:focus{border-bottom-color:var(--red)}
+  /* hide number spinners for a cleaner look */
+  .assume input::-webkit-outer-spin-button,.assume input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+  .assume input[type=number]{-moz-appearance:textfield}
+
+  /* Tables */
+  table{width:100%;border-collapse:collapse;font-size:10px;margin:6px 0}
+  th,td{text-align:right;padding:5px 6px;border-bottom:1px solid var(--rule);white-space:nowrap}
+  th:first-child,td:first-child{text-align:left}
+  thead th{font-family:var(--sans);font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:var(--sub);border-bottom:1.5px solid var(--ink);font-weight:600}
+  tbody tr:nth-child(even){background:rgba(176,136,60,.05)}
+  tbody tr.yr-end{background:rgba(140,21,21,.06);font-weight:600}
+  tbody tr.chart-hover{background:rgba(176,136,60,.22)}
+  tbody tr.yr-end.chart-hover{background:rgba(140,21,21,.18)}
+  tbody td.pos{color:var(--green)}
+  tbody td.neg{color:var(--red-2)}
+  tfoot td{font-weight:600;border-top:1.5px solid var(--ink);border-bottom:none;font-family:var(--sans)}
+  .annual table{font-size:11px}
+  .annual th,.annual td{padding:7px 9px}
+  table.proj{font-size:9px}
+  table.proj th,table.proj td{padding:4px 4px}
+  table.proj thead th{white-space:normal;letter-spacing:.04em;vertical-align:bottom}
+
+  /* Stat cards row */
+  .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:12px 0}
+  .stat-card{background:#fff;border:1px solid var(--rule);border-radius:10px;padding:12px 14px;border-left:3px solid var(--gold)}
+  .stat-card.red{border-left-color:var(--red)}
+  .stat-card.green{border-left-color:var(--green)}
+  .stat-card .k{font-family:var(--sans);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--sub);margin-bottom:6px}
+  .stat-card .v{font-family:var(--display);font-size:25px;font-weight:600;color:var(--ink);line-height:1}
+  .stat-card .v small{font-family:var(--serif);font-size:11px;font-weight:400;color:var(--sub)}
+  .stat-card .note{font-size:10px;color:var(--sub);margin-top:5px;line-height:1.35}
+
+  .page-footer{
+    display:flex;justify-content:space-between;font-family:var(--sans);
+    font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--sub);
+    border-top:1px solid var(--rule);padding-top:10px;margin-top:16px;
+  }
+
+  /* Cover */
+  .cover{padding-top:54px}
+  .cover h1{font-size:40px;line-height:1.04;margin-bottom:12px}
+  .cover .lead{font-size:15px;max-width:64ch}
+
+  /* Editable */
+  .ed[contenteditable=true]{outline:none;transition:background .15s}
+  .ed[contenteditable=true]:hover{background:rgba(140,21,21,.05)}
+  .ed[contenteditable=true]:focus{background:rgba(140,21,21,.09);box-shadow:inset 0 0 0 1px rgba(140,21,21,.22);border-radius:3px}
+  #save-indicator{color:#8fbf8f;font-size:12px;margin-left:14px;opacity:0;transition:opacity .3s}
+  #save-indicator.show{opacity:1}
+
+  .legend{font-size:10px;color:var(--sub);margin-top:6px;line-height:1.45}
+
+  /* Password gate (soft, client-side) */
+  #pw-gate{position:fixed;inset:0;z-index:100000;background:#16120d;
+    display:flex;align-items:center;justify-content:center;font-family:var(--sans)}
+  #pw-gate .pw-card{background:#1f1a13;border:1px solid #3a3024;border-radius:14px;
+    padding:34px 34px 30px;width:min(92vw,360px);text-align:center;box-shadow:0 18px 60px rgba(0,0,0,.5)}
+  #pw-gate .pw-brand{font-family:var(--display);font-size:15px;font-weight:600;letter-spacing:.34em;color:var(--gold);text-transform:uppercase;margin-bottom:18px}
+  #pw-gate .pw-title{font-family:var(--display);font-size:22px;font-weight:600;color:#fff;margin-bottom:6px}
+  #pw-gate .pw-sub{font-size:12.5px;line-height:1.5;color:#b3a692;margin:0 0 18px}
+  #pw-gate form{display:flex;flex-direction:column;gap:10px}
+  #pw-gate input{font:inherit;font-size:15px;padding:11px 13px;border-radius:8px;border:1px solid #4a3f31;background:#100c08;color:#fff;outline:none}
+  #pw-gate input:focus{border-color:var(--gold)}
+  #pw-gate button{font:inherit;font-size:14px;font-weight:600;padding:11px 13px;border-radius:8px;border:1px solid var(--red);background:var(--red);color:#fff;cursor:pointer}
+  #pw-gate button:hover{background:#741010;border-color:#741010}
+  #pw-gate #pw-error{font-size:11.5px;color:#e2918c;margin-top:12px;opacity:0;transition:opacity .15s}
+  #pw-gate #pw-error.show{opacity:1}
+
+  /* Break-even chart */
+  .chart-wrap{background:#fff;border:1px solid var(--rule);border-radius:10px;padding:12px 14px 8px;margin:10px 0 4px;box-shadow:0 3px 14px rgba(90,45,20,.04)}
+  .chart-wrap svg{display:block;width:100%;height:auto}
+
+  @media print{
+    *{ -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; }
+    html, body{ background:#fff !important; margin:0 !important; padding:0 !important; }
+    .toolbar, #save-indicator{ display:none !important; }
+    @page{ size: 8.5in 11in; margin: 0; }
+    .page{
+      width: 8.5in !important; min-height:0 !important;
+      margin:0 !important; padding:0.5in 0.6in !important; box-shadow:none !important; border-radius:0 !important;
+      position:relative; border-top:3px solid var(--red) !important; page-break-after:always; break-after:page;
+    }
+    .page:last-child{page-break-after:auto;break-after:auto}
+    .page.flow{page-break-after:always}
+    .band, .price-hero, .cols, .stat-row, .stat-card, .meta-strip, .assume, .chart-wrap, tr{ page-break-inside: avoid; break-inside: avoid; }
+    .ed[contenteditable=true]:hover, .ed[contenteditable=true]:focus{ background:none !important; box-shadow:none !important; }
+    .assume input{border-bottom:1px solid var(--rule-2) !important}
+    #pw-gate{display:none !important}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ PASSWORD GATE (soft, client-side) ============ -->
+<div id="pw-gate">
+  <div class="pw-card">
+    <div class="pw-brand">Palonur</div>
+    <div class="pw-title">Confidential business plan</div>
+    <p class="pw-sub">This document is private. Please enter the password to continue.</p>
+    <form id="pw-form" autocomplete="off">
+      <input id="pw-input" type="password" placeholder="Password" autocomplete="off" spellcheck="false" autofocus>
+      <button type="submit">Unlock</button>
+    </form>
+    <div id="pw-error">That password didn't match — please try again.</div>
+  </div>
+</div>
+
+<div class="toolbar">
+  <div class="left">
+    <span class="brand">Palonur · SLM Newsletter Business Plan</span>
+    <span class="hint">Edit assumptions to recompute · text edits &amp; numbers saved in this browser</span>
+  </div>
+  <div class="right">
+    <span id="save-indicator">Saved</span>
+    <button id="edit-mode-btn" onclick="toggleEditMode()">Enable text editing</button>
+    <button onclick="resetAll()">Reset</button>
+    <button onclick="downloadCSV()">Download CSV</button>
+    <button onclick="saveHTML()">Download HTML</button>
+    <a class="pdf-link" id="pdf-btn" href="/business-plan.html?print=1" target="_blank" rel="noopener">Download PDF</a>
+  </div>
+</div>
+
+<!-- ============ COVER / EXECUTIVE SUMMARY ============ -->
+<section class="page cover">
+  <div class="page-header">
+    <span class="wordmark">Palonur</span>
+    <span>Confidential · For investors</span>
+  </div>
+
+  <div class="eyebrow ed">Business plan · Stanford Lifestyle Medicine newsletter &amp; subscription</div>
+  <h1 class="ed">A trusted health newsletter, delivered through Palonur — built on the Harvard Health model, with an AI layer Harvard never had.</h1>
+  <p class="lead ed">Stanford Lifestyle Medicine (SLM) reaches roughly 120,000 visitors a month with no paid acquisition. This plan turns that audience into a recurring subscription — a curated newsletter plus a faculty-grounded AI agent that answers subscribers' lifestyle-health questions. Palonur builds and operates the product; investors cover a lean monthly cost base up front and are recovered out of subscription revenue. The model below is fully editable: change any assumption and every table recomputes.</p>
+
+  <div class="meta-strip">
+    <div><div class="stat-label">Launch</div><div class="stat-val ed">Jul 2026</div></div>
+    <div><div class="stat-label">Top of funnel</div><div class="stat-val">120k <small>/mo visitors</small></div></div>
+    <div><div class="stat-label">Revenue split (steady)</div><div class="stat-val"><span data-out="palShareAfter">30</span> / <span data-out="slmShareAfter">70</span> <small>Palonur / SLM</small></div></div>
+    <div><div class="stat-label">Cost base</div><div class="stat-val">$40k <small>/mo</small></div></div>
+  </div>
+
+  <div class="band" style="margin-top:14px">
+    <div class="eyebrow red ed" data-eid="goals-eyebrow">What this plan sets out to do</div>
+    <ul style="margin:4px 0 0">
+      <li class="ed" data-eid="goal-1"><strong>Turn an existing audience into a subscription.</strong> Convert SLM's ~120k monthly visitors into recurring members with a curated newsletter and a faculty-grounded AI agent — with no paid acquisition.</li>
+      <li class="ed" data-eid="goal-2"><strong>Recover a lean cost base, then hand the majority to Stanford.</strong> Investors fund a flat operating cost; once it is repaid, the revenue split steps decisively in SLM's favor.</li>
+      <li class="ed" data-eid="goal-3"><strong>Give back as a year-end gift that builds the Institute.</strong> SLM's share is accrued and gifted annually — funding a future Stanford Lifestyle Medicine Institute, a dedicated post-doc, and Amy's leadership.</li>
+      <li class="ed" data-eid="goal-4"><strong>Credit and reimburse the faculty.</strong> The experts whose science powers the answers are recognised and reimbursed from a defined share of revenue.</li>
+    </ul>
+  </div>
+
+  <div class="cols" style="margin-top:14px">
+    <div>
+      <div class="block">
+        <h2 class="ed">The opportunity</h2>
+        <p class="ed">Harvard Health Publishing turned trusted medical content into a durable consumer-subscription business. SLM has the same raw ingredient — credible Stanford lifestyle-medicine science — plus a distribution channel already running and an audience already asking health questions. What was missing is the product and the operating partner. Palonur is both.</p>
+      </div>
+      <div class="block">
+        <h2 class="ed">The product</h2>
+        <p class="ed">A subscription that pairs an editor-curated newsletter with a faculty-grounded AI agent. Every answer is sourced from Stanford-approved content and signed by a named expert — the same trust layer Palonur already runs in production for the sleep pillar.</p>
+      </div>
+    </div>
+    <div>
+      <div class="block">
+        <h2 class="ed">The deal</h2>
+        <p class="ed">Subscription income is shared with a structure that flips at investor recovery: Palonur takes a larger share (<strong><span data-out="palShareRec">60</span>%</strong>) while it repays the investor-funded cost base, then steps down to <strong><span data-out="palShareAfter">30</span>%</strong> once investors are whole — so SLM's share rises to <strong><span data-out="slmShareAfter">70</span>%</strong> for the long term. The SLM portion is not an ongoing payout — it is accrued through the year and <strong>distributed at year-end as a single gift</strong>. Investors fund Palonur's ~$40k/month cost base (the post-doc and support for Amy) and are repaid out of the recovery-phase share.</p>
+      </div>
+      <div class="block">
+        <h2 class="ed">Where the gift goes</h2>
+        <p class="ed">There are only two destinations for subscription revenue: Palonur's share, which repays the investor-funded cost base, and SLM's year-end gift. That single gift is the engine behind the longer-term goal — a standing <strong>Stanford Lifestyle Medicine Institute</strong>, a dedicated post-doc, and operating support for Amy.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="eyebrow red ed">How to read this document</div>
+    <p style="margin:0" class="ed">This is a numbers-first plan. The assumptions panel on the Pricing page drives every projection table and the break-even curve. All figures are planning estimates, not commitments. Edit any assumption (or any sentence) directly on the page — changes are saved in this browser only and never leave it. Use Download CSV for the full month-by-month model, Download PDF / HTML for a shareable snapshot.</p>
+  </div>
+
+  <div class="page-footer">
+    <span class="ed">karan@palonur.com · Palo Alto, CA · In partnership with Stanford Lifestyle Medicine</span>
+    <span>palonur.com</span>
+  </div>
+</section>
+
+<!-- ============ THE DEAL IN ONE PAGE ============ -->
+<section class="page">
+  <div class="page-header"><span class="wordmark">Palonur</span><span>The deal · in one page</span></div>
+  <div class="eyebrow ed" data-eid="sum-0">The deal, in one page</div>
+  <h1 class="ed" data-eid="sum-1">Everything an investor needs, at a glance.</h1>
+  <p class="lead ed" data-eid="sum-2">A trusted Stanford Lifestyle Medicine newsletter and faculty-grounded AI agent, sold to an audience that already exists. Investors fund a lean, flat cost base; a 30% revenue share recovers it; the remaining 70% is gifted to Stanford. Every figure below is live — it recomputes from the assumptions on the Pricing page.</p>
+
+  <div class="price-hero">
+    <div>
+      <div class="k">Blended revenue per subscriber</div>
+      <div class="big">$<span data-out="monthlyPrice">0</span><small> / month</small></div>
+      <div class="k" style="margin-top:8px">≈ $<span data-out="annualPerSub">0</span> per subscriber per year</div>
+    </div>
+    <div class="breakdown">
+      <div><span>Top of funnel</span><span>120k / mo visitors</span></div>
+      <div><span>Revenue split</span><span><span data-out="palShareShown">30</span>% Palonur / <span data-out="slmShareShown">70</span>% SLM</span></div>
+      <div><span>SLM share</span><span>Year-end gift</span></div>
+    </div>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat-card"><div class="k">Year-1 subscription revenue</div><div class="v">$<span data-out="y1Rev">0</span></div></div>
+    <div class="stat-card green"><div class="k">Year-1 SLM gift (70%)</div><div class="v">$<span data-out="y1Gift">0</span></div></div>
+    <div class="stat-card red"><div class="k">Year-1 Palonur net</div><div class="v">$<span data-out="y1Net">0</span></div></div>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat-card red"><div class="k">Peak capital required</div><div class="v">$<span data-out="peakCapital">0</span></div><div class="note">The most the business is ever underwater — the total investors fund before it self-sustains.</div></div>
+    <div class="stat-card green"><div class="k">Investor recovery</div><div class="v" data-out="breakEvenLabel">—</div><div class="note">First month the 30% share has repaid every dollar invested.</div></div>
+    <div class="stat-card"><div class="k">Ending subscribers</div><div class="v" data-out="endSubs">0</div><div class="note">Paying subscribers at the end of the projection horizon.</div></div>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat-card green"><div class="k">Cumulative SLM gift</div><div class="v">$<span data-out="cumGift">0</span></div><div class="note">Total 70% share gifted to Stanford over the horizon.</div></div>
+    <div class="stat-card"><div class="k">SLM Institute endowment</div><div class="v">$<span data-out="cumEndow">0</span></div><div class="note">From a share of Palonur's non-SLM expert-agent revenue.</div></div>
+    <div class="stat-card"><div class="k">Cumulative subscription revenue</div><div class="v">$<span data-out="cumRev">0</span></div><div class="note">Total subscription revenue across the projection horizon.</div></div>
+  </div>
+
+  <div class="band">
+    <div class="eyebrow red ed" data-eid="sum-3">The ask, in one line</div>
+    <p style="margin:0" class="ed" data-eid="sum-4">Fund a lean, flat cost base for a product that is already built; recover it from a 30% share of a subscription sold to an audience that already exists; and gift the rest to Stanford — while a second, non-SLM revenue stream builds the endowment of the Institute this is all meant to create.</p>
+  </div>
+
+  <div class="page-footer"><span>Confidential · planning estimates only · figures update live with assumptions</span><span>palonur.com</span></div>
+</section>
+
+<!-- ============ PRODUCT & SUBSCRIPTION MODEL ============ -->
+<section class="page">
+  <div class="page-header"><span class="wordmark">Palonur</span><span>The product · subscription model</span></div>
+  <div class="eyebrow ed">Product &amp; subscription model</div>
+  <h1 class="ed">A newsletter people read, an agent they can ask.</h1>
+  <p class="lead ed">Adapted from the Harvard Health subscription playbook — a trusted institution monetising its own content directly — and extended with the thing Harvard could not offer: a live AI agent grounded only in faculty-approved science.</p>
+
+  <div class="cols">
+    <div class="block">
+      <h2 class="ed">What a subscriber gets</h2>
+      <ul>
+        <li class="ed"><strong>The SLM newsletter.</strong> Editor-curated lifestyle-medicine briefings — sleep, nutrition, stress, movement — written from Stanford faculty content.</li>
+        <li class="ed"><strong>Tailored AI answers — and action.</strong> Ask a question and get an answer drawn only from approved Stanford sources and signed by a named expert — then a concrete next step: a protocol, a habit, a "try this for seven nights," not just a citation.</li>
+        <li class="ed"><strong>Myth-busting.</strong> Plain-language takedowns of the wellness misinformation subscribers meet every day, each grounded in faculty science and the paper behind it.</li>
+        <li class="ed"><strong>Courses.</strong> Short, faculty-backed lifestyle-medicine courses — sleep, nutrition, stress — that turn the science into a guided programme a member can actually follow.</li>
+        <li class="ed"><strong>Reader stories.</strong> Anonymised member experiences, already part of the Palonur Stories pipeline, feed the newsletter.</li>
+        <li class="ed"><strong>Archive &amp; receipts.</strong> Every answer is attributable back to the paper and the approver — trust you can audit.</li>
+      </ul>
+    </div>
+    <div class="block">
+      <h2 class="ed">Why it converts</h2>
+      <ul>
+        <li class="ed"><strong>Warm audience.</strong> ~120k monthly visitors already arrive asking lifestyle-health questions, with zero paid acquisition.</li>
+        <li class="ed"><strong>Named credibility.</strong> Stanford faculty attribution is something no general AI assistant can offer.</li>
+        <li class="ed"><strong>Two reasons to pay.</strong> Passive reading (the newsletter) and active answers (the agent) — content plus utility in one price.</li>
+        <li class="ed"><strong>Built, not hypothetical.</strong> The agent, the newsletter tooling, and the stories pipeline are already in production.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="eyebrow red ed">The Palonur partnership</div>
+    <p style="margin:0" class="ed">SLM owns the brand, the faculty relationships, and the audience. Palonur builds and runs the technology, the editorial tooling, billing, and the AI agent — and carries the operating cost. The split — Palonur-favored only until investors are recovered, then settling into a Stanford-favored steady state, with the SLM share gifted at year-end — keeps the overwhelming majority of long-term value with Stanford while giving Palonur a clear path to recover the investor-funded cost base. It is a partnership structured as a gift, not a vendor contract.</p>
+  </div>
+
+  <div class="block" style="margin-top:6px">
+    <h2 class="ed">The two-part price (Harvard model + AI)</h2>
+    <p class="ed">Harvard Health sells an annual subscription to its content. We keep that — an affordable annual plan anchored to the newsletter — and add a modest monthly AI-usage component for the agent. The exact figure is still to be confirmed; the price below is a clearly-labeled placeholder you can change in one place on the next page, and the whole model recomputes.</p>
+  </div>
+
+  <div class="page-footer"><span>Confidential · planning estimates only</span><span>palonur.com</span></div>
+</section>
+
+<!-- ============ PRICING & ASSUMPTIONS ============ -->
+<section class="page flow">
+  <div class="page-header"><span class="wordmark">Palonur</span><span>Pricing · assumptions</span></div>
+  <div class="eyebrow ed">Pricing &amp; assumptions — the model's control panel</div>
+  <h1 class="ed">Every number on the following pages comes from here.</h1>
+  <p class="lead ed">Change any field and the projection and break-even tables recompute instantly. Price is the single most important lever — set it once, here.</p>
+
+  <div class="price-hero">
+    <div>
+      <div class="k">Blended revenue per subscriber</div>
+      <div class="big">$<span data-out="monthlyPrice">0</span><small> / month</small></div>
+      <div class="k" style="margin-top:8px">≈ $<span data-out="annualPerSub">0</span> per subscriber per year</div>
+    </div>
+    <div class="breakdown">
+      <div><span>Annual plan (Harvard-style)</span><span>$<span data-out="annualPlanShown">0</span>/yr → $<span data-out="annualPlanMonthly">0</span>/mo</span></div>
+      <div><span>AI usage tier</span><span>$<span data-out="aiTierShown">0</span>/mo</span></div>
+      <div><span>Blended monthly</span><span>$<span data-out="monthlyPrice2">0</span>/mo</span></div>
+    </div>
+  </div>
+  <p class="legend ed">Placeholder pricing — to be confirmed. The annual plan mirrors Harvard Health's affordable content subscription; the AI tier prices the live agent. Both are editable below. The figure above is the starting (year-one) price; set an annual price increase below to model price rises in later years.</p>
+
+  <div class="assume-group">
+    <div class="glabel ed">Pricing</div>
+    <div class="assume-grid">
+      <div class="assume"><label>Annual subscription plan</label><div class="ifield"><span class="pre">$</span><input type="number" data-assume="priceAnnual" value="54" step="1" min="0"><span class="suf">/yr</span></div></div>
+      <div class="assume"><label>AI usage tier</label><div class="ifield"><span class="pre">$</span><input type="number" data-assume="aiTierMonthly" value="4" step="0.5" min="0"><span class="suf">/mo</span></div></div>
+      <div class="assume"><label>Annual price increase (later years)</label><div class="ifield"><input type="number" data-assume="priceIncrease" value="5" step="0.5" min="0"><span class="suf">%/yr</span></div></div>
+    </div>
+  </div>
+
+  <div class="assume-group">
+    <div class="glabel ed">Top of funnel &amp; subscriber dynamics</div>
+    <div class="assume-grid">
+      <div class="assume"><label>Monthly SLM visitors</label><div class="ifield"><input type="number" data-assume="visitors" value="120000" step="1000" min="0"></div></div>
+      <div class="assume"><label>Visitor → subscriber conversion</label><div class="ifield"><input type="number" data-assume="convRate" value="1.0" step="0.05" min="0"><span class="suf">%</span></div></div>
+      <div class="assume"><label>Monthly growth in new sign-ups</label><div class="ifield"><input type="number" data-assume="monthlyGrowth" value="1.5" step="0.5"><span class="suf">%</span></div></div>
+      <div class="assume"><label>Monthly churn</label><div class="ifield"><input type="number" data-assume="churn" value="3" step="0.5" min="0"><span class="suf">%</span></div></div>
+    </div>
+  </div>
+
+  <div class="assume-group">
+    <div class="glabel">Revenue share — Palonur / SLM</div>
+    <div class="preset-row">
+      <span class="preset-label">Doable scenarios:</span>
+      <button type="button" class="preset" data-preset="60,30" onclick="applyPreset(60,30)">Stanford-favored · 60 → 30</button>
+      <button type="button" class="preset" data-preset="55,40" onclick="applyPreset(55,40)">Balanced · 55 → 40</button>
+      <button type="button" class="preset" data-preset="70,35" onclick="applyPreset(70,35)">Fast recovery · 70 → 35</button>
+      <button type="button" class="preset" data-preset="50,50" onclick="applyPreset(50,50)">Even · 50 / 50</button>
+    </div>
+    <div class="assume-grid">
+      <div class="assume"><label>Palonur share — during investor recovery</label><div class="ifield"><input type="number" data-assume="palonurSplit" value="60" step="1" min="0" max="100"><span class="suf">%</span></div></div>
+      <div class="assume"><label>Palonur share — after recovery</label><div class="ifield"><input type="number" data-assume="palonurSplitAfter" value="45" step="1" min="0" max="100"><span class="suf">%</span></div></div>
+    </div>
+    <p class="legend">Palonur takes the higher share only until investors are repaid, then steps down to the lower share so SLM keeps the majority long-term. SLM always receives the remainder — e.g. <strong>60 → 45</strong> means SLM gets 40% during recovery and 55% after. Set both fields equal for a single flat split.</p>
+  </div>
+
+  <div class="assume-group">
+    <div class="glabel">Faculty reimbursement</div>
+    <div class="assume-grid">
+      <div class="assume"><label>Faculty reimbursement (share of gross revenue)</label><div class="ifield"><input type="number" data-assume="facultyReimbursePct" value="5" step="0.5" min="0" max="100"><span class="suf">%</span></div></div>
+    </div>
+    <p class="legend">Calculated on gross subscription revenue and shown as a separate line on the cost-structure page. In this model it does not reduce Palonur's or SLM's share or change investor recovery — it is a transparency figure for what contributing faculty would be reimbursed.</p>
+  </div>
+
+  <div class="assume-group">
+    <div class="glabel ed">Economics &amp; costs (investor-covered)</div>
+    <div class="assume-grid">
+      <div class="assume"><label>Payment processing fee</label><div class="ifield"><input type="number" data-assume="processingFee" value="3" step="0.5" min="0" max="100"><span class="suf">%</span></div></div>
+      <div class="assume"><label>Palonur cost base (post-doc, Amy, infra)</label><div class="ifield"><span class="pre">$</span><input type="number" data-assume="costMonthly" value="40000" step="1000" min="0"><span class="suf">/mo</span></div></div>
+      <div class="assume"><label>AI usage cost per active subscriber</label><div class="ifield"><span class="pre">$</span><input type="number" data-assume="aiCostPerActive" value="0.50" step="0.05" min="0"><span class="suf">/mo</span></div></div>
+      <div class="assume"><label>Projection horizon</label><div class="ifield"><input type="number" data-assume="horizon" value="36" step="1" min="1" max="120"><span class="suf">mo</span></div></div>
+    </div>
+  </div>
+
+  <div class="page-footer"><span>Edit a field above — every table recomputes</span><span>palonur.com</span></div>
+</section>
+
+<!-- ============ COST STRUCTURE & REVENUE SPLIT ============ -->
+<section class="page">
+  <div class="page-header"><span class="wordmark">Palonur</span><span>Cost structure · revenue split</span></div>
+  <div class="eyebrow ed">Cost structure &amp; the revenue split</div>
+  <h1 class="ed">Lean costs investors cover up front; most of the upside gifted to Stanford.</h1>
+
+  <div class="stat-row">
+    <div class="stat-card red"><div class="k">Investor-covered cost base</div><div class="v">$<span data-out="costMonthlyShown">0</span><small>/mo</small></div><div class="note ed">Post-doc, support for Amy, infrastructure. The lean operating cost investors fund up front.</div></div>
+    <div class="stat-card"><div class="k">Palonur share</div><div class="v"><span data-out="palShareRec">60</span>% <small>→</small> <span data-out="palShareAfter">30</span>%</div><div class="note ed">A higher share during investor recovery, stepping down once the outlay is repaid.</div></div>
+    <div class="stat-card green"><div class="k">SLM share — year-end gift</div><div class="v"><span data-out="slmShareRec">40</span>% <small>→</small> <span data-out="slmShareAfter">70</span>%</div><div class="note ed">SLM's share rises after recovery; accrued monthly and gifted once a year, not an ongoing payout.</div></div>
+  </div>
+
+  <div class="cols">
+    <div class="block">
+      <h2 class="ed">What investors fund</h2>
+      <p class="ed">Investors cover Palonur's monthly cost base from launch. There is no marketing spend in the base case — distribution comes free through the SLM audience — so the cost is dominated by the people who build and steward the product: a post-doc on the science side and operating support for Amy, plus infrastructure.</p>
+      <p class="ed">Because the cost base is flat and lean, the payback math is simple: after a <span data-out="feeShown">3</span>% payment processing fee, as subscribers compound, Palonur's recovery-phase share crosses the cost line, and from that month forward the business self-funds — at which point the split steps down in SLM's favor.</p>
+    </div>
+    <div class="block">
+      <h2 class="ed">Why the SLM share is a gift</h2>
+      <p class="ed">The SLM portion is deliberately structured as a gift rather than a vendor payment. It is accrued through the year and distributed at year-end as a single contribution to Stanford Lifestyle Medicine. This keeps the relationship philanthropic and mission-aligned, and keeps the overwhelming majority of subscription value with Stanford.</p>
+      <p class="ed">It also funds the longer-term goal: a standing Stanford Lifestyle Medicine Institute, a dedicated post-doc, and Amy's leadership — all paid for out of this single year-end gift.</p>
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="eyebrow red ed">Year-one snapshot (from current assumptions)</div>
+    <div class="stat-row" style="margin:8px 0 0">
+      <div class="stat-card"><div class="k">Yr-1 subscription revenue</div><div class="v">$<span data-out="y1Rev">0</span></div></div>
+      <div class="stat-card green"><div class="k">Yr-1 SLM gift</div><div class="v">$<span data-out="y1Gift">0</span></div></div>
+      <div class="stat-card red"><div class="k">Yr-1 Palonur net</div><div class="v">$<span data-out="y1Net">0</span></div></div>
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="eyebrow red ed" data-eid="reimb-eyebrow">Faculty reimbursement (shown separately)</div>
+    <p class="ed" data-eid="reimb-note" style="margin:0 0 8px">Contributing faculty are reimbursed a defined share of <strong>gross subscription revenue</strong>, recognised separately from the Palonur / SLM split. It is shown here for transparency and does not change Palonur's net or the investor break-even math.</p>
+    <div class="stat-row" style="margin:8px 0 0">
+      <div class="stat-card"><div class="k">Reimbursement rate</div><div class="v"><span data-out="facReimbPctShown">0</span>%</div><div class="note">Share of gross subscription revenue.</div></div>
+      <div class="stat-card"><div class="k">Yr-1 faculty reimbursement</div><div class="v">$<span data-out="y1FacReimb">0</span></div></div>
+      <div class="stat-card"><div class="k">Cumulative over horizon</div><div class="v">$<span data-out="cumFacReimb">0</span></div></div>
+    </div>
+  </div>
+
+  <div class="page-footer"><span>Confidential · planning estimates only</span><span>palonur.com</span></div>
+</section>
+
+<!-- ============ MONTH-BY-MONTH PROJECTION ============ -->
+<section class="page flow">
+  <div class="page-header"><span class="wordmark">Palonur</span><span>Month-by-month projection</span></div>
+  <div class="eyebrow ed">Month-by-month projection · from launch</div>
+  <h1 class="ed">The subscription business, month by month.</h1>
+  <p class="lead ed">Subscriber growth off the visitor base, subscription revenue, the revenue split (SLM share accrued for the year-end gift), the investor-covered monthly cost, Palonur's net, and the cumulative cash position that defines investor recovery. The Palonur / SLM columns reflect the recovery-phase share until investors are repaid, then the steady-state share.</p>
+
+  <table class="proj">
+    <thead>
+      <tr>
+        <th>Month</th>
+        <th>New subs</th>
+        <th>Cumulative</th>
+        <th>Sub revenue (gross)</th>
+        <th>Net rev (after fee)</th>
+        <th>Palonur share</th>
+        <th>SLM share (gift)</th>
+        <th>Faculty reimb</th>
+        <th>Monthly cost</th>
+        <th>Palonur net</th>
+        <th>Cum. cash</th>
+        <th>Cum. SLM gift</th>
+      </tr>
+    </thead>
+    <tbody id="proj-body"></tbody>
+  </table>
+  <p class="legend ed">Highlighted rows mark the end of each 12-month period. The Palonur and SLM share columns are split from revenue net of the payment processing fee, so together they sum to less than gross "Sub revenue." "SLM share (gift)" is accrued monthly and distributed at year-end. "Cum. cash" is Palonur's cumulative position after Palonur's share and all costs — it turns positive at investor recovery.</p>
+
+  <div class="page-footer"><span>Confidential · planning estimates only</span><span>palonur.com</span></div>
+</section>
+
+<!-- ============ BREAK-EVEN / INVESTOR RECOVERY ============ -->
+<section class="page">
+  <div class="page-header"><span class="wordmark">Palonur</span><span>Break-even · investor recovery</span></div>
+  <div class="eyebrow ed">Break-even &amp; investor recovery</div>
+  <h1 class="ed">When Palonur's share repays the people who funded it.</h1>
+
+  <div class="stat-row">
+    <div class="stat-card red"><div class="k">Peak capital required</div><div class="v">$<span data-out="peakCapital">0</span></div><div class="note ed">The most Palonur is ever underwater — the total investors must fund before the business self-sustains.</div></div>
+    <div class="stat-card green"><div class="k">Investor recovery</div><div class="v" data-out="breakEvenLabel">—</div><div class="note ed">First month cumulative cash turns positive — Palonur's share has repaid all costs to date.</div></div>
+    <div class="stat-card"><div class="k">Ending subscribers</div><div class="v" data-out="endSubs">0</div><div class="note ed">Cumulative paying subscribers at the end of the projection horizon.</div></div>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat-card"><div class="k">Cumulative subscription revenue</div><div class="v">$<span data-out="cumRev">0</span></div></div>
+    <div class="stat-card green"><div class="k">Cumulative SLM gift</div><div class="v">$<span data-out="cumGift">0</span></div></div>
+    <div class="stat-card"><div class="k">Ending cash position</div><div class="v">$<span data-out="endCash">0</span></div></div>
+  </div>
+
+  <div class="block" style="margin-top:10px">
+    <h2 class="ed">The recovery curve</h2>
+    <div class="chart-wrap" id="breakeven-chart"></div>
+    <p class="legend ed">Cumulative subscribers (gold, right axis) compound off the visitor base while Palonur's cumulative cash position (left axis) runs negative — the investor outlay — then crosses zero at recovery (green marker). Redraws with every assumption change.</p>
+  </div>
+
+  <div class="block" style="margin-top:8px">
+    <h2 class="ed">How recovery works</h2>
+    <p class="ed">Investors fund Palonur's monthly cost base from launch, so the cumulative cash position starts negative and deepens while subscribers are few. As the base compounds, Palonur's recovery-phase share first covers the monthly cost (operational break-even), then begins paying down the accumulated outlay. "Investor recovery" above is the month the cumulative position crosses zero — every dollar investors put in has been returned. Beyond that point the business funds its own growth and the SLM year-end gift keeps compounding.</p>
+  </div>
+
+  <div class="band">
+    <div class="eyebrow red ed">Sensitivity</div>
+    <p style="margin:0" class="ed">Price and conversion are the dominant levers. Raising the AI usage tier or the annual plan, or improving conversion off the 120k base, pulls recovery forward sharply; higher churn pushes it out. Edit the assumptions on the Pricing page to test any scenario — these cards recompute live.</p>
+  </div>
+
+  <div class="page-footer"><span>Confidential · planning estimates only</span><span>palonur.com</span></div>
+</section>
+
+<!-- ============ ANNUAL SUMMARY ============ -->
+<section class="page flow annual">
+  <div class="page-header"><span class="wordmark">Palonur</span><span>Annual summary</span></div>
+  <div class="eyebrow ed">Annual summary</div>
+  <h1 class="ed">The plan, by year.</h1>
+  <p class="lead ed">Each 12-month period from the July 2026 launch: ending subscribers, subscription revenue, the revenue split with the SLM share shown as that year's gift, Palonur's net, and the year-end cash position.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Year</th>
+        <th>End subs</th>
+        <th>Sub revenue (gross)</th>
+        <th>Palonur share</th>
+        <th>SLM gift</th>
+        <th>Cost</th>
+        <th>Palonur net</th>
+        <th>End cash</th>
+      </tr>
+    </thead>
+    <tbody id="annual-body"></tbody>
+  </table>
+
+  <div class="band" style="margin-top:14px">
+    <div class="eyebrow red ed">The ask, in one line</div>
+    <p style="margin:0" class="ed">Fund a lean, flat cost base for a product that is already built; recover it from Palonur's share of a subscription sold to an audience that already exists; and gift the rest to Stanford — a year-end gift that builds toward the standing Institute this is all meant to create.</p>
+  </div>
+
+  <p class="legend ed" style="margin-top:10px">All figures are planning estimates generated from the editable assumptions and do not constitute commitments. Download CSV for the full month-by-month workings.</p>
+
+  <div class="page-footer"><span class="ed">karan@palonur.com · In partnership with Stanford Lifestyle Medicine</span><span>palonur.com</span></div>
+</section>
+
+<script>
+  // ---------------------------------------------------------------------------
+  // Self-contained. Two kinds of state, both localStorage-only (no server):
+  //   1. Assumptions (the numeric inputs) -> drive every computed table.
+  //   2. Narrative text edits (.ed elements) -> restored by stable index id.
+  // CSV / HTML / PDF export a snapshot. Launch month is fixed at July 2026.
+  // ---------------------------------------------------------------------------
+  const ASSUME_KEY  = 'palonur-business-plan-assumptions';
+  const CONTENT_KEY = 'palonur-business-plan-content';
+  const EDIT_FLAG   = 'palonur-business-plan-edit';
+  const LAUNCH_YEAR = 2026, LAUNCH_MONTH = 6; // July (0-indexed)
+
+  // ---------- helpers ----------
+  function setIndicator(text, ok){
+    const ind = document.getElementById('save-indicator');
+    if (!ind) return;
+    ind.textContent = text;
+    ind.style.color = ok === false ? '#e26a6a' : '#7fbf7f';
+    ind.classList.add('show');
+    clearTimeout(setIndicator._t);
+    setIndicator._t = setTimeout(() => ind.classList.remove('show'), 2200);
+  }
+  function money(n){
+    n = Math.round(n||0);
+    return n.toLocaleString('en-US');
+  }
+  function money2(n){ return (n||0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+  function num(n){ return Math.round(n||0).toLocaleString('en-US'); }
+  function fmtAbbr(n){
+    const s = n < 0 ? '-' : '';
+    const x = Math.abs(n);
+    if (x >= 1e6) return s + '$' + (x/1e6).toFixed(x >= 1e7 ? 0 : 1) + 'M';
+    if (x >= 1e3) return s + '$' + Math.round(x/1e3) + 'k';
+    return s + '$' + Math.round(x);
+  }
+  function fmtNum(n){
+    const x = Math.abs(n||0);
+    if (x >= 1e6) return (x/1e6).toFixed(1) + 'M';
+    if (x >= 1e3) return Math.round(x/1e3) + 'k';
+    return String(Math.round(x));
+  }
+  function monthLabel(i){
+    const d = new Date(LAUNCH_YEAR, LAUNCH_MONTH + i, 1);
+    return d.toLocaleString('en-US',{month:'short', year:'2-digit'});
+  }
+  function setOut(name, value){
+    document.querySelectorAll('[data-out="'+name+'"]').forEach(el => { el.textContent = value; });
+  }
+
+  // ---------- model ----------
+  function readAssumptions(){
+    const a = {};
+    document.querySelectorAll('[data-assume]').forEach(inp => {
+      const v = parseFloat(inp.value);
+      a[inp.dataset.assume] = isNaN(v) ? 0 : v;
+    });
+    return a;
+  }
+
+  function computeModel(a){
+    const horizon = Math.max(1, Math.min(120, Math.round(a.horizon || 36)));
+    const conv    = (a.convRate || 0) / 100;
+    const growth  = (a.monthlyGrowth || 0) / 100;
+    const churn   = (a.churn || 0) / 100;
+    const palShareRec   = (a.palonurSplit || 0) / 100;        // during investor recovery
+    const palShareAfter = (a.palonurSplitAfter || 0) / 100;   // after recovery
+    const fee     = Math.max(0, Math.min(100, a.processingFee || 0)) / 100;
+    const monthlyPrice = (a.priceAnnual || 0) / 12 + (a.aiTierMonthly || 0); // starting (year-1) price
+    const priceInc = Math.max(0, a.priceIncrease || 0) / 100;                // annual price escalator
+    const facReimbPct  = Math.max(0, a.facultyReimbursePct || 0) / 100; // faculty reimbursement, % of gross
+    const baseNew = (a.visitors || 0) * conv;
+
+    const rows = [];
+    let cumSubs = 0, cumCash = 0, cumRev = 0, cumGift = 0, cumFacReimb = 0;
+    let peak = 0, breakEven = -1, recovered = false;
+
+    for (let m = 0; m < horizon; m++){
+      const newSubs = baseNew * Math.pow(1 + growth, m);
+      cumSubs = cumSubs * (1 - churn) + newSubs;
+      const monthPrice = monthlyPrice * Math.pow(1 + priceInc, Math.floor(m / 12)); // escalates each year
+      const subRev = cumSubs * monthPrice;            // gross subscription revenue (escalates yearly)
+      const netRev = subRev * (1 - fee);              // after payment processing, before split
+      const palShare = recovered ? palShareAfter : palShareRec;
+      const palRev = netRev * palShare;
+      const slmRev = netRev * (1 - palShare);
+      const facReimb = subRev * facReimbPct;          // faculty reimbursement, on gross (informational)
+      const varCost = cumSubs * (a.aiCostPerActive || 0);
+      const cost = (a.costMonthly || 0) + varCost;
+      const palNet = palRev - cost;
+      cumCash += palNet;
+      cumRev += subRev;
+      cumGift += slmRev;
+      cumFacReimb += facReimb;
+      if (cumCash < peak) peak = cumCash;
+      if (!recovered && cumCash >= 0){ breakEven = m; recovered = true; }
+
+      rows.push({ m, newSubs, cumSubs, subRev, netRev, palShare, palRev, slmRev, facReimb, cost, palNet, cumCash, cumGift });
+    }
+    return { rows, horizon, monthlyPrice, palShareRec, palShareAfter, fee, cumRev, cumGift, cumFacReimb,
+             peakCapital: -peak, breakEven, endCash: cumCash, endSubs: cumSubs };
+  }
+
+  function annualBuckets(rows){
+    const years = [];
+    for (let i = 0; i < rows.length; i += 12){
+      const slice = rows.slice(i, i + 12);
+      const last = slice[slice.length - 1];
+      years.push({
+        year: (i / 12) + 1,
+        endSubs: last.cumSubs,
+        subRev: slice.reduce((s, r) => s + r.subRev, 0),
+        palRev: slice.reduce((s, r) => s + r.palRev, 0),
+        slmRev: slice.reduce((s, r) => s + r.slmRev, 0),
+        facReimb: slice.reduce((s, r) => s + r.facReimb, 0),
+        cost:   slice.reduce((s, r) => s + r.cost, 0),
+        palNet: slice.reduce((s, r) => s + r.palNet, 0),
+        endCash: last.cumCash,
+        startMonth: i, endMonth: i + slice.length - 1
+      });
+    }
+    return years;
+  }
+
+  // ---------- break-even chart (inline SVG, no libraries) ----------
+  function chartGeometry(model){
+    const rows = model.rows || [];
+    const n = rows.length;
+    const W = 700, H = 340, mL = 66, mR = 60, mT = 24, mB = 44;
+    const pW = W - mL - mR, pH = H - mT - mB;
+    const lastX = Math.max(1, n - 1);
+    const X = m => mL + (n === 1 ? pW/2 : (m/lastX) * pW);
+
+    let cashMin = 0, cashMax = 0, subsMax = 0;
+    rows.forEach(r => {
+      cashMin = Math.min(cashMin, r.cumCash);
+      cashMax = Math.max(cashMax, r.cumCash);
+      subsMax = Math.max(subsMax, r.cumSubs);
+    });
+    if (cashMax === 0 && cashMin === 0) cashMax = 1;
+    const span = (cashMax - cashMin) || 1, pad = span * 0.08;
+    const cMax = cashMax + pad, cMin = cashMin - pad;
+    const Yc = v => mT + (cMax - v) / (cMax - cMin) * pH;
+    if (subsMax <= 0) subsMax = 1;
+    const sMax = subsMax * 1.08;
+    const Ys = v => mT + (sMax - v) / sMax * pH;
+    return { rows, n, W, H, mL, mR, mT, mB, pW, pH, lastX, X, Yc, Ys, cashMin, cashMax, subsMax };
+  }
+
+  function buildChartSVG(model){
+    const g = chartGeometry(model);
+    const { rows, n, W, H, mL, mR, mT, mB, pW, pH, lastX, X, Yc, Ys, cashMin, cashMax, subsMax } = g;
+    if (!n) return '';
+    const zeroY = Yc(0);
+
+    const cashLine = rows.map((r,i) => (i ? 'L' : 'M') + X(r.m).toFixed(1) + ' ' + Yc(r.cumCash).toFixed(1)).join(' ');
+    const subsLine = rows.map((r,i) => (i ? 'L' : 'M') + X(r.m).toFixed(1) + ' ' + Ys(r.cumSubs).toFixed(1)).join(' ');
+    const area = 'M' + X(0).toFixed(1) + ' ' + zeroY.toFixed(1) + ' '
+      + rows.map(r => 'L' + X(r.m).toFixed(1) + ' ' + Yc(r.cumCash).toFixed(1)).join(' ')
+      + ' L' + X(lastX).toFixed(1) + ' ' + zeroY.toFixed(1) + ' Z';
+    const aboveH = Math.max(0, zeroY - mT), belowH = Math.max(0, (mT + pH) - zeroY);
+
+    // x-axis ticks (month labels)
+    const step = n <= 14 ? 3 : (n <= 26 ? 6 : 12);
+    let xticks = '';
+    const drawXTick = m => {
+      const x = X(m);
+      xticks += '<line x1="' + x.toFixed(1) + '" y1="' + (mT + pH) + '" x2="' + x.toFixed(1) + '" y2="' + (mT + pH + 5) + '" stroke="#cdbfa8"/>'
+        + '<text x="' + x.toFixed(1) + '" y="' + (mT + pH + 18) + '" text-anchor="middle" font-size="10" fill="#6f6457">' + monthLabel(m) + '</text>';
+    };
+    for (let m = 0; m < n; m += step) drawXTick(m);
+    if ((n - 1) % step !== 0) drawXTick(n - 1);
+
+    // left axis (cash) labels
+    let yticks = '';
+    [cashMax, 0, cashMin].forEach(v => {
+      const y = Yc(v);
+      yticks += '<text x="' + (mL - 8) + '" y="' + (y + 3).toFixed(1) + '" text-anchor="end" font-size="10" fill="#6f6457">' + fmtAbbr(v) + '</text>';
+    });
+
+    // right axis (subscribers) labels
+    const substicks =
+      '<text x="' + (mL + pW + 8) + '" y="' + (Ys(subsMax) + 3).toFixed(1) + '" font-size="10" fill="#B0883C">' + fmtNum(subsMax) + '</text>'
+      + '<text x="' + (mL + pW + 8) + '" y="' + (Ys(0) + 3).toFixed(1) + '" font-size="10" fill="#B0883C">0</text>';
+
+    // break-even marker
+    let be = '';
+    if (model.breakEven >= 0 && model.breakEven < n){
+      const bx = X(model.breakEven);
+      let anchor = 'middle', tx = bx;
+      if (bx < mL + 56){ anchor = 'start'; tx = bx + 6; }
+      else if (bx > mL + pW - 56){ anchor = 'end'; tx = bx - 6; }
+      be = '<line x1="' + bx.toFixed(1) + '" y1="' + mT + '" x2="' + bx.toFixed(1) + '" y2="' + (mT + pH) + '" stroke="#2f6b43" stroke-width="1.1" stroke-dasharray="4 3"/>'
+        + '<circle cx="' + bx.toFixed(1) + '" cy="' + zeroY.toFixed(1) + '" r="4" fill="#2f6b43" stroke="#fff" stroke-width="1.5"/>'
+        + '<text x="' + tx.toFixed(1) + '" y="14" text-anchor="' + anchor + '" font-size="10" font-weight="600" fill="#2f6b43">Recovery · mo ' + (model.breakEven + 1) + '</text>';
+    }
+
+    // legend (top-left, inside plot)
+    const lgX = mL + 10, lgY = mT + 12;
+    const legend = '<g font-size="10">'
+      + '<line x1="' + lgX + '" y1="' + lgY + '" x2="' + (lgX + 16) + '" y2="' + lgY + '" stroke="#241c13" stroke-width="1.8"/>'
+      + '<text x="' + (lgX + 21) + '" y="' + (lgY + 3.5) + '" fill="#352e25">Cumulative cash</text>'
+      + '<line x1="' + (lgX + 118) + '" y1="' + lgY + '" x2="' + (lgX + 134) + '" y2="' + lgY + '" stroke="#B0883C" stroke-width="1.8"/>'
+      + '<text x="' + (lgX + 139) + '" y="' + (lgY + 3.5) + '" fill="#352e25">Subscribers (right)</text>'
+      + '</g>';
+
+    return '<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="xMidYMid meet" role="img" '
+      + 'aria-label="Cumulative subscribers and cumulative cash position over the projection horizon with the investor-recovery crossover marked" '
+      + 'font-family="-apple-system,Segoe UI,Helvetica,Arial,sans-serif">'
+      + '<defs>'
+      + '<clipPath id="bechart-above"><rect x="' + mL + '" y="' + mT + '" width="' + pW + '" height="' + aboveH.toFixed(1) + '"/></clipPath>'
+      + '<clipPath id="bechart-below"><rect x="' + mL + '" y="' + zeroY.toFixed(1) + '" width="' + pW + '" height="' + belowH.toFixed(1) + '"/></clipPath>'
+      + '</defs>'
+      + '<rect x="' + mL + '" y="' + mT + '" width="' + pW + '" height="' + pH + '" fill="#fff" stroke="#e9e0d0"/>'
+      + '<path d="' + area + '" fill="#2f6b43" fill-opacity="0.13" clip-path="url(#bechart-above)"/>'
+      + '<path d="' + area + '" fill="#8C1515" fill-opacity="0.12" clip-path="url(#bechart-below)"/>'
+      + '<line x1="' + mL + '" y1="' + zeroY.toFixed(1) + '" x2="' + (mL + pW) + '" y2="' + zeroY.toFixed(1) + '" stroke="#6f6457" stroke-width="1" stroke-dasharray="3 3"/>'
+      + xticks + yticks + substicks
+      + '<path d="' + subsLine + '" fill="none" stroke="#B0883C" stroke-width="1.8"/>'
+      + '<path d="' + cashLine + '" fill="none" stroke="#241c13" stroke-width="1.8"/>'
+      + be + legend
+      + '<g id="bechart-hover" style="visibility:hidden" pointer-events="none">'
+        + '<line id="bechart-guide" y1="' + mT + '" y2="' + (mT + pH) + '" stroke="#8a7a63" stroke-width="1" stroke-dasharray="3 3"/>'
+        + '<circle id="bechart-dot-subs" r="3.5" fill="#B0883C" stroke="#fff" stroke-width="1.5"/>'
+        + '<circle id="bechart-dot-cash" r="3.5" fill="#241c13" stroke="#fff" stroke-width="1.5"/>'
+        + '<g id="bechart-tip">'
+          + '<rect id="bechart-tip-bg" rx="5" ry="5" width="134" height="60" fill="#fffdf8" stroke="#d8caac" opacity="0.97"/>'
+          + '<text id="bechart-tip-label" x="9" y="17" font-size="10.5" font-weight="700" fill="#352e25"></text>'
+          + '<text id="bechart-tip-subs" x="9" y="34" font-size="10" fill="#9a7426"></text>'
+          + '<text id="bechart-tip-cash" x="9" y="51" font-size="10" fill="#241c13"></text>'
+        + '</g>'
+      + '</g>'
+      + '<rect id="bechart-overlay" x="' + mL + '" y="' + mT + '" width="' + pW + '" height="' + pH + '" fill="transparent" style="cursor:crosshair"/>'
+      + '</svg>';
+  }
+
+  function wireChartHover(container, model){
+    const svg = container.querySelector('svg');
+    if (!svg) return;
+    const g = chartGeometry(model);
+    const rows = g.rows, n = g.n;
+    if (!n) return;
+    const overlay = svg.querySelector('#bechart-overlay');
+    const hover = svg.querySelector('#bechart-hover');
+    const guide = svg.querySelector('#bechart-guide');
+    const dotCash = svg.querySelector('#bechart-dot-cash');
+    const dotSubs = svg.querySelector('#bechart-dot-subs');
+    const tip = svg.querySelector('#bechart-tip');
+    const tipLabel = svg.querySelector('#bechart-tip-label');
+    const tipSubs = svg.querySelector('#bechart-tip-subs');
+    const tipCash = svg.querySelector('#bechart-tip-cash');
+    if (!overlay || !hover) return;
+    const projBody = document.getElementById('proj-body');
+    let lastRow = null;
+    function highlightRow(m){
+      if (!projBody) return;
+      const next = projBody.querySelector('tr[data-m="' + m + '"]');
+      if (next === lastRow) return;
+      if (lastRow) lastRow.classList.remove('chart-hover');
+      if (next) next.classList.add('chart-hover');
+      lastRow = next;
+    }
+    function clearRow(){
+      if (lastRow) lastRow.classList.remove('chart-hover');
+      lastRow = null;
+    }
+    const tw = 134, th = 60;
+    function moveTo(clientX, clientY){
+      const rect = svg.getBoundingClientRect();
+      if (!rect.width) return;
+      const scale = rect.width / g.W;
+      const svgX = (clientX - rect.left) / scale;
+      const svgY = (clientY - rect.top) / scale;
+      let m = Math.round((svgX - g.mL) / g.pW * g.lastX);
+      if (m < 0) m = 0;
+      if (m > n - 1) m = n - 1;
+      const r = rows[m];
+      const x = g.X(r.m), yc = g.Yc(r.cumCash), ys = g.Ys(r.cumSubs);
+      guide.setAttribute('x1', x.toFixed(1));
+      guide.setAttribute('x2', x.toFixed(1));
+      dotCash.setAttribute('cx', x.toFixed(1));
+      dotCash.setAttribute('cy', yc.toFixed(1));
+      dotSubs.setAttribute('cx', x.toFixed(1));
+      dotSubs.setAttribute('cy', ys.toFixed(1));
+      tipLabel.textContent = monthLabel(r.m) + ' · mo ' + (r.m + 1);
+      tipSubs.textContent = 'Subscribers: ' + num(r.cumSubs);
+      tipCash.textContent = 'Cash: ' + (r.cumCash < 0 ? '-$' : '$') + money(Math.abs(r.cumCash));
+      let tx = x + 14;
+      if (tx + tw > g.mL + g.pW) tx = x - 14 - tw;
+      if (tx < g.mL + 2) tx = g.mL + 2;
+      let ty = svgY - th - 12;
+      if (ty < g.mT + 2) ty = svgY + 16;
+      if (ty + th > g.mT + g.pH) ty = g.mT + g.pH - th - 2;
+      tip.setAttribute('transform', 'translate(' + tx.toFixed(1) + ',' + ty.toFixed(1) + ')');
+      hover.style.visibility = 'visible';
+      highlightRow(r.m);
+    }
+    overlay.addEventListener('pointermove', e => moveTo(e.clientX, e.clientY));
+    overlay.addEventListener('pointerdown', e => moveTo(e.clientX, e.clientY));
+    overlay.addEventListener('pointerleave', () => { hover.style.visibility = 'hidden'; clearRow(); });
+  }
+
+  // ---------- render ----------
+  let MODEL = null, YEARS = null;
+
+  function render(){
+    const a = readAssumptions();
+    const model = computeModel(a);
+    const years = annualBuckets(model.rows);
+    MODEL = model; YEARS = years;
+
+    // price hero
+    setOut('monthlyPrice', money2(model.monthlyPrice));
+    setOut('monthlyPrice2', money2(model.monthlyPrice));
+    setOut('annualPerSub', money(model.monthlyPrice * 12));
+    setOut('annualPlanShown', money(a.priceAnnual));
+    setOut('annualPlanMonthly', money2((a.priceAnnual || 0) / 12));
+    setOut('aiTierShown', money2(a.aiTierMonthly));
+
+    // split page
+    setOut('costMonthlyShown', money(a.costMonthly));
+    const palRec = Math.round(a.palonurSplit), palAft = Math.round(a.palonurSplitAfter);
+    setOut('palShareRec', palRec);
+    setOut('slmShareRec', 100 - palRec);
+    setOut('palShareAfter', palAft);
+    setOut('slmShareAfter', 100 - palAft);
+    setOut('feeShown', (a.processingFee || 0));
+    syncPresetButtons(palRec, palAft);
+
+    // year-1 snapshot
+    const y1 = years[0];
+    if (y1){
+      setOut('y1Rev', money(y1.subRev));
+      setOut('y1Gift', money(y1.slmRev));
+      setOut('y1Net', money(y1.palNet));
+      setOut('y1FacReimb', money(y1.facReimb));
+    }
+    setOut('facReimbPctShown', (a.facultyReimbursePct || 0));
+    setOut('cumFacReimb', money(model.cumFacReimb));
+
+    // break-even cards
+    setOut('peakCapital', money(model.peakCapital));
+    setOut('endSubs', num(model.endSubs));
+    setOut('cumRev', money(model.cumRev));
+    setOut('cumGift', money(model.cumGift));
+    setOut('endCash', money(model.endCash));
+    document.querySelectorAll('[data-out="breakEvenLabel"]').forEach(el => {
+      if (model.breakEven >= 0) el.textContent = monthLabel(model.breakEven) + ' · mo ' + (model.breakEven + 1);
+      else el.textContent = 'Beyond horizon';
+    });
+
+    // break-even chart
+    const chart = document.getElementById('breakeven-chart');
+    if (chart){ chart.innerHTML = buildChartSVG(model); wireChartHover(chart, model); }
+
+    // projection body
+    const pb = document.getElementById('proj-body');
+    pb.innerHTML = model.rows.map(r => {
+      const yearEnd = ((r.m + 1) % 12 === 0);
+      const cashCls = r.cumCash >= 0 ? 'pos' : 'neg';
+      const netCls = r.palNet >= 0 ? 'pos' : 'neg';
+      return '<tr data-m="' + r.m + '" class="' + (yearEnd ? 'yr-end' : '') + '">' +
+        '<td>' + monthLabel(r.m) + '</td>' +
+        '<td>' + num(r.newSubs) + '</td>' +
+        '<td>' + num(r.cumSubs) + '</td>' +
+        '<td>$' + money(r.subRev) + '</td>' +
+        '<td>$' + money(r.netRev) + '</td>' +
+        '<td>$' + money(r.palRev) + '</td>' +
+        '<td>$' + money(r.slmRev) + '</td>' +
+        '<td>$' + money(r.facReimb) + '</td>' +
+        '<td>$' + money(r.cost) + '</td>' +
+        '<td class="' + netCls + '">$' + money(r.palNet) + '</td>' +
+        '<td class="' + cashCls + '">$' + money(r.cumCash) + '</td>' +
+        '<td>$' + money(r.cumGift) + '</td>' +
+      '</tr>';
+    }).join('');
+
+    // annual body
+    const ab = document.getElementById('annual-body');
+    ab.innerHTML = years.map(y => {
+      const netCls = y.palNet >= 0 ? 'pos' : 'neg';
+      const cashCls = y.endCash >= 0 ? 'pos' : 'neg';
+      return '<tr>' +
+        '<td>Year ' + y.year + '</td>' +
+        '<td>' + num(y.endSubs) + '</td>' +
+        '<td>$' + money(y.subRev) + '</td>' +
+        '<td>$' + money(y.palRev) + '</td>' +
+        '<td>$' + money(y.slmRev) + '</td>' +
+        '<td>$' + money(y.cost) + '</td>' +
+        '<td class="' + netCls + '">$' + money(y.palNet) + '</td>' +
+        '<td class="' + cashCls + '">$' + money(y.endCash) + '</td>' +
+      '</tr>';
+    }).join('');
+  }
+
+  // ---------- assumptions persistence ----------
+  function saveAssumptions(){
+    const a = {};
+    document.querySelectorAll('[data-assume]').forEach(inp => { a[inp.dataset.assume] = inp.value; });
+    try { localStorage.setItem(ASSUME_KEY, JSON.stringify(a)); setIndicator('Saved in this browser', true); }
+    catch(e){ setIndicator('Save failed (storage full?)', false); }
+  }
+  function loadAssumptions(){
+    try {
+      const raw = localStorage.getItem(ASSUME_KEY);
+      if (!raw) return;
+      const a = JSON.parse(raw);
+      document.querySelectorAll('[data-assume]').forEach(inp => {
+        if (a[inp.dataset.assume] !== undefined) inp.value = a[inp.dataset.assume];
+      });
+    } catch(e){}
+  }
+
+  // ---------- narrative persistence ----------
+  function assignEditIds(){
+    // Elements with an explicit data-eid (e.g. the one-page summary) keep it, so
+    // inserting them near the top doesn't shift the auto-numbered e0..eN ids and
+    // corrupt narrative edits already saved against the original ordering.
+    let i = 0;
+    document.querySelectorAll('.ed').forEach((el) => {
+      if (el.dataset.eid) return;
+      el.dataset.eid = 'e' + i; i++;
+    });
+  }
+  function saveNarrative(){
+    const map = {};
+    document.querySelectorAll('.ed').forEach(el => { map[el.dataset.eid] = el.innerHTML; });
+    try { localStorage.setItem(CONTENT_KEY, JSON.stringify(map)); setIndicator('Saved in this browser', true); }
+    catch(e){ setIndicator('Save failed (storage full?)', false); }
+  }
+  function loadNarrative(){
+    try {
+      const raw = localStorage.getItem(CONTENT_KEY);
+      if (!raw) return;
+      const map = JSON.parse(raw);
+      document.querySelectorAll('.ed').forEach(el => {
+        if (map[el.dataset.eid] !== undefined) el.innerHTML = map[el.dataset.eid];
+      });
+    } catch(e){}
+  }
+
+  // ---------- edit mode (narrative text only) ----------
+  function isEditMode(){ return !!sessionStorage.getItem(EDIT_FLAG); }
+  function refreshEditAffordances(){
+    const editing = isEditMode();
+    const btn = document.getElementById('edit-mode-btn');
+    if (btn) btn.textContent = editing ? 'Text editing on · click to exit' : 'Enable text editing';
+    document.querySelectorAll('.ed').forEach(el => {
+      if (editing) el.setAttribute('contenteditable','true');
+      else el.removeAttribute('contenteditable');
+    });
+  }
+  function toggleEditMode(){
+    if (isEditMode()){ sessionStorage.removeItem(EDIT_FLAG); refreshEditAffordances(); setIndicator('Text editing off', true); return; }
+    sessionStorage.setItem(EDIT_FLAG, '1'); refreshEditAffordances();
+    setIndicator('Text editing enabled · saved in this browser', true);
+  }
+
+  // ---------- revenue-share presets ----------
+  function applyPreset(rec, after){
+    const a = document.querySelector('[data-assume="palonurSplit"]');
+    const b = document.querySelector('[data-assume="palonurSplitAfter"]');
+    if (a) a.value = rec;
+    if (b) b.value = after;
+    render(); saveAssumptions();
+    setIndicator('Revenue-share scenario applied · ' + rec + ' → ' + after, true);
+  }
+  function syncPresetButtons(rec, after){
+    document.querySelectorAll('.preset[data-preset]').forEach(btn => {
+      const [r, f] = btn.dataset.preset.split(',').map(Number);
+      btn.classList.toggle('active', r === rec && f === after);
+    });
+  }
+
+  // ---------- CSV export ----------
+  function downloadCSV(){
+    if (!MODEL) render();
+    const a = readAssumptions();
+    const rowsCsv = [];
+    const esc = v => '"' + String(v).replace(/"/g,'""') + '"';
+
+    rowsCsv.push(['Palonur — SLM Newsletter Business Plan — Financial Model']);
+    rowsCsv.push(['Generated', new Date().toISOString()]);
+    rowsCsv.push(['Note','Planning estimates only. Launch month: July 2026.']);
+    rowsCsv.push([]);
+    rowsCsv.push(['ASSUMPTIONS']);
+    const labels = {
+      priceAnnual:'Annual subscription plan ($/yr)', aiTierMonthly:'AI usage tier ($/mo)', priceIncrease:'Annual price increase (%)',
+      visitors:'Monthly SLM visitors', convRate:'Visitor->subscriber conversion (%)',
+      monthlyGrowth:'Monthly growth in new sign-ups (%)', churn:'Monthly churn (%)',
+      palonurSplit:'Palonur revenue share — during recovery (%)', palonurSplitAfter:'Palonur revenue share — after recovery (%)', facultyReimbursePct:'Faculty reimbursement (% of gross revenue)', processingFee:'Payment processing fee (%)', costMonthly:'Palonur cost base ($/mo)',
+      aiCostPerActive:'AI usage cost per active subscriber ($/mo)', horizon:'Projection horizon (months)'
+    };
+    Object.keys(labels).forEach(k => rowsCsv.push([labels[k], a[k]]));
+    rowsCsv.push(['Blended price per subscriber ($/mo)', (MODEL.monthlyPrice).toFixed(2)]);
+    rowsCsv.push([]);
+    rowsCsv.push(['MONTH-BY-MONTH PROJECTION']);
+    rowsCsv.push(['Month','New subscribers','Cumulative subscribers','Subscription revenue','Net revenue (after fee)','Palonur share','SLM share (year-end gift)','Faculty reimbursement','Monthly cost','Palonur net','Cumulative cash','Cumulative SLM gift']);
+    MODEL.rows.forEach(r => rowsCsv.push([
+      monthLabel(r.m), Math.round(r.newSubs), Math.round(r.cumSubs),
+      Math.round(r.subRev), Math.round(r.netRev), Math.round(r.palRev), Math.round(r.slmRev), Math.round(r.facReimb),
+      Math.round(r.cost), Math.round(r.palNet), Math.round(r.cumCash), Math.round(r.cumGift)
+    ]));
+    rowsCsv.push([]);
+    rowsCsv.push(['ANNUAL SUMMARY']);
+    rowsCsv.push(['Year','Ending subscribers','Subscription revenue','Palonur share','SLM gift','Faculty reimbursement','Cost','Palonur net','Ending cash']);
+    YEARS.forEach(y => rowsCsv.push([
+      'Year ' + y.year, Math.round(y.endSubs), Math.round(y.subRev), Math.round(y.palRev),
+      Math.round(y.slmRev), Math.round(y.facReimb), Math.round(y.cost), Math.round(y.palNet), Math.round(y.endCash)
+    ]));
+    rowsCsv.push([]);
+    rowsCsv.push(['KEY OUTPUTS']);
+    rowsCsv.push(['Peak capital required', Math.round(MODEL.peakCapital)]);
+    rowsCsv.push(['Investor recovery month', MODEL.breakEven >= 0 ? (monthLabel(MODEL.breakEven) + ' (month ' + (MODEL.breakEven+1) + ')') : 'Beyond horizon']);
+    rowsCsv.push(['Ending subscribers', Math.round(MODEL.endSubs)]);
+    rowsCsv.push(['Cumulative subscription revenue', Math.round(MODEL.cumRev)]);
+    rowsCsv.push(['Cumulative SLM gift', Math.round(MODEL.cumGift)]);
+    rowsCsv.push(['Cumulative faculty reimbursement', Math.round(MODEL.cumFacReimb)]);
+
+    const csv = rowsCsv.map(row => row.map(esc).join(',')).join('\r\n');
+    const blob = new Blob([csv], { type:'text/csv;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url; link.download = 'palonur_slm_newsletter_financial_model.csv';
+    document.body.appendChild(link); link.click(); link.remove();
+    URL.revokeObjectURL(url);
+    setIndicator('CSV downloaded', true);
+  }
+
+  // ---------- HTML export ----------
+  function saveHTML(){
+    const clone = document.documentElement.cloneNode(true);
+    clone.querySelectorAll('.toolbar, #save-indicator').forEach(n => n.remove());
+    clone.querySelectorAll('[contenteditable]').forEach(n => n.removeAttribute('contenteditable'));
+    // re-lock the gate in the downloaded copy (the live one may be unlocked)
+    const gateClone = clone.querySelector('#pw-gate');
+    if (gateClone) gateClone.style.removeProperty('display');
+    // freeze current input values so the snapshot opens with the same numbers
+    const liveInputs = document.querySelectorAll('[data-assume]');
+    clone.querySelectorAll('[data-assume]').forEach((inp, i) => {
+      if (liveInputs[i]) inp.setAttribute('value', liveInputs[i].value);
+    });
+    const html = '<!doctype html>\n' + clone.outerHTML;
+    const blob = new Blob([html], { type:'text/html' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'palonur_slm_newsletter_business_plan.html';
+    document.body.appendChild(a); a.click(); a.remove();
+    URL.revokeObjectURL(url);
+    setIndicator('HTML downloaded', true);
+  }
+
+  function resetAll(){
+    if (!confirm('Reset the business plan to its original assumptions and text? This clears edits saved in THIS browser (assumptions are shared with the SLM partnership version).')) return;
+    localStorage.removeItem(ASSUME_KEY);
+    localStorage.removeItem(CONTENT_KEY);
+    location.reload();
+  }
+
+  // ---------- password gate (soft, client-side; case-insensitive) ----------
+  const PW_HASH = '2379340481082047';            // cyrb53 of the lowercased password
+  const PW_UNLOCK_KEY = 'palonur-bp-unlocked';
+  function pwHash(str){
+    let h1 = 0xdeadbeef, h2 = 0x41c6ce57;
+    for (let i = 0, ch; i < str.length; i++){
+      ch = str.charCodeAt(i);
+      h1 = Math.imul(h1 ^ ch, 2654435761);
+      h2 = Math.imul(h2 ^ ch, 1597334677);
+    }
+    h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507); h1 ^= Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+    h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507); h2 ^= Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+    return (4294967296 * (2097151 & h2) + (h1 >>> 0)).toString();
+  }
+  function unlockDoc(){
+    const g = document.getElementById('pw-gate');
+    if (g) g.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+  function initGate(){
+    const gate = document.getElementById('pw-gate');
+    if (!gate) return;
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('print') === '1' || sessionStorage.getItem(PW_UNLOCK_KEY) === '1'){ unlockDoc(); return; }
+    document.body.style.overflow = 'hidden';
+    const form  = document.getElementById('pw-form');
+    const input = document.getElementById('pw-input');
+    const err   = document.getElementById('pw-error');
+    if (form) form.addEventListener('submit', e => {
+      e.preventDefault();
+      const val = (input && input.value ? input.value : '').trim().toLowerCase();
+      if (pwHash(val) === PW_HASH){
+        try { sessionStorage.setItem(PW_UNLOCK_KEY, '1'); } catch(_){}
+        unlockDoc();
+      } else {
+        if (err) err.classList.add('show');
+        if (input){ input.value = ''; input.focus(); }
+      }
+    });
+    if (input) input.focus();
+  }
+
+  // ---------- boot ----------
+  document.getElementById('pdf-btn').addEventListener('click', function(e){
+    e.preventDefault();
+    const w = window.open('/business-plan.html?print=1', '_blank', 'noopener');
+    if (!w) { alert('Popup blocked — allow popups, then use Download PDF again.'); }
+  });
+
+  window.addEventListener('DOMContentLoaded', async () => {
+    initGate();
+    assignEditIds();
+    loadAssumptions();
+    loadNarrative();
+    render();
+    refreshEditAffordances();
+
+    // assumptions: live recompute + persist
+    document.querySelectorAll('[data-assume]').forEach(inp => {
+      inp.addEventListener('input', () => { render(); saveAssumptions(); });
+    });
+    // narrative: persist on edit
+    document.addEventListener('input', (e) => {
+      if (isEditMode() && e.target.closest && e.target.closest('.ed')) saveNarrative();
+    }, true);
+
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('print') === '1'){
+      document.querySelectorAll('.toolbar, #save-indicator').forEach(n => n.remove());
+      document.querySelectorAll('[contenteditable]').forEach(n => n.removeAttribute('contenteditable'));
+      try { if (document.fonts && document.fonts.ready) await document.fonts.ready; } catch(_){}
+      setTimeout(() => { try { window.focus(); window.print(); } catch(_){} }, 450);
+    }
+  });
+</script>
+</body>
+</html>

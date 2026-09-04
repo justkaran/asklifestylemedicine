@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--
+      Self-heal stale cache after a redeploy. A browser-cached index.html can
+      reference an old hashed bundle (/assets/index-OLDHASH.js) that no longer
+      exists once a new build replaces it. The SPA rewrite (/* -> /index.html)
+      then returns text/html for that missing .js, so module loading fails with
+      "Expected a JavaScript module but got MIME type text/html". Catch that
+      specific failure and do ONE cache-busting reload to fetch the fresh
+      index.html (the _cb guard prevents any reload loop).
+    -->
+    <script>
+      (function () {
+        window.addEventListener(
+          "error",
+          function (e) {
+            var t = e && e.target;
+            if (
+              t &&
+              t.tagName === "SCRIPT" &&
+              t.src &&
+              t.src.indexOf("/assets/") !== -1 &&
+              location.search.indexOf("_cb=") === -1
+            ) {
+              location.replace(
+                location.pathname +
+                  (location.search ? location.search + "&" : "?") +
+                  "_cb=" +
+                  Date.now() +
+                  location.hash,
+              );
+            }
+          },
+          true,
+        );
+      })();
+    </script>
+    <title>Palonur — The authority router for human knowledge in the AI era</title>
+    <meta
+      name="description"
+      content="Named Stanford faculty answer your questions about sleep, movement, nutrition, stress, and healthy aging. Every answer cites the study. Every expert puts their name on it."
+    />
+    <meta name="keywords" content="Palonur, Stanford Lifestyle Medicine, sleep, movement, nutrition, stress, healthy aging, evidence-based health, faculty-governed AI" />
+    <meta name="author" content="Palonur · Stanford Lifestyle Medicine Program" />
+    <meta name="theme-color" content="#01010A" />
+    <link rel="canonical" href="https://palonur.com/" />
+
+    <!-- Favicons (palonur tree-on-sun mark) -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+    <!-- Open Graph (Facebook, LinkedIn, iMessage previews) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://palonur.com/" />
+    <meta property="og:title" content="Palonur — America's Finest Faculty" />
+    <meta property="og:description" content="Named Stanford faculty answer your questions about sleep, movement, nutrition, stress, and healthy aging. Every answer cites the study. Every expert puts their name on it." />
+    <meta property="og:image" content="https://palonur.com/opengraph.jpg" />
+    <meta property="og:site_name" content="Palonur" />
+
+    <!-- Twitter / X card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Palonur — America's Finest Faculty" />
+    <meta name="twitter:description" content="Named Stanford faculty answer your questions about sleep, movement, nutrition, stress, and healthy aging. Every answer cites the study." />
+    <meta name="twitter:image" content="https://palonur.com/opengraph.jpg" />
+
+    <!-- Schema.org structured data — helps Google show a rich, descriptive snippet -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Palonur",
+      "url": "https://palonur.com",
+      "logo": "https://palonur.com/favicon-512.png",
+      "description": "Palonur is the faculty-governed platform where named Stanford Lifestyle Medicine faculty answer your questions about sleep, movement, nutrition, stress, and healthy aging — every answer cited, every expert named.",
+      "founder": "Palonur, Palo Alto",
+      "sameAs": [],
+      "memberOf": {
+        "@type": "Organization",
+        "name": "Stanford Lifestyle Medicine Program",
+        "url": "https://longevity.stanford.edu/lifestyle/"
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

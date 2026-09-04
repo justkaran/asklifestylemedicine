@@ -1,0 +1,922 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A brief, informal proposal for an AI-augmented Stanford Lifestyle Medicine newsletter — written by faculty, produced by Palonur.">
+<title>Palonur · An AI-Augmented Newsletter for SLM</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Spectral:wght@300;400;500;600&display=swap');
+  :root{
+    --ink:#2b2017; --paper:#FBF8F2; --paper-2:#F4ECDD; --sub:#6f6457; --rule:#e9e0d0; --rule-2:#dccfba;
+    --red:#8C1515; --red-2:#a8332c; --gold:#B0883C; --gold-2:#caa24a; --gold-ink:#866321; --card:#ffffff;
+    --serif:'Spectral',Georgia,'Times New Roman',serif;
+    --display:'Fraunces',Georgia,serif;
+    --sans:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:#ede4d4;color:var(--ink);font-family:var(--serif)}
+  body{padding:80px 16px 120px}
+
+  /* Toolbar (editing chrome — not part of the document, never printed) */
+  .toolbar{
+    position:fixed;top:0;left:0;right:0;height:56px;background:#1f1812;color:#fff;
+    display:flex;align-items:center;justify-content:space-between;padding:0 24px;
+    z-index:9999;font-family:var(--sans);font-size:13px;border-bottom:1px solid #3a3024;
+  }
+  .toolbar .left{display:flex;align-items:center;gap:14px}
+  .toolbar .brand{font-weight:600;letter-spacing:.04em}
+  .toolbar .hint{color:#a99c8a}
+  .toolbar button{
+    background:transparent;border:1px solid #4a3f31;color:#fff;padding:8px 14px;border-radius:6px;
+    cursor:pointer;font:inherit;margin-left:8px
+  }
+  .toolbar button:hover{background:#2b241b;border-color:#6a5b46}
+  .toolbar a.pdf-link{
+    display:inline-block;background:var(--red);border:1px solid var(--red);color:#fff;
+    text-decoration:none;border-radius:6px;padding:7px 12px;font:inherit;font-size:12.5px;cursor:pointer;
+  }
+  .toolbar a.pdf-link:hover{background:#741010;border-color:#741010}
+
+  /* Section shell (kept as .page so save/load + export keep working) */
+  .page{
+    width:100%;max-width:1040px;margin:26px auto;background:var(--paper);
+    padding:54px 60px 48px;box-shadow:0 18px 50px rgba(90,55,20,.13);position:relative;
+    border-radius:20px;border-top:3px solid var(--red);
+  }
+  .page.letter{border-top:3px solid var(--gold)}
+  .page.example{
+    background:linear-gradient(180deg,#FCFAF5 0%, #F6EFE2 100%);
+    border-top:3px solid var(--gold);padding:58px 60px 52px;
+  }
+  .page.cta{
+    background:linear-gradient(180deg,#FCFAF5 0%, #F4ECDD 100%);
+    border-top:3px solid var(--red);text-align:center;padding:60px 60px 56px;
+  }
+
+  .page-header{
+    display:flex;justify-content:space-between;align-items:baseline;
+    font-family:var(--sans);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--sub);
+    border-bottom:1px solid var(--rule);padding-bottom:11px;margin-bottom:26px;
+  }
+  .page-header .wordmark{font-family:var(--display);font-size:14px;font-weight:600;letter-spacing:.34em;color:var(--red);text-transform:uppercase}
+
+  .rule-label{
+    font-family:var(--sans);font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--gold-ink);margin-bottom:12px;font-weight:600
+  }
+  .rule-label.red,.red{color:var(--red)}
+
+  h1{font-family:var(--display);font-size:34px;line-height:1.08;font-weight:500;letter-spacing:-.01em;margin:0 0 14px;color:var(--ink)}
+  h2{font-size:11px;line-height:1.2;font-weight:600;margin:0 0 8px;
+     font-family:var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--red);
+     position:relative;padding-left:14px}
+  h2::before{content:"";position:absolute;left:0;top:.05em;width:4px;height:.9em;background:var(--gold);border-radius:1px}
+  p{font-size:14px;line-height:1.62;margin:0 0 10px;color:#3b3328}
+  .lead{font-size:16.5px;line-height:1.66;color:#3a3127;margin:0 0 14px}
+  .lead.first{font-size:17.5px}
+  .lead.statement{font-size:20px;line-height:1.5;color:var(--ink)}
+  .lead em{font-style:italic;color:var(--red);font-weight:500}
+
+  /* Proposal — at a glance */
+  .glance{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:13px;margin:24px 0 4px}
+  .gcard{background:#fff;border:1px solid var(--rule);border-left:3px solid var(--gold);border-radius:12px;
+    padding:15px 17px;box-shadow:0 5px 16px rgba(90,45,20,.05)}
+  .gcard .gt{font-family:var(--display);font-size:15px;font-weight:600;color:var(--ink);margin:0 0 4px}
+  .gcard p{margin:0;font-size:12.5px;line-height:1.5;color:#5f5446}
+
+  /* Example (reader-facing) hero */
+  .hero-top{text-align:center;max-width:800px;margin:0 auto}
+  .page.example h1{font-size:clamp(30px,4vw,44px);line-height:1.06;font-weight:600;letter-spacing:-.012em;color:var(--ink)}
+  .page.example .lead{max-width:660px;margin:0 auto 4px}
+  .hero-sub{font-family:var(--sans);font-size:12.5px;letter-spacing:.05em;color:#8a7d68;margin-top:16px}
+
+  /* Actionable-journey strip */
+  .journey{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:30px auto 8px;max-width:840px}
+  .jstep{background:#fff;border:1px solid var(--rule);border-radius:14px;padding:16px 18px;text-align:left;
+    box-shadow:0 6px 18px rgba(90,45,20,.05)}
+  .jstep .jk{font-family:var(--sans);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-ink);margin-bottom:8px;font-weight:600}
+  .jstep p{color:#5f5446;font-size:13.5px;line-height:1.45;margin:0}
+  .jstep .jt{font-family:var(--display);font-weight:600;color:var(--ink);display:block;margin-bottom:2px;font-size:14.5px}
+
+  /* What you get */
+  .get-head{text-align:center;margin:44px auto 22px;max-width:660px}
+  .get-head .gh-title{font-family:var(--display);font-size:22px;font-weight:600;color:var(--ink);margin:0 0 6px}
+  .get-head .gh-note{font-family:var(--sans);font-size:12px;letter-spacing:.04em;color:#8a7d68}
+  .tiers{display:grid;grid-template-columns:repeat(auto-fit,minmax(248px,1fr));gap:18px}
+  .tier{
+    background:#fff;border-radius:16px;padding:22px 22px 24px;border:1px solid #efe6d6;
+    box-shadow:0 10px 30px rgba(90,45,20,.08);display:flex;flex-direction:column;gap:9px;position:relative
+  }
+  .tier .chk{
+    width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--gold-2),#9a6f28);
+    color:#fff;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;
+    box-shadow:0 4px 12px rgba(120,80,20,.22);margin-bottom:2px
+  }
+  .tier .at{font-family:var(--display);font-size:16px;font-weight:600;color:var(--ink);letter-spacing:.005em;text-transform:none;margin:0}
+  .tier p{color:#5f5446;font-size:13px;line-height:1.5;margin:0}
+  .tier .ai-tag{font-family:var(--sans);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-ink);font-weight:600;margin-top:auto;padding-top:8px}
+
+  /* Steps */
+  .steps{margin-top:18px;border-top:1px solid var(--rule);padding-top:16px}
+  .step{display:grid;grid-template-columns:38px 1fr;gap:16px;padding:14px 0;border-bottom:1px solid var(--rule)}
+  .step:last-child{border-bottom:none}
+  .step .n{font-family:var(--display);font-size:24px;font-weight:600;color:var(--gold);line-height:1}
+  .step .st-title{font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--red);margin-bottom:4px}
+  .step p{margin:0;font-size:13.5px;line-height:1.55}
+
+  /* Two-up feature cards */
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:18px}
+  .feature{background:#fff;border:1px solid var(--rule);border-top:3px solid var(--red);border-radius:14px;
+    padding:20px 22px;box-shadow:0 6px 20px rgba(90,45,20,.06)}
+  .feature .rule-label{margin-bottom:7px}
+  .feature h3{font-family:var(--display);font-size:18px;font-weight:600;color:var(--ink);margin:0 0 8px}
+  .feature p{margin:0;font-size:13.5px;line-height:1.56}
+
+  /* Faculty portal visual (stand-in for a screenshot) */
+  .shot{margin:20px 0 6px;border:1px solid var(--rule-2);border-radius:14px;overflow:hidden;box-shadow:0 10px 30px rgba(90,45,20,.10);background:#fff}
+  .shot-bar{display:flex;align-items:center;gap:7px;background:#efe7d8;padding:9px 13px;border-bottom:1px solid var(--rule-2)}
+  .shot-bar .dot{width:9px;height:9px;border-radius:50%;background:#cdbfa6}
+  .shot-bar .url{margin-left:8px;font-family:var(--sans);font-size:10px;letter-spacing:.04em;color:#7a6e5c;background:#fff;border:1px solid var(--rule-2);border-radius:6px;padding:3px 10px}
+  .shot-body{background:#FBF7F0;padding:20px 22px}
+  .mock-eyebrow{font-family:var(--sans);font-size:8.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--red);margin-bottom:7px}
+  .mock-h{font-family:var(--display);font-size:20px;color:#572020;margin:0 0 4px;font-weight:500}
+  .mock-sub{font-size:11px;color:#8a6a5a;margin:0 0 14px;line-height:1.4;max-width:52ch}
+  .mock-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin-bottom:15px}
+  .mock-card{border:1px solid #E8DDD0;border-radius:12px;padding:12px 14px;background:#fff}
+  .mock-card .v{font-family:var(--display);font-size:19px;color:#572020}
+  .mock-card .k{font-size:9px;color:#8a6a5a;margin-top:3px}
+  .mock-form{border:1px solid #E8DDD0;border-radius:12px;padding:15px 16px;background:#fff}
+  .mock-form .fh{font-family:var(--display);font-size:14px;color:#572020;margin:0 0 10px}
+  .mock-label{font-size:9.5px;color:#572020;margin:0 0 4px}
+  .mock-input{border:1px solid #E8DDD0;border-radius:7px;background:#fff;color:#b7a899;font-size:10px;padding:8px 10px;margin-bottom:10px}
+  .mock-input.area{height:46px}
+  .mock-btn{display:inline-block;background:#8C1515;color:#fff;font-family:var(--sans);font-size:10px;font-weight:600;border-radius:7px;padding:8px 15px}
+  .shot-caption{font-family:var(--sans);font-size:10px;letter-spacing:.04em;color:var(--sub);margin-top:10px;font-style:normal;line-height:1.45}
+  .shot-caption strong{color:var(--ink);font-weight:600}
+
+  /* What Palonur AI actually does — explicit capability panel */
+  .aican{margin:22px 0 6px;background:#fff;border:1px solid var(--rule);border-top:3px solid var(--gold);border-radius:16px;padding:22px 24px 24px;box-shadow:0 8px 24px rgba(90,45,20,.06)}
+  .aican .ac-h{font-family:var(--display);font-size:19px;font-weight:600;color:var(--ink);margin:0 0 3px}
+  .aican .ac-note{font-family:var(--sans);font-size:11.5px;letter-spacing:.04em;color:#8a7d68;margin:0 0 16px;line-height:1.45}
+  .ai-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+  .ai-item{border:1px solid var(--rule);border-left:3px solid var(--gold-2);border-radius:11px;padding:13px 15px;background:#FCFAF5}
+  .ai-item .ai-do{font-family:var(--display);font-size:14px;font-weight:600;color:var(--ink);margin:0 0 4px}
+  .ai-item p{margin:0;font-size:12px;line-height:1.5;color:#5f5446}
+  .ai-item.hl{border-left-color:var(--red);background:linear-gradient(180deg,#fff,#fbf2ee);box-shadow:0 6px 18px rgba(140,21,21,.08)}
+  .ai-item.hl .ai-do{color:var(--red)}
+  .ai-item .badge{display:inline-block;font-family:var(--sans);font-size:8px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:#fff;background:var(--red);border-radius:5px;padding:2px 6px;margin-left:8px;vertical-align:middle}
+
+  /* Faculty mock — AI action buttons */
+  .ai-actions{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 12px}
+  .ai-actions .ai-btn{display:inline-flex;align-items:center;gap:6px;font-family:var(--sans);font-size:9.5px;font-weight:600;color:var(--gold-ink);background:#FCF6E9;border:1px solid #e7d6ad;border-radius:999px;padding:6px 11px}
+  .ai-actions .ai-btn::before{content:"✦";color:var(--gold);font-size:10px}
+
+  /* Editor dashboard mock — review queue + AI audience editions */
+  .eq{border:1px solid #E8DDD0;border-radius:12px;background:#fff;overflow:hidden;margin-bottom:15px}
+  .eq-row{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:12px;padding:10px 13px;border-bottom:1px solid #f0e7d9}
+  .eq-row:last-child{border-bottom:none}
+  .eq-title{font-family:var(--display);font-size:12.5px;font-weight:600;color:#572020;line-height:1.25}
+  .eq-meta{font-family:var(--sans);font-size:9px;color:#8a6a5a;margin-top:2px}
+  .eq-seg{display:flex;flex-wrap:wrap;gap:4px;justify-content:flex-end;max-width:170px}
+  .chip{font-family:var(--sans);font-size:8px;letter-spacing:.05em;color:var(--gold-ink);background:#FCF6E9;border:1px solid #ecdcb6;border-radius:999px;padding:2px 7px;white-space:nowrap}
+  .pill{font-family:var(--sans);font-size:8.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-radius:999px;padding:3px 9px;white-space:nowrap}
+  .pill.new{color:#8C1515;background:#fbeceb;border:1px solid #f0cfcd}
+  .pill.rev{color:#9a6b16;background:#fbf2dd;border:1px solid #ecd9a8}
+  .pill.ready{color:#3f7a3f;background:#e9f3e7;border:1px solid #c7e0c4}
+  .seg-head{font-family:var(--sans);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--red);margin:4px 0 8px;font-weight:600}
+  .seg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+  .seg{border:1px solid #E8DDD0;border-left:3px solid var(--gold-2);border-radius:10px;padding:10px 11px;background:#FCFAF5}
+  .seg .sn{font-family:var(--display);font-size:12px;font-weight:600;color:var(--ink)}
+  .seg .sm{font-family:var(--sans);font-size:8.5px;color:#8a6a5a;margin-top:3px;line-height:1.4}
+
+  /* CTA / close */
+  .page.cta h1{color:var(--red);font-size:clamp(28px,3.6vw,38px);max-width:20ch;margin:0 auto 16px}
+  .page.cta p{color:#473d31;font-size:16px;line-height:1.62;max-width:62ch;margin:0 auto 8px}
+  .sig{font-family:var(--display);font-size:15px;font-style:italic;color:var(--gold-ink);margin-top:26px}
+
+  ul{margin:0;padding-left:0;list-style:none}
+  li{font-size:13.5px;line-height:1.5;color:#3b3328;margin-bottom:6px;padding-left:16px;position:relative}
+  li::before{content:"";position:absolute;left:1px;top:.55em;width:5px;height:5px;background:var(--gold);border-radius:50%}
+  li strong{font-weight:600;color:var(--ink)}
+
+  .page-footer{
+    display:flex;justify-content:space-between;font-family:var(--sans);
+    font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--sub);
+    border-top:1px solid var(--rule);padding-top:14px;margin-top:30px;
+  }
+
+  /* Editable hover */
+  [contenteditable=true]{outline:none;transition:background .15s}
+  [contenteditable=true]:hover{background:rgba(140,21,21,.05)}
+  [contenteditable=true]:focus{background:rgba(140,21,21,.09);box-shadow:inset 0 0 0 1px rgba(140,21,21,.22);border-radius:3px}
+
+  .delete-btn{
+    position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:50%;
+    background:#1f1812;color:#fff;border:none;cursor:pointer;font-size:14px;line-height:1;
+    display:none;align-items:center;justify-content:center;font-family:var(--sans);z-index:5;
+  }
+  [data-card]{position:relative}
+  [data-card]:hover > .delete-btn{display:flex}
+  .delete-btn:hover{background:var(--red)}
+  #save-indicator{color:#8fbf8f;font-size:12px;margin-left:14px;opacity:0;transition:opacity .3s}
+  #save-indicator.show{opacity:1}
+
+  @media (max-width:720px){
+    .page{padding:36px 22px 32px}
+    .journey{grid-template-columns:1fr}
+    .cols{grid-template-columns:1fr}
+    .mock-cards{grid-template-columns:1fr}
+  }
+
+  @media print{
+    *{ -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; }
+    html, body{ background:#fff !important; margin:0 !important; padding:0 !important; }
+    .toolbar, #save-indicator, .delete-btn{ display:none !important; }
+    .page{
+      width:100% !important; max-width:100% !important; min-height:0 !important;
+      margin:0 !important; padding:0.45in 0.55in !important; box-shadow:none !important; border-radius:0 !important;
+      page-break-after: always; break-after: page;
+    }
+    .page:last-of-type{ page-break-after: auto; break-after: auto; }
+    .tier, .feature, .jstep, .step, .shot, .cols, ul, .glance, .gcard, .aican, .ai-item{ page-break-inside: avoid; break-inside: avoid; }
+    [contenteditable=true]:hover, [contenteditable=true]:focus{ background:none !important; box-shadow:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="left">
+    <span class="brand">Palonur · SLM newsletter proposal</span>
+    <span class="hint">Enable editing to change any text · saved to the database</span>
+  </div>
+  <div class="right">
+    <span id="save-indicator">Saved</span>
+    <button id="edit-mode-btn" onclick="toggleEditMode()">Enable editing</button>
+    <button onclick="resetAll()">Reset</button>
+    <button onclick="saveHTML()">Download HTML</button>
+    <a class="pdf-link" id="pdf-btn" href="/ai-newsletter.html?print=1" target="_blank" rel="noopener">Download PDF</a>
+  </div>
+</div>
+
+<!-- ============ SECTION 1 — THE PROPOSAL ============ -->
+<section class="page letter" data-card>
+  <div class="page-header">
+    <span class="wordmark" contenteditable="false">Palonur</span>
+    <span contenteditable="false">For SLM leadership · Confidential</span>
+  </div>
+
+  <div class="rule-label" contenteditable="false">A proposal for Stanford Lifestyle Medicine</div>
+  <h1 contenteditable="false">An AI-augmented newsletter — written by your experts, produced by Palonur.</h1>
+
+  <p class="lead first" contenteditable="false">Thank you for considering how Palonur might help Stanford Lifestyle Medicine publish its newsletter. To be clear from the outset, this is a model of <em>augmentation, not automation</em>. The articles remain the work of SLM's pillar owners and faculty experts, and a human editor reviews and approves every piece before it reaches a reader. Palonur is the engine underneath — it removes the production friction that makes a high-quality newsletter so hard to sustain, so a small team can publish a compelling, credible issue on a dependable cadence.</p>
+
+  <p class="lead" contenteditable="false">The case for it is practical. Because faculty already manage their papers and articles inside Palonur, contributing to the newsletter becomes an extension of work they are doing anyway rather than a new obligation. Palonur turns rough notes — or an existing paper — into a clean, consistently formatted draft for the editor to refine, compressing hours of layout and copy-editing into minutes. In parallel, it scans the web for new articles and mentions by SLM members and offers them to editors as ready-to-use sources, so no one loses an afternoon hunting for material. The result is lower production effort, more consistent quality and cadence, and a newsletter that is genuinely feasible with the team and budget you have today.</p>
+
+  <h2 contenteditable="false" style="margin-top:24px">How it would work — three places Palonur augments</h2>
+  <p class="lead" contenteditable="false">The clearest way to describe the model is by who it helps. Palonur augments three groups — and replaces none of them.</p>
+  <p class="lead" contenteditable="false"><strong>The faculty and experts who write it.</strong> Their papers and articles already live in Palonur, so contributing is an extension of work they do anyway, not a new obligation. An expert drafts an article — or drops in a few rough notes — and Palonur returns a clean, formatted draft in minutes. It can rewrite dense passages in plainer language, translate a piece into Spanish, French, or German, and check sources and facts before it is handed in. In parallel, Palonur scans the web for new work by SLM members and offers it to editors, so no contribution goes unnoticed. The expertise — and the byline — stay entirely theirs.</p>
+  <p class="lead" contenteditable="false"><strong>The editor who runs it.</strong> Every article and submission arrives in a single review queue. Palonur reads each one, tags who it is for, and assembles a tailored edition for each audience — men, women, athletes, clinical experts, and more — that the editor approves before anything sends. The layout, copy-editing, fact-checking, and formatting that once took days happen in the background, so one editor can sustain a polished, on-brand issue on a dependable cadence — without losing control of a single word.</p>
+  <p class="lead" contenteditable="false"><strong>The business behind it.</strong> Palonur runs the subscription and payment infrastructure intelligently — sign-ups, plans, secure checkout, renewals, and receipts handled end to end. Its AI keeps revenue healthy by recovering failed payments, flagging subscribers at risk of leaving, and suggesting the right plan and price for each audience. The newsletter not only reaches more people; it can begin to support itself — every action reviewable by the team.</p>
+  <p class="lead" contenteditable="false">Taken together, these augmentations let the team you have today publish a compelling, credible newsletter: operations are streamlined, quality and consistency rise, and the whole effort becomes feasible with limited resources. Every step is AI-assisted but human-approved — experts write, the editor decides, and nothing reaches a reader without a person's sign-off.</p>
+
+  <h2 contenteditable="false" style="margin-top:24px">Why it helps, at a glance</h2>
+  <div class="glance" data-card>
+    <button class="delete-btn" onclick="deleteCard(this)">×</button>
+    <div class="gcard">
+      <div class="gt" contenteditable="false">Streamlines operations</div>
+      <p contenteditable="false">Notes or an existing paper become a clean, formatted draft in minutes — hours of layout and copy-editing removed.</p>
+    </div>
+    <div class="gcard">
+      <div class="gt" contenteditable="false">Enhances quality &amp; consistency</div>
+      <p contenteditable="false">Every issue is polished, on-brand, and arrives on a dependable cadence — drawn from Stanford's own science.</p>
+    </div>
+    <div class="gcard">
+      <div class="gt" contenteditable="false">Feasible with limited resources</div>
+      <p contenteditable="false">A compelling newsletter the team you have today can actually sustain — no new headcount required.</p>
+    </div>
+    <div class="gcard">
+      <div class="gt" contenteditable="false">Editorial control stays human</div>
+      <p contenteditable="false">Experts write, the editor approves. AI never publishes on its own and never replaces faculty judgment or voice.</p>
+    </div>
+  </div>
+
+  <p class="lead" contenteditable="false" style="margin-top:18px">Below is how this works in practice — the lifecycle, the actual Palonur screens your team would use, and an example of what a member would receive.</p>
+
+  <div class="page-footer">
+    <span contenteditable="false">In partnership with Stanford Lifestyle Medicine</span>
+    <span contenteditable="false">palonur.com</span>
+  </div>
+</section>
+
+<!-- ============ SECTION 2 — HOW IT WORKS (LIFECYCLE) ============ -->
+<section class="page" data-card>
+  <div class="page-header">
+    <span class="wordmark" contenteditable="false">Palonur</span>
+    <span contenteditable="false">The content production lifecycle</span>
+  </div>
+
+  <div class="rule-label" contenteditable="false">How it works · the content production lifecycle</div>
+  <h1 contenteditable="false">Pillar owners and experts write it. Palonur removes the friction.</h1>
+  <p class="lead" contenteditable="false">Because SLM faculty already manage their papers and articles inside Palonur, contributing to the newsletter is a natural extension of work they're doing anyway. A pillar owner or expert can write an article right in Palonur and hand it in for review to be featured. And while they work, Palonur's AI scans the web for new articles by Stanford Lifestyle Medicine members and suggests them to your editors as ready-to-use sources.</p>
+
+  <h2 contenteditable="false" style="margin-top:22px">How a piece comes together</h2>
+  <div class="steps" data-card>
+    <button class="delete-btn" onclick="deleteCard(this)">×</button>
+    <div class="step">
+      <div class="n" contenteditable="false">1</div>
+      <div>
+        <div class="st-title" contenteditable="false">Experts draft inside Palonur</div>
+        <p contenteditable="false">Their research already lives here, so a pillar owner or expert can write an article — or drop in a few rough notes — without leaving the tools they use to manage their work.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="n" contenteditable="false">2</div>
+      <div>
+        <div class="st-title" contenteditable="false">They hand it in for review</div>
+        <p contenteditable="false">One click offers the piece to the newsletter. The editor sees every offer and decides what runs — faculty supply the expertise, the editor keeps control of the issue.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="n" contenteditable="false">3</div>
+      <div>
+        <div class="st-title" contenteditable="false">Palonur scouts the web for SLM voices</div>
+        <p contenteditable="false">In parallel, the AI surfaces recent articles and mentions featuring program members from across the internet, and suggests them to editors as sources to feature — no afternoon of searching required.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cols" data-card>
+    <button class="delete-btn" onclick="deleteCard(this)">×</button>
+    <div class="feature">
+      <div class="rule-label red" contenteditable="false">Palonur helps draft &amp; format</div>
+      <h3 contenteditable="false">The AI saves the hours, the editor keeps the pen.</h3>
+      <p contenteditable="false">AI turns an expert's raw notes into a clean first draft and lays out the newsletter in a consistent, polished format. The editor then reviews, edits, and finalizes every piece — judgment and voice stay human at every step.</p>
+    </div>
+    <div class="feature">
+      <div class="rule-label red" contenteditable="false">The newsletter is "alive"</div>
+      <h3 contenteditable="false">A way in to the program's expertise — not a one-way send.</h3>
+      <p contenteditable="false">Readers can ask a question about an article to understand it better, and get an answer drawn only from faculty-approved Stanford knowledge — not the open internet. The issue keeps teaching long after it lands.</p>
+    </div>
+  </div>
+
+  <div class="aican" data-card>
+    <button class="delete-btn" onclick="deleteCard(this)">×</button>
+    <div class="ac-h" contenteditable="false">What Palonur's AI actually does</div>
+    <div class="ac-note" contenteditable="false">Each item below is AI assistance the faculty author and editor can invoke on demand — and every result is reviewed and approved by a person. Nothing is published automatically.</div>
+    <div class="ai-grid">
+      <div class="ai-item hl">
+        <div class="ai-do" contenteditable="false">Finds the exact answer inside any article<span class="badge">Search</span></div>
+        <p contenteditable="false">Palonur AI search pinpoints the precise passage that answers a reader's question — drawn only from faculty-approved Stanford knowledge, never the open web.</p>
+      </div>
+      <div class="ai-item">
+        <div class="ai-do" contenteditable="false">Drafts &amp; formats from raw notes</div>
+        <p contenteditable="false">Turns an expert's notes — or an existing paper — into a clean, consistently formatted first draft in minutes, ready for the editor to refine.</p>
+      </div>
+      <div class="ai-item">
+        <div class="ai-do" contenteditable="false">Rewrites in plainer, easier language</div>
+        <p contenteditable="false">Recasts dense, technical writing into clear prose any reader can follow — without changing the meaning. The editor approves the result.</p>
+      </div>
+      <div class="ai-item">
+        <div class="ai-do" contenteditable="false">Translates every issue</div>
+        <p contenteditable="false">Produces Spanish, French, and German versions of an article or issue, so SLM can reach a wider community in their own language.</p>
+      </div>
+      <div class="ai-item">
+        <div class="ai-do" contenteditable="false">Checks an article against what's online</div>
+        <p contenteditable="false">Compares a draft to recent articles published on the web and flags overlaps, gaps, and fresh sources worth citing.</p>
+      </div>
+      <div class="ai-item">
+        <div class="ai-do" contenteditable="false">Checks sources &amp; facts, returns a verdict</div>
+        <p contenteditable="false">Verifies the claims and references in a draft and reports back a clear verdict for the editor to act on.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="shot" data-card>
+    <button class="delete-btn" onclick="deleteCard(this)">×</button>
+    <div class="shot-bar">
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      <span class="url">palonur.com / faculty / newsletter</span>
+    </div>
+    <div class="shot-body">
+      <div class="mock-eyebrow">Stanford Lifestyle Medicine · Newsletter</div>
+      <div class="mock-h">Write &amp; offer an article</div>
+      <div class="mock-sub">Draft a piece for the SLM newsletter. An editor reviews every offer and decides what runs; if it does, it carries your byline.</div>
+      <div class="mock-form">
+        <div class="fh">New article</div>
+        <div class="mock-label">Title</div>
+        <div class="mock-input">Three ways to reset your circadian clock</div>
+        <div class="mock-label">One-line summary (optional)</div>
+        <div class="mock-input">What's the takeaway?</div>
+        <div class="mock-label">Draft / notes</div>
+        <div class="mock-input area">Write your article, or paste the key points — Palonur drafts and formats the rest for the editor.</div>
+        <div class="mock-label">Palonur AI — the editor stays in control of every result</div>
+        <div class="ai-actions">
+          <span class="ai-btn">Check article against recent articles shown online</span>
+          <span class="ai-btn">Rewrite in plainer, easier language</span>
+          <span class="ai-btn">Translate · Español · Français · Deutsch</span>
+          <span class="ai-btn">Check sources &amp; facts → verdict</span>
+        </div>
+        <span class="mock-btn">Offer to the newsletter</span>
+      </div>
+    </div>
+  </div>
+  <div class="shot-caption" contenteditable="false"><strong>The faculty newsletter page in the Palonur portal.</strong> Experts write and submit here in minutes; the editor reviews each offer and decides what is featured. (Illustrative layout of the live page.)</div>
+
+  <div class="shot" data-card>
+    <button class="delete-btn" onclick="deleteCard(this)">×</button>
+    <div class="shot-bar">
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      <span class="url">palonur.com / editor / newsletter</span>
+    </div>
+    <div class="shot-body">
+      <div class="mock-eyebrow">Stanford Lifestyle Medicine · Editor</div>
+      <div class="mock-h">Review queue &amp; audience editions</div>
+      <div class="mock-sub">Everything faculty hand in, in one place. Palonur reads each piece and tags who it's for, then assembles a tailored edition for every audience — you approve what goes out to whom.</div>
+
+      <div class="eq">
+        <div class="eq-row">
+          <div>
+            <div class="eq-title">Three ways to reset your circadian clock</div>
+            <div class="eq-meta">Dr. Zeitzer · Sleep · handed in 2h ago</div>
+          </div>
+          <div class="eq-seg"><span class="chip">Athletes</span><span class="chip">General</span></div>
+          <span class="pill new">New</span>
+        </div>
+        <div class="eq-row">
+          <div>
+            <div class="eq-title">Strength training after menopause</div>
+            <div class="eq-meta">Dr. Friedlander · Movement · in review</div>
+          </div>
+          <div class="eq-seg"><span class="chip">Women</span><span class="chip">Older adults</span></div>
+          <span class="pill rev">In review</span>
+        </div>
+        <div class="eq-row">
+          <div>
+            <div class="eq-title">Reading a lipid panel: what the numbers mean</div>
+            <div class="eq-meta">Dr. Fredericson · Clinical · revised</div>
+          </div>
+          <div class="eq-seg"><span class="chip">Clinical experts</span></div>
+          <span class="pill ready">Ready</span>
+        </div>
+        <div class="eq-row">
+          <div>
+            <div class="eq-title">Protein timing for masters athletes</div>
+            <div class="eq-meta">Suggested by Palonur · found online</div>
+          </div>
+          <div class="eq-seg"><span class="chip">Athletes</span><span class="chip">Men</span></div>
+          <span class="pill new">New</span>
+        </div>
+      </div>
+
+      <div class="seg-head" contenteditable="false">✦ Palonur-assembled editions — sorted by subscriber audience · you approve each before it sends</div>
+      <div class="seg-grid">
+        <div class="seg"><div class="sn">Men</div><div class="sm">1,240 subscribers · 4 articles queued</div></div>
+        <div class="seg"><div class="sn">Women</div><div class="sm">1,610 subscribers · 5 articles queued</div></div>
+        <div class="seg"><div class="sn">Athletes</div><div class="sm">880 subscribers · 6 articles queued</div></div>
+        <div class="seg"><div class="sn">Clinical experts</div><div class="sm">410 subscribers · 3 articles queued</div></div>
+        <div class="seg"><div class="sn">Older adults</div><div class="sm">720 subscribers · 4 articles queued</div></div>
+        <div class="seg"><div class="sn">General</div><div class="sm">3,900 subscribers · weekly digest</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="shot-caption" contenteditable="false"><strong>The editor's dashboard in Palonur.</strong> Amy sees every article and submission handed in for review in one queue. Palonur sorts each piece by audience and assembles a tailored edition for each group — men, women, athletes, clinical experts, and more — so the editor approves the right story for the right reader. (Illustrative layout.)</div>
+
+  <div class="shot" data-card>
+    <button class="delete-btn" onclick="deleteCard(this)">×</button>
+    <div class="shot-bar">
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      <span class="url">palonur.com / admin / subscriptions</span>
+    </div>
+    <div class="shot-body">
+      <div class="mock-eyebrow">Stanford Lifestyle Medicine · Subscriptions &amp; billing</div>
+      <div class="mock-h">Subscriptions &amp; payments — run by Palonur</div>
+      <div class="mock-sub">Palonur runs the whole subscription and payment infrastructure — sign-ups, plans, secure checkout, renewals, receipts — and uses AI to keep revenue healthy. The team approves; Palonur handles the busywork.</div>
+
+      <div class="mock-cards">
+        <div class="mock-card"><div class="v">9,560</div><div class="k">Active subscribers</div></div>
+        <div class="mock-card"><div class="v">$48,210</div><div class="k">Monthly recurring revenue</div></div>
+        <div class="mock-card"><div class="v">1.8%</div><div class="k">Monthly churn</div></div>
+      </div>
+
+      <div class="seg-head" contenteditable="false">Plans &amp; billing — secure checkout on Stripe-grade infrastructure</div>
+      <div class="seg-grid">
+        <div class="seg"><div class="sn">Free</div><div class="sm">5,030 members · weekly digest</div></div>
+        <div class="seg"><div class="sn">Member · $5/mo</div><div class="sm">3,640 members · full journey</div></div>
+        <div class="seg"><div class="sn">Member+ · $12/mo</div><div class="sm">890 members · 1:1 + archive</div></div>
+      </div>
+
+      <div class="seg-head" contenteditable="false" style="margin-top:14px">✦ What Palonur's AI manages here — every action reviewable by the team</div>
+      <div class="ai-actions">
+        <span class="ai-btn">Recovers failed payments automatically</span>
+        <span class="ai-btn">Flags at-risk subscribers before they churn</span>
+        <span class="ai-btn">Suggests the right plan &amp; price per segment</span>
+        <span class="ai-btn">Handles upgrades, refunds &amp; receipts</span>
+        <span class="ai-btn">Reconciles payouts &amp; tax</span>
+      </div>
+    </div>
+  </div>
+  <div class="shot-caption" contenteditable="false"><strong>Subscriptions &amp; payments, managed by Palonur.</strong> Sign-ups, plans, secure checkout, renewals, and receipts run end to end — and Palonur's AI recovers failed payments, flags churn risk, and suggests the right plan and price per segment, so a small team keeps revenue healthy without a billing department. (Illustrative layout.)</div>
+
+  <div class="page-footer">
+    <span contenteditable="false">In partnership with Stanford Lifestyle Medicine</span>
+    <span contenteditable="false">palonur.com</span>
+  </div>
+</section>
+
+<!-- ============ SECTION 3 — THE READER EXAMPLE ============ -->
+<section class="page example" data-card>
+  <div class="page-header">
+    <span class="wordmark" contenteditable="false">Palonur</span>
+    <span contenteditable="false">An example · what a member receives</span>
+  </div>
+
+  <div class="hero-top">
+    <div class="rule-label" contenteditable="false">An example · the reader's experience</div>
+    <h1 contenteditable="false">More than a newsletter — a guided wellness journey.</h1>
+    <p class="lead" contenteditable="false">In the Harvard Health spirit, an issue isn't just something to read — it's a guided wellness journey: faculty-grade science delivered to the inbox, and small, doable steps that turn a great article into a better night's sleep, a calmer week, a healthier year. Palonur is the engine underneath — search, subscriptions, recommendations, and an AI that answers from Stanford's own knowledge.</p>
+    <div class="hero-sub" contenteditable="false">A reader doesn't just read about sleep. They get tonight's one small step — and the science behind it, on tap.</div>
+  </div>
+
+  <div class="journey" data-card>
+    <button class="delete-btn" onclick="deleteCard(this)">×</button>
+    <div class="jstep">
+      <div class="jk" contenteditable="false">Tonight</div>
+      <p contenteditable="false"><span class="jt">One small step</span>Dim screens 60 minutes before bed — with the why, drawn from a faculty article.</p>
+    </div>
+    <div class="jstep">
+      <div class="jk" contenteditable="false">This week</div>
+      <p contenteditable="false"><span class="jt">A short plan</span>A 3-night reset to nudge your body clock earlier, paced by Palonur.</p>
+    </div>
+    <div class="jstep">
+      <div class="jk" contenteditable="false">This month</div>
+      <p contenteditable="false"><span class="jt">A new habit</span>A monthly issue that builds on the last — a journey, not a one-off send.</p>
+    </div>
+  </div>
+
+  <div class="get-head">
+    <div class="gh-title" contenteditable="false">What every member gets</div>
+    <div class="gh-note" contenteditable="false">The Harvard Health model — reimagined with Palonur AI woven through every piece.</div>
+  </div>
+
+  <div class="tiers" data-card>
+    <button class="delete-btn" onclick="deleteCard(this)">×</button>
+    <div class="tier">
+      <div class="chk" contenteditable="false">✓</div>
+      <div class="at" contenteditable="false">Unlimited access to articles</div>
+      <p contenteditable="false">Read everything the program publishes — no metering, no walls between a reader and the science.</p>
+      <div class="ai-tag" contenteditable="false">Palonur AI search finds the exact answer inside any article</div>
+    </div>
+    <div class="tier">
+      <div class="chk" contenteditable="false">✓</div>
+      <div class="at" contenteditable="false">Monthly newsletters to your inbox</div>
+      <p contenteditable="false">Beautifully formatted issues arrive on a dependable cadence, straight to every subscriber.</p>
+      <div class="ai-tag" contenteditable="false">Palonur runs subscriptions &amp; payments end-to-end</div>
+    </div>
+    <div class="tier">
+      <div class="chk" contenteditable="false">✓</div>
+      <div class="at" contenteditable="false">Subscriber-only articles</div>
+      <p contenteditable="false">Reserve premium pieces for members — set in a single click, no engineering required.</p>
+      <div class="ai-tag" contenteditable="false">Palonur AI recommends each reader's next article</div>
+    </div>
+    <div class="tier">
+      <div class="chk" contenteditable="false">✓</div>
+      <div class="at" contenteditable="false">Full A-to-Z health library</div>
+      <p contenteditable="false">The complete reference your community already trusts, all in one place.</p>
+      <div class="ai-tag" contenteditable="false">Made instantly searchable by Palonur AI</div>
+    </div>
+    <div class="tier">
+      <div class="chk" contenteditable="false">✓</div>
+      <div class="at" contenteditable="false">Quizzes, health tips &amp; more</div>
+      <p contenteditable="false">Interactive ways to learn that turn passive reading into real-world action.</p>
+      <div class="ai-tag" contenteditable="false">AI-guided quizzes &amp; daily tips via Palonur</div>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span contenteditable="false">In partnership with Stanford Lifestyle Medicine</span>
+    <span contenteditable="false">palonur.com</span>
+  </div>
+</section>
+
+<!-- ============ SECTION 4 — CLOSE ============ -->
+<section class="page cta" data-card>
+  <div class="page-header">
+    <span class="wordmark" contenteditable="false">Palonur</span>
+    <span contenteditable="false">For SLM leadership · Confidential</span>
+  </div>
+
+  <div class="rule-label" contenteditable="false">In closing</div>
+  <h1 contenteditable="false">Feasible now — and ready when you are.</h1>
+  <p contenteditable="false">Editorial judgment stays human at every step. Palonur simply removes the friction that keeps a great newsletter from happening — and turns each issue into a guided journey readers return to, powered entirely by your faculty's own science.</p>
+  <p contenteditable="false">It's feasible with the team you have today, on a cadence you can sustain — so SLM can stay consistently, credibly in front of its community. We'd welcome the chance to walk the team through a live issue whenever it's useful.</p>
+  <div class="sig" contenteditable="false">With appreciation — the Palonur team</div>
+
+  <div class="page-footer">
+    <span contenteditable="false">In partnership with Stanford Lifestyle Medicine</span>
+    <span contenteditable="false">palonur.com</span>
+  </div>
+</section>
+
+<script>
+  // Persistence. Edits are saved to the database (shared across browsers)
+  // via /api/ai-newsletter-doc, with localStorage kept as a local backup.
+  // Use Download HTML / PDF to share a snapshot. Edit mode is a sessionStorage
+  // flag (clears on tab close); saving to the DB requires an edit password.
+  const LOCAL_KEY = 'palonur-ai-newsletter-onepager-v4';
+  const EDIT_FLAG = 'palonur-ai-newsletter-edit';
+  const PW_KEY = 'palonur-ai-newsletter-edit-password';
+  const SERVER_URL = '/api/ai-newsletter-doc';
+
+  function getPassword(){ return sessionStorage.getItem(PW_KEY) || ''; }
+
+  function setIndicator(text, ok){
+    const ind = document.getElementById('save-indicator');
+    if (!ind) return;
+    ind.textContent = text;
+    ind.style.color = ok === false ? '#e26a6a' : '#7fbf7f';
+    ind.classList.add('show');
+    clearTimeout(setIndicator._t);
+    setIndicator._t = setTimeout(() => ind.classList.remove('show'), 2200);
+  }
+
+  function isEditMode(){ return !!sessionStorage.getItem(EDIT_FLAG); }
+
+  function refreshEditAffordances(){
+    const editing = isEditMode();
+    const btn = document.getElementById('edit-mode-btn');
+    if (btn) btn.textContent = editing ? 'Editing on · click to exit' : 'Enable editing';
+    document.querySelectorAll('.delete-btn').forEach(b => { b.style.display = editing ? '' : 'none'; });
+    document.querySelectorAll('.page-header span, .rule-label, h1, h2, h3, .lead, .hero-sub, .gh-title, .gh-note, .gt, .jk, p, li, .st-title, .at, .ai-tag, .ac-h, .ac-note, .ai-do, .shot-caption, .sig, .page-footer span').forEach(el => {
+      if (editing){
+        if (!el.closest('.toolbar') && !el.closest('.shot-body') && !el.classList.contains('delete-btn')) el.setAttribute('contenteditable', 'true');
+      } else {
+        el.removeAttribute('contenteditable');
+      }
+    });
+    document.querySelectorAll('.delete-btn').forEach(b => b.setAttribute('contenteditable', 'false'));
+  }
+
+  function toggleEditMode(){
+    if (isEditMode()){
+      sessionStorage.removeItem(EDIT_FLAG);
+      refreshEditAffordances();
+      setIndicator('View only', true);
+      return;
+    }
+    if (!getPassword()){
+      const pw = prompt('Enter the edit password to save changes to the database:');
+      if (!pw) { setIndicator('Editing cancelled', false); return; }
+      sessionStorage.setItem(PW_KEY, pw.trim());
+    }
+    sessionStorage.setItem(EDIT_FLAG, '1');
+    refreshEditAffordances();
+    setIndicator('Editing enabled · changes save to the database', true);
+  }
+
+  function currentPages(){
+    return Array.from(document.querySelectorAll('.page')).map(p => p.outerHTML);
+  }
+
+  function saveLocal(){
+    try { localStorage.setItem(LOCAL_KEY, JSON.stringify(currentPages())); }
+    catch(e){ /* localStorage is a best-effort backup only */ }
+  }
+
+  async function saveToServer(){
+    if (!isEditMode()) return false;
+    saveLocal();
+    try {
+      const res = await fetch(SERVER_URL, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', 'x-edit-password': getPassword() },
+        body: JSON.stringify({ content: currentPages() }),
+      });
+      if (res.status === 401){
+        sessionStorage.removeItem(PW_KEY);
+        setIndicator('Wrong edit password — not saved', false);
+        return false;
+      }
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      setIndicator('Saved to database ' + new Date().toLocaleTimeString(), true);
+      return true;
+    } catch(e){
+      setIndicator('Saved locally · database save failed', false);
+      return false;
+    }
+  }
+
+  let saveTimer;
+  function autoSave(){
+    if (!isEditMode()) return;
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(() => { saveToServer(); }, 800);
+  }
+
+  function deleteCard(btn){
+    if (!isEditMode()) return;
+    const card = btn.closest('[data-card]');
+    if (card && confirm('Delete this block?')){ card.remove(); autoSave(); }
+  }
+
+  function isEmptyEditableParagraph(el){
+    if (!el || el.tagName !== 'P') return false;
+    if (el.getAttribute('contenteditable') !== 'true') return false;
+    if (el.querySelector('img, .delete-btn')) return false;
+    return el.textContent.replace(/\u00a0/g, ' ').trim() === '';
+  }
+
+  function placeCaretAtEnd(node){
+    try {
+      node.focus();
+      const range = document.createRange();
+      range.selectNodeContents(node);
+      range.collapse(false);
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+    } catch(_){ /* focus is best-effort */ }
+  }
+
+  function handleEmptyParagraphDelete(e){
+    if (!isEditMode()) return;
+    if (e.key !== 'Backspace' && e.key !== 'Delete') return;
+    const el = document.activeElement;
+    if (!isEmptyEditableParagraph(el)) return;
+    e.preventDefault();
+    let focusTarget = el.previousElementSibling;
+    while (focusTarget && focusTarget.getAttribute('contenteditable') !== 'true') {
+      focusTarget = focusTarget.previousElementSibling;
+    }
+    let after = el.nextElementSibling;
+    while (after && after.getAttribute('contenteditable') !== 'true') {
+      after = after.nextElementSibling;
+    }
+    el.remove();
+    if (focusTarget) placeCaretAtEnd(focusTarget);
+    else if (after) placeCaretAtEnd(after);
+    autoSave();
+  }
+
+  const PRINT_OVERRIDE = `
+    <style id="palonur-print-window">
+      html,body{background:#fff !important;margin:0 !important;padding:0 !important}
+      *{ -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; }
+      @page{ size: 8.5in 11in; margin: 0.95in 0.8in 0.7in 0.8in; }
+      .page{
+        width:100% !important; max-width:100% !important; min-height:0 !important;
+        margin:0 !important; padding:0.2in 0.25in !important; box-shadow:none !important; border-radius:0 !important;
+        page-break-after: always; break-after: page;
+      }
+      .page:last-of-type{ page-break-after:auto; break-after:auto; }
+      .tier, .feature, .jstep, .step, .shot, .cols, ul, .glance, .gcard, .aican, .ai-item{ page-break-inside: avoid; break-inside: avoid; }
+    </style>
+  `;
+
+  function buildPrintDocument(){
+    const clone = document.documentElement.cloneNode(true);
+    clone.querySelectorAll('.delete-btn, .toolbar, #save-indicator').forEach(n => n.remove());
+    clone.querySelectorAll('[contenteditable]').forEach(n => n.removeAttribute('contenteditable'));
+    const head = clone.querySelector('head');
+    if (head) head.insertAdjacentHTML('beforeend', PRINT_OVERRIDE);
+    return '<!doctype html>\n' + clone.outerHTML;
+  }
+
+  async function generatePDF(){
+    try {
+      const html = buildPrintDocument();
+      const w = window.open('', '_blank');
+      if (!w) throw new Error('Popup blocked. Please allow popups for this site.');
+      w.document.open(); w.document.write(html); w.document.close();
+      const fire = async () => {
+        try { if (w.document.fonts && w.document.fonts.ready) await w.document.fonts.ready; } catch(_){}
+        setTimeout(() => { try { w.focus(); w.print(); } catch(_){} }, 250);
+      };
+      if (w.document.readyState === 'complete') fire();
+      else w.addEventListener('load', fire);
+    } catch (e) {
+      alert('Could not open print window: ' + (e?.message || e) + '\n\nFalling back to the current-tab print dialog. In the dialog: choose "Save as PDF", uncheck "Headers and footers", set Margins to "None".');
+      window.print();
+    }
+  }
+
+  function saveHTML(){
+    const clone = document.documentElement.cloneNode(true);
+    clone.querySelectorAll('.delete-btn, .toolbar, #save-indicator').forEach(n => n.remove());
+    clone.querySelectorAll('[contenteditable]').forEach(n => n.removeAttribute('contenteditable'));
+    const head = clone.querySelector('head');
+    if (head) head.insertAdjacentHTML('beforeend', PRINT_OVERRIDE.replace('palonur-print-window','palonur-print-export'));
+    const html = '<!doctype html>\n' + clone.outerHTML;
+    const blob = new Blob([html], {type:'text/html'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'palonur_slm_newsletter_proposal.html';
+    document.body.appendChild(a); a.click(); a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  async function resetAll(){
+    if (!confirm('Reset this page back to the original? This clears the saved edits in the database and in this browser.')) return;
+    let pw = getPassword();
+    if (!pw){
+      const entered = prompt('Enter the edit password to reset the saved version:');
+      if (!entered) { setIndicator('Reset cancelled', false); return; }
+      pw = entered.trim();
+      sessionStorage.setItem(PW_KEY, pw);
+    }
+    try {
+      const res = await fetch(SERVER_URL, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', 'x-edit-password': pw },
+        body: JSON.stringify({ content: [] }),
+      });
+      if (res.status === 401){
+        sessionStorage.removeItem(PW_KEY);
+        alert('Wrong edit password — nothing was reset.');
+        return;
+      }
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+    } catch(e){
+      alert('Could not reset the saved version (database error). Please try again.');
+      return;
+    }
+    localStorage.removeItem(LOCAL_KEY);
+    location.reload();
+  }
+
+  function injectPages(pages){
+    if (!Array.isArray(pages) || pages.length === 0 || !pages.every(x => typeof x === 'string')) return false;
+    const existing = document.querySelectorAll('.page');
+    const parent = existing[0] ? existing[0].parentNode : document.body;
+    const anchor = existing[existing.length - 1] ? existing[existing.length - 1].nextSibling : null;
+    existing.forEach(p => p.remove());
+    pages.forEach(html => {
+      const wrap = document.createElement('div');
+      wrap.innerHTML = html;
+      const node = wrap.firstElementChild;
+      if (node) parent.insertBefore(node, anchor);
+    });
+    return true;
+  }
+
+  async function loadFromServer(){
+    try {
+      const res = await fetch(SERVER_URL, { headers: { 'Accept': 'application/json' } });
+      if (!res.ok) return false;
+      const data = await res.json();
+      const content = data && data.content;
+      // A row exists (array) — the server is authoritative, even when empty
+      // (an empty array means it was reset back to the static original).
+      if (Array.isArray(content)){
+        if (content.length === 0){
+          localStorage.removeItem(LOCAL_KEY); // drop any stale local backup
+          return true;
+        }
+        if (injectPages(content)){
+          setIndicator('Loaded the latest saved edits', true);
+          return true;
+        }
+      }
+      // content === null → nothing saved yet → fall back to localStorage / static
+    } catch(e){ /* fall back to localStorage / static below */ }
+    return false;
+  }
+
+  function loadLocal(){
+    try {
+      const raw = localStorage.getItem(LOCAL_KEY);
+      if (!raw) return false;
+      const pages = JSON.parse(raw);
+      if (injectPages(pages)){
+        setIndicator('Loaded your saved edits', true);
+        return true;
+      }
+      return false;
+    } catch(e){ return false; }
+  }
+
+  document.getElementById('pdf-btn').addEventListener('click', function(e){
+    e.preventDefault();
+    generatePDF();
+  });
+
+  window.addEventListener('DOMContentLoaded', async () => {
+    const fromServer = await loadFromServer();
+    if (!fromServer) loadLocal();
+    refreshEditAffordances();
+    document.addEventListener('input', autoSave, true);
+    document.addEventListener('keydown', handleEmptyParagraphDelete, true);
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('print') === '1') {
+      document.querySelectorAll('.toolbar, #save-indicator, .delete-btn').forEach(n => n.remove());
+      document.querySelectorAll('[contenteditable]').forEach(n => n.removeAttribute('contenteditable'));
+      const head = document.querySelector('head');
+      if (head) head.insertAdjacentHTML('beforeend', PRINT_OVERRIDE);
+      try { if (document.fonts && document.fonts.ready) await document.fonts.ready; } catch(_){}
+      setTimeout(() => { try { window.focus(); window.print(); } catch(_){} }, 400);
+    }
+  });
+</script>
+</body>
+</html>

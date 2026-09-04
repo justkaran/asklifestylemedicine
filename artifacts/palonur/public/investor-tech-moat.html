@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Palonur · Defensible tech & moat — investor one-pager</title>
+<meta name="robots" content="noindex,nofollow" />
+<style>
+  :root{
+    --paper:#FAF8F4; --ink:#0A0A0F; --red:#E8352A; --muted:#5b5b66;
+    --rule:rgba(10,10,15,.12); --card:#ffffff;
+    --serif:Georgia,'Times New Roman',serif;
+    --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;background:#e9e6df;color:var(--ink);font-family:var(--sans);}
+  .page{
+    width:8.5in; min-height:11in; margin:24px auto; padding:0.55in 0.6in;
+    background:var(--paper); position:relative; overflow:hidden;
+    box-shadow:0 8px 40px rgba(0,0,0,.18);
+  }
+  header{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--rule);padding-bottom:10px;margin-bottom:16px;}
+  .lockup{display:flex;align-items:center;gap:10px;}
+  .flower{width:22px;height:22px;}
+  .brand{font-family:var(--serif);font-weight:400;font-size:20px;letter-spacing:.01em;}
+  .partner{font-family:var(--serif);font-style:italic;color:var(--muted);font-size:11.5px;}
+  .partner b{color:var(--red);font-style:normal;font-weight:600;}
+  .doctag{font-family:var(--sans);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);}
+  h1{font-family:var(--serif);font-weight:500;font-size:30px;line-height:1.12;margin:8px 0 4px;letter-spacing:-.005em;}
+  h1 em{font-style:italic;color:var(--red);font-weight:500;}
+  .lede{font-family:var(--serif);font-size:13.5px;line-height:1.45;color:#222;margin:6px 0 14px;max-width:7.1in;}
+  h2{font-family:var(--sans);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin:14px 0 8px;font-weight:700;}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 16px;}
+  .row{display:grid;grid-template-columns:140px 1fr;gap:10px;font-size:12px;line-height:1.4;border-bottom:1px dotted var(--rule);padding:6px 0;}
+  .row b{font-family:var(--serif);font-weight:600;font-size:12.5px;}
+  .row span{color:#333;}
+  .row .why{display:block;color:var(--muted);font-style:italic;font-size:11px;margin-top:2px;}
+  .moat{display:grid;grid-template-columns:36px 1fr;gap:10px;margin:8px 0;font-size:12px;line-height:1.42;}
+  .moat .ring{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--red);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:13px;color:var(--red);font-weight:600;}
+  .moat b{font-family:var(--serif);font-size:13px;}
+  .pull{font-family:var(--serif);font-size:13.5px;line-height:1.45;border-left:3px solid var(--red);padding:6px 12px;margin:12px 0 6px;color:#1a1a22;background:#fff;}
+  .stack-card{background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:12px 14px;}
+  .stack-card h3{margin:0 0 6px;font-family:var(--serif);font-size:13.5px;font-weight:600;}
+  footer{position:absolute;left:.6in;right:.6in;bottom:.4in;display:flex;justify-content:space-between;border-top:1px solid var(--rule);padding-top:8px;font-size:10px;color:var(--muted);}
+  footer b{color:var(--ink);font-weight:600;}
+  @media print{
+    html,body{background:#fff;}
+    .page{box-shadow:none;margin:0;width:auto;min-height:auto;padding:.45in .55in;}
+    @page{size:Letter;margin:0;}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <div class="lockup">
+      <svg class="flower" viewBox="0 0 48 48" fill="none" stroke="#0A0A0F" stroke-width="1.6">
+        <circle cx="24" cy="24" r="9"/><circle cx="24" cy="15" r="9"/>
+        <circle cx="31.8" cy="19.5" r="9"/><circle cx="31.8" cy="28.5" r="9"/>
+        <circle cx="24" cy="33" r="9"/><circle cx="16.2" cy="28.5" r="9"/>
+        <circle cx="16.2" cy="19.5" r="9"/>
+      </svg>
+      <div>
+        <div class="brand">Palonur</div>
+        <div class="partner"><i>in partnership with</i> <b>Stanford</b> Lifestyle Medicine</div>
+      </div>
+    </div>
+    <div class="doctag">Investor · 1 of 3 · Tech &amp; Moat</div>
+  </header>
+
+  <h1>A <em>trust layer</em> for AI in lifestyle medicine.</h1>
+  <p class="lede">
+    The model isn't the moat. The <b>relationships</b> are. Palonur is a verification
+    pipeline that puts a named Stanford faculty member behind every answer an AI
+    gives about your sleep, and refuses cleanly when no faculty-grounded answer
+    exists. The defensibility is the rolodex of researchers who agreed to sign.
+  </p>
+
+  <h2>Tech stack — the verification pipeline</h2>
+  <div class="row"><b>Curated corpus</b><span>Faculty-selected papers, talks, and clinical guidance, embedded into a vector store keyed by pillar (sleep first, six more queued).<span class="why">Off-the-shelf models can't search this — it didn't exist before us.</span></span></div>
+  <div class="row"><b>Structured output</b><span>LLM forced to emit five labeled sections (ANSWER · CITATION · PAPER · FINDING · INTERPRETATION). Two refusal modes (<code>REFUSE</code>, <code>UNCOVERED</code>).<span class="why">Lets us audit every answer and lets partners parse them deterministically.</span></span></div>
+  <div class="row"><b>Faculty-in-the-loop</b><span>Every interpretation passes through the named faculty's queue before it ships. Steward console, edit history, approval state.<span class="why">A model can't fake this — it's a workflow, not a prompt.</span></span></div>
+  <div class="row"><b>Refusal posture</b><span>If the answer isn't in the faculty corpus, we say so. No silent confabulation, no generic medical hand-wave.<span class="why">This is what makes regulators, insurers, and clinicians take the meeting.</span></span></div>
+  <div class="row"><b>Receipts API</b><span>Every response carries a graph receipt: question → corpus chunk → paper → faculty signer → timestamp. Queryable by partners.<span class="why">The receipt is the product. The chat is the demo.</span></span></div>
+  <div class="row"><b>Two endpoints</b><span><code>/api/sleep-agent</code> (consumer-facing answers) · <code>/api/agent/spec</code> (machine-readable for AI platforms, wearables, insurer bots).<span class="why">B2C and B2B share one source of truth — same answer, same signer, same receipt.</span></span></div>
+
+  <h2>The moat — concentric circles of trust, not a feature list</h2>
+
+  <div class="moat"><div class="ring">1</div><div><b>Stanford Lifestyle Medicine, today.</b> Six named faculty have signed onto Palonur — Fredericson, Friedlander, Zeitzer, Kluger, Dehghani, and Parker (Advisor). Sleep ships with Prof. Jamie Zeitzer's name on every answer.</div></div>
+  <div class="moat"><div class="ring">2</div><div><b>Stanford, beyond Lifestyle Medicine.</b> Six more pillars (exercise, nutrition, stress, social, substances, environment) — each gets its own Stanford faculty lead. Recruiting is warm-intro through the existing six.</div></div>
+  <div class="moat"><div class="ring">3</div><div><b>Beyond Stanford — global tier-1 faculty.</b> Once a Stanford lead is in place per pillar, we add international peer institutions (Oxford, Karolinska, UCSF, Johns Hopkins, Mayo). Each adds geographic credibility and answer breadth.</div></div>
+  <div class="moat"><div class="ring">4</div><div><b>The receipts compound.</b> Every signed answer is a piece of public-record IP that competitors cannot synthesize after the fact. The corpus, the signers, and the audit trail accrete monthly.</div></div>
+
+  <p class="pull">
+    A new entrant can copy the model. They cannot copy <em>"Prof. Jamie Zeitzer
+    signed this answer."</em> That signature is a relationship, and the relationship
+    took us a year of in-person work at Stanford to earn.
+  </p>
+
+  <footer>
+    <span>Palonur · Confidential · For investor discussion only — not medical advice</span>
+    <span><b>palonur.com</b> · partners@palonur.com</span>
+  </footer>
+</div>
+</body>
+</html>

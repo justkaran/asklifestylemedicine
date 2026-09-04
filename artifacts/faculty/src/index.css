@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Source Sans 3", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-serif: "Source Serif 4", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+}
+
+html,
+body,
+#root {
+  background: #ffffff;
+  color: #2e2d29;
+  min-height: 100vh;
+  margin: 0;
+}
+
+body {
+  font-family:
+    "Source Sans 3",
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+}
+
+/* Stanford Faculty controls use square corners consistently. Keep this at the
+ * base layer so it also overrides one-off Tailwind rounded utilities on
+ * buttons without changing avatars, status dots, or content badges. */
+button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+[role="button"] {
+  border-radius: 0 !important;
+}
+
+.font-serif {
+  font-family: "Source Serif 4", "Source Serif Pro", Georgia, serif;
+}
+
+@keyframes welcomeFade {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.welcome-fade {
+  animation: welcomeFade 0.5s ease-out both;
+}

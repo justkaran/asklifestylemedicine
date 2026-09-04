@@ -1,0 +1,127 @@
+{
+  "title": "Your Account · Palonur",
+  "headline": "Your Palonur account",
+  "loading": "Loading your account…",
+  "notSignedIn": "Not signed in",
+  "signIn": "Sign in with your email to see your account.",
+  "emailLabel": "Your email",
+  "emailPlaceholder": "you@email.com",
+  "sendLink": "Send sign-in link",
+  "sending": "Sending…",
+  "linkSent": "Check your email — we've sent you a sign-in link.",
+  "signInHeadline": "Sign in to manage your subscriptions.",
+  "signInBody": "We'll email you a secure sign-in link — no password needed.",
+  "signInEmailPlaceholder": "Your email",
+  "sendLinkBtn": "Send link",
+  "checkInbox": "Check your inbox — we sent a sign-in link.",
+  "allAccess": "You have All-Access.",
+  "yourSubscriptions": "Your subscriptions.",
+  "signedInAs": "Signed in as",
+  "open": "Open →",
+  "locked": "Locked",
+  "capabilities": {
+    "headline": "Your access",
+    "sectionLabel": "What you can access",
+    "nightly": "Pal (unlimited answers, all pillars)",
+    "nightlyLabel": "Pal. your personal research companion",
+    "nightlyBlurb": "Unlimited evidence-based answers across all pillars.",
+    "joysanBlurb": "Unlimited healthspan and longevity answers.",
+    "newsletter": "Newsletter Premium",
+    "newsletterLabel": "Premium newsletters",
+    "newsletterBlurb": "Full access to every premium issue.",
+    "noAccess": "No active subscriptions",
+    "upgrade": "See plans →"
+  },
+  "weeklyCall": {
+    "sectionLabel": "Your weekly call",
+    "bookedBadge": "BOOKED THIS WEEK",
+    "scheduledFor": "Your call is scheduled for {{time}}. We'll send a reminder before it.",
+    "bookedWeek": "You've booked your call for the week of {{week}}. Reschedule in the scheduler if you need a different time.",
+    "manageScheduler": "Manage in scheduler →",
+    "cancelThisWeek": "Cancel this week",
+    "schedulingOpens": "Your plan includes one call each week. Scheduling opens shortly — we'll email you the link.",
+    "whenCall": "When is your call? (optional — lets us remind you)",
+    "openingScheduler": "Opening scheduler…",
+    "bookCall": "Book your call →"
+  },
+  "billing": {
+    "sectionLabel": "Billing",
+    "freeTier": "You're on the free tier — no paid plan yet.",
+    "cancels": "Cancels",
+    "trialEnds": "Trial ends",
+    "renews": "Renews",
+    "everyN": "every {{count}} {{interval}}",
+    "perInterval": "/ {{interval}}",
+    "perMonth": "/mo",
+    "perYear": "/yr",
+    "intervalLabels": {
+      "day": {
+        "singular": "day",
+        "plural": "days"
+      },
+      "week": {
+        "singular": "week",
+        "plural": "weeks"
+      },
+      "month": {
+        "singular": "month",
+        "plural": "months"
+      },
+      "year": {
+        "singular": "year",
+        "plural": "years"
+      }
+    },
+    "subscription": "Subscription",
+    "askQuestion": "Ask a question →",
+    "manageBilling": "Manage billing"
+  },
+  "subscriptions": {
+    "headline": "Active subscriptions",
+    "noSubs": "No active subscriptions",
+    "status": "Status",
+    "active": "Active",
+    "canceled": "Cancels at period end",
+    "renewsOn": "Renews on",
+    "endsOn": "Ends on",
+    "manage": "Manage billing →",
+    "cancel": "Cancel subscription"
+  },
+  "upgradeCard": {
+    "eyebrow": "Upgrade",
+    "title": "All-Access",
+    "tagline": "Everything Palonur offers — one subscription.",
+    "includes": [
+      "Unlimited answers across all pillars (Pal)",
+      "Full access to every premium newsletter issue"
+    ],
+    "cta": "Upgrade to All-Access →"
+  },
+  "newsletters": {
+    "sectionLabel": "Your newsletters",
+    "headline": "Newsletter memberships",
+    "readingRoom": "Enter the reading room →",
+    "browseNewsletters": "Browse newsletters →",
+    "unsubscribe": "Unsubscribe",
+    "unsubscribed": "Unsubscribed",
+    "noNewsletters": "Not subscribed to any newsletters.",
+    "house": "House"
+  },
+  "portal": {
+    "openPortal": "Manage billing →",
+    "opening": "Opening…"
+  },
+  "name": {
+    "sectionLabel": "Your name",
+    "prompt": "Tell us what to call you. You can change it any time.",
+    "placeholder": "Your name",
+    "save": "Save",
+    "saving": "Saving…",
+    "change": "Change",
+    "notSet": "No name yet",
+    "error": "We could not save that. Please try again."
+  },
+  "signOut": "Sign out",
+  "readingRoom": "Visit the reading room →",
+  "upgrade": "Upgrade your plan →"
+}

@@ -1,0 +1,37 @@
+kind = "web"
+previewPath = "/"
+title = "Palonur"
+version = "1.0.0"
+id = "artifacts/palonur"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 22480
+
+[services.development]
+run = "pnpm --filter @workspace/palonur run dev"
+
+[services.production]
+
+[services.production.build]
+args = [ "pnpm", "--filter", "@workspace/palonur", "run", "build" ]
+
+[services.production.build.env]
+NODE_ENV = "production"
+
+[services.production.run]
+args = [ "node", "artifacts/palonur/server/index.mjs" ]
+
+[services.production.run.env]
+PORT = "22480"
+NODE_ENV = "production"
+
+[services.env]
+PORT = "22480"
+BASE_PATH = "/"

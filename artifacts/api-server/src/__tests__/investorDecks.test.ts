@@ -1,0 +1,203 @@
+import { readFileSync } from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { describe, expect, test } from "vitest";
+import {
+  CLOUD_SYNC_MARKERS,
+  findUncoveredCloudSyncEndpoints,
+  sanitizeForInvestor,
+} from "../lib/investorDecks";
+
+const SAMPLE = `<!doctype html>
+<html>
+<head>
+  <title>Plan</title>
+</head>
+<body>
+<div class="toolbar">
+  <button id="edit-mode-btn" onclick="toggleEditMode()">Enable text editing</button>
+</div>
+<div id="pw-gate"><div class="pw-card"><form id="pw-form"><input id="pw-input"></form></div></div>
+<div class="page">Real content with <span class="ed">editable text</span>.</div>
+<script>
+  function toggleEditMode(){ /* original */ }
+  function initGate(){ document.body.style.overflow = 'hidden'; }
+</script>
+<!-- ===== -->
+<!-- Collaboration layer -->
+<script>
+  (function(){
+    const API = '/api/business-plan';
+    fetch(API + '/auth');
+  })();
+</script>
+</body>
+</html>`;
+
+describe("sanitizeForInvestor", () => {
+  const out = sanitizeForInvestor(SAMPLE);
+
+  test("preserves the real plan content", () => {
+    expect(out).toContain("Real content with");
+    expect(out).toContain("editable text");
+  });
+
+  test("strips the collaboration script that writes shared state", () => {
+    expect(out).not.toContain("/api/business-plan");
+    expect(out).not.toContain("fetch(API");
+    // The first, self-contained script is left in place.
+    expect(out).toContain("function initGate()");
+  });
+
+  test("neutralizes the password gate from first paint", () => {
+    expect(out).toContain("#pw-gate{display:none!important}");
+    expect(out).toContain("palonur-bp-unlocked");
+    // Injection lands inside <head>.
+    expect(out.indexOf("investor-readonly")).toBeLessThan(out.indexOf("</head>"));
+  });
+
+  test("hides the edit control + toolbar + delete chrome", () => {
+    expect(out).toContain("#edit-mode-btn{display:none!important}");
+    expect(out).toContain(".toolbar{display:none!important}");
+    expect(out).toContain(".delete-btn{display:none!important}");
+  });
+
+  test("forces contenteditable off at load", () => {
+    expect(out).toContain("setAttribute('contenteditable','false')");
+  });
+
+  test("is idempotent enough to not double-strip", () => {
+    const twice = sanitizeForInvestor(out);
+    expect(twice).not.toContain("/api/business-plan");
+  });
+
+  test("strips a reach-style /api/reach-deck cloud-sync script too", () => {
+    const reachLike = `<!doctype html>
+<html>
+<head><title>Reach</title></head>
+<body>
+<div class="page" contenteditable="true">Reach narrative.</div>
+<script>
+  const API_URL = '/api/reach-deck';
+  function toggleEditMode(){ /* edit */ }
+  async function saveToServer(){ await fetch(API_URL, { method: 'PUT' }); }
+</script>
+</body>
+</html>`;
+    const cleaned = sanitizeForInvestor(reachLike);
+    // The cloud-sync script (and the whole monolithic edit block) is gone.
+    expect(cleaned).not.toContain("/api/reach-deck");
+    expect(cleaned).not.toContain("saveToServer");
+    // Real content survives, and the read-only chrome is injected.
+    expect(cleaned).toContain("Reach narrative.");
+    expect(cleaned).toContain("investor-readonly");
+    expect(cleaned).toContain("setAttribute('contenteditable','false')");
+  });
+});
+
+describe("findUncoveredCloudSyncEndpoints", () => {
+  test("returns nothing when the write endpoint is a known marker", () => {
+    const html = `<script>
+      const API = '/api/business-plan';
+      async function save(){ await fetch(API + '/state', { method: 'PUT' }); }
+    </script>`;
+    expect(findUncoveredCloudSyncEndpoints(html)).toEqual([]);
+  });
+
+  test("catches a renamed cloud-sync endpoint the marker list doesn't cover", () => {
+    // The deck author renamed the sync endpoint; the strip list was not updated.
+    const html = `<script>
+      const API_URL = '/api/tech-doc-v2';
+      async function save(){ await fetch(API_URL, { method: 'PUT' }); }
+    </script>`;
+    expect(findUncoveredCloudSyncEndpoints(html)).toEqual(["/api/tech-doc-v2"]);
+    // Every current marker, by definition, must NOT be flagged.
+    for (const marker of CLOUD_SYNC_MARKERS) {
+      expect(marker.startsWith("/api/")).toBe(true);
+    }
+  });
+
+  test("catches a direct string-literal PUT to a fresh endpoint", () => {
+    const html = `<script>
+      fetch('/api/secret-sync', { method: 'POST', body: '{}' });
+    </script>`;
+    expect(findUncoveredCloudSyncEndpoints(html)).toEqual(["/api/secret-sync"]);
+  });
+
+  test("ignores read-only fetches and non-/api endpoints", () => {
+    const html = `<script>
+      const API = '/api/reach-deck';
+      fetch(API + '?t=' + Date.now(), { cache: 'no-store' }); // GET load
+      fetch('https://example.com/track', { method: 'POST' }); // not /api
+    </script>`;
+    expect(findUncoveredCloudSyncEndpoints(html)).toEqual([]);
+  });
+});
+
+// The subscriber-growth charts in the detailed cash-flow docs are generated by
+// scripts/src/sync-cashflow-docs.ts (chartHtml). Each cash-flow section ships
+// one <figure class="cf-chart"> with a dashed 2M ceiling line and one plotted
+// point per projected year. This guards against a future edit silently dropping
+// or breaking a chart in any of the docs.
+// Note: angels.html and angels-de.html are 3-page plain-language angel overviews
+// with their own inline SVG bar charts (not cf-chart figures generated by
+// sync-cashflow-docs); only business-plan-slm.html has cf-chart figures.
+describe("cash-flow growth charts", () => {
+  const CASHFLOW_DOCS = [
+    "business-plan-slm.html",
+  ] as const;
+
+  // Number of plotted years per chart (10-year projection → 10 data points).
+  const EXPECTED_POINTS = 10;
+  // One cash-flow section per scenario (conservative / middle / super-growth).
+  const EXPECTED_CHARTS = 3;
+
+  function readDocSource(file: string): string {
+    let dir = path.dirname(fileURLToPath(import.meta.url));
+    for (let i = 0; i < 8; i++) {
+      const candidate = path.join(dir, "artifacts", "palonur", "public", file);
+      try {
+        return readFileSync(candidate, "utf8");
+      } catch {
+        // walk up toward the repo root
+      }
+      const parent = path.dirname(dir);
+      if (parent === dir) break;
+      dir = parent;
+    }
+    throw new Error(`Could not locate ${file} source on disk`);
+  }
+
+  function extractCharts(html: string): string[] {
+    return html.match(/<figure class="cf-chart"[\s\S]*?<\/figure>/g) ?? [];
+  }
+
+  for (const file of CASHFLOW_DOCS) {
+    test(`${file} has exactly ${EXPECTED_CHARTS} growth charts`, () => {
+      const charts = extractCharts(readDocSource(file));
+      expect(
+        charts.length,
+        `${file} should ship ${EXPECTED_CHARTS} cf-chart figures (one per cash-flow scenario) — a chart was dropped or duplicated`,
+      ).toBe(EXPECTED_CHARTS);
+    });
+
+    test(`${file} charts each have a dashed 2M ceiling line and ${EXPECTED_POINTS} points`, () => {
+      const charts = extractCharts(readDocSource(file));
+      expect(charts.length).toBe(EXPECTED_CHARTS);
+
+      charts.forEach((chart, i) => {
+        const dashedLines = chart.match(/stroke-dasharray="4 3"/g) ?? [];
+        expect(
+          dashedLines.length,
+          `${file} chart #${i + 1} is missing its single dashed 2M ceiling line`,
+        ).toBe(1);
+
+        const points = chart.match(/<circle\b/g) ?? [];
+        expect(
+          points.length,
+          `${file} chart #${i + 1} should plot ${EXPECTED_POINTS} year points, found ${points.length}`,
+        ).toBe(EXPECTED_POINTS);
+      });
+    });
+  }
+});
