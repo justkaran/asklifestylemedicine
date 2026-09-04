@@ -45,11 +45,6 @@ const SLM_ARCHIVE_RIGHTS_BASIS = "permission" as const;
  *   node run-script.mjs ingestSlmArticles [-- --dry-run] [--limit=N] [--file=path.xlsx]
  */
 
-const DEFAULT_XLSX = path.resolve(
-  process.cwd(),
-  "../../attached_assets/SLM_NEWSLETTER_ARTICLES_(2)_1784581664295.xlsx",
-);
-
 const CUSTODIAN_EMAIL = "custodian@palonur.com";
 
 /** Spreadsheet category header → canonical pillar slug. The "Gratutude"
@@ -261,7 +256,13 @@ async function main(): Promise<void> {
   const limitArg = args.find((a) => a.startsWith("--limit="));
   const limit = limitArg ? parseInt(limitArg.split("=")[1], 10) : Infinity;
   const fileArg = args.find((a) => a.startsWith("--file="));
-  const xlsxPath = fileArg ? path.resolve(fileArg.split("=")[1]) : DEFAULT_XLSX;
+  const filePath = fileArg?.slice("--file=".length).trim();
+  if (!filePath) {
+    throw new Error(
+      "Missing spreadsheet path. Pass --file=/absolute/or/relative/path.xlsx",
+    );
+  }
+  const xlsxPath = path.resolve(filePath);
 
   if (!dryRun && !isFirecrawlConfigured()) {
     throw new Error("FIRECRAWL_API_KEY is not set — cannot download articles");

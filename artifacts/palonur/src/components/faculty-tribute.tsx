@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { motion, useReducedMotion } from "framer-motion";
-import academicImage from "@assets/generated_images/stanford_light.jpg";
+
+const academicImage = `${import.meta.env.BASE_URL}stanford-building.png`;
 
 const RED   = "#B3261E";
 const INK   = "#0A0A0F";
